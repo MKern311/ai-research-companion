@@ -144,7 +144,7 @@ function renderIntro(){
     </div>`;
   el.open = open;
 }
-function card(u){
+function card(u, rank){
   const r = myR(u.id), rm = room(u.id);
   const pills = [];
   if (r.x) pills.push('<span class="pill notai">Not an AI task</span>');
@@ -154,13 +154,19 @@ function card(u){
   if (!u.custom && u.risk === 3) pills.push('<span class="pill hi">High risk</span>');
   if (u.custom) pills.push(`<span class="pill">${u.by === 'Survey' ? 'From the survey' : 'From the room'}</span>`);
   if (rm.k && session) pills.push(`<span class="pill room">${rm.k} ${rm.k === 1 ? 'table' : 'tables'}</span>`);
-  return `<button class="card${r.tt ? ' tested' : ''}" type="button" data-open="${esc(u.id)}" aria-current="${ui.open === u.id}">
-    <h3>${r.f ? '<span class="star" aria-label="starred">★</span> ' : ''}${esc(u.t)}</h3>${u.d ? `<p>${esc(u.d)}</p>` : ''}
+  const low = ui.lens === 2 && (r.x || !(r.n && r.u));
+  return `<button class="card${r.tt ? ' tested' : ''}${low ? ' low' : ''}" type="button" data-open="${esc(u.id)}" aria-current="${ui.open === u.id}">
+    ${rank ? `<span class="rankno">Priority ${rank} · ${r.n}×${r.u}</span>` : ''}<h3>${r.f ? '<span class="star" aria-label="starred">★</span> ' : ''}${esc(u.t)}</h3>${u.d ? `<p>${esc(u.d)}</p>` : ''}
     <span class="foot">${pills.join('')}</span></button>`;
 }
+const prio = u => { const r = myR(u.id); return r.x ? -2 : (r.n && r.u) ? r.n * r.u + (r.f ? .5 : 0) + (r.tt ? .25 : 0) : -1; };
 function renderCards(){
   const p = PHASES[ui.phase];
-  $('#cards').innerHTML = ucsOf(p).map(card).join('') + (readOnly() ? '' : '<button class="card add" type="button" data-add>+ Add a use case</button>');
+  let list = ucsOf(p);
+  if (ui.lens === 2) list = list.slice().sort((a, b) => prio(b) - prio(a));
+  let rank = 0;
+  $('#cards').innerHTML = (ui.lens === 2 ? `<p class="sortnote">Sorted by your group’s priority (value × feasibility). Pick one to three use cases and try them with Copilot.</p>` : '') +
+    list.map(u => card(u, ui.lens === 2 && prio(u) > 0 ? ++rank : 0)).join('') + (readOnly() ? '' : '<button class="card add" type="button" data-add>+ Add a use case</button>');
 }
 
 /* ---------- drawer ---------- */
@@ -168,12 +174,25 @@ function scale(key, val, label, hint){
   return `<div><div class="q-label">${label}</div><div class="q-hint">${hint}</div>
     <div class="scale" role="group" aria-label="${label}">${[1,2,3,4,5].map(n => `<button type="button" data-rate="${key}" data-v="${n}" aria-pressed="${val === n}">${n}</button>`).join('')}</div></div>`;
 }
+const GENERIC = {bring:'Material for your own example: a short text, an open-access paper or a dummy dataset – nothing personal or confidential.',
+  steps:['Open Copilot Chat with your university login.','Describe your goal and attach or paste the material.','Say what a good result looks like (format, length).','Compare the answer with your material and note what happened.'],
+  prompt:'I am a PhD researcher in [discipline]. My goal: [what you want to achieve]. Material: [attached file / pasted text]. Please [task]. Give the result as [format, length]. If you are not sure about something, say so; do not invent sources.',
+  check:'The result is correct against your material and saves you real time.'};
+function guideHtml(u, open){
+  const g = (typeof GUIDES !== 'undefined' && GUIDES[u.id]) || GENERIC;
+  return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot · about 10 minutes</summary>
+    <p><b>Bring:</b> ${esc(g.bring)}</p>
+    <ol class="howto">${g.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
+    <div class="prompt"><div class="ptools"><b>Starter prompt</b><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button></div><pre>${esc(g.prompt)}</pre></div>
+    <p><b>Check:</b> ${esc(g.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}</details>`;
+}
 function testHtml(u){
   const r = myR(u.id), n = myTests().length, full = !r.tt && n >= MAXTEST;
-  if (readOnly()) return '<p class="later">View only.</p>';
+  if (readOnly()) return guideHtml(u, false);
   let h = `<button type="button" class="toggle" data-test aria-pressed="${!!r.tt}" ${full ? 'disabled title="Your table already tests three use cases"' : ''}>${r.tt ? '✓ Selected for a Copilot test' : 'Test this with Copilot'}</button>
     <p class="q-hint">${full ? 'Your table already tests three use cases – deselect one first.' : `${n} of ${MAXTEST} selected for your table.`}</p>`;
-  if (r.tt) h += `<ol class="howto"><li>Open Copilot Chat with your university login.</li><li>Give it context: your goal, a source or dataset you may share, what a good result looks like.</li><li>Check the answer against the original – then note what happened.</li></ol>
+  h += guideHtml(u, !!r.tt);
+  if (r.tt) h += `
     <div><div class="q-label">How did it go?</div><div class="chips" role="group" aria-label="Copilot result">${Object.entries(OUTCOME).map(([k, v]) => `<button type="button" data-out="${k}" aria-pressed="${r.o === k}">${v[0]}</button>`).join('')}</div></div>
     <div class="field"><label for="testNote">What did you notice?</label><textarea id="testNote" data-note maxlength="400" placeholder="e.g. good first draft, but two invented references">${esc(r.note || '')}</textarea></div>`;
   return h;
@@ -407,6 +426,7 @@ document.addEventListener('click', e => {
   if (t.closest('#explore')) { $('#login').hidden = true; renderAll(); return; }
   if (t.closest('#menuBtn')) { openMenu(); return; }
   if (t.closest('[data-mclose]') || t === $('#modal')) { closeMenu(); return; }
+  if (t.closest('[data-copyprompt]') && ui.open) { const g = (typeof GUIDES !== 'undefined' && GUIDES[ui.open]) || GENERIC; copyText(g.prompt, 'Prompt'); return; }
   if (t.closest('#repCopy')) { copyText(reportMarkdown(), 'Report'); return; }
   if (t.closest('#repDl')) { download(`${stamp()}_ai-research-process_report.md`, reportMarkdown(), 'text/markdown'); return; }
   if (t.closest('#mCsv')) { download(`${stamp()}_ai-research-process_results.csv`, '﻿' + csv(), 'text/csv'); return; }

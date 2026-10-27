@@ -1,0 +1,206 @@
+{
+  "publikation-3": {
+    "bring": "The abstract of a paper you are writing (or an open-access abstract from your field) and the name of one journal you are considering.",
+    "steps": [
+      "Paste your abstract and ask for five candidate journals with links to their author guidelines.",
+      "Open two of the linked guideline pages and compare scope and word limits.",
+      "Paste one journal's author guidelines and ask for a formatting checklist.",
+      "Tick the checklist against your manuscript and note what needs changing."
+    ],
+    "prompt": "I am a PhD researcher in [discipline] preparing a manuscript. My abstract is: [paste abstract]. Suggest five peer-reviewed journals whose published aims and scope fit this work, including [journal I am considering]. Give a table with: journal, publisher, why it fits, article type and word limit, reference style, open-access options, and a link to the author guidelines page. Use only information from the journals' own websites and cite the link. If you are not sure about a detail, say so; do not invent journals or requirements.",
+    "check": "Open the author guidelines of two suggested journals and confirm that the scope, word limit and reference style match what Copilot stated."
+  },
+  "publikation-4": {
+    "bring": "Two to three pages of your own draft (for example methods and discussion) that you are sole author of or have co-authors' consent to share, or an open-access paper from your field.",
+    "steps": [
+      "Attach or paste the text and name the target journal and article type.",
+      "Ask for a reviewer report with major and minor comments.",
+      "Ask Copilot to quote the passage behind each major comment.",
+      "Choose the two most useful comments and draft how you would address them."
+    ],
+    "prompt": "I am a PhD researcher in [discipline] and plan to submit this [article type] to [journal]. Attached is [section of my draft]. Act as a critical but fair peer reviewer. Assess the contribution, the fit between research question and method, the strength of the evidence, and how openly limitations are discussed. Give: a two-sentence overall assessment, up to five major comments and up to five minor comments. For each comment, quote the passage it refers to and suggest a concrete fix. Comment only on what is in the text; if something may be covered elsewhere in the paper, say so.",
+    "check": "Each comment points to a passage you can find in your text, and at least one names a weakness that you or a supervisor had already noticed."
+  },
+  "publikation-5": {
+    "bring": "Reviewer comments from a published open peer review (for example from eLife, F1000Research or BMJ) or anonymised comments on your own paper, plus a few notes on changes you made.",
+    "steps": [
+      "Paste the reviewer comments and ask for a numbered table of all points.",
+      "Add your notes on what you changed or why you disagree.",
+      "Ask for a draft response letter and a short summary of changes.",
+      "Compare the letter against the table to see that no comment is missing."
+    ],
+    "prompt": "I am revising a manuscript in [discipline] after peer review. Below are the reviewer comments: [paste comments]. My notes on changes made or points I disagree with: [paste notes]. First, list every comment in a table: number, reviewer, major or minor, what is requested, my planned action. Then draft a polite, concise response letter that answers each comment in turn, quoting it first. Where my notes give no answer, write [ADD RESPONSE] instead of inventing one. Do not claim any change I have not listed. End with a summary of changes in five bullet points or fewer.",
+    "check": "Every reviewer comment appears once in the table, and the letter claims no change that is not in your notes."
+  },
+  "publikation-6": {
+    "bring": "Your research questions and a chapter outline with a short summary (three to five sentences) of each chapter, written by you.",
+    "steps": [
+      "Paste your research questions and the chapter summaries in one message.",
+      "Ask for a table mapping each research question to chapters.",
+      "Ask Copilot to flag gaps, overlaps and repetition, quoting your summaries.",
+      "Check two flagged issues against your actual chapters."
+    ],
+    "prompt": "I am a PhD researcher in [discipline] checking the golden thread of my thesis. My research questions are: [paste RQs]. Below are short summaries of each chapter: [paste summaries]. Create a table with one row per research question showing where it is introduced, addressed with methods, answered with findings, and discussed in the conclusion. Then list any gaps (a question not answered), overlaps between chapters and likely repetition. For each point, quote the sentence from my summaries it is based on. If the summaries do not give enough information to judge, say so.",
+    "check": "Pick two flagged gaps or overlaps and confirm them in your full chapters; the mapping should match where you know each question is answered.",
+    "limit": "Copilot may skip parts of long files, so this tests the golden thread on your outline and summaries, not on the full thesis text."
+  },
+  "publikation-7": {
+    "bring": "Your thesis abstract and a one-page summary of one chapter, or the abstract of a published paper from your thesis.",
+    "steps": [
+      "Paste your abstract and chapter summary, then ask for likely examiner questions.",
+      "Pick three questions and answer each one in the chat.",
+      "Ask for feedback and one probing follow-up question per answer.",
+      "Note which questions you found hardest to discuss with your supervisor."
+    ],
+    "prompt": "I am preparing for my PhD viva in [discipline] at a UK university. Below are my thesis abstract and a summary of chapter [number]: [paste text]. Act as an experienced external examiner. Write 12 questions I am likely to be asked, grouped under: contribution to knowledge, methodology, findings and limitations, and future work. Make some broad and some probing, and link each to a specific claim in my text. Then ask me one question at a time, wait for my answer, and give brief feedback on clarity, use of evidence and what an examiner might ask next.",
+    "check": "At least half of the questions refer to specific claims in your abstract or summary, and the feedback on your answers points to something concrete you could say better."
+  },
+  "transfer-0": {
+    "bring": "One of your published open-access papers, or an open-access paper from your field, as a PDF or its abstract and key findings.",
+    "steps": [
+      "Attach the paper and name your target audience.",
+      "Ask for a 150-word lay summary and a one-page policy brief outline.",
+      "Ask for one short social media post based on the lay summary.",
+      "Compare every number and claim with the paper."
+    ],
+    "prompt": "I am a researcher in [discipline]. Attached is my paper [title]. Write for [audience, e.g. local council officers or the general public]: 1) a lay summary of about 150 words in plain English, without jargon; 2) an outline for a one-page policy brief with the problem, key findings and three practical recommendations; 3) a social media post of up to 60 words. Use only findings stated in the paper, keep numbers exact, and do not make the results sound stronger or more general than the paper does. List any point where you had to simplify.",
+    "check": "Every number and claim in the outputs can be found in the paper, and no finding is stated more strongly or more broadly than in the original."
+  },
+  "transfer-1": {
+    "bring": "Three to five sentences on your key findings and a small results table as CSV or Excel (public or dummy data).",
+    "steps": [
+      "Attach the results table and ask for one clear chart of the main result.",
+      "Ask Copilot to show the Python code it used for the chart.",
+      "Paste your key findings and ask for a six-slide talk outline.",
+      "Check two data points in the chart against your table."
+    ],
+    "prompt": "I am presenting my research to [audience] in a [10-minute] talk. Attached is a results table [file name]; my key findings are: [paste findings]. 1) Create one clear chart of [variable] by [group] with labelled axes, units and a short title, and show the Python code you used. 2) Draft a six-slide outline: each slide title is a full-sentence message, with up to three bullet points and a note on which visual to use. Use only the numbers in the file and my findings; if a column is unclear, ask me.",
+    "check": "Two or three values in the chart match your table exactly, and the slide titles say what your findings actually show.",
+    "limit": "Copilot Chat drafts the chart and the slide outline; building the final slides or poster is done by you in PowerPoint."
+  },
+  "transfer-2": {
+    "bring": "An open-access paper from your field (your own or a recent one) and the level of the module you teach or support, e.g. second-year undergraduate.",
+    "steps": [
+      "Attach the paper and state the module, level and learning outcome.",
+      "Ask for a short case study based on the paper.",
+      "Ask for three discussion questions and one applied exercise.",
+      "Check that the case facts match the paper and the questions need application."
+    ],
+    "prompt": "I teach [module] to [level] students in [discipline]. Attached is a recent paper: [title]. The learning outcome is: [paste outcome]. Write a case study of about 400 words based on the paper's setting and findings, suitable for a 20-minute seminar activity. Add three discussion questions that ask students to apply or evaluate the findings, not just recall them, and one short applied exercise. Keep facts and figures as in the paper, and list any simplifications you made so I can check them.",
+    "check": "Every fact and figure in the case can be found in the paper, and each question asks students to apply, compare or judge rather than repeat."
+  },
+  "transfer-3": {
+    "bring": "The title and DOI of one published paper (yours or a well-known one in your field) or the name of a public research project.",
+    "steps": [
+      "Give the title, DOI and authors, and ask for mentions beyond academia.",
+      "Ask for a table of sources with links and type of impact.",
+      "Open three of the links and check each one.",
+      "Ask Copilot to structure the confirmed items as a short impact narrative."
+    ],
+    "prompt": "I am gathering evidence of the impact of my research. The paper is [title, authors, DOI] (or the project [name]). Search the web for mentions since [year] in policy documents, government or NGO reports, news media and practitioner websites. Give a table: source, type (policy, media, practice), date, link, what it says about the research, and possible kind of impact (awareness, policy change, practice change). Include only items with a link that names the paper, project or authors. If you are not sure an item refers to this work, say so; do not invent sources.",
+    "check": "Open at least three links and confirm each one exists and actually refers to the paper or project; drop any item that does not.",
+    "limit": "Copilot only finds what its web search reaches; it does not replace Altmetric, Overton or your library's tools and will miss mentions."
+  },
+  "transfer-4": {
+    "bring": "A lay summary or abstract of your own (150–250 words) and a target language you read, or a colleague who does.",
+    "steps": [
+      "Paste the text and name the target language, country and audience.",
+      "Ask for a translation plus a list of cultural adaptations made.",
+      "In a new chat, ask Copilot to translate the result back into English.",
+      "Compare the back-translation with your original for changes in meaning."
+    ],
+    "prompt": "I am a researcher in [discipline] sharing my work with [audience] in [country]. Below is my lay summary in English: [paste text]. Translate it into [language] for this audience, in a clear and natural style. Keep technical terms consistent and give the [language] term for each key concept in a short glossary. Adapt examples, units or references that would not make sense locally, and list every adaptation you made. Mark any term where you are unsure of the usual translation in this field.",
+    "check": "The back-translation keeps the meaning of each sentence of your original, and a fluent speaker confirms the marked terms."
+  },
+  "querschnitt-0": {
+    "bring": "Your own short notes on progress since the last supervision meeting and a few open questions; no personal details about other people.",
+    "steps": [
+      "Paste your notes and ask for a 45-minute meeting agenda.",
+      "Ask for three decisions you need and questions to ask.",
+      "After a meeting, paste your own notes and ask for an action list.",
+      "Check the action list against your notes line by line."
+    ],
+    "prompt": "I am a PhD researcher in [discipline] preparing for a [45-minute] supervision meeting. My notes on progress and open issues are: [paste notes]. Draft an agenda with time slots, the three decisions I need from my supervisors, and specific questions for each agenda item. After the meeting I will paste my notes; then summarise them as a table: action, owner, deadline, and add any open questions. Use only what is in my notes and do not add actions or agreements that are not there.",
+    "check": "Every action in the summary appears in your notes, and nothing you agreed in the meeting is missing.",
+    "limit": "Copilot Chat does not join or record the meeting; it works only from the notes you write and paste."
+  },
+  "querschnitt-1": {
+    "bring": "Bullet-point notes on this year's progress, outputs and plans, and the section headings of your review form; leave out health or other personal circumstances.",
+    "steps": [
+      "Paste the section headings of your review form.",
+      "Paste your notes and ask for a draft under those headings.",
+      "Ask for a risk table with likelihood, impact and mitigation.",
+      "Check every achievement and date against your notes and records."
+    ],
+    "prompt": "I am a PhD researcher in [discipline] preparing my [annual / transfer / confirmation] review. The report needs these sections: [paste headings]. My notes are: [paste notes]. Draft the report under these headings in a factual, concise style of about [word count] words. Include progress against last year's objectives, outputs, training, a plan for the next 12 months, and a table of risks with likelihood, impact and mitigation. Use only what is in my notes; mark missing information with [TO ADD] and do not invent achievements, dates or results.",
+    "check": "Every achievement, output and date in the draft matches your notes, and each risk is one you recognise as real."
+  },
+  "querschnitt-2": {
+    "bring": "Your planned submission date, your institution's main milestones (e.g. confirmation review) and a list of your regular commitments.",
+    "steps": [
+      "Paste your submission date, milestones and commitments.",
+      "Ask for a backward plan with quarterly milestones and buffers.",
+      "Ask for a realistic plan for next week.",
+      "Describe a setback and ask Copilot to re-plan."
+    ],
+    "prompt": "I am a PhD researcher in year [year] of [full-time / part-time] study in [discipline]. My submission date is [date]. Fixed milestones: [list]. Regular commitments: [teaching, work, caring, hours per week]. Plan backwards from submission: a table of quarterly milestones with deliverables and a buffer of at least [x] weeks. Then plan my next week in half-day blocks with one main goal per day. Finally, show how the plan changes if [setback, e.g. data collection is delayed by six weeks]. Keep it realistic for the hours I have and point out where the plan is too tight.",
+    "check": "The dates add up to your submission date, the fixed milestones fall on the right dates, and the weekly plan fits your actual available hours."
+  },
+  "querschnitt-3": {
+    "bring": "Three to five of your own reading notes or abstracts of open-access papers, as one Word file or pasted text.",
+    "steps": [
+      "Attach or paste the notes and ask for a summary table.",
+      "Ask for links between sources: agree, contradict, build on.",
+      "Ask for a tagging scheme for your notes tool.",
+      "Check two suggested links against the original notes."
+    ],
+    "prompt": "I am a PhD researcher in [discipline] organising my reading. Attached are my notes on [number] sources. Create a table: source, key claim, method, main concepts, three suggested tags. Then list up to five links between sources, saying whether they agree, contradict or build on each other, and name the note each link is based on. Finally, suggest a simple tagging scheme of 10 to 15 tags I could use in [Zotero / OneNote / Obsidian]. Use only what is in my notes; if a link is uncertain, say so.",
+    "check": "Pick two suggested links and confirm that both notes really say what Copilot claims they say.",
+    "limit": "Copilot Chat does not keep a searchable library of your files, so this tests connecting a handful of notes, not building a lasting knowledge base."
+  },
+  "querschnitt-4": {
+    "bring": "A small public or dummy dataset as CSV or Excel, for example from data.gov.uk or the UK Data Service open data.",
+    "steps": [
+      "Attach the dataset and say what it contains and how it was collected.",
+      "Ask for a codebook with computed ranges and missing values.",
+      "Ask for a README and key repository metadata fields.",
+      "Check ranges and missing counts for two columns in the file."
+    ],
+    "prompt": "I am preparing a dataset for deposit in [repository]. Attached is [file name]; it contains [short description and how it was collected]. Use Python to inspect the file, then create a codebook table: variable name, description, type, unit, range or allowed values, number of missing values, missing-value code. Then draft a README with: title, creators [placeholder], description, methods, file list, variables, licence [placeholder], how to cite, contact. Mark any variable meaning you have guessed with [CHECK]. Finally, list the core metadata fields the repository will likely ask for.",
+    "check": "For two columns, the ranges and missing counts in the codebook match the file, and every variable meaning Copilot guessed is marked [CHECK]."
+  },
+  "querschnitt-5": {
+    "bring": "A short description of one AI task you did today (for example in this workshop) and, if available, your university's guidance on declaring AI use.",
+    "steps": [
+      "Describe today's AI task: tool, purpose, prompt and how you checked it.",
+      "Ask for a log table template with your task as row one.",
+      "Save the table as a Copilot Page or copy it into Word or Excel.",
+      "Ask for a short draft AI declaration based only on the log."
+    ],
+    "prompt": "I am a PhD researcher and want to keep a log of my AI use as the basis for the AI declaration in my thesis. Create a log table with columns: date, tool, task, prompt (full or summary), where the output is saved, how I checked it, what I used in my work. Fill in the first row from this description: [describe today's task]. Then draft a declaration of about 100 words, in a neutral tone, that describes only the uses in the log. Do not add uses I have not listed. [Paste university guidance if available.]",
+    "check": "Someone else could retrace your step from the log row (tool, date, prompt, saved output), and the declaration mentions nothing that is not in the log; check it against your university's policy."
+  },
+  "querschnitt-6": {
+    "bring": "The name of a method, statistics package or programming language you want to learn, and optionally a small public or dummy dataset.",
+    "steps": [
+      "Name the skill and ask Copilot to test your level with three questions.",
+      "Work through the first step and try the small exercise yourself.",
+      "Ask for feedback on your answer before seeing the solution.",
+      "Finish with a five-question quiz and note what to look up."
+    ],
+    "prompt": "I am a PhD researcher in [discipline] and want to learn [method / package / language] for [purpose in my project]. Act as a patient tutor. First ask me three short questions to judge my level. Then teach step by step in short chunks: explain one idea, show a small example, and give me one exercise. Wait for my answer and give feedback before showing the solution. Use [dataset or a simple made-up example]. Point me to the official documentation for each step, and if you are not sure about a function or option, say so.",
+    "check": "Run one example in your own software or compare it with the official documentation, and confirm that it works or matches."
+  },
+  "querschnitt-7": {
+    "bring": "A narrow research question and two or three trusted public websites (for example an organisation's reports page) to use as sources.",
+    "steps": [
+      "Create a new agent in Copilot Chat and paste the prompt as its instructions.",
+      "Add your two or three public websites as its knowledge sources.",
+      "Run stage 1 only and check every source before you approve it.",
+      "Approve extraction, then the report, and note where you corrected it."
+    ],
+    "prompt": "You support a [discipline] researcher with a small scoping task on [research question]. Work in three stages and stop after each one for my approval. Stage 1, search: list up to eight sources from [websites] or the web, with title, year, link and one line on relevance. Stage 2, extraction: for the sources I approve, fill a table with aim, method, sample and main finding. Stage 3, report: write a 300-word summary that cites only approved sources. If you are not sure, say so; do not invent sources.",
+    "check": "Before approving each stage, open every link and confirm the source exists and says what the table claims; treat the final report as an unverified draft that still needs your own reading.",
+    "limit": "Copilot runs short web-based steps that you approve one by one; it cannot search library databases or run the pipeline on its own, so this tests the checkpoint workflow, not full automation."
+  }
+}

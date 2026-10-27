@@ -1,0 +1,228 @@
+{
+  "idee-0": {
+    "bring": "Titles and years of 15 to 20 recent papers in your field, copied from a database or Google Scholar results page.",
+    "steps": [
+      "Paste the list of titles and years into Copilot Chat.",
+      "Ask it to group the papers into themes and count them per year.",
+      "Ask which pairs of themes rarely appear together in the same paper.",
+      "Compare the themes with your own sense of the field and note surprises."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline] looking for growing topics and gaps. Below are [number] paper titles with their publication years, copied from [source]. Group them into four to six themes. Show a table: theme, paper titles in that theme, number of papers per year. Then list two or three combinations of themes that rarely appear together and could be under-researched. Base this only on the list I give you; say clearly that a small list cannot show real trends.\n\n[paste titles and years]",
+    "check": "Pick two themes and check that every title assigned to them really belongs there, and that the per-year counts match your list.",
+    "limit": "Copilot cannot analyse publication or citation databases; this tests clustering a small list you supply, not a bibliometric trend analysis."
+  },
+  "idee-1": {
+    "bring": "A rough research idea of your own in two or three sentences, nothing confidential.",
+    "steps": [
+      "Paste your idea and ask Copilot to act as a critical supervisor.",
+      "Ask for alternative research questions with different scope or angle.",
+      "Ask for hidden assumptions and the strongest objections to your idea.",
+      "Pick one objection and ask how you could answer it."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline]. My rough research idea is: [idea]. Act as a critical but fair supervisor. First, give three alternative research questions: one narrower, one broader, one from a different angle, each with one sentence on what it would add. Second, list the assumptions my idea takes for granted. Third, give the three strongest objections a reviewer might raise, and one possible counter-position. Keep it under 350 words. Do not cite literature unless you are sure it exists.",
+    "check": "You find at least one alternative question or objection you had not considered and that you could support or rebut with literature you know."
+  },
+  "idee-2": {
+    "bring": "A draft research question of your own in one or two sentences.",
+    "steps": [
+      "Paste your research question and name your discipline.",
+      "Ask which framework fits best (PICO, PEO, SPIDER or other) and why.",
+      "Ask for the question broken down into the framework's elements in a table.",
+      "Ask which constructs are vague and how each could be defined or measured."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline]. My draft research question is: [question]. Suggest the most suitable framework for structuring it (for example PICO, PEO or SPIDER) and explain in two sentences why it fits better than the others. Then show a table: framework element, the part of my question it covers, what is still missing or unclear. Finally, list the key constructs, say which are vague, and propose a working definition and one possible way to measure or observe each.",
+    "check": "Every element in the table maps to words actually in your question, nothing has been added that you did not intend, and the element labels match the framework's standard definitions."
+  },
+  "idee-3": {
+    "bring": "A short summary (about 150 words) of your planned project or your draft research question.",
+    "steps": [
+      "Paste your summary and ask for closely related published studies with links.",
+      "Ask for one sentence per study on how it overlaps with yours.",
+      "Open every link and check the paper exists and matches the description.",
+      "Run a quick Google Scholar search and compare what Copilot missed."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline] checking whether my planned study has already been done. My project summary is: [summary]. Search for up to eight published studies that are closest to it. For each, give authors, year, title, a working link, and one sentence on how it overlaps with or differs from my project. Only list studies you actually found with a link. If you are not sure, say so; do not invent sources. End with two sentences on how I could position my study.",
+    "check": "Each link opens a real paper that says what Copilot claims, and a quick Google Scholar search does not reveal an obviously closer study it missed.",
+    "limit": "Copilot searches the open web, not library databases, and may miss literature; this is a first scan, not proof of novelty."
+  },
+  "idee-4": {
+    "bring": "Your research question and the name of your discipline.",
+    "steps": [
+      "Paste your research question and name your discipline.",
+      "Ask for concepts or methods from neighbouring disciplines that could transfer.",
+      "Ask what would need adapting and where the transfer could fail.",
+      "Look up one suggested concept to confirm it exists as described."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline] working on: [research question]. Suggest four concepts, theories or methods from neighbouring disciplines that could help answer it. Show a table: discipline, concept or method, how it would transfer to my question, what would need adapting, risk of mismatch. Add one key reference per row only if you are confident it exists, with a link where possible. If you are not sure, say so; do not invent sources.",
+    "check": "Look up one suggested concept and its reference: the source exists and uses the concept in the way Copilot describes."
+  },
+  "literatur-0": {
+    "bring": "Your research question in one or two sentences and the name of one database you use.",
+    "steps": [
+      "Paste your research question and name the database.",
+      "Ask for a Boolean search string with synonyms and subject headings.",
+      "Ask what each block of the string covers and what it may miss.",
+      "Run the string in the database and compare the hit count with your usual search."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. Build a Boolean search string for [database] with three concept blocks, synonyms joined by OR, blocks joined by AND, and truncation where useful. Suggest subject headings (for example MeSH) if the database uses them. Show the string in a code block, then a short table: block, terms, what it may miss. Use only syntax that [database] supports; if unsure about a field code, say so.",
+    "check": "The string runs in the database without syntax errors and finds two or three papers you already know are relevant."
+  },
+  "literatur-1": {
+    "bring": "Title and DOI of one open-access key paper in your field that you know well.",
+    "steps": [
+      "Give Copilot the title and DOI of your key paper.",
+      "Ask it to describe the paper's core idea in plain words, not keywords.",
+      "Ask for related papers that use different terms for the same problem.",
+      "Check the results against the paper's Google Scholar 'Cited by' list and reference list."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline]. A key paper for my work is [title, authors, year, DOI]. First, describe its core problem and idea in three plain sentences without its own jargon. Then search for up to six papers that address the same problem, including ones that use different terminology, and up to three that cite this paper. For each, give authors, year, title, a working link and one sentence on the connection. If you are not sure, say so; do not invent sources.",
+    "check": "Every link opens a real paper, and at least one relevant result is not already in your reference list or easy to find with your usual keywords.",
+    "limit": "Copilot cannot browse citation databases; this tests meaning-based web search, and the citation trail must be checked by hand in Google Scholar."
+  },
+  "literatur-2": {
+    "bring": "Your inclusion and exclusion criteria and 10 titles with abstracts from a public search, which you screen yourself first.",
+    "steps": [
+      "Screen the 10 abstracts yourself and note your decisions.",
+      "Paste your criteria and the 10 numbered abstracts into Copilot Chat.",
+      "Ask for include, exclude or unsure per abstract, with a supporting quote.",
+      "Compare its decisions with yours and discuss each disagreement."
+    ],
+    "prompt": "I am screening records for a literature review on [topic]. Inclusion criteria: [criteria]. Exclusion criteria: [criteria]. Below are 10 numbered titles with abstracts. For each, give a table row: number, decision (include, exclude or unsure), the criterion that decides it, and a short quote from the abstract that supports the decision. Use 'unsure' when the abstract does not give enough information; do not guess. I will make the final decision.\n\n[paste numbered titles and abstracts]",
+    "check": "Count how many of the 10 decisions match yours and read each quoted passage to confirm it is really in the abstract and supports the decision.",
+    "limit": "Copilot cannot rank thousands of records with active learning; this tests criteria-based screening of a small batch only."
+  },
+  "literatur-3": {
+    "bring": "One or two open-access empirical papers as PDFs.",
+    "steps": [
+      "Attach the PDF and paste your extraction fields.",
+      "Ask for one table row per paper with page or section references.",
+      "Ask it to mark missing information as 'not reported'.",
+      "Check three values, including sample size and main effect, against the PDF."
+    ],
+    "prompt": "I am building an evidence table for a review on [topic]. From the attached paper(s), extract one table row per study with these columns: citation, design, sample size and population, setting, key variables or measures, main result with the reported statistic, stated limitations. After each value give the page or section where you found it. Copy numbers exactly as reported; do not calculate, round or infer. If a field is not in the paper, write 'not reported'.",
+    "check": "Three values you pick, including sample size and the main statistic, match the PDF exactly at the page or section Copilot gave."
+  },
+  "literatur-4": {
+    "bring": "Three open-access PDFs on your topic.",
+    "steps": [
+      "Attach the three PDFs to one chat.",
+      "Ask a question that the papers answer, requesting quotes with file and page.",
+      "Ask a question you know the papers do not answer.",
+      "Search each quoted passage in the PDF to confirm it is there."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline]. Answer my question using only the attached PDFs. My question is: [question]. Give a short answer (up to 200 words), then a list of supporting passages: file name, page, exact quote of one to three sentences. Only quote text that appears word for word in the files. If the files do not answer the question, or only partly, say so clearly instead of using outside knowledge.",
+    "check": "Each quote is found word for word in the PDF (Ctrl+F) and supports the claim, and Copilot says 'not in the files' for the question you know is not answered.",
+    "limit": "Copilot Chat answers over a few attached PDFs, not your whole library, and may partly ignore long documents."
+  },
+  "literatur-5": {
+    "bring": "Abstracts or short summaries of five or six studies you already know well, or their open-access PDFs.",
+    "steps": [
+      "Paste or attach the studies and list the concepts you want compared.",
+      "Ask for a concept matrix with studies as rows and concepts as columns.",
+      "Ask where the studies agree, contradict each other, and why that might be.",
+      "Check every cell for two studies against the originals."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline] working on a review of [topic]. Using only the studies I provide, build a concept matrix: one row per study, columns for [concept 1], [concept 2], [concept 3]. In each cell, give the finding in a few words, including direction of effect, or 'not addressed'. Then list where the studies agree and where they contradict each other, with possible reasons such as method, sample or context, naming the study for each point. Do not add studies I have not given you.\n\n[paste abstracts or attach files]",
+    "check": "Every cell for two studies matches the originals; be cautious, because Copilot can smooth over contradictions or overstate agreement, so the synthesis and its argument must be your own."
+  },
+  "literatur-6": {
+    "bring": "An open-access paper with a method, formula or statistic you find hard, as a PDF or the copied passage.",
+    "steps": [
+      "Attach the paper or paste the difficult passage.",
+      "Ask for a plain-language, step-by-step explanation with every symbol defined.",
+      "Ask a follow-up question about the part that is still unclear.",
+      "Re-read the original passage and check the explanation matches it."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline] and new to [method or statistic]. Explain the passage below (or section [x] of the attached paper) in plain language. Go step by step, define every symbol and term, and give a small worked example with made-up numbers. Then name the key assumptions the method relies on. Keep it under 400 words. Mark clearly which parts of your explanation go beyond what the paper itself says.\n\n[paste passage]",
+    "check": "The explanation uses the same notation and numbers as the paper, and one key point is confirmed by a methods textbook or reliable methods source."
+  },
+  "literatur-7": {
+    "bring": "The abstract or one or two pages of an open-access paper in a language other than English, ideally one with an English abstract too.",
+    "steps": [
+      "Paste the non-English text and state your research question.",
+      "Ask for an English (UK) translation, then a short relevance summary.",
+      "Ask it to flag uncertain terms with the original word in brackets.",
+      "Compare with the paper's English abstract or a colleague who reads the language."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline] deciding whether a [language] paper is relevant to my research question: [question]. Translate the text below into English (UK spelling). Keep technical terms precise and put the original word in brackets wherever you are unsure of the translation. Then give a five-bullet summary: research question, method, sample, main findings, relevance to my question. Note that this translation is for screening only.\n\n[paste text]",
+    "check": "Key facts (method, sample, main finding) match the paper's English abstract or a colleague's reading; quote only from a translation you have verified."
+  },
+  "design-0": {
+    "bring": "Your research question and your planned design in two or three sentences.",
+    "steps": [
+      "Paste your research question and planned design.",
+      "Ask for a comparison of three design alternatives in a table.",
+      "Ask for the main threats to validity of your preferred design, with mitigations.",
+      "Compare the threats with what your methods textbook or supervisor would name."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. My planned design is: [design]. Compare it with two realistic alternatives in a table: design, what it can answer, main strengths, main weaknesses, practical demands (time, access, data). Then, for my planned design, list the main threats to validity (or, for qualitative work, to trustworthiness), each with a concrete way to reduce it. Be specific to my study rather than generic. Keep it under 450 words.",
+    "check": "The threats named include those you already know about from your methods training, and each one is specific to your study rather than a textbook list."
+  },
+  "design-1": {
+    "bring": "Five to eight draft survey items or interview questions of your own, on a non-sensitive topic.",
+    "steps": [
+      "Paste your draft items and describe the construct and target group.",
+      "Ask Copilot to flag double-barrelled, leading, ambiguous or jargon-heavy items.",
+      "Ask for revised wording and a suitable response scale.",
+      "Check that each revision still measures your intended construct."
+    ],
+    "prompt": "I am developing a [survey or interview guide] on [construct] for [target group]. Review the draft items below. Show a table: item number, original wording, problem (double-barrelled, leading, ambiguous, jargon, mismatch with response scale, or none), revised wording. Keep the meaning and the construct unchanged. Then suggest a suitable response scale and say whether a validated scale for this construct might already exist; if you are not sure, say so; do not invent sources.\n\n[paste items]",
+    "check": "Each flagged problem is real when you re-read the original item, and each revised item still asks about the construct you intended."
+  },
+  "design-2": {
+    "bring": "Five to eight draft survey items on a non-sensitive topic and a short description of your target population.",
+    "steps": [
+      "Paste your items and describe the target population.",
+      "Ask Copilot to simulate four varied respondents thinking aloud about each item.",
+      "Ask for a summary of comprehension problems by item.",
+      "Decide which issues to test in a real cognitive pre-test."
+    ],
+    "prompt": "I am preparing a pre-test of a questionnaire on [topic] for [population]. Simulate four varied respondents from this population (differing in age, background and reading level). For each, think aloud briefly about each item below: how they understand it and where they hesitate or misread it. Then give a table: item number, comprehension problem, how many personas had it, suggested fix. These are simulated respondents to prepare a real pre-test, not data.\n\n[paste items]",
+    "check": "Each flagged problem points to actual wording in your item; treat the personas as the model's assumptions, not real people, and never report them as pre-test data or use them instead of a real pre-test."
+  },
+  "design-3": {
+    "bring": "Your planned statistical test (for example a two-group comparison) and an expected effect size from a previous study.",
+    "steps": [
+      "Describe your planned test, effect size, alpha and desired power.",
+      "Ask Copilot to write and run Python code for the power analysis.",
+      "Ask for a chart of required sample size across a range of effect sizes.",
+      "Check the result against G*Power or a published power table."
+    ],
+    "prompt": "I am planning a study in [discipline] using [statistical test, e.g. independent-samples t-test]. Write and run Python code (for example with statsmodels) to calculate the required sample size for effect size [value, e.g. Cohen's d = 0.5], alpha 0.05, power 0.80, two-sided. Show the code, the result, and a chart of sample size for effect sizes from 0.2 to 0.8. List every assumption the calculation makes, and explain the result in two plain sentences.",
+    "check": "Run a known case: for d = 0.5, alpha 0.05, power 0.80, two-sided t-test, the result should be about 64 per group, matching G*Power."
+  },
+  "design-4": {
+    "bring": "The section headings of your institution's ethics form or a public data management plan template, plus a short fictional or non-sensitive study summary.",
+    "steps": [
+      "Paste the template headings and your short study summary.",
+      "Ask for a skeleton draft under each heading with guiding questions.",
+      "Ask it to leave consent, risk and anonymisation reasoning as prompts for you.",
+      "Compare each section with the official template guidance."
+    ],
+    "prompt": "I am preparing a [ethics application or data management plan] for a study on [topic]. The template headings are: [headings]. My study in brief: [summary]. For each heading, give: what reviewers usually expect, the questions I must answer myself, and a short skeleton with [placeholders]. Do not write study-specific reasoning on consent, risks or anonymisation; leave clear prompts for me instead. Do not state institutional rules or legal requirements unless you are sure; if you are not sure, say so.",
+    "check": "Each section matches the official template guidance, no institutional rule or legal claim (for example on UK GDPR) appears that you cannot confirm, and the consent and risk reasoning is left for you to write."
+  },
+  "foerderung-0": {
+    "bring": "A three-sentence summary of your research profile and career stage, and one or two funders you know (for example UKRI, British Academy, Wellcome, Leverhulme).",
+    "steps": [
+      "Paste your profile and career stage.",
+      "Ask for matching open or recurring calls with links to funder pages.",
+      "Ask for a table with amount, deadline, eligibility and fit.",
+      "Open each link and confirm deadline and eligibility on the funder's site."
+    ],
+    "prompt": "I am a [career stage] researcher in [discipline] at a UK university. My research profile: [three sentences]. Search for open or recurring funding calls that fit, starting with [funders]. Show a table: funder, scheme, typical amount, next deadline, key eligibility rules, link to the funder's page, one sentence on fit. Only include calls with a link to the funder's own page. Flag any deadline that may be out of date. If you are not sure, say so.",
+    "check": "Every link opens the funder's own page, and the deadline and eligibility shown there match the table.",
+    "limit": "Copilot searches the open web, so it may miss calls or show outdated deadlines; it does not replace your research office or a funding database."
+  },
+  "foerderung-1": {
+    "bring": "The public assessment criteria from a funding call page and your own short project outline, nothing written with co-authors without their consent.",
+    "steps": [
+      "Paste the call's assessment criteria and your project outline.",
+      "Ask Copilot to map each criterion to where your outline addresses it.",
+      "Ask for gaps and a proposed section structure following the criteria.",
+      "Check every criterion from the call appears in the table."
+    ],
+    "prompt": "I am preparing an application to [funder and scheme]. The call's assessment criteria are: [paste criteria, with weightings if given]. My project outline is: [outline]. Show a table: criterion (quoted exactly from the call), where my outline addresses it, what is missing or weak, one concrete suggestion. Then propose a section structure for the application that follows the criteria, with a rough word allocation per section based on the weightings. Do not write the content for me and do not add criteria that are not in the call.",
+    "check": "Every criterion from the call page appears in the table word for word, none is invented, and the gaps named match what you would expect a reviewer to notice."
+  }
+}
