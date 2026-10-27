@@ -5,7 +5,7 @@
    ================================================================ */
 const CFG = window.AIRP_CONFIG || {};
 const REMOTE_OK = !!(CFG.supabaseUrl && CFG.anonKey);
-const TABLES = ['Table 1','Table 2','Table 3','Table 4','Table 5','Table 6','Table 7','Table 8','Table 9','Table 10','Table 11','Table 12','Facilitator'];
+const TABLES = ['Group 1','Group 2','Group 3','Group 4','Group 5','Group 6','Group 7','Group 8','Group 9','Group 10','Group 11','Group 12','Facilitator'];
 const TYP = {ki:'AI-native', gpt:'Custom GPT', et:'Established'};
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -20,9 +20,9 @@ const toast = msg => { const t = $('#toast'); t.textContent = msg; t.classList.a
 
 /* ---------- state ---------- */
 const KEY = 'airp-v5', SKEY = 'airp-session';
-const blank = () => ({t:{}, c:[], a:'Table 1'});
+const blank = () => ({t:{}, c:[], a:'Group 1'});
 let state = blank();
-try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && v.t) state = {t:v.t, c:Array.isArray(v.c) ? v.c : [], a:v.a || 'Table 1'}; } catch(e) {}
+try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && v.t) state = {t:v.t, c:Array.isArray(v.c) ? v.c : [], a:(v.a && v.a !== 'Table 1' ? v.a : 'Group 1')}; } catch(e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} };
 let session = null;            // {code, role, table, workshop}
 const ui = {view:'cases', lens:1, phase:0, scope:'room', resPhase:null, toolPhase:null, open:null};
@@ -113,7 +113,7 @@ function renderIdent(){
     : `<span class="sync">This browser only</span>`;
   const who = session
     ? `<span class="who">${esc(session.role === 'viewer' ? 'Viewing results' : session.table)}</span><button class="btn btn-quiet btn-sm" type="button" id="signOut">Sign out</button>`
-    : `<span class="who">${state.a === 'Table 1' ? 'Explore mode' : 'Offline · ' + esc(state.a)}</span>${REMOTE_OK ? '<button class="btn btn-ghost btn-sm" type="button" id="signIn">Sign in</button>' : ''}`;
+    : `<span class="who">${state.a === 'Group 1' ? 'Explore mode' : 'Offline · ' + esc(state.a)}</span>${REMOTE_OK ? '<button class="btn btn-ghost btn-sm" type="button" id="signIn">Sign in</button>' : ''}`;
   const gear = (!session || session.role === 'facilitator') ? `<button class="icon-btn" type="button" id="menuBtn" aria-label="Facilitator menu" title="Facilitator menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>` : '';
   el.innerHTML = st + who + gear;
 }
@@ -367,9 +367,9 @@ function closeMenu(){ $('#modal').hidden = true; const b = $('#menuBtn'); if (b)
 /* ---------- login ---------- */
 function showLogin(msg){
   $('#login').innerHTML = `<div class="box" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-    <h2 id="loginTitle">Sign in with your table code</h2>
-    <p>Your table facilitator has the code. Ratings are saved for your table and appear in the results for the whole room.</p>
-    <form id="loginForm" autocomplete="off"><label class="sr" for="codeIn">Table code</label><input id="codeIn" placeholder="T1-XXXX-XXXX" required>
+    <h2 id="loginTitle">Sign in with your group code</h2>
+    <p>Your facilitator gives you the code, e.g. “group 3”. Ratings are saved for your group and appear in the results for the whole room.</p>
+    <form id="loginForm" autocomplete="off"><label class="sr" for="codeIn">Group code</label><input id="codeIn" placeholder="group 3" required>
     <p class="err" id="loginErr">${msg ? esc(msg) : ''}</p>
     <div class="acts"><button class="btn btn-primary" type="submit">Sign in</button><button class="link" type="button" id="explore">Explore without a code (this browser only)</button></div></form></div>`;
   $('#login').hidden = false; setTimeout(() => $('#codeIn').focus(), 30);

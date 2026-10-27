@@ -247,7 +247,7 @@ main{padding-block:28px 64px}
 .modal textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:9px;padding:10px;font:13px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--ink);background:#fff}
 .login .box{width:min(440px,100%);text-align:left}
 .login p{color:var(--ink-2);margin-top:8px}
-.login input{width:100%;margin-top:14px;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-size:18px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:#fff}
+.login input{width:100%;margin-top:14px;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-size:18px;color:var(--ink);background:#fff}
 .login .err{color:#9A2B00;font-size:14px;margin-top:8px;min-height:1.2em}
 .login .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:center}
 .login .acts .link{font-size:14px;color:var(--ink-2);text-decoration:underline;padding:6px 0}
