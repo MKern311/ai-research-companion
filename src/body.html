@@ -1,0 +1,86 @@
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <span class="hlogo" role="img" aria-label="Hitachi Solutions">{{WORDMARK}}<b>Hitachi Solutions</b></span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="title">AI in the Research Process</span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button role="tab" id="tab-cases" data-view="cases" aria-selected="true">Use cases</button>
+      <button role="tab" id="tab-results" data-view="results" aria-selected="false">Results</button>
+      <button role="tab" id="tab-tools" data-view="tools" aria-selected="false">Tools</button>
+    </nav>
+    <div class="ident" id="ident"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="view-cases" aria-labelledby="tab-cases">
+    <div class="view-head">
+      <div><h1>Where does AI really help your research?</h1>
+        <p>Choose a phase, open a use case and rate it. Step 1 is about the value for your research; Step 2 checks what can implement it.</p></div>
+    </div>
+    <div class="stepbar">
+      <div class="seg" role="group" aria-label="Assessment step">
+        <button type="button" data-lens="1" aria-pressed="true">Step 1 · Research value</button>
+        <button type="button" data-lens="2" aria-pressed="false">Step 2 · Technology</button>
+      </div>
+      <p id="lensHint"></p>
+    </div>
+    <div class="phases" id="phases" role="tablist" aria-label="Research phases"></div>
+    <details class="intro" id="intro"></details>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section id="view-results" aria-labelledby="tab-results" hidden>
+    <div class="view-head">
+      <div><h1>Results from the room</h1><p id="resSub">Value against feasibility, top use cases, and what each table found.</p></div>
+      <div class="seg dark" role="group" aria-label="Scope">
+        <button type="button" data-scope="room" aria-pressed="true">Whole room</button>
+        <button type="button" data-scope="table" aria-pressed="false" id="scopeTable">My table</button>
+      </div>
+    </div>
+    <div class="res-grid">
+      <div class="panel">
+        <div class="ptools"><h2>Value × feasibility</h2>
+          <button type="button" class="toggle" id="colourToggle" aria-pressed="false">Colour by technology</button></div>
+        <div id="matrix"></div>
+      </div>
+      <div class="panel">
+        <h2>Top use cases</h2><p class="sub">By value × feasibility. Select one to open it.</p>
+        <ol class="rank" id="rank"></ol>
+      </div>
+    </div>
+    <div class="lists" id="lists"></div>
+    <div class="fd-grid">
+      <div class="panel" id="fdForm"></div>
+      <div class="panel" id="fdAll"></div>
+    </div>
+    <div class="panel report" id="report">
+      <div class="ptools"><div><h2>Results report</h2><p class="sub">Fills automatically – the basis for the follow-up e-mail.</p></div>
+        <div class="row"><button type="button" class="btn btn-primary btn-sm" id="repCopy">Copy report</button> <button type="button" class="btn btn-ghost btn-sm" id="repDl">Download (.md)</button></div></div>
+      <div id="reportBody"></div>
+    </div>
+  </section>
+
+  <section id="view-tools" aria-labelledby="tab-tools" hidden>
+    <div class="view-head">
+      <div><h1>Specialist tools</h1><p>Tools commonly used in academic work, mapped to the research phases – context for Step 2, not recommendations. Stars: ratings by students at a German university, 2024/25 (greyed out with fewer than three ratings); tools without stars were added for this workshop.</p></div>
+    </div>
+    <div class="tchips" id="toolFilter"></div>
+    <div class="tgrid" id="toolGrid"></div>
+    <div class="panel" style="margin-top:8px">
+      <h2>About Copilot</h2>
+      <p class="sub" style="font-size:14.5px;color:var(--ink-2)">Copilot is the assistant universities provide with data protection when you sign in with your university account. Other assistants can serve many of the same use cases – check what your university permits. Assessments as of October 2026; features change frequently.</p>
+      <ul class="note" id="sources"></ul>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>Prof. Dr. Manuel Kern · Delivered by Hitachi Solutions · <span class="version"></span></span><span>No personal data is stored · no product endorsement</span></div></footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden></aside>
+<div class="modal" id="modal" hidden></div>
+<div class="modal login" id="login" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
