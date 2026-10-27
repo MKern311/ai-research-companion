@@ -41,8 +41,8 @@ a{color:var(--red)}
 .top .wrap{display:flex;align-items:center;gap:20px;min-height:64px;flex-wrap:wrap;padding-block:8px}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
 .brand .hlogo{display:flex;flex-direction:column;gap:2px;line-height:1}
-.brand .hlogo svg{height:10px;width:auto;color:#000}
-.brand .hlogo b{font-size:17px;color:#000;letter-spacing:-.01em}
+.brand .hlogo svg{height:18px;width:auto;color:#000;display:block}
+.brand .hlogo b{font-size:20px;color:#000;letter-spacing:-.01em}
 .brand .sep{width:1px;height:28px;background:var(--line)}
 .brand .title{font-size:15px;color:var(--ink-2);white-space:nowrap}
 .tabs{display:flex;gap:4px;background:var(--surface);border-radius:999px;padding:4px;margin-left:auto}
@@ -257,3 +257,41 @@ main{padding-block:28px 64px}
 footer{font-size:13px;color:var(--muted);padding-block:24px 40px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 @media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
+
+/* Step 2 · Copilot tests */
+.pill.test{background:var(--ink);color:#fff}
+.card.tested{box-shadow:inset 0 0 0 2px var(--ink)}
+.howto{margin:0;padding-left:20px;font-size:14px;color:var(--ink-2)}
+.howto li{margin:3px 0}
+.toggle[disabled]{opacity:.5;cursor:not-allowed}
+.tests{list-style:none;margin:10px 0 0;padding:0}
+.tests li{padding:10px 4px;border-top:1px solid var(--line-2);cursor:pointer;font-size:14.5px}
+.tests li:hover{background:var(--red-tint)}
+.tests li small{color:var(--muted)}
+.tests li p{margin-top:4px;color:var(--ink-2);font-size:14px}
+#resPhase{margin-bottom:14px}
+
+/* PDF export of the results view (browser print → Save as PDF) */
+@media print{
+  @page{size:A4;margin:14mm}
+  body{background:#fff;font-size:11pt}
+  .top .tabs,.ident,#view-cases,#view-tools,.drawer,.scrim,.modal,.toast,.no-print,#resPhase,.view-head .seg{display:none !important}
+  #view-results{display:block !important}
+  .top{position:static;border-bottom:2px solid var(--red)}
+  .brand .sep,.brand .title{display:inline-block !important}
+  .wrap{max-width:none;padding-inline:0}
+  main{padding-block:10px 0}
+  .panel{padding:10px 0;border-radius:0;break-inside:avoid}
+  .res-grid{display:grid !important;grid-template-columns:1.15fr 1fr !important;gap:12px}
+  .lists,.fd-grid,.rgrid{display:block}
+  .rank li{padding:5px 2px}
+  .rank b{font-size:10pt}
+  .res-grid > .panel,.lists > .panel,.fd-grid > .panel{margin-bottom:10px}
+  .rank li,.tests li,.lists li{cursor:auto}
+  #fdForm{display:none}
+  .report{border-top:2px solid var(--red);break-before:page}
+  .gains,.rk{grid-template-columns:repeat(4,1fr) !important}
+  a{color:inherit;text-decoration:none}
+  footer{padding-block:8px 0}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

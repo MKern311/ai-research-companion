@@ -25,7 +25,7 @@ let state = blank();
 try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && v.t) state = {t:v.t, c:Array.isArray(v.c) ? v.c : [], a:v.a || 'Table 1'}; } catch(e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} };
 let session = null;            // {code, role, table, workshop}
-const ui = {view:'cases', lens:1, phase:0, scope:'room', colour:false, toolPhase:null, open:null};
+const ui = {view:'cases', lens:1, phase:0, scope:'room', resPhase:null, toolPhase:null, open:null};
 const sync = {dirty:false, timer:0, poll:0, last:null, err:null, busy:false};
 
 const remote = () => !!session;
@@ -97,10 +97,13 @@ function room(id){
   const avg = k => both.length ? both.reduce((s, [, r]) => s + r[k], 0) / both.length : 0;
   return {k:both.length, n:avg('n'), u:avg('u'), stars:rs.filter(([, r]) => r.f).length,
     gain:Object.fromEntries(GAINS.map(([g]) => [g, rs.filter(([, r]) => (r.b || []).includes(g)).length])),
-    x:rs.filter(([, r]) => r.x).map(([k]) => k), chk:rs.filter(([, r]) => chkOf(r)).map(([k]) => k)};
+    x:rs.filter(([, r]) => r.x).map(([k]) => k), chk:rs.filter(([, r]) => chkOf(r)).map(([k]) => k),
+    tests:rs.filter(([, r]) => r.tt).map(([k, r]) => ({table:k, o:r.o || '', note:r.note || ''}))};
 }
-function techOf(u){ return u.custom ? {b:u.tb || null, bn:'Rated in the workshop.', t:[]} : TECH[u.id]; }
-function verdict(u){ const t = techOf(u); if (!t || !t.b) return 'open'; if (t.b === 'y') return 'free'; if (t.t.length) return 'spec'; return 'gap'; }
+/* Step 2: each table picks up to three use cases and tries them live with Copilot */
+const MAXTEST = 3;
+const OUTCOME = {y:['Worked well', '#2F6410'], p:['Partly', '#7A4700'], n:['Did not work', '#5F5F5F']};
+const myTests = () => allUcs().filter(u => myR(u.id).tt);
 
 /* ---------- header ---------- */
 function renderIdent(){
@@ -118,9 +121,10 @@ function renderIdent(){
 /* ---------- use cases view ---------- */
 function renderLens(){
   document.querySelectorAll('[data-lens]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.lens === ui.lens)));
+  const n = myTests().length;
   $('#lensHint').textContent = ui.lens === 1
     ? 'Rate the value for your research, the kind of gain and whether you could start on Monday.'
-    : 'See whether Copilot can do it today – or where a specialist tool fits better.';
+    : `Pick one to three of your highest-rated use cases and try them live with Copilot · ${n} of ${MAXTEST} selected.`;
 }
 function renderPhases(){
   $('#phases').innerHTML = PHASES.map((p, i) => {
@@ -141,15 +145,16 @@ function renderIntro(){
   el.open = open;
 }
 function card(u){
-  const r = myR(u.id), v = verdict(u), rm = room(u.id);
+  const r = myR(u.id), rm = room(u.id);
   const pills = [];
   if (r.x) pills.push('<span class="pill notai">Not an AI task</span>');
   else if (r.n && r.u) pills.push(`<span class="pill rated">Value ${r.n} · Feasibility ${r.u}</span>`);
-  if (ui.lens === 2) pills.push(`<span class="pill v" style="--vc:${VERD[v].c}">${VERD[v].l}</span>`);
+  if (r.tt) pills.push(r.o ? `<span class="pill v" style="--vc:${OUTCOME[r.o][1]}">Copilot: ${OUTCOME[r.o][0]}</span>` : '<span class="pill test">Testing with Copilot</span>');
+  else if (ui.lens === 2 && r.n && r.u && !r.x) pills.push('<span class="pill">Candidate for a test</span>');
   if (!u.custom && u.risk === 3) pills.push('<span class="pill hi">High risk</span>');
   if (u.custom) pills.push(`<span class="pill">${u.by === 'Survey' ? 'From the survey' : 'From the room'}</span>`);
   if (rm.k && session) pills.push(`<span class="pill room">${rm.k} ${rm.k === 1 ? 'table' : 'tables'}</span>`);
-  return `<button class="card" type="button" data-open="${esc(u.id)}" aria-current="${ui.open === u.id}">
+  return `<button class="card${r.tt ? ' tested' : ''}" type="button" data-open="${esc(u.id)}" aria-current="${ui.open === u.id}">
     <h3>${r.f ? '<span class="star" aria-label="starred">★</span> ' : ''}${esc(u.t)}</h3>${u.d ? `<p>${esc(u.d)}</p>` : ''}
     <span class="foot">${pills.join('')}</span></button>`;
 }
@@ -163,13 +168,15 @@ function scale(key, val, label, hint){
   return `<div><div class="q-label">${label}</div><div class="q-hint">${hint}</div>
     <div class="scale" role="group" aria-label="${label}">${[1,2,3,4,5].map(n => `<button type="button" data-rate="${key}" data-v="${n}" aria-pressed="${val === n}">${n}</button>`).join('')}</div></div>`;
 }
-function techHtml(u){
-  const t = techOf(u), v = verdict(u), f = FIT[t.b];
-  const pick = u.custom && !readOnly() ? `<div class="chips">${['y','p','n'].map(k => `<button type="button" data-tech="${k}" aria-pressed="${t.b === k}">${FIT[k][0]} ${FIT[k][2]}</button>`).join('')}</div>` : '';
-  return `<div class="trow"><span class="fit ${f ? f[1] : 'fit-o'}" aria-hidden="true">${f ? f[0] : '?'}</span><div><b>Copilot</b><span>${u.custom ? 'How well does Copilot handle it?' : esc(t.bn)}</span>${pick}</div></div>
-    ${u.custom ? '' : `<div class="trow"><span class="fit fit-t" aria-hidden="true">⚙</span><div><b>Specialist tools</b>${t.t.length ? `<div class="tools">${t.t.map(n => TOOL[n]).filter(Boolean).sort(byScore).map(x => `<span>${esc(x.n)}${x.r ? ` <em>★ ${x.r.toFixed(1)} (${x.c})</em>` : ''}</span>`).join('')}</div>` : '<span>None needed or none in the tool library.</span>'}</div></div>`}
-    <div class="verdict" style="--vc:${VERD[v].c}">${VERD[v].l}</div>
-    ${!u.custom && u.risk === 3 ? '<div class="hiwarn">High risk – check what is permitted before using any tool.</div>' : ''}`;
+function testHtml(u){
+  const r = myR(u.id), n = myTests().length, full = !r.tt && n >= MAXTEST;
+  if (readOnly()) return '<p class="later">View only.</p>';
+  let h = `<button type="button" class="toggle" data-test aria-pressed="${!!r.tt}" ${full ? 'disabled title="Your table already tests three use cases"' : ''}>${r.tt ? '✓ Selected for a Copilot test' : 'Test this with Copilot'}</button>
+    <p class="q-hint">${full ? 'Your table already tests three use cases – deselect one first.' : `${n} of ${MAXTEST} selected for your table.`}</p>`;
+  if (r.tt) h += `<ol class="howto"><li>Open Copilot Chat with your university login.</li><li>Give it context: your goal, a source or dataset you may share, what a good result looks like.</li><li>Check the answer against the original – then note what happened.</li></ol>
+    <div><div class="q-label">How did it go?</div><div class="chips" role="group" aria-label="Copilot result">${Object.entries(OUTCOME).map(([k, v]) => `<button type="button" data-out="${k}" aria-pressed="${r.o === k}">${v[0]}</button>`).join('')}</div></div>
+    <div class="field"><label for="testNote">What did you notice?</label><textarea id="testNote" data-note maxlength="400" placeholder="e.g. good first draft, but two invented references">${esc(r.note || '')}</textarea></div>`;
+  return h;
 }
 function openDrawer(id){
   ui.open = id;
@@ -204,8 +211,8 @@ function openDrawer(id){
           ${rm.k ? `<div class="roomline">Room: ${rm.k} ${rm.k === 1 ? 'table' : 'tables'} · value ${rm.n.toFixed(1)} · feasibility ${rm.u.toFixed(1)}${rm.x.length ? ` · ${rm.x.length}× not an AI task` : ''}</div>` : ''}
         </div>
         <div class="block tech">
-          <h3>Step 2 · Technology</h3>
-          ${ui.lens === 2 ? techHtml(u) : '<p class="later">Opens in Step 2 – first discuss the value for your research.</p>'}
+          <h3>Step 2 · Try it with Copilot</h3>
+          ${ui.lens === 2 ? testHtml(u) : '<p class="later">Opens in Step 2 – first discuss the value for your research.</p>'}
         </div>
         ${u.custom && !ro && (!session || u.by === myTable() || session.role === 'facilitator') ? '<div><button class="btn btn-quiet btn-sm" type="button" data-del>Remove this use case</button></div>' : ''}
       </div>`;
@@ -221,14 +228,15 @@ function closeDrawer(){
 }
 
 /* ---------- results view ---------- */
+const inPhase = u => !ui.resPhase || u.phase === ui.resPhase;
 function rated(){
   const mine = myTable();
   if (ui.scope === 'table') {
-    return allUcs().map(u => ({u, r:(state.t[mine] && state.t[mine].r[u.id]) || {}})).filter(e => e.r.n && e.r.u && !e.r.x)
-      .map(e => ({u:e.u, n:e.r.n, m:e.r.u, f:!!e.r.f, k:1, chk:chkOf(e.r), v:verdict(e.u)})).sort((a, b) => b.n*b.m - a.n*a.m || b.n - a.n);
+    return allUcs().filter(inPhase).map(u => ({u, r:(state.t[mine] && state.t[mine].r[u.id]) || {}})).filter(e => e.r.n && e.r.u && !e.r.x)
+      .map(e => ({u:e.u, n:e.r.n, m:e.r.u, f:!!e.r.f, k:1, chk:chkOf(e.r), t:!!e.r.tt})).sort((a, b) => b.n*b.m - a.n*a.m || b.n - a.n);
   }
-  return allUcs().map(u => ({u, rm:room(u.id)})).filter(e => e.rm.k)
-    .map(({u, rm}) => ({u, n:rm.n, m:rm.u, f:rm.stars > 0, k:rm.k, chk:rm.chk.length > 0, v:verdict(u)}))
+  return allUcs().filter(inPhase).map(u => ({u, rm:room(u.id)})).filter(e => e.rm.k)
+    .map(({u, rm}) => ({u, n:rm.n, m:rm.u, f:rm.stars > 0, k:rm.k, chk:rm.chk.length > 0, t:rm.tests.length > 0}))
     .sort((a, b) => b.n*b.m - a.n*a.m || b.k - a.k || b.n - a.n);
 }
 function renderMatrix(list){
@@ -247,27 +255,29 @@ function renderMatrix(list){
   list.forEach((e, i) => { e.key = Math.round(e.m*2)/2 + '-' + Math.round(e.n*2)/2; (groups[e.key] = groups[e.key] || []).push(i); });
   list.forEach((e, i) => {
     const grp = groups[e.key], idx = grp.indexOf(i), cnt = grp.length, ang = idx / cnt * Math.PI * 2, rad = cnt > 1 ? 16 + (cnt > 6 ? 8 : 0) : 0;
-    const x = sx(e.m) + Math.cos(ang) * rad, y = sy(e.n) + Math.sin(ang) * rad, fill = ui.colour ? VERD[e.v].c : '#CC0000';
+    const x = sx(e.m) + Math.cos(ang) * rad, y = sy(e.n) + Math.sin(ang) * rad, fill = '#CC0000';
     g += `<g style="cursor:pointer" data-open="${esc(e.u.id)}"><title>${esc(e.u.t)} – value ${e.n.toFixed(1)}, feasibility ${e.m.toFixed(1)}</title>${e.f ? `<circle cx="${x}" cy="${y}" r="15" fill="none" stroke="#1F1F1F" stroke-width="2.5"/>` : ''}<circle cx="${x}" cy="${y}" r="11" fill="${fill}" stroke="#fff" stroke-width="2"/><text x="${x}" y="${y+4}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">${i+1}</text></g>`;
   });
   if (!list.length) g += `<text x="${(L+W-R)/2}" y="${(T+H-B)/2}" text-anchor="middle" font-size="14" fill="#5F5F5F">No ratings yet – rate use cases in Step 1.</text>`;
-  $('#matrix').innerHTML = g + '</svg>' + `<div class="legend">${ui.colour ? ['free','spec','gap','open'].map(k => `<span><i style="background:${VERD[k].c}"></i>${VERD[k].l}</span>`).join('') : ''}<span><i style="background:#fff;box-shadow:0 0 0 2px #1F1F1F"></i>Starred</span></div>`;
+  $('#matrix').innerHTML = g + '</svg>' + `<div class="legend"><span><i style="background:#fff;box-shadow:0 0 0 2px #1F1F1F"></i>Starred</span></div>`;
 }
 function renderResults(){
   const list = rated(), mine = myTable();
+  $('#resPhase').innerHTML = `<button type="button" data-rph="" aria-pressed="${!ui.resPhase}">All phases</button>` + PHASES.map(p => `<button type="button" data-rph="${p.id}" aria-pressed="${ui.resPhase === p.id}">${p.short}</button>`).join('');
   $('#scopeTable').textContent = session && session.role === 'viewer' ? 'My table' : mine;
   $('#scopeTable').disabled = !!session && session.role === 'viewer';
   document.querySelectorAll('[data-scope]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.scope === ui.scope)));
-  $('#colourToggle').setAttribute('aria-pressed', String(ui.colour));
   const tabs = Object.keys(state.t).filter(k => Object.keys(state.t[k].r).length);
-  $('#resSub').textContent = ui.scope === 'room' ? `Averages over ${tabs.length} ${tabs.length === 1 ? 'table' : 'tables'} · ${list.length} rated use cases.` : `${mine} · ${list.length} rated use cases.`;
+  $('#resSub').textContent = (ui.resPhase ? SHORT[ui.resPhase] : 'All phases') + ' · ' + (ui.scope === 'room' ? `averages over ${tabs.length} ${tabs.length === 1 ? 'table' : 'tables'} · ${list.length} rated use cases.` : `${mine} · ${list.length} rated use cases.`);
   renderMatrix(list);
-  $('#rank').innerHTML = list.length ? list.slice(0, 12).map((e, i) => `<li data-open="${esc(e.u.id)}" tabindex="0"><span class="n" style="background:${ui.colour ? VERD[e.v].c : '#CC0000'}">${i+1}</span><span><b>${esc(e.u.t)}</b><small>${SHORT[e.u.phase]}${ui.scope === 'room' ? ` · ${e.k} ${e.k === 1 ? 'table' : 'tables'}` : ''}${e.chk ? ' · check rules first' : ''}</small></span><span class="sc">V ${e.n.toFixed(1)} · F ${e.m.toFixed(1)}</span></li>`).join('')
+  $('#rank').innerHTML = list.length ? list.slice(0, 12).map((e, i) => `<li data-open="${esc(e.u.id)}" tabindex="0"><span class="n" style="background:#CC0000">${i+1}</span><span><b>${esc(e.u.t)}</b><small>${SHORT[e.u.phase]}${ui.scope === 'room' ? ` · ${e.k} ${e.k === 1 ? 'table' : 'tables'}` : ''}${e.chk ? ' · check rules first' : ''}${e.t ? ' · tested with Copilot' : ''}</small></span><span class="sc">V ${e.n.toFixed(1)} · F ${e.m.toFixed(1)}</span></li>`).join('')
     : '<li class="empty" style="display:block;cursor:default">No use cases rated yet.</li>';
   const scope = id => ui.scope === 'room' ? room(id) : (r => ({x:r.x ? [mine] : [], chk:chkOf(r) ? [mine] : []}))(myR(id));
-  const all = allUcs().map(u => ({u, s:scope(u.id)}));
+  const all = allUcs().filter(inPhase).map(u => ({u, s:scope(u.id)}));
   const notai = all.filter(e => e.s.x.length), chk = all.filter(e => e.s.chk.length);
+  const tests = allUcs().filter(inPhase).flatMap(u => (ui.scope === 'room' ? room(u.id).tests : (r => r.tt ? [{table:mine, o:r.o || '', note:r.note || ''}] : [])(myR(u.id))).map(x => ({u, ...x})));
   const li = (e, who) => `<li data-open="${esc(e.u.id)}" tabindex="0">${esc(e.u.t)} <small>· ${SHORT[e.u.phase]}${ui.scope === 'room' && who.length ? ' · ' + who.join(', ') : ''}</small></li>`;
+  $('#tests').innerHTML = `<h2>Tried with Copilot</h2><p class="sub">${tests.length} ${tests.length === 1 ? 'test' : 'tests'}${ui.scope === 'room' ? ' across the room' : ''}.</p>` + (tests.length ? `<ul class="tests">${tests.map(x => `<li data-open="${esc(x.u.id)}" tabindex="0"><span class="pill v" style="--vc:${x.o ? OUTCOME[x.o][1] : '#BDBDBD'}">${x.o ? OUTCOME[x.o][0] : 'Not yet tested'}</span> <b>${esc(x.u.t)}</b> <small>· ${esc(x.table)}</small>${x.note ? `<p>${esc(x.note)}</p>` : ''}</li>`).join('')}</ul>` : '<p class="empty">No use cases selected for a test yet (Step 2).</p>');
   $('#lists').innerHTML = `<div class="panel"><h2>Not an AI task</h2><p class="sub">Where AI is the wrong instrument.</p>${notai.length ? `<ul>${notai.map(e => li(e, e.s.x)).join('')}</ul>` : '<p class="empty">None flagged yet.</p>'}</div>
     <div class="panel"><h2>Check rules before use</h2><p class="sub">Ethics, data or policy rules to clarify first.</p>${chk.length ? `<ul>${chk.map(e => li(e, e.s.chk)).join('')}</ul>` : '<p class="empty">None flagged yet.</p>'}</div>`;
   if (!$('#fdForm').contains(document.activeElement)) renderFindingsForm();
@@ -290,39 +300,40 @@ function renderFindingsAll(){
 
 /* ---------- report ---------- */
 function reportData(){
-  const ucs = allUcs().map(u => ({u, rm:room(u.id), v:verdict(u)}));
+  const ucs = allUcs().map(u => ({u, rm:room(u.id)}));
   const ranked = ucs.filter(e => e.rm.k).sort((a, b) => b.rm.n*b.rm.u - a.rm.n*a.rm.u || b.rm.k - a.rm.k);
   return {ranked, tabs:Object.keys(state.t).filter(k => Object.keys(state.t[k].r).length || Object.values(state.t[k].fd || {}).some(Boolean)),
     notai:ucs.filter(e => e.rm.x.length), chk:ranked.filter(e => e.rm.chk.length),
+    tests:ucs.flatMap(e => e.rm.tests.map(x => ({u:e.u, ...x}))),
     gains:GAINS.map(([g, l]) => ({l, n:ucs.reduce((s, e) => s + e.rm.gain[g], 0), top:ranked.filter(e => e.rm.gain[g]).sort((a, b) => b.rm.gain[g] - a.rm.gain[g] || b.rm.n - a.rm.n).slice(0, 3)})),
     fds:fdTables().map(k => [k, state.t[k].fd])};
 }
 function renderReport(){
   const d = reportData(), el = $('#reportBody');
-  if (!d.ranked.length && !d.fds.length) { el.innerHTML = '<p class="empty">The report fills automatically once tables have rated use cases or entered findings.</p>'; return; }
-  const top = d.ranked.slice(0, 10), free = top.filter(e => e.v === 'free').length, spec = top.filter(e => e.v === 'spec').length;
-  el.innerHTML = `<div class="rk"><div><b>${d.tabs.length}</b><span>tables contributed</span></div><div><b>${d.ranked.length}</b><span>use cases rated</span></div><div><b>${d.notai.length}</b><span>not an AI task</span></div><div><b>${d.fds.length}</b><span>tables with findings</span></div></div>
-    <div class="rgrid"><div><h3>Top use cases from the room</h3><ol class="rlist">${top.map(e => `<li><b>${esc(e.u.t)}</b> <small>· ${SHORT[e.u.phase]} · value ${e.rm.n.toFixed(1)} · feasibility ${e.rm.u.toFixed(1)} · ${e.rm.k} ${e.rm.k === 1 ? 'table' : 'tables'} · ${VERD[e.v].l}</small></li>`).join('')}</ol>
-      <p class="rnote">Of the top ${top.length}, ${free} work with Copilot today and ${spec} are better served by a specialist tool (author’s pre-assessment).</p></div>
+  if (!d.ranked.length && !d.fds.length && !d.tests.length) { el.innerHTML = '<p class="empty">The report fills automatically once tables have rated use cases or entered findings.</p>'; return; }
+  const top = d.ranked.slice(0, 10), done = d.tests.filter(x => x.o), ok = done.filter(x => x.o === 'y').length;
+  el.innerHTML = `<div class="rk"><div><b>${d.tabs.length}</b><span>tables contributed</span></div><div><b>${d.ranked.length}</b><span>use cases rated</span></div><div><b>${done.length}</b><span>Copilot tests (${ok} worked well)</span></div><div><b>${d.notai.length}</b><span>not an AI task</span></div></div>
+    <div class="rgrid"><div><h3>Top use cases from the room</h3><ol class="rlist">${top.map(e => `<li><b>${esc(e.u.t)}</b> <small>· ${SHORT[e.u.phase]} · value ${e.rm.n.toFixed(1)} · feasibility ${e.rm.u.toFixed(1)} · ${e.rm.k} ${e.rm.k === 1 ? 'table' : 'tables'}</small></li>`).join('')}</ol></div>
       <div><h3>Top use case per cluster</h3><ul class="rlist">${CLUSTERS.map(c => { const e = d.ranked.find(x => c.ph.includes(x.u.phase)); return `<li><b>${c.n}:</b> ${e ? esc(e.u.t) : '<small>not rated</small>'}</li>`; }).join('')}</ul>
       ${d.chk.length ? `<h3>Check rules before use</h3><ul class="rlist">${d.chk.map(e => `<li>${esc(e.u.t)}</li>`).join('')}</ul>` : ''}</div></div>
+    ${d.tests.length ? `<h3>Tried with Copilot</h3><ul class="rlist">${d.tests.map(x => `<li><b>${esc(x.u.t)}</b> <small>· ${esc(x.table)} · ${x.o ? OUTCOME[x.o][0] : 'not yet tested'}</small>${x.note ? ` – ${esc(x.note)}` : ''}</li>`).join('')}</ul>` : ''}
     ${d.gains.some(x => x.n) ? `<h3>Where the room sees the gain</h3><div class="gains">${d.gains.map(x => `<div><b>${x.n}</b><span>${x.l}</span>${x.top.length ? `<ul>${x.top.map(e => `<li>${esc(e.u.t)}</li>`).join('')}</ul>` : ''}</div>`).join('')}</div>` : ''}
-    <p class="rnote">Method: research value first (value 1–5 · kind of gain · feasibility 1–5), technology second. Room values are means over the tables that rated a use case; “not an AI task” ratings are excluded from the means.</p>`;
+    <p class="rnote">Method: Step 1 research value (value 1–5 · kind of gain · feasibility 1–5); Step 2 each table tried up to three of its use cases live with Copilot. Room values are means over the tables that rated a use case; “not an AI task” ratings are excluded from the means.</p>`;
 }
 function reportMarkdown(){
   const d = reportData(), top = d.ranked.slice(0, 10);
   const L = ['# Results report – Generative AI in Your Research', `Workshop, 4 November 2026 · generated ${new Date().toISOString().slice(0, 10)} · ${VERSION}`, '',
-    `- Tables contributed: ${d.tabs.length}`, `- Use cases rated: ${d.ranked.length}`, `- Flagged “not an AI task”: ${d.notai.length}`, `- Tables with findings: ${d.fds.length}`, '',
-    '## Top use cases from the room', ...top.map((e, i) => `${i+1}. **${e.u.t}** (${SHORT[e.u.phase]}) – value ${e.rm.n.toFixed(1)}, feasibility ${e.rm.u.toFixed(1)}, ${e.rm.k} table(s); ${VERD[e.v].l}`), '',
+    `- Tables contributed: ${d.tabs.length}`, `- Use cases rated: ${d.ranked.length}`, `- Copilot tests: ${d.tests.filter(x => x.o).length}`, `- Flagged “not an AI task”: ${d.notai.length}`, `- Tables with findings: ${d.fds.length}`, '',
+    '## Top use cases from the room', ...top.map((e, i) => `${i+1}. **${e.u.t}** (${SHORT[e.u.phase]}) – value ${e.rm.n.toFixed(1)}, feasibility ${e.rm.u.toFixed(1)}, ${e.rm.k} table(s)`), '',
     '## Top use case per cluster', ...CLUSTERS.map(c => { const e = d.ranked.find(x => c.ph.includes(x.u.phase)); return `- ${c.n}: ${e ? e.u.t : 'not rated'}`; }), ''];
+  if (d.tests.length) L.push('## Tried with Copilot', ...d.tests.map(x => `- ${x.u.t} (${x.table}): ${x.o ? OUTCOME[x.o][0] : 'not yet tested'}${x.note ? ' – ' + x.note : ''}`), '');
   if (d.gains.some(x => x.n)) L.push('## Where the room sees the gain', ...d.gains.map(x => `- ${x.l}: ${x.n}${x.top.length ? ' – e.g. ' + x.top.map(e => e.u.t).join('; ') : ''}`), '');
   if (d.notai.length) L.push('## Not an AI task', ...d.notai.map(e => `- ${e.u.t} (${SHORT[e.u.phase]})`), '');
   if (d.chk.length) L.push('## Check rules before use', ...d.chk.map(e => `- ${e.u.t} (${SHORT[e.u.phase]})`), '');
   if (d.fds.length) { L.push('## Findings and open questions'); d.fds.forEach(([k, f]) => { L.push(`### ${k}`, ...['f1','f2','f3'].filter(x => f[x]).map(x => `- ${f[x]}`)); if (f.q) L.push(`- Open question: ${f.q}`); L.push(''); }); }
-  L.push('## Method', 'Research value first (value 1–5 · kind of gain · feasibility 1–5), technology second (Copilot, specialist tools). Room values are means over the tables that rated a use case; “not an AI task” ratings are excluded from the means.', '', 'Prof. Dr. Manuel Kern · Delivered by Hitachi Solutions');
+  L.push('## Method', 'Step 1 research value (value 1–5 · kind of gain · feasibility 1–5); Step 2 each table tried up to three of its use cases live with Copilot. Room values are means over the tables that rated a use case; “not an AI task” ratings are excluded from the means.', '', 'Prof. Dr. Manuel Kern · Delivered by Hitachi Solutions');
   return L.join('\n');
 }
-
 /* ---------- tools view ---------- */
 function renderTools(){
   const counts = PHASES.map(p => TOOLS.filter(t => t.ph.includes(p.id)).length);
@@ -388,7 +399,8 @@ document.addEventListener('click', e => {
   if (t.closest('[data-add]')) { openDrawer('__new'); return; }
   if (t.closest('[data-close]') || t === $('#scrim')) { closeDrawer(); return; }
   const sc = t.closest('[data-scope]'); if (sc && !sc.disabled) { ui.scope = sc.dataset.scope; renderResults(); return; }
-  if (t.closest('#colourToggle')) { ui.colour = !ui.colour; renderResults(); return; }
+  const rp = t.closest('[data-rph]'); if (rp) { ui.resPhase = rp.dataset.rph || null; renderResults(); return; }
+  if (t.closest('#pdfBtn')) { if (ui.view !== 'results') setView('results'); document.title = 'Results – AI in the Research Process – ' + new Date().toISOString().slice(0, 10); window.print(); setTimeout(() => { document.title = 'AI in the Research Process'; }, 1000); return; }
   const tp = t.closest('[data-tph]'); if (tp) { ui.toolPhase = tp.dataset.tph || null; renderTools(); return; }
   if (t.closest('#signOut')) { signOut(); return; }
   if (t.closest('#signIn')) { showLogin(); return; }
@@ -408,16 +420,17 @@ document.addEventListener('click', e => {
   // drawer controls
   const d = $('#drawer'); if (d.hidden || !d.contains(t)) return;
   const id = ui.open, u = findUc(id); if (!u || readOnly()) return;
-  const rb = t.closest('[data-rate]'), gb = t.closest('[data-gain]'), fb = t.closest('[data-flag]'), tb = t.closest('[data-tech]');
+  const rb = t.closest('[data-rate]'), gb = t.closest('[data-gain]'), fb = t.closest('[data-flag]'), tb = t.closest('[data-test]'), ob = t.closest('[data-out]');
   const T = tbl(myTable()); const r = T.r[id] = T.r[id] || {};
   if (rb) { const k = rb.dataset.rate, v = +rb.dataset.v; r[k] = r[k] === v ? 0 : v; }
   else if (gb) { const g = gb.dataset.gain, b = r.b || []; r.b = b.includes(g) ? b.filter(x => x !== g) : b.concat(g); }
   else if (fb) { const k = fb.dataset.flag; if (k === 'c') { r.c = !chkOf(r); delete r.g; } else r[k] = !r[k]; }
-  else if (tb) { u.tb = u.tb === tb.dataset.tech ? null : tb.dataset.tech; pushAddition(u); openDrawer(id); return; }
+  else if (tb) { if (!r.tt && myTests().length >= MAXTEST) { toast('Your table already tests three use cases'); return; } r.tt = !r.tt; renderLens(); }
+  else if (ob) { r.o = r.o === ob.dataset.out ? '' : ob.dataset.out; }
   else if (t.closest('[data-del]')) { state.c = state.c.filter(x => x.id !== id); Object.values(state.t).forEach(X => delete X.r[id]); pushAddition(u, true); push(); closeDrawer(); renderPhases(); toast('Use case removed'); return; }
   else return;
   push(); openDrawer(id); renderPhases();
-  const again = $('#drawer').querySelector(rb ? `[data-rate="${rb.dataset.rate}"][data-v="${rb.dataset.v}"]` : gb ? `[data-gain="${gb.dataset.gain}"]` : `[data-flag="${fb.dataset.flag}"]`); if (again) again.focus();
+  const again = $('#drawer').querySelector(rb ? `[data-rate="${rb.dataset.rate}"][data-v="${rb.dataset.v}"]` : gb ? `[data-gain="${gb.dataset.gain}"]` : fb ? `[data-flag="${fb.dataset.flag}"]` : tb ? '[data-test]' : `[data-out="${ob.dataset.out}"]`); if (again) again.focus();
 });
 document.addEventListener('change', e => {
   if (e.target.id === 'tableSel') { state.a = e.target.value; save(); renderAll(); toast('Rating as ' + state.a); }
@@ -425,6 +438,7 @@ document.addEventListener('change', e => {
 });
 document.addEventListener('input', e => {
   const k = e.target.dataset && e.target.dataset.fd;
+  if (e.target.dataset && 'note' in e.target.dataset && ui.open && !readOnly()) { const T = tbl(myTable()); (T.r[ui.open] = T.r[ui.open] || {}).note = e.target.value; push(); }
   if (k && !readOnly()) { tbl(myTable()).fd[k] = e.target.value; push(); clearTimeout(renderFindingsAll.t); renderFindingsAll.t = setTimeout(() => { renderFindingsAll(); renderReport(); }, 500); }
   if (e.target.id === 'svText') { const rows = parseSurvey(e.target.value), bad = rows.filter(r => !r.phase).length, risky = rows.filter(r => r.risky).length;
     $('#svInfo').textContent = rows.length ? `${rows.length} rows · ${rows.length - bad - risky} ready${bad ? ` · ${bad} without a recognised stage` : ''}${risky ? ` · ${risky} skipped (possible personal data)` : ''}` : ''; }
@@ -456,18 +470,18 @@ function copyText(text, what){
 }
 function csv(){
   const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
-  const head = ['Table','Phase','Wall cluster','Use case','Description','Value (1-5)','Kind of gain','Feasibility (1-5)','Score','Starred','Not an AI task','Check rules first','Copilot','Specialist tools','Technology verdict','Workshop addition'];
+  const head = ['Table','Phase','Wall cluster','Use case','Description','Value (1-5)','Kind of gain','Feasibility (1-5)','Score','Starred','Not an AI task','Check rules first','Tested with Copilot','Copilot result','Test note','Workshop addition'];
   const rows = [];
-  Object.entries(state.t).forEach(([tn, T]) => PHASES.forEach(p => ucsOf(p).forEach(u => { const r = T.r[u.id]; if (!r || !(r.n || r.u || (r.b || []).length || chkOf(r) || r.f || r.x)) return; const t = techOf(u);
-    rows.push([tn, p.name, CLUSTER_OF[p.id], u.t, u.d, r.n || '', (r.b || []).map(gainLabel).join(', '), r.u || '', (r.n && r.u) ? r.n * r.u : '', r.f ? 'yes' : '', r.x ? 'yes' : '', chkOf(r) ? 'yes' : '', t.b ? FIT[t.b][2] : '', t.t.join(', '), VERD[verdict(u)].l, u.custom ? 'yes' : ''].map(q).join(',')); })));
+  Object.entries(state.t).forEach(([tn, T]) => PHASES.forEach(p => ucsOf(p).forEach(u => { const r = T.r[u.id]; if (!r || !(r.n || r.u || (r.b || []).length || chkOf(r) || r.f || r.x || r.tt)) return;
+    rows.push([tn, p.name, CLUSTER_OF[p.id], u.t, u.d, r.n || '', (r.b || []).map(gainLabel).join(', '), r.u || '', (r.n && r.u) ? r.n * r.u : '', r.f ? 'yes' : '', r.x ? 'yes' : '', chkOf(r) ? 'yes' : '', r.tt ? 'yes' : '', r.o ? OUTCOME[r.o][0] : '', r.note || '', u.custom ? 'yes' : ''].map(q).join(',')); })));
   Object.entries(state.t).forEach(([tn, T]) => ['f1','f2','f3','q'].forEach(k => { if ((T.fd || {})[k]) rows.push([tn, '', '', k === 'q' ? 'OPEN QUESTION' : 'FINDING', T.fd[k]].map(q).join(',')); }));
   return [head.map(q).join(','), ...rows].join('\r\n');
 }
 function tsv(){
   const c = v => String(v ?? '').replace(/[\t\r\n]+/g, ' ');
-  const head = ['Use case','Phase','Tables rated','Value (avg)','Feasibility (avg)','Score','Stars','Kind of gain','Not an AI task','Check rules first','Technology'];
-  const rows = allUcs().map(u => ({u, rm:room(u.id)})).filter(e => e.rm.k || e.rm.x.length || e.rm.chk.length || e.rm.stars).sort((a, b) => b.rm.n*b.rm.u - a.rm.n*a.rm.u)
-    .map(({u, rm}) => [u.t, SHORT[u.phase], rm.k, rm.k ? rm.n.toFixed(1) : '', rm.k ? rm.u.toFixed(1) : '', rm.k ? (rm.n*rm.u).toFixed(1) : '', rm.stars, GAINS.filter(([g]) => rm.gain[g]).map(([g, l]) => `${l} ×${rm.gain[g]}`).join(', '), rm.x.join(' / '), rm.chk.join(' / '), VERD[verdict(u)].l].map(c).join('\t'));
+  const head = ['Use case','Phase','Tables rated','Value (avg)','Feasibility (avg)','Score','Stars','Kind of gain','Not an AI task','Check rules first','Copilot tests'];
+  const rows = allUcs().map(u => ({u, rm:room(u.id)})).filter(e => e.rm.k || e.rm.x.length || e.rm.chk.length || e.rm.stars || e.rm.tests.length).sort((a, b) => b.rm.n*b.rm.u - a.rm.n*a.rm.u)
+    .map(({u, rm}) => [u.t, SHORT[u.phase], rm.k, rm.k ? rm.n.toFixed(1) : '', rm.k ? rm.u.toFixed(1) : '', rm.k ? (rm.n*rm.u).toFixed(1) : '', rm.stars, GAINS.filter(([g]) => rm.gain[g]).map(([g, l]) => `${l} ×${rm.gain[g]}`).join(', '), rm.x.join(' / '), rm.chk.join(' / '), rm.tests.map(x => `${x.table}: ${x.o ? OUTCOME[x.o][0] : 'selected'}`).join(' / ')].map(c).join('\t'));
   const fds = fdTables().flatMap(k => ['f1','f2','f3','q'].filter(x => state.t[k].fd[x]).map(x => [k, x === 'q' ? 'Open question' : 'Finding', c(state.t[k].fd[x])].join('\t')));
   return [head.join('\t'), ...rows, '', 'Table\tType\tText', ...fds].join('\n');
 }

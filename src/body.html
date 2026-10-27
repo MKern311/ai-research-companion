@@ -1,14 +1,14 @@
 <header class="top">
   <div class="wrap">
     <div class="brand">
-      <span class="hlogo" role="img" aria-label="Hitachi Solutions">{{WORDMARK}}<b>Hitachi Solutions</b></span>
+      <span class="hlogo" role="img" aria-label="Hitachi">{{WORDMARK}}</span>
       <span class="sep" aria-hidden="true"></span>
       <span class="title">AI in the Research Process</span>
     </div>
     <nav class="tabs" role="tablist" aria-label="Views">
       <button role="tab" id="tab-cases" data-view="cases" aria-selected="true">Use cases</button>
       <button role="tab" id="tab-results" data-view="results" aria-selected="false">Results</button>
-      <button role="tab" id="tab-tools" data-view="tools" aria-selected="false">Tools</button>
+      <button role="tab" id="tab-tools" data-view="tools" aria-selected="false">Academic tools</button>
     </nav>
     <div class="ident" id="ident"></div>
   </div>
@@ -18,12 +18,12 @@
   <section id="view-cases" aria-labelledby="tab-cases">
     <div class="view-head">
       <div><h1>Where does AI really help your research?</h1>
-        <p>Choose a phase, open a use case and rate it. Step 1 is about the value for your research; Step 2 checks what can implement it.</p></div>
+        <p>Choose a phase, open a use case and rate it. Step 1 is about the value for your research; in Step 2 your table tries one to three use cases live with Copilot.</p></div>
     </div>
     <div class="stepbar">
       <div class="seg" role="group" aria-label="Assessment step">
         <button type="button" data-lens="1" aria-pressed="true">Step 1 · Research value</button>
-        <button type="button" data-lens="2" aria-pressed="false">Step 2 · Technology</button>
+        <button type="button" data-lens="2" aria-pressed="false">Step 2 · Try it with Copilot</button>
       </div>
       <p id="lensHint"></p>
     </div>
@@ -40,10 +40,10 @@
         <button type="button" data-scope="table" aria-pressed="false" id="scopeTable">My table</button>
       </div>
     </div>
+    <div class="tchips" id="resPhase" role="group" aria-label="Filter by phase"></div>
     <div class="res-grid">
       <div class="panel">
-        <div class="ptools"><h2>Value × feasibility</h2>
-          <button type="button" class="toggle" id="colourToggle" aria-pressed="false">Colour by technology</button></div>
+        <div class="ptools"><h2>Value × feasibility</h2></div>
         <div id="matrix"></div>
       </div>
       <div class="panel">
@@ -51,6 +51,7 @@
         <ol class="rank" id="rank"></ol>
       </div>
     </div>
+    <div class="panel" id="tests" style="margin-top:16px"></div>
     <div class="lists" id="lists"></div>
     <div class="fd-grid">
       <div class="panel" id="fdForm"></div>
@@ -58,14 +59,14 @@
     </div>
     <div class="panel report" id="report">
       <div class="ptools"><div><h2>Results report</h2><p class="sub">Fills automatically – the basis for the follow-up e-mail.</p></div>
-        <div class="row"><button type="button" class="btn btn-primary btn-sm" id="repCopy">Copy report</button> <button type="button" class="btn btn-ghost btn-sm" id="repDl">Download (.md)</button></div></div>
+        <div class="row no-print"><button type="button" class="btn btn-primary btn-sm" id="pdfBtn">Save results as PDF</button> <button type="button" class="btn btn-ghost btn-sm" id="repCopy">Copy report</button> <button type="button" class="btn btn-ghost btn-sm" id="repDl">Download (.md)</button></div></div>
       <div id="reportBody"></div>
     </div>
   </section>
 
   <section id="view-tools" aria-labelledby="tab-tools" hidden>
     <div class="view-head">
-      <div><h1>Specialist tools</h1><p>Tools commonly used in academic work, mapped to the research phases – context for Step 2, not recommendations. Stars: ratings by students at a German university, 2024/25 (greyed out with fewer than three ratings); tools without stars were added for this workshop.</p></div>
+      <div><h1>Academic tools</h1><p>Tools commonly used in academic work, mapped to the research phases – for orientation, not recommendations. Stars: ratings by students at a German university, 2024/25 (greyed out with fewer than three ratings); tools without stars were added for this workshop.</p></div>
     </div>
     <div class="tchips" id="toolFilter"></div>
     <div class="tgrid" id="toolGrid"></div>
