@@ -49,7 +49,7 @@ a{color:var(--red)}
 .tabs button{border-radius:999px;padding:8px 16px;font-weight:600;font-size:14.5px;color:var(--ink-2);min-height:36px}
 .tabs button[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
 .ident{display:flex;align-items:center;gap:8px}
-.ident select{min-height:36px;border:1px solid var(--line);border-radius:999px;padding:0 30px 0 12px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23454545' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--ink);font-weight:600;font-size:14px}
+.ident select,.selectbox{min-height:36px;border:1px solid var(--line);border-radius:999px;padding:0 30px 0 12px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23454545' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--ink);font-weight:600;font-size:14px}
 .who{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;background:var(--surface);border-radius:999px;padding:6px 12px}
 .sync{font-size:12.5px;color:var(--muted);white-space:nowrap}
 .sync.ok::before,.sync.err::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px;background:var(--green)}

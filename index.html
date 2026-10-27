@@ -57,7 +57,7 @@ a{color:var(--red)}
 .tabs button{border-radius:999px;padding:8px 16px;font-weight:600;font-size:14.5px;color:var(--ink-2);min-height:36px}
 .tabs button[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
 .ident{display:flex;align-items:center;gap:8px}
-.ident select{min-height:36px;border:1px solid var(--line);border-radius:999px;padding:0 30px 0 12px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23454545' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--ink);font-weight:600;font-size:14px}
+.ident select,.selectbox{min-height:36px;border:1px solid var(--line);border-radius:999px;padding:0 30px 0 12px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23454545' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--ink);font-weight:600;font-size:14px}
 .who{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;background:var(--surface);border-radius:999px;padding:6px 12px}
 .sync{font-size:12.5px;color:var(--muted);white-space:nowrap}
 .sync.ok::before,.sync.err::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px;background:var(--green)}
@@ -768,7 +768,7 @@ function renderIdent(){
     : `<span class="sync">This browser only</span>`;
   const who = session
     ? `<span class="who">${esc(session.role === 'viewer' ? 'Viewing results' : session.table)}</span><button class="btn btn-quiet btn-sm" type="button" id="signOut">Sign out</button>`
-    : `<label class="sr" for="tableSel">Rate as</label><select id="tableSel">${TABLES.map(t => `<option${t === state.a ? ' selected' : ''}>${t}</option>`).join('')}</select>${REMOTE_OK ? '<button class="btn btn-ghost btn-sm" type="button" id="signIn">Sign in</button>' : ''}`;
+    : `<span class="who">${state.a === 'Table 1' ? 'Explore mode' : 'Offline · ' + esc(state.a)}</span>${REMOTE_OK ? '<button class="btn btn-ghost btn-sm" type="button" id="signIn">Sign in</button>' : ''}`;
   const gear = (!session || session.role === 'facilitator') ? `<button class="icon-btn" type="button" id="menuBtn" aria-label="Facilitator menu" title="Facilitator menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>` : '';
   el.innerHTML = st + who + gear;
 }
@@ -1001,7 +1001,9 @@ function openMenu(){
     <section><h3>Export</h3><div class="row"><button class="btn btn-quiet btn-sm" type="button" id="mCsv">Download results (.csv)</button><button class="btn btn-quiet btn-sm" type="button" id="mJson">Download all data (.json)</button><button class="btn btn-quiet btn-sm" type="button" id="mTsv">Copy results for Excel</button></div></section>
     <section><h3>Import survey use cases</h3><p class="sub">Paste rows from the survey export: column 1 = stage of the research journey, column 2 = use case text, optional column 3 = short title. Rows that may contain names, e-mails, links or numbers are skipped.</p>
       <textarea id="svText" placeholder="Data analysis&#9;Help me check my R code for a mixed model"></textarea><p class="sub" id="svInfo"></p><div class="row"><button class="btn btn-primary btn-sm" type="button" id="svGo">Import</button></div></section>
-    ${session ? '' : `<section><h3>Merge data from other laptops</h3><p class="sub">Only needed without sign-in: paste the “table data” each laptop copied, or choose the exported files.</p>
+    ${session ? '' : `<section><h3>Offline fallback</h3><p class="sub">Only if sign-in is not possible (no network): give each laptop its own table name, so their data can be merged later.</p>
+      <div class="row"><label class="sr" for="tableSel">Rate as</label><select id="tableSel" class="selectbox">${TABLES.map(t => `<option${t === state.a ? ' selected' : ''}>${t}</option>`).join('')}</select></div></section>
+    <section><h3>Merge data from other laptops</h3><p class="sub">Paste the “table data” each offline laptop copied, or choose the exported files.</p>
       <textarea id="mgText"></textarea><div class="row"><button class="btn btn-primary btn-sm" type="button" id="mgGo">Merge</button><button class="btn btn-quiet btn-sm" type="button" id="mgCopy">Copy this table’s data</button><label class="btn btn-quiet btn-sm">Choose files<input type="file" id="mgFile" accept="application/json" multiple hidden></label></div></section>`}
     <section><h3>Reset</h3><p class="sub">${fac ? 'Deletes all ratings, findings and additions of this workshop for everyone.' : 'Deletes everything stored in this browser.'}</p><div class="row"><button class="btn btn-quiet btn-sm" type="button" id="mReset">${fac ? 'Reset workshop' : 'Reset this browser'}</button></div></section>
   </div>`;
