@@ -313,3 +313,15 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 .prompt pre{white-space:pre-wrap;word-wrap:break-word;font:13.5px/1.5 var(--font);color:var(--ink);margin:0}
 .limit{background:var(--amber-bg);color:var(--amber) !important;border-radius:8px;padding:8px 10px}
 .guide:last-child{margin-bottom:4px}
+
+/* Results · group picker and overview */
+.scopebar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.scopepick{font:inherit;font-size:14px;font-weight:600;color:var(--ink);background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:8px 14px;min-height:42px}
+#groups{margin-bottom:16px}
+.gtable{overflow-x:auto}
+.gtable table{width:100%;border-collapse:collapse;font-size:14px}
+.gtable th,.gtable td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.gtable thead th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)}
+.gtable tbody tr{cursor:pointer}
+.gtable tbody tr:hover,.gtable tbody tr:focus-visible{background:var(--surface);outline:none}
+.gtable tbody th,.gtable td:nth-child(2),.gtable td:nth-child(4),.gtable td:nth-child(5){white-space:nowrap}

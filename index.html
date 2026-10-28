@@ -322,6 +322,18 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 .limit{background:var(--amber-bg);color:var(--amber) !important;border-radius:8px;padding:8px 10px}
 .guide:last-child{margin-bottom:4px}
 
+/* Results · group picker and overview */
+.scopebar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.scopepick{font:inherit;font-size:14px;font-weight:600;color:var(--ink);background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:8px 14px;min-height:42px}
+#groups{margin-bottom:16px}
+.gtable{overflow-x:auto}
+.gtable table{width:100%;border-collapse:collapse;font-size:14px}
+.gtable th,.gtable td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.gtable thead th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)}
+.gtable tbody tr{cursor:pointer}
+.gtable tbody tr:hover,.gtable tbody tr:focus-visible{background:var(--surface);outline:none}
+.gtable tbody th,.gtable td:nth-child(2),.gtable td:nth-child(4),.gtable td:nth-child(5){white-space:nowrap}
+
 </style>
 </head>
 <body>
@@ -362,12 +374,16 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   <section id="view-results" aria-labelledby="tab-results" hidden>
     <div class="view-head">
       <div><h1>Results from the room</h1><p id="resSub">Value against feasibility, top use cases, and what each table found.</p></div>
-      <div class="seg dark" role="group" aria-label="Scope">
-        <button type="button" data-scope="room" aria-pressed="true">Whole room</button>
-        <button type="button" data-scope="table" aria-pressed="false" id="scopeTable">My table</button>
+      <div class="scopebar">
+        <div class="seg dark" role="group" aria-label="Scope">
+          <button type="button" data-scope="room" aria-pressed="true">Whole room</button>
+          <button type="button" data-scope="table" aria-pressed="false" id="scopeTable">My table</button>
+        </div>
+        <select id="scopePick" class="scopepick no-print" aria-label="Show results of one group" hidden></select>
       </div>
     </div>
     <div class="tchips" id="resPhase" role="group" aria-label="Filter by phase"></div>
+    <div class="panel" id="groups" hidden></div>
     <div class="res-grid">
       <div class="panel">
         <div class="ptools"><h2>Value × feasibility</h2></div>
@@ -662,7 +678,7 @@ let state = blank();
 try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && v.t) state = {t:v.t, c:Array.isArray(v.c) ? v.c : [], a:(v.a && v.a !== 'Table 1' ? v.a : 'Group 1')}; } catch(e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} };
 let session = null;            // {code, role, table, workshop}
-const ui = {view:'cases', lens:1, phase:0, scope:'room', resPhase:null, toolPhase:null, open:null};
+const ui = {view:'cases', lens:1, phase:0, scope:'room', resTable:null, resPhase:null, toolPhase:null, open:null};
 const sync = {dirty:false, timer:0, poll:0, last:null, err:null, busy:false};
 
 const remote = () => !!session;
@@ -885,8 +901,13 @@ function closeDrawer(){
 
 /* ---------- results view ---------- */
 const inPhase = u => !ui.resPhase || u.phase === ui.resPhase;
+// facilitator, viewer and explore mode may open any group; a group sees itself
+const canPick = () => !session || session.role !== 'table';
+const hasData = k => !!state.t[k] && (Object.keys(state.t[k].r).length > 0 || Object.values(state.t[k].fd || {}).some(Boolean));
+const shownTable = () => canPick() ? (ui.resTable || TABLES.find(hasData) || TABLES[0]) : myTable();
+const rOf = (k, id) => (state.t[k] && state.t[k].r[id]) || {};
 function rated(){
-  const mine = myTable();
+  const mine = shownTable();
   if (ui.scope === 'table') {
     return allUcs().filter(inPhase).map(u => ({u, r:(state.t[mine] && state.t[mine].r[u.id]) || {}})).filter(e => e.r.n && e.r.u && !e.r.x)
       .map(e => ({u:e.u, n:e.r.n, m:e.r.u, f:!!e.r.f, k:1, chk:chkOf(e.r), t:!!e.r.tt})).sort((a, b) => b.n*b.m - a.n*a.m || b.n - a.n);
@@ -917,21 +938,37 @@ function renderMatrix(list){
   if (!list.length) g += `<text x="${(L+W-R)/2}" y="${(T+H-B)/2}" text-anchor="middle" font-size="14" fill="#5F5F5F">No ratings yet – rate use cases in Step 1.</text>`;
   $('#matrix').innerHTML = g + '</svg>' + `<div class="legend"><span><i style="background:#fff;box-shadow:0 0 0 2px #1F1F1F"></i>Starred</span></div>`;
 }
+function renderGroups(){
+  const el = $('#groups');
+  el.hidden = !(canPick() && ui.scope === 'room');
+  if (el.hidden) return;
+  const rows = TABLES.filter(hasData).map(k => {
+    const r = state.t[k].r, ids = Object.keys(r).filter(id => findUc(id) && inPhase(findUc(id)));
+    const ok = ids.filter(id => r[id].n && r[id].u && !r[id].x).sort((a, b) => r[b].n*r[b].u - r[a].n*r[a].u);
+    return {k, n:ok.length, top:ok.slice(0, 3).map(id => findUc(id).t), tests:ids.filter(id => r[id].tt).length, fd:Object.values(state.t[k].fd || {}).filter(Boolean).length};
+  });
+  el.innerHTML = `<h2>Groups</h2><p class="sub">${rows.length} ${rows.length === 1 ? 'group' : 'groups'} with results. Select a group to see its own matrix, ranking and tests.</p>` +
+    (rows.length ? `<div class="gtable"><table><thead><tr><th>Group</th><th>Rated</th><th>Top use cases</th><th>Copilot tests</th><th>Findings</th></tr></thead><tbody>${rows.map(x =>
+      `<tr data-group="${esc(x.k)}" tabindex="0"><th>${esc(x.k)}</th><td>${x.n}</td><td>${x.top.length ? x.top.map(esc).join(' · ') : '–'}</td><td>${x.tests}</td><td>${x.fd ? '✓' : '–'}</td></tr>`).join('')}</tbody></table></div>` : '<p class="empty">No group has saved results yet.</p>');
+}
 function renderResults(){
-  const list = rated(), mine = myTable();
+  const list = rated(), mine = shownTable();
+  const pick = $('#scopePick');
+  pick.hidden = !(canPick() && ui.scope === 'table');
+  if (canPick()) pick.innerHTML = TABLES.map(k => `<option value="${esc(k)}"${k === mine ? ' selected' : ''}>${esc(k)}${hasData(k) ? '' : ' (no results yet)'}</option>`).join('');
+  renderGroups();
   $('#resPhase').innerHTML = `<button type="button" data-rph="" aria-pressed="${!ui.resPhase}">All phases</button>` + PHASES.map(p => `<button type="button" data-rph="${p.id}" aria-pressed="${ui.resPhase === p.id}">${p.short}</button>`).join('');
-  $('#scopeTable').textContent = session && session.role === 'viewer' ? 'My table' : mine;
-  $('#scopeTable').disabled = !!session && session.role === 'viewer';
+  $('#scopeTable').textContent = canPick() ? 'One group' : mine;
   document.querySelectorAll('[data-scope]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.scope === ui.scope)));
   const tabs = Object.keys(state.t).filter(k => Object.keys(state.t[k].r).length);
   $('#resSub').textContent = (ui.resPhase ? SHORT[ui.resPhase] : 'All phases') + ' · ' + (ui.scope === 'room' ? `averages over ${tabs.length} ${tabs.length === 1 ? 'table' : 'tables'} · ${list.length} rated use cases.` : `${mine} · ${list.length} rated use cases.`);
   renderMatrix(list);
   $('#rank').innerHTML = list.length ? list.slice(0, 12).map((e, i) => `<li data-open="${esc(e.u.id)}" tabindex="0"><span class="n" style="background:#CC0000">${i+1}</span><span><b>${esc(e.u.t)}</b><small>${SHORT[e.u.phase]}${ui.scope === 'room' ? ` · ${e.k} ${e.k === 1 ? 'table' : 'tables'}` : ''}${e.chk ? ' · check rules first' : ''}${e.t ? ' · tested with Copilot' : ''}</small></span><span class="sc">V ${e.n.toFixed(1)} · F ${e.m.toFixed(1)}</span></li>`).join('')
     : '<li class="empty" style="display:block;cursor:default">No use cases rated yet.</li>';
-  const scope = id => ui.scope === 'room' ? room(id) : (r => ({x:r.x ? [mine] : [], chk:chkOf(r) ? [mine] : []}))(myR(id));
+  const scope = id => ui.scope === 'room' ? room(id) : (r => ({x:r.x ? [mine] : [], chk:chkOf(r) ? [mine] : []}))(rOf(mine, id));
   const all = allUcs().filter(inPhase).map(u => ({u, s:scope(u.id)}));
   const notai = all.filter(e => e.s.x.length), chk = all.filter(e => e.s.chk.length);
-  const tests = allUcs().filter(inPhase).flatMap(u => (ui.scope === 'room' ? room(u.id).tests : (r => r.tt ? [{table:mine, o:r.o || '', note:r.note || ''}] : [])(myR(u.id))).map(x => ({u, ...x})));
+  const tests = allUcs().filter(inPhase).flatMap(u => (ui.scope === 'room' ? room(u.id).tests : (r => r.tt ? [{table:mine, o:r.o || '', note:r.note || ''}] : [])(rOf(mine, u.id))).map(x => ({u, ...x})));
   const li = (e, who) => `<li data-open="${esc(e.u.id)}" tabindex="0">${esc(e.u.t)} <small>· ${SHORT[e.u.phase]}${ui.scope === 'room' && who.length ? ' · ' + who.join(', ') : ''}</small></li>`;
   $('#tests').innerHTML = `<h2>Tried with Copilot</h2><p class="sub">${tests.length} ${tests.length === 1 ? 'test' : 'tests'}${ui.scope === 'room' ? ' across the room' : ''}.</p>` + (tests.length ? `<ul class="tests">${tests.map(x => `<li data-open="${esc(x.u.id)}" tabindex="0"><span class="pill v" style="--vc:${x.o ? OUTCOME[x.o][1] : '#BDBDBD'}">${x.o ? OUTCOME[x.o][0] : 'Not yet tested'}</span> <b>${esc(x.u.t)}</b> <small>· ${esc(x.table)}</small>${x.note ? `<p>${esc(x.note)}</p>` : ''}</li>`).join('')}</ul>` : '<p class="empty">No use cases selected for a test yet (Step 2).</p>');
   $('#lists').innerHTML = `<div class="panel"><h2>Not an AI task</h2><p class="sub">Where AI is the wrong instrument.</p>${notai.length ? `<ul>${notai.map(e => li(e, e.s.x)).join('')}</ul>` : '<p class="empty">None flagged yet.</p>'}</div>
@@ -1055,6 +1092,7 @@ document.addEventListener('click', e => {
   if (t.closest('[data-add]')) { openDrawer('__new'); return; }
   if (t.closest('[data-close]') || t === $('#scrim')) { closeDrawer(); return; }
   const sc = t.closest('[data-scope]'); if (sc && !sc.disabled) { ui.scope = sc.dataset.scope; renderResults(); return; }
+  const gr = t.closest('[data-group]'); if (gr) { ui.scope = 'table'; ui.resTable = gr.dataset.group; renderResults(); window.scrollTo({top:0, behavior:'smooth'}); return; }
   const rp = t.closest('[data-rph]'); if (rp) { ui.resPhase = rp.dataset.rph || null; renderResults(); return; }
   if (t.closest('#pdfBtn')) { if (ui.view !== 'results') setView('results'); document.title = 'Results – AI in the Research Process – ' + new Date().toISOString().slice(0, 10); window.print(); setTimeout(() => { document.title = 'AI in the Research Process'; }, 1000); return; }
   const tp = t.closest('[data-tph]'); if (tp) { ui.toolPhase = tp.dataset.tph || null; renderTools(); return; }
@@ -1091,6 +1129,7 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('change', e => {
   if (e.target.id === 'tableSel') { state.a = e.target.value; save(); renderAll(); toast('Rating as ' + state.a); }
+  if (e.target.id === 'scopePick') { ui.resTable = e.target.value; renderResults(); }
   if (e.target.id === 'mgFile') { Promise.all([...e.target.files].map(f => f.text().then(JSON.parse))).then(list => { const n = merge(list); toast(`Merged ${n} ${n === 1 ? 'table' : 'tables'}`); }).catch(() => toast('Could not read the file')); e.target.value = ''; }
 });
 document.addEventListener('input', e => {
@@ -1115,7 +1154,7 @@ document.addEventListener('submit', async e => {
 });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { if (!$('#modal').hidden) closeMenu(); else if (!$('#drawer').hidden) closeDrawer(); }
-  if (e.key === 'Enter' && e.target.matches && e.target.matches('li[data-open]')) e.target.click();
+  if (e.key === 'Enter' && e.target.matches && e.target.matches('li[data-open], tr[data-group]')) e.target.click();
 });
 
 /* ---------- helpers: export, merge, survey ---------- */

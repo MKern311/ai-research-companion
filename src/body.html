@@ -35,12 +35,16 @@
   <section id="view-results" aria-labelledby="tab-results" hidden>
     <div class="view-head">
       <div><h1>Results from the room</h1><p id="resSub">Value against feasibility, top use cases, and what each table found.</p></div>
-      <div class="seg dark" role="group" aria-label="Scope">
-        <button type="button" data-scope="room" aria-pressed="true">Whole room</button>
-        <button type="button" data-scope="table" aria-pressed="false" id="scopeTable">My table</button>
+      <div class="scopebar">
+        <div class="seg dark" role="group" aria-label="Scope">
+          <button type="button" data-scope="room" aria-pressed="true">Whole room</button>
+          <button type="button" data-scope="table" aria-pressed="false" id="scopeTable">My table</button>
+        </div>
+        <select id="scopePick" class="scopepick no-print" aria-label="Show results of one group" hidden></select>
       </div>
     </div>
     <div class="tchips" id="resPhase" role="group" aria-label="Filter by phase"></div>
+    <div class="panel" id="groups" hidden></div>
     <div class="res-grid">
       <div class="panel">
         <div class="ptools"><h2>Value × feasibility</h2></div>
