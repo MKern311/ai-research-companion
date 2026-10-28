@@ -227,6 +227,29 @@ const MCP = {
  'Overleaf':['c',0,'https://github.com/mjyoo2/OverleafMCP','Via Overleaf’s Git integration (paid plans).']
 };
 
+// Microsoft 365 integrations per tool (checked 28 October 2026): [type, source]
+// copilot = Copilot connector or agent (needs a Microsoft 365 Copilot licence and IT approval)
+const M365 = {
+ 'Consensus':[['copilot','https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/connectors-gallery-microsoft']],
+ 'scite':[['copilot','https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/federated-connectors-overview']],
+ 'DeepL Write':[['copilot','https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/connectors-gallery-microsoft'],['word','https://www.deepl.com/word-addin'],['teams','https://marketplace.microsoft.com/en-us/product/office/WA200007424'],['power','https://learn.microsoft.com/en-us/connectors/deepl/'],['outlook','https://marketplace.microsoft.com/en-us/product/WA200006684']],
+ 'Notion':[['copilot','https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/federated-connectors-overview'],['teams','https://www.notion.com/help/microsoft-teams-notifications'],['power','https://learn.microsoft.com/en-us/connectors/notionip/'],['files','https://www.notion.com/help/notion-ai-connector-for-microsoft-sharepoint-and-onedrive']],
+ 'GitHub Copilot':[['copilot','https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/github-cloud-knowledge-overview'],['teams','https://docs.github.com/en/integrations/how-tos/teams/integrate-github-with-teams'],['power','https://learn.microsoft.com/en-us/connectors/github/']],
+ 'Perplexity':[['word','https://marketplace.microsoft.com/en-us/product/WA200010847'],['teams','https://marketplace.microsoft.com/en-us/product/WA200010619'],['power','https://learn.microsoft.com/en-us/connectors/perplexityai/'],['outlook','https://marketplace.microsoft.com/en-us/product/WA200010911']],
+ 'Zotero':[['word','https://www.zotero.org/support/word_processor_plugin_usage'],['edge','https://microsoftedge.microsoft.com/addons/detail/nmhdhpibnnopknkmonacoephklnflpho']],
+ 'Citavi':[['word','https://marketplace.microsoft.com/en-us/product/WA200002891']],
+ 'EndNote':[['word','https://docs.endnote.com/docs/endnote/2025/v1/windows/en/content/09word/installing_cwywsprtinword.htm'],['edge','https://microsoftedge.microsoft.com/addons/detail/endnote-click/jaleebmaoohbjjohjlfmihkkopgfibne']],
+ 'Mendeley':[['word','https://marketplace.microsoft.com/en-us/product/office/wa104382081'],['edge','https://microsoftedge.microsoft.com/addons/detail/mendeley-web-importer/mbcgpelmjnpfbdnkbebdlfjmeckpnhha']],
+ 'Paperpile':[['word','https://paperpile.com/word-plugin/']],
+ 'Paperpal':[['word','https://marketplace.microsoft.com/en-us/product/office/wa200001361']],
+ 'QuillBot':[['word','https://quillbot.com/word'],['edge','https://microsoftedge.microsoft.com/addons/detail/quillbot-ai-writing-and-/cphpplikchcioccedpjacdanfibnimmh']],
+ 'Google Scholar':[['edge','https://microsoftedge.microsoft.com/addons/detail/google-scholar-button/fciokoalnclhnonofghacdplgpafdcgl']],
+ 'Otter.ai':[['teams','https://otter.ai/integration/microsoft-teams'],['outlook','https://otter.ai/integration/microsoft-outlook'],['files','https://otter.ai/integration/microsoft-onedrive']],
+ 'Sally AI':[['teams','https://www.sally.io/api-integration/microsoft-teams'],['outlook','https://www.sally.io/api-integration/automation-zapier-make-power-automate']],
+ 'Whisper (OpenAI)':[['azure','https://learn.microsoft.com/en-us/azure/ai-services/speech-service/whisper-overview']]
+};
+const M365_TYPE = {copilot:'Copilot connector', word:'Word add-in', teams:'Teams', power:'Power Automate', outlook:'Outlook', files:'OneDrive / SharePoint', edge:'Edge extension', azure:'Azure AI Speech'};
+
 const GAINS = [['time','Saves time'],['quality','Better quality'],['new','New possibility'],['learn','I learn']];
 
 const CLUSTERS = [

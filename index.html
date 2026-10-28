@@ -359,6 +359,11 @@ a.mcpb:hover{background:var(--red);color:#fff;box-shadow:none}
 .ib-grid ol,.ib-grid ul{margin:4px 0 0;padding-left:20px}
 .ib-grid li{margin:3px 0}
 .ib-check{background:var(--surface);border-radius:10px;padding:14px 16px}
+.mcp.m365{gap:5px}
+.mlab{font-size:11.5px;font-weight:700;color:var(--muted);margin-right:2px}
+.msb{display:inline-block;font-size:11.5px;font-weight:600;border-radius:4px;padding:2px 7px;background:#EAF1FB;color:#0B4A8F;text-decoration:none}
+a.msb:hover{background:#0B4A8F;color:#fff}
+.msb.cp{background:#0B4A8F;color:#fff}
 
 </style>
 </head>
@@ -438,14 +443,14 @@ a.mcpb:hover{background:var(--red);color:#fff;box-shadow:none}
       <div><h1>Academic tools</h1>
         <p>Tools commonly used in academic work, mapped to the research phases – for orientation, not recommendations. They complement Copilot rather than replace it: subject databases, reference managers and analysis software do things a general assistant cannot. Many of them can also be connected to Copilot, most flexibly through the <b>Model Context Protocol (MCP)</b>, an open standard that lets an assistant call another tool and use its results.</p>
         <p><b>Example:</b> a Copilot Studio agent connected to scite’s MCP server can check, while you draft a literature review, whether later studies support or contrast a finding you cite – and answers with the actual citation statements and DOIs instead of guessing.</p>
-        <p class="sub">Stars: ratings by students at a German university, 2024/25 (greyed out with fewer than three ratings); tools without stars were added for this workshop. <span class="mcpb o">MCP</span> official server from the provider · <span class="mcpb c">MCP</span> community server, review before use · “Copilot Studio” = remote server that can be added there directly.</p></div>
+        <p class="sub">Stars: ratings by students at a German university, 2024/25 (greyed out with fewer than three ratings); tools without stars were added for this workshop. <span class="mcpb o">MCP</span> official server from the provider · <span class="mcpb c">MCP</span> community server, review before use · “Copilot Studio” = remote server that can be added there directly · <span class="msb">Microsoft 365</span> other ways the tool connects to Copilot, Word, Teams, Outlook or Power Automate.</p></div>
     </div>
     <details class="panel infobox" id="mcpBox">
       <summary><span><b>How to connect a tool to Copilot via MCP</b><small>Three routes, from simple to flexible – and what to check first.</small></span></summary>
       <div class="ib-grid">
         <div>
           <h3>1 · Ready-made connectors</h3>
-          <p>With a Microsoft 365 Copilot licence, IT can switch on ready-made connectors for research sources such as Consensus, scite and PubMed. Nothing to build – ask your IT team whether they are available.</p>
+          <p>With a Microsoft 365 Copilot licence, IT can switch on ready-made Copilot connectors – for research, for example Consensus, scite, PubMed, DeepL and Notion. Many of them use MCP in the background. Nothing to build – ask your IT team whether they are available.</p>
           <h3>2 · Your own agent in Copilot Studio</h3>
           <ol>
             <li>In Copilot Studio, create an agent and open <b>Tools → Add a tool → New tool → Model Context Protocol</b>.</li>
@@ -455,6 +460,8 @@ a.mcpb:hover{background:var(--red);color:#fff;box-shadow:none}
           </ol>
           <h3>3 · Code and analysis</h3>
           <p>GitHub Copilot in VS Code connects to MCP servers directly – including local ones such as Zotero or jamovi.</p>
+          <h3>Without MCP</h3>
+          <p>Many tools already work inside Microsoft 365: reference managers cite while you write in Word (Zotero, EndNote, Mendeley, Citavi, Paperpile), note-takers join Teams meetings (Otter, Sally), and some offer Power Automate connectors. Filter by “Microsoft 365 integration” below.</p>
         </div>
         <div class="ib-check">
           <h3>Before you start</h3>
@@ -715,6 +722,29 @@ const MCP = {
  'Transkribus':['c',0,'https://github.com/lazyants/transkribus-mcp-server','Needs your Transkribus credentials.'],
  'Overleaf':['c',0,'https://github.com/mjyoo2/OverleafMCP','Via Overleaf’s Git integration (paid plans).']
 };
+
+// Microsoft 365 integrations per tool (checked 28 October 2026): [type, source]
+// copilot = Copilot connector or agent (needs a Microsoft 365 Copilot licence and IT approval)
+const M365 = {
+ 'Consensus':[['copilot','https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/connectors-gallery-microsoft']],
+ 'scite':[['copilot','https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/federated-connectors-overview']],
+ 'DeepL Write':[['copilot','https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/connectors-gallery-microsoft'],['word','https://www.deepl.com/word-addin'],['teams','https://marketplace.microsoft.com/en-us/product/office/WA200007424'],['power','https://learn.microsoft.com/en-us/connectors/deepl/'],['outlook','https://marketplace.microsoft.com/en-us/product/WA200006684']],
+ 'Notion':[['copilot','https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/federated-connectors-overview'],['teams','https://www.notion.com/help/microsoft-teams-notifications'],['power','https://learn.microsoft.com/en-us/connectors/notionip/'],['files','https://www.notion.com/help/notion-ai-connector-for-microsoft-sharepoint-and-onedrive']],
+ 'GitHub Copilot':[['copilot','https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/github-cloud-knowledge-overview'],['teams','https://docs.github.com/en/integrations/how-tos/teams/integrate-github-with-teams'],['power','https://learn.microsoft.com/en-us/connectors/github/']],
+ 'Perplexity':[['word','https://marketplace.microsoft.com/en-us/product/WA200010847'],['teams','https://marketplace.microsoft.com/en-us/product/WA200010619'],['power','https://learn.microsoft.com/en-us/connectors/perplexityai/'],['outlook','https://marketplace.microsoft.com/en-us/product/WA200010911']],
+ 'Zotero':[['word','https://www.zotero.org/support/word_processor_plugin_usage'],['edge','https://microsoftedge.microsoft.com/addons/detail/nmhdhpibnnopknkmonacoephklnflpho']],
+ 'Citavi':[['word','https://marketplace.microsoft.com/en-us/product/WA200002891']],
+ 'EndNote':[['word','https://docs.endnote.com/docs/endnote/2025/v1/windows/en/content/09word/installing_cwywsprtinword.htm'],['edge','https://microsoftedge.microsoft.com/addons/detail/endnote-click/jaleebmaoohbjjohjlfmihkkopgfibne']],
+ 'Mendeley':[['word','https://marketplace.microsoft.com/en-us/product/office/wa104382081'],['edge','https://microsoftedge.microsoft.com/addons/detail/mendeley-web-importer/mbcgpelmjnpfbdnkbebdlfjmeckpnhha']],
+ 'Paperpile':[['word','https://paperpile.com/word-plugin/']],
+ 'Paperpal':[['word','https://marketplace.microsoft.com/en-us/product/office/wa200001361']],
+ 'QuillBot':[['word','https://quillbot.com/word'],['edge','https://microsoftedge.microsoft.com/addons/detail/quillbot-ai-writing-and-/cphpplikchcioccedpjacdanfibnimmh']],
+ 'Google Scholar':[['edge','https://microsoftedge.microsoft.com/addons/detail/google-scholar-button/fciokoalnclhnonofghacdplgpafdcgl']],
+ 'Otter.ai':[['teams','https://otter.ai/integration/microsoft-teams'],['outlook','https://otter.ai/integration/microsoft-outlook'],['files','https://otter.ai/integration/microsoft-onedrive']],
+ 'Sally AI':[['teams','https://www.sally.io/api-integration/microsoft-teams'],['outlook','https://www.sally.io/api-integration/automation-zapier-make-power-automate']],
+ 'Whisper (OpenAI)':[['azure','https://learn.microsoft.com/en-us/azure/ai-services/speech-service/whisper-overview']]
+};
+const M365_TYPE = {copilot:'Copilot connector', word:'Word add-in', teams:'Teams', power:'Power Automate', outlook:'Outlook', files:'OneDrive / SharePoint', edge:'Edge extension', azure:'Azure AI Speech'};
 
 const GAINS = [['time','Saves time'],['quality','Better quality'],['new','New possibility'],['learn','I learn']];
 
@@ -1118,16 +1148,19 @@ function reportMarkdown(){
 }
 /* ---------- tools view ---------- */
 function mcpHtml(t){
-  const m = MCP[t.n]; if (!m) return '';
-  return `<span class="mcp"><a class="mcpb ${m[0]}" href="${m[2]}" target="_blank" rel="noopener" title="${m[0] === 'o' ? 'Official MCP server' : 'Community MCP server'} – open the documentation">MCP · ${m[0] === 'o' ? 'official' : 'community'}</a>${m[1] ? '<span class="mcpr">Copilot Studio</span>' : '<span class="mcpr loc">local</span>'} ${esc(m[3])}</span>`;
+  const m = MCP[t.n], ms = M365[t.n];
+  const m365 = ms ? `<span class="mcp m365"><span class="mlab">Microsoft 365</span>${ms.map(([k, url]) => `<a class="msb${k === 'copilot' ? ' cp' : ''}" href="${url}" target="_blank" rel="noopener">${M365_TYPE[k]}</a>`).join('')}</span>` : '';
+  if (!m) return m365;
+  return m365 + `<span class="mcp"><a class="mcpb ${m[0]}" href="${m[2]}" target="_blank" rel="noopener" title="${m[0] === 'o' ? 'Official MCP server' : 'Community MCP server'} – open the documentation">MCP · ${m[0] === 'o' ? 'official' : 'community'}</a>${m[1] ? '<span class="mcpr">Copilot Studio</span>' : '<span class="mcpr loc">local</span>'} ${esc(m[3])}</span>`;
 }
 function renderTools(){
   const counts = PHASES.map(p => TOOLS.filter(t => t.ph.includes(p.id)).length);
   $('#toolFilter').innerHTML = `<button type="button" data-tph="" aria-pressed="${!ui.toolPhase && !ui.toolMcp}">All (${TOOLS.length})</button>` +
     PHASES.map((p, i) => `<button type="button" data-tph="${p.id}" aria-pressed="${ui.toolPhase === p.id}">${p.short} (${counts[i]})</button>`).join('') +
-    `<button type="button" class="mcpf" data-tmcp aria-pressed="${!!ui.toolMcp}">MCP server (${TOOLS.filter(t => MCP[t.n]).length})</button>`;
+    `<button type="button" class="mcpf" data-tmcp="mcp" aria-pressed="${ui.toolMcp === 'mcp'}">MCP server (${TOOLS.filter(t => MCP[t.n]).length})</button>` +
+    `<button type="button" class="mcpf" data-tmcp="m365" aria-pressed="${ui.toolMcp === 'm365'}">Microsoft 365 integration (${TOOLS.filter(t => M365[t.n]).length})</button>`;
   $('#toolGrid').innerHTML = TCATS.map((c, ci) => {
-    const ts = TOOLS.filter(t => t.cat === ci && (!ui.toolPhase || t.ph.includes(ui.toolPhase)) && (!ui.toolMcp || MCP[t.n])).sort(byScore);
+    const ts = TOOLS.filter(t => t.cat === ci && (!ui.toolPhase || t.ph.includes(ui.toolPhase)) && (!ui.toolMcp || (ui.toolMcp === 'mcp' ? MCP : M365)[t.n])).sort(byScore);
     if (!ts.length) return '';
     return `<div class="panel tcat"><h2>${c}<span>${ts.length}</span></h2>${ts.map(t => `<div class="tool"><span>${t.url ? `<a href="https://${t.url}" target="_blank" rel="noopener">${esc(t.n)}</a>` : `<span class="nm">${esc(t.n)}</span>`}<span class="typ">${TYP[t.typ]}</span></span>${t.r ? `<span class="stars${t.c < 3 ? ' low' : ''}" title="${t.c < 3 ? 'Fewer than 3 ratings – indicative only' : 'Mean rating'}"><span class="bar"><i style="width:${t.r/5*100}%"></i></span>${t.r.toFixed(1)} <small>(${t.c})</small></span>` : '<span class="stars nr">not rated</span>'}<span class="nt">${esc(t.nt)}</span>${mcpHtml(t)}</div>`).join('')}</div>`;
   }).join('');
@@ -1190,7 +1223,7 @@ document.addEventListener('click', e => {
   const rp = t.closest('[data-rph]'); if (rp) { ui.resPhase = rp.dataset.rph || null; renderResults(); return; }
   if (t.closest('#pdfBtn')) { if (ui.view !== 'results') setView('results'); document.title = 'Results – AI in the Research Process – ' + new Date().toISOString().slice(0, 10); window.print(); setTimeout(() => { document.title = 'AI in the Research Process'; }, 1000); return; }
   const tp = t.closest('[data-tph]'); if (tp) { ui.toolPhase = tp.dataset.tph || null; if (!ui.toolPhase) ui.toolMcp = false; renderTools(); return; }
-  if (t.closest('[data-tmcp]')) { ui.toolMcp = !ui.toolMcp; renderTools(); return; }
+  const tm = t.closest('[data-tmcp]'); if (tm) { ui.toolMcp = ui.toolMcp === tm.dataset.tmcp ? false : tm.dataset.tmcp; renderTools(); return; }
   if (t.closest('#signOut')) { signOut(); return; }
   if (t.closest('#signIn')) { showLogin(); return; }
   if (t.closest('#explore')) { $('#login').hidden = true; renderAll(); return; }

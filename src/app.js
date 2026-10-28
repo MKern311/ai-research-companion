@@ -377,16 +377,19 @@ function reportMarkdown(){
 }
 /* ---------- tools view ---------- */
 function mcpHtml(t){
-  const m = MCP[t.n]; if (!m) return '';
-  return `<span class="mcp"><a class="mcpb ${m[0]}" href="${m[2]}" target="_blank" rel="noopener" title="${m[0] === 'o' ? 'Official MCP server' : 'Community MCP server'} – open the documentation">MCP · ${m[0] === 'o' ? 'official' : 'community'}</a>${m[1] ? '<span class="mcpr">Copilot Studio</span>' : '<span class="mcpr loc">local</span>'} ${esc(m[3])}</span>`;
+  const m = MCP[t.n], ms = M365[t.n];
+  const m365 = ms ? `<span class="mcp m365"><span class="mlab">Microsoft 365</span>${ms.map(([k, url]) => `<a class="msb${k === 'copilot' ? ' cp' : ''}" href="${url}" target="_blank" rel="noopener">${M365_TYPE[k]}</a>`).join('')}</span>` : '';
+  if (!m) return m365;
+  return m365 + `<span class="mcp"><a class="mcpb ${m[0]}" href="${m[2]}" target="_blank" rel="noopener" title="${m[0] === 'o' ? 'Official MCP server' : 'Community MCP server'} – open the documentation">MCP · ${m[0] === 'o' ? 'official' : 'community'}</a>${m[1] ? '<span class="mcpr">Copilot Studio</span>' : '<span class="mcpr loc">local</span>'} ${esc(m[3])}</span>`;
 }
 function renderTools(){
   const counts = PHASES.map(p => TOOLS.filter(t => t.ph.includes(p.id)).length);
   $('#toolFilter').innerHTML = `<button type="button" data-tph="" aria-pressed="${!ui.toolPhase && !ui.toolMcp}">All (${TOOLS.length})</button>` +
     PHASES.map((p, i) => `<button type="button" data-tph="${p.id}" aria-pressed="${ui.toolPhase === p.id}">${p.short} (${counts[i]})</button>`).join('') +
-    `<button type="button" class="mcpf" data-tmcp aria-pressed="${!!ui.toolMcp}">MCP server (${TOOLS.filter(t => MCP[t.n]).length})</button>`;
+    `<button type="button" class="mcpf" data-tmcp="mcp" aria-pressed="${ui.toolMcp === 'mcp'}">MCP server (${TOOLS.filter(t => MCP[t.n]).length})</button>` +
+    `<button type="button" class="mcpf" data-tmcp="m365" aria-pressed="${ui.toolMcp === 'm365'}">Microsoft 365 integration (${TOOLS.filter(t => M365[t.n]).length})</button>`;
   $('#toolGrid').innerHTML = TCATS.map((c, ci) => {
-    const ts = TOOLS.filter(t => t.cat === ci && (!ui.toolPhase || t.ph.includes(ui.toolPhase)) && (!ui.toolMcp || MCP[t.n])).sort(byScore);
+    const ts = TOOLS.filter(t => t.cat === ci && (!ui.toolPhase || t.ph.includes(ui.toolPhase)) && (!ui.toolMcp || (ui.toolMcp === 'mcp' ? MCP : M365)[t.n])).sort(byScore);
     if (!ts.length) return '';
     return `<div class="panel tcat"><h2>${c}<span>${ts.length}</span></h2>${ts.map(t => `<div class="tool"><span>${t.url ? `<a href="https://${t.url}" target="_blank" rel="noopener">${esc(t.n)}</a>` : `<span class="nm">${esc(t.n)}</span>`}<span class="typ">${TYP[t.typ]}</span></span>${t.r ? `<span class="stars${t.c < 3 ? ' low' : ''}" title="${t.c < 3 ? 'Fewer than 3 ratings – indicative only' : 'Mean rating'}"><span class="bar"><i style="width:${t.r/5*100}%"></i></span>${t.r.toFixed(1)} <small>(${t.c})</small></span>` : '<span class="stars nr">not rated</span>'}<span class="nt">${esc(t.nt)}</span>${mcpHtml(t)}</div>`).join('')}</div>`;
   }).join('');
@@ -449,7 +452,7 @@ document.addEventListener('click', e => {
   const rp = t.closest('[data-rph]'); if (rp) { ui.resPhase = rp.dataset.rph || null; renderResults(); return; }
   if (t.closest('#pdfBtn')) { if (ui.view !== 'results') setView('results'); document.title = 'Results – AI in the Research Process – ' + new Date().toISOString().slice(0, 10); window.print(); setTimeout(() => { document.title = 'AI in the Research Process'; }, 1000); return; }
   const tp = t.closest('[data-tph]'); if (tp) { ui.toolPhase = tp.dataset.tph || null; if (!ui.toolPhase) ui.toolMcp = false; renderTools(); return; }
-  if (t.closest('[data-tmcp]')) { ui.toolMcp = !ui.toolMcp; renderTools(); return; }
+  const tm = t.closest('[data-tmcp]'); if (tm) { ui.toolMcp = ui.toolMcp === tm.dataset.tmcp ? false : tm.dataset.tmcp; renderTools(); return; }
   if (t.closest('#signOut')) { signOut(); return; }
   if (t.closest('#signIn')) { showLogin(); return; }
   if (t.closest('#explore')) { $('#login').hidden = true; renderAll(); return; }
