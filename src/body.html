@@ -70,8 +70,38 @@
 
   <section id="view-tools" aria-labelledby="tab-tools" hidden>
     <div class="view-head">
-      <div><h1>Academic tools</h1><p>Tools commonly used in academic work, mapped to the research phases – for orientation, not recommendations. Stars: ratings by students at a German university, 2024/25 (greyed out with fewer than three ratings); tools without stars were added for this workshop.</p></div>
+      <div><h1>Academic tools</h1>
+        <p>Tools commonly used in academic work, mapped to the research phases – for orientation, not recommendations. They complement Copilot rather than replace it: subject databases, reference managers and analysis software do things a general assistant cannot. Many of them can also be connected to Copilot, most flexibly through the <b>Model Context Protocol (MCP)</b>, an open standard that lets an assistant call another tool and use its results.</p>
+        <p><b>Example:</b> a Copilot Studio agent connected to scite’s MCP server can check, while you draft a literature review, whether later studies support or contrast a finding you cite – and answers with the actual citation statements and DOIs instead of guessing.</p>
+        <p class="sub">Stars: ratings by students at a German university, 2024/25 (greyed out with fewer than three ratings); tools without stars were added for this workshop. <span class="mcpb o">MCP</span> official server from the provider · <span class="mcpb c">MCP</span> community server, review before use · “Copilot Studio” = remote server that can be added there directly.</p></div>
     </div>
+    <details class="panel infobox" id="mcpBox">
+      <summary><span><b>How to connect a tool to Copilot via MCP</b><small>Three routes, from simple to flexible – and what to check first.</small></span></summary>
+      <div class="ib-grid">
+        <div>
+          <h3>1 · Ready-made connectors</h3>
+          <p>With a Microsoft 365 Copilot licence, IT can switch on ready-made connectors for research sources such as Consensus, scite and PubMed. Nothing to build – ask your IT team whether they are available.</p>
+          <h3>2 · Your own agent in Copilot Studio</h3>
+          <ol>
+            <li>In Copilot Studio, create an agent and open <b>Tools → Add a tool → New tool → Model Context Protocol</b>.</li>
+            <li>Enter a name, a short description (Copilot uses it to decide when to call the tool) and the server URL from the provider’s documentation.</li>
+            <li>Choose how to sign in: none, API key or OAuth 2.0. With OAuth, each researcher uses their own account.</li>
+            <li>Add instructions such as “cite DOIs, never invent sources”, test the agent, then publish it to Teams and Microsoft 365 Copilot and share it.</li>
+          </ol>
+          <h3>3 · Code and analysis</h3>
+          <p>GitHub Copilot in VS Code connects to MCP servers directly – including local ones such as Zotero or jamovi.</p>
+        </div>
+        <div class="ib-check">
+          <h3>Before you start</h3>
+          <ul>
+            <li>Copilot Studio only connects to <b>remote</b> servers (HTTPS). Local community servers need VS Code or a desktop assistant.</li>
+            <li>Building and publishing agents may need additional licences; IT usually approves agents and can restrict connectors.</li>
+            <li>Your prompts and inputs go to the tool provider. Check your university’s data rules; never send unpublished or personal data to an unvetted server.</li>
+            <li>Community servers are not maintained by the provider – review the code and permissions first.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
     <div class="tchips" id="toolFilter"></div>
     <div class="tgrid" id="toolGrid"></div>
     <div class="panel" style="margin-top:8px">

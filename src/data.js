@@ -199,6 +199,34 @@ const TOOLS = [
  T('GitHub Copilot','github.com/features/copilot',7,null,0,'ki',['analyse'],'AI coding assistant in the code editor; education offers are available.')
 ];
 
+// MCP servers per tool (checked 28 October 2026): [o = official / c = community, remote server?, source, note]
+const MCP = {
+ 'Semantic Scholar':['o',1,'https://allenai.org/asta/resources/mcp','Ai2 Asta server on the Semantic Scholar corpus; API key optional.'],
+ 'Elicit':['o',1,'https://support.elicit.com/en/articles/14757404-use-elicit-via-mcp-server','Sign-in with your account; Pro plan or higher.'],
+ 'Perplexity':['o',1,'https://docs.perplexity.ai/guides/mcp-server','Remote or local; uses the paid Perplexity API.'],
+ 'Consensus':['o',1,'https://docs.consensus.app/consensus-mcp','Sign-in; small free monthly allowance.'],
+ 'DeepL Write':['o',1,'https://developers.deepl.com/docs/mcp','Remote with sign-in or local with API key; rephrasing needs Write.'],
+ 'Napkin AI':['o',1,'https://api.napkin.ai/faq/index.html','Beta; sign-in, uses Napkin credits.'],
+ 'Litmaps':['o',1,'https://docs.litmaps.com/en/articles/17508256-use-litmaps-with-your-ai-assistant-mcp','Beta; reads and edits your maps.'],
+ 'scite':['o',1,'https://scite.ai/mcp','Sign-in; paid plan or trial.'],
+ 'Sally AI':['o',1,'https://www.sally.io/api-integration/claude','Read-only access to meetings; admin must enable it.'],
+ 'Otter.ai':['o',1,'https://help.otter.ai/hc/en-us/articles/35287607569687-Otter-MCP-Server','Sign-in; search and fetch your transcripts.'],
+ 'Notion':['o',1,'https://developers.notion.com/docs/mcp','Remote with sign-in, or local with a token.'],
+ 'GitHub Copilot':['o',1,'https://github.com/github/github-mcp-server','GitHub’s own server; Copilot in VS Code is also an MCP client.'],
+ 'JASP':['o',0,'https://github.com/jasp-stats/jasp-mcp','Local, early stage; JASP must be running.'],
+ 'Scholar AI':['o',0,'https://scholarai.io/blog/mcp','Local; needs a ScholarAI API key.'],
+ 'Zotero':['c',0,'https://github.com/54yyyu/zotero-mcp','Reads your local library or the Zotero web API.'],
+ 'EndNote':['c',0,'https://github.com/gokmengokhan/endnote-mcp','Works on an XML export of your library.'],
+ 'Mendeley':['c',0,'https://github.com/pallaprolus/mendeley-mcp','Uses the Mendeley API; register your own app.'],
+ 'Google Scholar':['c',0,'https://github.com/JackKuo666/Google-Scholar-MCP-Server','No official API – scrapes results; may break.'],
+ 'Whisper (OpenAI)':['c',0,'https://github.com/kachiO/mlx-whisper-mcp','Local transcription, audio stays on your machine.'],
+ 'Jamovi':['c',0,'https://github.com/yjm110517/jamovi-mcp','Controls a local jamovi installation.'],
+ 'Obsidian':['c',0,'https://github.com/MarkusPfundstein/mcp-obsidian','Needs the Local REST API plugin.'],
+ 'NotebookLM':['c',0,'https://github.com/PleasePrompto/notebooklm-mcp','No official API – automates the browser; fragile.'],
+ 'Transkribus':['c',0,'https://github.com/lazyants/transkribus-mcp-server','Needs your Transkribus credentials.'],
+ 'Overleaf':['c',0,'https://github.com/mjyoo2/OverleafMCP','Via Overleaf’s Git integration (paid plans).']
+};
+
 const GAINS = [['time','Saves time'],['quality','Better quality'],['new','New possibility'],['learn','I learn']];
 
 const CLUSTERS = [
@@ -213,6 +241,10 @@ const SOURCES = [
  ['Microsoft Learn – Copilot Chat FAQ','https://learn.microsoft.com/en-us/copilot/faq'],
  ['Microsoft Learn – Copilot Chat overview','https://learn.microsoft.com/en-us/copilot/overview'],
  ['Microsoft Learn – Privacy and protections in Copilot Chat','https://learn.microsoft.com/en-us/copilot/privacy-and-protections'],
- ['Microsoft Learn – Agents in Copilot Chat','https://learn.microsoft.com/en-us/copilot/agents']
+ ['Microsoft Learn – Agents in Copilot Chat','https://learn.microsoft.com/en-us/copilot/agents'],
+ ['Microsoft Learn – Connect an agent to an existing MCP server (Copilot Studio)','https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent'],
+ ['Microsoft Learn – Publish an agent to Teams and Microsoft 365 Copilot','https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams'],
+ ['Microsoft Learn – Federated Copilot connectors','https://learn.microsoft.com/en-us/microsoftsearch/federated-connectors-overview'],
+ ['Microsoft Learn – Purchase and manage agents in Copilot Chat','https://learn.microsoft.com/en-us/copilot/manage-agents-copilot-chat']
 ];
-const VERSION = 'v5 · 27 October 2026';
+const VERSION = 'v5 · 28 October 2026';
