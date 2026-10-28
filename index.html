@@ -317,7 +317,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 .guide > p{font-size:14px;color:var(--ink-2);margin:6px 0}
 .guide .howto{margin:6px 0 10px}
 .prompt{background:#fff;border-radius:8px;padding:10px 12px;margin:8px 0;box-shadow:inset 0 0 0 1px var(--line)}
-.prompt .ptools{margin-bottom:6px}
+.prompt .ptools{margin-bottom:6px;flex-wrap:wrap;gap:8px}
+.prompt .ptools .row{display:flex;gap:8px;flex-wrap:wrap}
+.prompt a.btn{text-decoration:none}
 .prompt pre{white-space:pre-wrap;word-wrap:break-word;font:13.5px/1.5 var(--font);color:var(--ink);margin:0}
 .limit{background:var(--amber-bg);color:var(--amber) !important;border-radius:8px;padding:8px 10px}
 .guide:last-child{margin-bottom:4px}
@@ -831,12 +833,13 @@ const GENERIC = {bring:'Material for your own example: a short text, an open-acc
   steps:['Open Copilot Chat with your university login.','Describe your goal and attach or paste the material.','Say what a good result looks like (format, length).','Compare the answer with your material and note what happened.'],
   prompt:'I am a PhD researcher in [discipline]. My goal: [what you want to achieve]. Material: [attached file / pasted text]. Please [task]. Give the result as [format, length]. If you are not sure about something, say so; do not invent sources.',
   check:'The result is correct against your material and saves you real time.'};
+const COPILOT_URL = 'https://m365.cloud.microsoft/chat';   // Microsoft 365 Copilot Chat, university sign-in
 function guideHtml(u, open){
   const g = (typeof GUIDES !== 'undefined' && GUIDES[u.id]) || GENERIC;
   return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot · about 10 minutes</summary>
     <p><b>Bring:</b> ${esc(g.bring)}</p>
     <ol class="howto">${g.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
-    <div class="prompt"><div class="ptools"><b>Starter prompt</b><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button></div><pre>${esc(g.prompt)}</pre></div>
+    <div class="prompt"><div class="ptools"><b>Starter prompt</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-opencopilot title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(g.prompt)}</pre></div>
     <p><b>Check:</b> ${esc(g.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}</details>`;
 }
 function testHtml(u){
@@ -1101,6 +1104,7 @@ document.addEventListener('click', e => {
   if (t.closest('#explore')) { $('#login').hidden = true; renderAll(); return; }
   if (t.closest('#menuBtn')) { openMenu(); return; }
   if (t.closest('[data-mclose]') || t === $('#modal')) { closeMenu(); return; }
+  if (t.closest('[data-opencopilot]') && ui.open) { const g = (typeof GUIDES !== 'undefined' && GUIDES[ui.open]) || GENERIC; copyText(g.prompt, 'Prompt', 'Prompt copied – paste it into Copilot'); return; }
   if (t.closest('[data-copyprompt]') && ui.open) { const g = (typeof GUIDES !== 'undefined' && GUIDES[ui.open]) || GENERIC; copyText(g.prompt, 'Prompt'); return; }
   if (t.closest('#repCopy')) { copyText(reportMarkdown(), 'Report'); return; }
   if (t.closest('#repDl')) { download(`${stamp()}_ai-research-process_report.md`, reportMarkdown(), 'text/markdown'); return; }
@@ -1160,9 +1164,10 @@ document.addEventListener('keydown', e => {
 /* ---------- helpers: export, merge, survey ---------- */
 const stamp = () => new Date().toISOString().slice(0, 10);
 function download(name, text, type){ const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type:type + ';charset=utf-8'})); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
-function copyText(text, what){
-  const fallback = () => { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast(what + ' copied'); } catch(e) { toast('Copy failed – select and copy manually'); } ta.remove(); };
-  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(() => toast(what + ' copied'), fallback); else fallback();
+function copyText(text, what, msg){
+  const done = () => toast(msg || what + ' copied');
+  const fallback = () => { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch(e) { toast('Copy failed – select and copy manually'); } ta.remove(); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
 }
 function csv(){
   const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
