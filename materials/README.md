@@ -2,7 +2,7 @@
 
 Open papers and raw datasets for testing AI use cases in the workshop *Generative AI in Your Research*. Snapshot downloaded on 2026-10-29; the providers keep updating most series, so values may differ from today’s files.
 
-All files may be redistributed under the licence named for each item. Cite the sources as given. Items marked **non-commercial** (CC BY-NC) may only be used for non-commercial purposes such as research and teaching.
+All files may be redistributed under the licence named for each item. Cite the sources as given.
 
 ## Papers
 
@@ -17,13 +17,11 @@ All files may be redistributed under the licence named for each item. Cite the s
 
 ### UK and Europe
 
-- **B1** Kendon, M., et al. (2025). State of the UK Climate in 2024. International Journal of Climatology, 45(S1), e70010. https://doi.org/10.1002/joc.70010 – *CC BY-NC 4.0 (non-commercial)*  
-  File: `papers/B_uk-europe/2025_Kendon_State-of-UK-Climate-2024_IJC.pdf`. The Met Office’s annual assessment of UK temperature, rainfall, sunshine, wind, sea level and phenology.
-- **B2** Legg, T., et al. (2025). An Update to the Central England Temperature Series – HadCET v2.1. Geoscience Data Journal, 12, e284. https://doi.org/10.1002/gdj3.284 – *CC BY 4.0*  
+- **B1** Legg, T., et al. (2025). An Update to the Central England Temperature Series – HadCET v2.1. Geoscience Data Journal, 12, e284. https://doi.org/10.1002/gdj3.284 – *CC BY 4.0*  
   File: `papers/B_uk-europe/2025_Legg_HadCET-v2-1_GDJ.pdf`. Documents the current version of the Central England Temperature series: stations, homogenisation and urban adjustment.
-- **B3** Christidis, N., McCarthy, M., & Stott, P. A. (2020). The increasing likelihood of temperatures above 30 to 40 °C in the United Kingdom. Nature Communications, 11, 3093. https://doi.org/10.1038/s41467-020-16834-0 – *CC BY 4.0*  
+- **B2** Christidis, N., McCarthy, M., & Stott, P. A. (2020). The increasing likelihood of temperatures above 30 to 40 °C in the United Kingdom. Nature Communications, 11, 3093. https://doi.org/10.1038/s41467-020-16834-0 – *CC BY 4.0*  
   File: `papers/B_uk-europe/2020_Christidis_UK-30-40C_NatCommun.pdf`. Attribution study on how human influence raises the chance of 30–40 °C days in the UK – published two years before the 40.3 °C record of July 2022.
-- **B4** Vautard, R., et al. (2023). Heat extremes in Western Europe increasing faster than simulated due to atmospheric circulation trends. Nature Communications, 14, 6803. https://doi.org/10.1038/s41467-023-42143-3 – *CC BY 4.0*  
+- **B3** Vautard, R., et al. (2023). Heat extremes in Western Europe increasing faster than simulated due to atmospheric circulation trends. Nature Communications, 14, 6803. https://doi.org/10.1038/s41467-023-42143-3 – *CC BY 4.0*  
   File: `papers/B_uk-europe/2023_Vautard_W-Europe-heat-extremes_NatCommun.pdf`. Shows that Western European heat extremes rise faster than climate models simulate, partly due to circulation changes.
 
 ### Extremes and attribution
@@ -55,43 +53,42 @@ All files may be redistributed under the licence named for each item. Cite the s
 - **D4 Global temperature anomalies – GISTEMP v4** – NASA GISS. 1880 to today. Format: CSV, wide (year × months + seasons), title line to skip. *US government open data*. Source: https://data.giss.nasa.gov/gistemp/. Cite: GISTEMP Team (2026), GISS Surface Temperature Analysis v4; Lenssen et al.  
   Baseline 1951–1980; missing values coded as ***.  
   Files: `data/D04_gistemp/GLB.Ts+dSST_2026-10-29.csv`
-- **D5 Global temperature anomalies – Berkeley Earth** – Berkeley Earth. 1850 to today, monthly and annual. Format: Text with long % comment header, whitespace-separated. *CC BY-NC 4.0 (non-commercial)*. Source: https://berkeleyearth.org/data/. Cite: Rohde & Hausfather (2020).  
-  Marked “preliminary” by the provider; missing values coded as NaN.  
-  Files: `data/D05_berkeley-earth/Global_TAVG_annual_2026-10-29.txt`, `data/D05_berkeley-earth/Global_TAVG_monthly_2026-10-29.txt`
-- **D6 Atmospheric CO₂ – Mauna Loa, monthly** – NOAA Global Monitoring Laboratory. March 1958 to today. Format: CSV with # comment header. *US government open data (citation requested)*. Source: https://gml.noaa.gov/ccgg/trends/data.html. Cite: Lan, X., Tans, P. & Thoning, K. W., NOAA GML; Scripps Institution of Oceanography.  
+- **D5 Atmospheric CO₂ – Mauna Loa, monthly** – NOAA Global Monitoring Laboratory. March 1958 to today. Format: CSV with # comment header. *US government open data (citation requested)*. Source: https://gml.noaa.gov/ccgg/trends/data.html. Cite: Lan, X., Tans, P. & Thoning, K. W., NOAA GML; Scripps Institution of Oceanography.  
   December 2022 – July 2023 measured on Maunakea after the Mauna Loa eruption; negative values are placeholders.  
-  Files: `data/D06_noaa-co2-maunaloa/co2_mm_mlo_2026-10-29.csv`
-- **D7 Sea-ice extent, Arctic and Antarctic – daily** – NSIDC Sea Ice Index v4. 26 October 1978 to today. Format: CSV with a units row under the header. *Free use with citation*. Source: https://nsidc.org/data/g02135. Cite: Fetterer, F., et al., Sea Ice Index, Version 4 (G02135), NSIDC.  
+  Files: `data/D05_noaa-co2-maunaloa/co2_mm_mlo_2026-10-29.csv`
+- **D6 Sea-ice extent, Arctic and Antarctic – daily** – NSIDC Sea Ice Index v4. 26 October 1978 to today. Format: CSV with a units row under the header. *Free use with citation*. Source: https://nsidc.org/data/g02135. Cite: Fetterer, F., et al., Sea Ice Index, Version 4 (G02135), NSIDC.  
   Every other day until mid-1987 and a gap in 1987–88 – good for irregular time series.  
-  Files: `data/D07_nsidc-seaice-v4/N_seaice_extent_daily_v4.0_2026-10-29.csv`, `data/D07_nsidc-seaice-v4/S_seaice_extent_daily_v4.0_2026-10-29.csv`
-- **D8 UK station records – Oxford, Durham, Sutton Bonington** – Met Office historic station data. Oxford from 1853, monthly. Format: Text, header lines; tmax, tmin, air frost, rain, sun. *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/research/climate/maps-and-data/historic-station-data. Cite: Met Office historic station data.  
+  Files: `data/D06_nsidc-seaice-v4/N_seaice_extent_daily_v4.0_2026-10-29.csv`, `data/D06_nsidc-seaice-v4/S_seaice_extent_daily_v4.0_2026-10-29.csv`
+- **D7 UK station records – Oxford, Durham, Sutton Bonington** – Met Office historic station data. Oxford from 1853, monthly. Format: Text, header lines; tmax, tmin, air frost, rain, sun. *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/research/climate/maps-and-data/historic-station-data. Cite: Met Office historic station data.  
   Codes to clean: --- missing, * estimated, # sensor type, “Provisional” rows. The best file for a data-cleaning test.  
-  Files: `data/D08_metoffice-stations/durhamdata_2026-10-29.txt`, `data/D08_metoffice-stations/oxforddata_2026-10-29.txt`, `data/D08_metoffice-stations/suttonboningtondata_2026-10-29.txt`
-- **D9 UK mean temperature and rainfall – national series** – Met Office HadUK-Grid. Temperature from 1884, rainfall from 1836. Format: Text, wide (year × months + seasons + annual). *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/research/climate/maps-and-data/uk-and-regional-series. Cite: Met Office HadUK-Grid.  
+  Files: `data/D07_metoffice-stations/durhamdata_2026-10-29.txt`, `data/D07_metoffice-stations/oxforddata_2026-10-29.txt`, `data/D07_metoffice-stations/suttonboningtondata_2026-10-29.txt`
+- **D8 UK mean temperature and rainfall – national series** – Met Office HadUK-Grid. Temperature from 1884, rainfall from 1836. Format: Text, wide (year × months + seasons + annual). *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/research/climate/maps-and-data/uk-and-regional-series. Cite: Met Office HadUK-Grid.  
   Areal averages for the UK; --- marks missing seasonal values.  
-  Files: `data/D09_metoffice-uk-series/UK_Rainfall_2026-10-29.txt`, `data/D09_metoffice-uk-series/UK_Tmean_2026-10-29.txt`
-- **D10 Global air temperature – daily (ERA5)** – Copernicus Climate Change Service / ECMWF (Climate Pulse). 1940 to today. Format: CSV with # description header. *Copernicus licence (free, with attribution)*. Source: https://pulse.climate.copernicus.eu/. Cite: C3S/ECMWF, ERA5 via Climate Pulse.  
+  Files: `data/D08_metoffice-uk-series/UK_Rainfall_2026-10-29.txt`, `data/D08_metoffice-uk-series/UK_Tmean_2026-10-29.txt`
+- **D9 Global air temperature – daily (ERA5)** – Copernicus Climate Change Service / ECMWF (Climate Pulse). 1940 to today. Format: CSV with # description header. *Copernicus licence (free, with attribution)*. Source: https://pulse.climate.copernicus.eu/. Cite: C3S/ECMWF, ERA5 via Climate Pulse.  
   Anomalies relative to 1991–2020; the last weeks are preliminary (ERA5T).  
-  Files: `data/D10_copernicus-climatepulse/era5_daily_series_2t_global_2026-10-29.csv`
-- **D11 CO₂ and greenhouse-gas emissions by country** – Our World in Data. About 1750 to today, ~50,000 rows, ~80 columns. Format: CSV, long format, with codebook. *CC BY 4.0*. Source: https://github.com/owid/co2-data. Cite: Our World in Data, based on the Global Carbon Project (Friedlingstein et al., 2025).  
+  Files: `data/D09_copernicus-climatepulse/era5_daily_series_2t_global_2026-10-29.csv`
+- **D10 CO₂ and greenhouse-gas emissions by country** – Our World in Data. About 1750 to today, ~50,000 rows, ~80 columns. Format: CSV, long format, with codebook. *CC BY 4.0*. Source: https://github.com/owid/co2-data. Cite: Our World in Data, based on the Global Carbon Project (Friedlingstein et al., 2025).  
   Contains aggregates (World, Europe, income groups) that must be filtered out before comparing countries. 20 MB – may be too large to upload to Copilot in one piece.  
-  Files: `data/D11_owid-co2/owid-co2-codebook_2026-10-29.csv`, `data/D11_owid-co2/owid-co2-data_2026-10-29.csv`
+  Files: `data/D10_owid-co2/owid-co2-codebook_2026-10-29.csv`, `data/D10_owid-co2/owid-co2-data_2026-10-29.csv`
 
 ## Not included
 
 - **EM-DAT disaster database (CRED/UCLouvain)** – Requires registration and does not allow redistribution – download it yourself at https://public.emdat.be after accepting the terms.
+- **Berkeley Earth temperature data** – Licensed for non-commercial use only (CC BY-NC 4.0) – not included. The paper A2 describing it is in the pack; the data is available at https://berkeleyearth.org/data/.
+- **State of the UK Climate in 2024 (Kendon et al., 2025)** – Licensed for non-commercial use only (CC BY-NC 4.0) – not included; open access at https://doi.org/10.1002/joc.70010.
 - **Meteostat daily station data** – Licence statements conflict (CC BY vs CC BY-NC) – not included.
 
 ## Ideas for pairing papers and data
 
 | Paper | Data | Test idea |
 |---|---|---|
-| B2 | D1 · D2 | Ask Copilot to explain the file layout and write code that reshapes the monthly series to long format; check the 2022 values by hand. |
-| A1 | D3 · D4 · D5 · D10 | Compare the global records on a common baseline; check Copilot’s explanation of the differences against the paper. |
-| B1 | D8 · D9 | Clean the three station files and compare decadal frost and rainfall with the statements in the report. |
-| A3 | D3 · D6 · D11 | Let Copilot propose testable hypotheses from the emissions data, then critique them. |
-| B3 · B4 | D1 | Count hot days in the Central England maximum series and compare Copilot’s reading of “return period” with the paper. |
-| B3 · C3 · C4 · C5 | – | Ask Copilot for a comparison table of the attribution studies, then check every cell against the PDFs. |
+| B1 | D1 · D2 | Ask Copilot to explain the file layout and write code that reshapes the monthly series to long format; check the 2022 values by hand. |
+| A1 | D3 · D4 · D9 | Compare the global records on a common baseline; check Copilot’s explanation of the differences against the paper. |
+| C2 | D7 · D8 | Clean the three station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study. |
+| A3 | D3 · D5 · D10 | Let Copilot propose testable hypotheses from the emissions data, then critique them. |
+| B2 · B3 | D1 | Count hot days in the Central England maximum series and compare Copilot’s reading of “return period” with the paper. |
+| B2 · C3 · C4 · C5 | – | Ask Copilot for a comparison table of the attribution studies, then check every cell against the PDFs. |
 
 ---
 Compiled for the workshop by Prof. Dr. Manuel Kern · delivered by Hitachi Solutions. The pack contains third-party material; all rights remain with the authors and providers.

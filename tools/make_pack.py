@@ -1,6 +1,6 @@
 """Build the practice-data pack from materials/manifest.json.
 
-Writes materials/README.md, materials/data/D13_emdat/HOW-TO-DOWNLOAD.md and
+Writes materials/README.md, materials/data/EMDAT_how-to-download/HOW-TO-DOWNLOAD.md and
 materials/pack.json (file lists and sizes for the page), and creates two zips in
 dist/ that are uploaded as GitHub release assets (kept out of the repository):
   ai-research-practice-data.zip  – README + raw data
@@ -14,7 +14,7 @@ MAT = os.path.join(ROOT, 'materials')
 DIST = os.path.join(ROOT, 'dist')
 m = json.load(open(os.path.join(MAT, 'manifest.json'), encoding='utf-8'))
 
-emdat = os.path.join(MAT, 'data', 'D13_emdat')
+emdat = os.path.join(MAT, 'data', 'EMDAT_how-to-download')
 os.makedirs(emdat, exist_ok=True)
 open(os.path.join(emdat, 'HOW-TO-DOWNLOAD.md'), 'w', encoding='utf-8').write(
     "# EM-DAT – download it yourself\n\n"
@@ -34,7 +34,7 @@ for d in m['data']: d['files'] = [{'f': f, 'size': size(f)} for f in files_in(d[
 
 L = [f"# Practice data – {m['topic']}", '',
      f"Open papers and raw datasets for testing AI use cases in the workshop *Generative AI in Your Research*. Snapshot downloaded on {m['snapshot']}; the providers keep updating most series, so values may differ from today’s files.", '',
-     'All files may be redistributed under the licence named for each item. Cite the sources as given. Items marked **non-commercial** (CC BY-NC) may only be used for non-commercial purposes such as research and teaching.', '',
+     'All files may be redistributed under the licence named for each item. Cite the sources as given.', '',
      '## Papers', '']
 grp = None
 for p in m['papers']:

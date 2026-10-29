@@ -24,9 +24,7 @@
    "doi": "10.5194/essd-12-3469-2020",
    "licence": "CC BY 4.0",
    "about": "Describes the Berkeley Earth global record and compares it with HadCRUT, GISTEMP and other series.",
-   "data": [
-    "D5"
-   ],
+   "data": [],
    "size": 3892422
   },
   {
@@ -39,28 +37,13 @@
    "about": "The annual IPCC-style update: emissions, concentrations, forcing, observed and human-induced warming, remaining carbon budget.",
    "data": [
     "D3",
-    "D6",
-    "D11"
+    "D5",
+    "D10"
    ],
    "size": 7794895
   },
   {
    "id": "B1",
-   "group": "UK and Europe",
-   "file": "papers/B_uk-europe/2025_Kendon_State-of-UK-Climate-2024_IJC.pdf",
-   "cite": "Kendon, M., et al. (2025). State of the UK Climate in 2024. International Journal of Climatology, 45(S1), e70010.",
-   "doi": "10.1002/joc.70010",
-   "licence": "CC BY-NC 4.0 (non-commercial)",
-   "large": true,
-   "about": "The Met Office’s annual assessment of UK temperature, rainfall, sunshine, wind, sea level and phenology.",
-   "data": [
-    "D8",
-    "D9"
-   ],
-   "size": 39543822
-  },
-  {
-   "id": "B2",
    "group": "UK and Europe",
    "file": "papers/B_uk-europe/2025_Legg_HadCET-v2-1_GDJ.pdf",
    "cite": "Legg, T., et al. (2025). An Update to the Central England Temperature Series – HadCET v2.1. Geoscience Data Journal, 12, e284.",
@@ -74,7 +57,7 @@
    "size": 4122743
   },
   {
-   "id": "B3",
+   "id": "B2",
    "group": "UK and Europe",
    "file": "papers/B_uk-europe/2020_Christidis_UK-30-40C_NatCommun.pdf",
    "cite": "Christidis, N., McCarthy, M., & Stott, P. A. (2020). The increasing likelihood of temperatures above 30 to 40 °C in the United Kingdom. Nature Communications, 11, 3093.",
@@ -87,7 +70,7 @@
    "size": 1635253
   },
   {
-   "id": "B4",
+   "id": "B3",
    "group": "UK and Europe",
    "file": "papers/B_uk-europe/2023_Vautard_W-Europe-heat-extremes_NatCommun.pdf",
    "cite": "Vautard, R., et al. (2023). Heat extremes in Western Europe increasing faster than simulated due to atmospheric circulation trends. Nature Communications, 14, 6803.",
@@ -108,8 +91,7 @@
    "licence": "CC BY 4.0",
    "about": "Heatwave frequency, duration, intensity and cumulative heat by region since 1950.",
    "data": [
-    "D1",
-    "D5"
+    "D1"
    ],
    "size": 3504271
   },
@@ -122,7 +104,7 @@
    "licence": "CC BY 4.0",
    "about": "Extreme daily precipitation becomes more frequent with warming – the rarer the event, the larger the increase.",
    "data": [
-    "D8"
+    "D7"
    ],
    "size": 2888479
   },
@@ -261,31 +243,9 @@
   },
   {
    "id": "D5",
-   "title": "Global temperature anomalies – Berkeley Earth",
-   "provider": "Berkeley Earth",
-   "dir": "data/D05_berkeley-earth",
-   "span": "1850 to today, monthly and annual",
-   "format": "Text with long % comment header, whitespace-separated",
-   "licence": "CC BY-NC 4.0 (non-commercial)",
-   "source": "https://berkeleyearth.org/data/",
-   "cite": "Rohde & Hausfather (2020).",
-   "notes": "Marked “preliminary” by the provider; missing values coded as NaN.",
-   "files": [
-    {
-     "f": "data/D05_berkeley-earth/Global_TAVG_annual_2026-10-29.txt",
-     "size": 15368
-    },
-    {
-     "f": "data/D05_berkeley-earth/Global_TAVG_monthly_2026-10-29.txt",
-     "size": 213416
-    }
-   ]
-  },
-  {
-   "id": "D6",
    "title": "Atmospheric CO₂ – Mauna Loa, monthly",
    "provider": "NOAA Global Monitoring Laboratory",
-   "dir": "data/D06_noaa-co2-maunaloa",
+   "dir": "data/D05_noaa-co2-maunaloa",
    "span": "March 1958 to today",
    "format": "CSV with # comment header",
    "licence": "US government open data (citation requested)",
@@ -294,16 +254,16 @@
    "notes": "December 2022 – July 2023 measured on Maunakea after the Mauna Loa eruption; negative values are placeholders.",
    "files": [
     {
-     "f": "data/D06_noaa-co2-maunaloa/co2_mm_mlo_2026-10-29.csv",
+     "f": "data/D05_noaa-co2-maunaloa/co2_mm_mlo_2026-10-29.csv",
      "size": 38776
     }
    ]
   },
   {
-   "id": "D7",
+   "id": "D6",
    "title": "Sea-ice extent, Arctic and Antarctic – daily",
    "provider": "NSIDC Sea Ice Index v4",
-   "dir": "data/D07_nsidc-seaice-v4",
+   "dir": "data/D06_nsidc-seaice-v4",
    "span": "26 October 1978 to today",
    "format": "CSV with a units row under the header",
    "licence": "Free use with citation",
@@ -312,20 +272,20 @@
    "notes": "Every other day until mid-1987 and a gap in 1987–88 – good for irregular time series.",
    "files": [
     {
-     "f": "data/D07_nsidc-seaice-v4/N_seaice_extent_daily_v4.0_2026-10-29.csv",
+     "f": "data/D06_nsidc-seaice-v4/N_seaice_extent_daily_v4.0_2026-10-29.csv",
      "size": 1909758
     },
     {
-     "f": "data/D07_nsidc-seaice-v4/S_seaice_extent_daily_v4.0_2026-10-29.csv",
+     "f": "data/D06_nsidc-seaice-v4/S_seaice_extent_daily_v4.0_2026-10-29.csv",
      "size": 1836077
     }
    ]
   },
   {
-   "id": "D8",
+   "id": "D7",
    "title": "UK station records – Oxford, Durham, Sutton Bonington",
    "provider": "Met Office historic station data",
-   "dir": "data/D08_metoffice-stations",
+   "dir": "data/D07_metoffice-stations",
    "span": "Oxford from 1853, monthly",
    "format": "Text, header lines; tmax, tmin, air frost, rain, sun",
    "licence": "Open Government Licence v3",
@@ -334,24 +294,24 @@
    "notes": "Codes to clean: --- missing, * estimated, # sensor type, “Provisional” rows. The best file for a data-cleaning test.",
    "files": [
     {
-     "f": "data/D08_metoffice-stations/durhamdata_2026-10-29.txt",
+     "f": "data/D07_metoffice-stations/durhamdata_2026-10-29.txt",
      "size": 92268
     },
     {
-     "f": "data/D08_metoffice-stations/oxforddata_2026-10-29.txt",
+     "f": "data/D07_metoffice-stations/oxforddata_2026-10-29.txt",
      "size": 109141
     },
     {
-     "f": "data/D08_metoffice-stations/suttonboningtondata_2026-10-29.txt",
+     "f": "data/D07_metoffice-stations/suttonboningtondata_2026-10-29.txt",
      "size": 42984
     }
    ]
   },
   {
-   "id": "D9",
+   "id": "D8",
    "title": "UK mean temperature and rainfall – national series",
    "provider": "Met Office HadUK-Grid",
-   "dir": "data/D09_metoffice-uk-series",
+   "dir": "data/D08_metoffice-uk-series",
    "span": "Temperature from 1884, rainfall from 1836",
    "format": "Text, wide (year × months + seasons + annual)",
    "licence": "Open Government Licence v3",
@@ -360,20 +320,20 @@
    "notes": "Areal averages for the UK; --- marks missing seasonal values.",
    "files": [
     {
-     "f": "data/D09_metoffice-uk-series/UK_Rainfall_2026-10-29.txt",
+     "f": "data/D08_metoffice-uk-series/UK_Rainfall_2026-10-29.txt",
      "size": 25028
     },
     {
-     "f": "data/D09_metoffice-uk-series/UK_Tmean_2026-10-29.txt",
+     "f": "data/D08_metoffice-uk-series/UK_Tmean_2026-10-29.txt",
      "size": 18830
     }
    ]
   },
   {
-   "id": "D10",
+   "id": "D9",
    "title": "Global air temperature – daily (ERA5)",
    "provider": "Copernicus Climate Change Service / ECMWF (Climate Pulse)",
-   "dir": "data/D10_copernicus-climatepulse",
+   "dir": "data/D09_copernicus-climatepulse",
    "span": "1940 to today",
    "format": "CSV with # description header",
    "licence": "Copernicus licence (free, with attribution)",
@@ -382,16 +342,16 @@
    "notes": "Anomalies relative to 1991–2020; the last weeks are preliminary (ERA5T).",
    "files": [
     {
-     "f": "data/D10_copernicus-climatepulse/era5_daily_series_2t_global_2026-10-29.csv",
+     "f": "data/D09_copernicus-climatepulse/era5_daily_series_2t_global_2026-10-29.csv",
      "size": 1198595
     }
    ]
   },
   {
-   "id": "D11",
+   "id": "D10",
    "title": "CO₂ and greenhouse-gas emissions by country",
    "provider": "Our World in Data",
-   "dir": "data/D11_owid-co2",
+   "dir": "data/D10_owid-co2",
    "span": "About 1750 to today, ~50,000 rows, ~80 columns",
    "format": "CSV, long format, with codebook",
    "licence": "CC BY 4.0",
@@ -401,11 +361,11 @@
    "large": true,
    "files": [
     {
-     "f": "data/D11_owid-co2/owid-co2-codebook_2026-10-29.csv",
+     "f": "data/D10_owid-co2/owid-co2-codebook_2026-10-29.csv",
      "size": 24149
     },
     {
-     "f": "data/D11_owid-co2/owid-co2-data_2026-10-29.csv",
+     "f": "data/D10_owid-co2/owid-co2-data_2026-10-29.csv",
      "size": 20199517
     }
    ]
@@ -413,32 +373,32 @@
  ],
  "pairs": [
   [
-   "B2",
+   "B1",
    "D1 · D2",
    "Ask Copilot to explain the file layout and write code that reshapes the monthly series to long format; check the 2022 values by hand."
   ],
   [
    "A1",
-   "D3 · D4 · D5 · D10",
+   "D3 · D4 · D9",
    "Compare the global records on a common baseline; check Copilot’s explanation of the differences against the paper."
   ],
   [
-   "B1",
-   "D8 · D9",
-   "Clean the three station files and compare decadal frost and rainfall with the statements in the report."
+   "C2",
+   "D7 · D8",
+   "Clean the three station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study."
   ],
   [
    "A3",
-   "D3 · D6 · D11",
+   "D3 · D5 · D10",
    "Let Copilot propose testable hypotheses from the emissions data, then critique them."
   ],
   [
-   "B3 · B4",
+   "B2 · B3",
    "D1",
    "Count hot days in the Central England maximum series and compare Copilot’s reading of “return period” with the paper."
   ],
   [
-   "B3 · C3 · C4 · C5",
+   "B2 · C3 · C4 · C5",
    "–",
    "Ask Copilot for a comparison table of the attribution studies, then check every cell against the PDFs."
   ]
@@ -449,12 +409,20 @@
    "Requires registration and does not allow redistribution – download it yourself at https://public.emdat.be after accepting the terms."
   ],
   [
+   "Berkeley Earth temperature data",
+   "Licensed for non-commercial use only (CC BY-NC 4.0) – not included. The paper A2 describing it is in the pack; the data is available at https://berkeleyearth.org/data/."
+  ],
+  [
+   "State of the UK Climate in 2024 (Kendon et al., 2025)",
+   "Licensed for non-commercial use only (CC BY-NC 4.0) – not included; open access at https://doi.org/10.1002/joc.70010."
+  ],
+  [
    "Meteostat daily station data",
    "Licence statements conflict (CC BY vs CC BY-NC) – not included."
   ]
  ],
  "zips": {
-  "data": 9581670,
-  "all": 81049756
+  "data": 9537279,
+  "all": 45744341
  }
 }
