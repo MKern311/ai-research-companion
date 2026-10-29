@@ -283,7 +283,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 @media print{
   @page{size:A4;margin:14mm}
   body{background:#fff;font-size:11pt}
-  .top .tabs,.ident,#view-cases,#view-tools,.drawer,.scrim,.modal,.toast,.no-print,#resPhase,.view-head .seg{display:none !important}
+  .top .tabs,.ident,#view-agenda,#view-cases,#view-tools,.drawer,.scrim,.modal,.toast,.no-print,#resPhase,.view-head .seg{display:none !important}
   #view-results{display:block !important}
   .top{position:static;border-bottom:2px solid var(--red)}
   .brand .sep,.brand .title{display:inline-block !important}
@@ -365,6 +365,37 @@ a.mcpb:hover{background:var(--red);color:#fff;box-shadow:none}
 a.msb:hover{background:#0B4A8F;color:#fff}
 .msb.cp{background:#0B4A8F;color:#fff}
 
+/* Agenda */
+.ag-grid{display:grid;grid-template-columns:3fr 2fr;gap:16px;margin-bottom:16px}
+@media (max-width:900px){.ag-grid{grid-template-columns:1fr}}
+.agenda{list-style:none;margin:10px 0 0;padding:0}
+.agenda li{display:grid;grid-template-columns:104px 1fr auto;gap:12px;align-items:baseline;padding:11px 0;border-top:1px solid var(--line-2)}
+.agenda li:first-child{border-top:0}
+.agenda .t{font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink-2);font-size:14px}
+.agenda b{display:block;font-size:15.5px}
+.agenda small{display:block;color:var(--ink-2);font-size:13.5px;margin-top:2px}
+.agenda small.here{color:var(--red);font-weight:700}
+.agenda li.brk b{font-weight:600;color:var(--muted)}
+.agenda li.live{background:#FDF2F2;box-shadow:inset 4px 0 0 var(--red);padding-left:12px;border-radius:6px}
+.agenda .now{background:var(--red);color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px}
+@media (max-width:520px){.agenda li{grid-template-columns:1fr auto}.agenda .t{grid-column:1/-1}}
+.team{display:grid;gap:14px;margin-top:12px}
+.member{display:flex;gap:14px;align-items:center}
+.member img,.member .avatar{width:64px;height:64px;border-radius:50%;flex:none;object-fit:cover}
+.member .avatar{display:grid;place-items:center;background:var(--surface);color:var(--ink);font-weight:700;font-size:18px;box-shadow:inset 0 0 0 1px var(--line)}
+.member b{display:block}
+.member small{display:block;color:var(--ink-2);font-size:13.5px}
+.member small.leads{color:var(--muted);font-size:13px;margin-top:2px}
+.steps-ov .sub{max-width:80ch}
+.ov-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:14px 0 16px}
+@media (max-width:900px){.ov-grid{grid-template-columns:1fr}}
+.ov{background:var(--surface);border-radius:10px;padding:16px 18px}
+.ov-n{display:inline-block;background:var(--red);color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px}
+.ov-after .ov-n{background:var(--ink)}
+.ov h3{font-size:1.05rem;margin:8px 0 6px}
+.ov p{font-size:14.5px;color:var(--ink-2);margin:0 0 8px}
+.ov .ov-out{font-weight:600;color:var(--ink)}
+
 </style>
 </head>
 <body>
@@ -376,7 +407,8 @@ a.msb:hover{background:#0B4A8F;color:#fff}
       <span class="title">AI in the Research Process</span>
     </div>
     <nav class="tabs" role="tablist" aria-label="Views">
-      <button role="tab" id="tab-cases" data-view="cases" aria-selected="true">Use cases</button>
+      <button role="tab" id="tab-agenda" data-view="agenda" aria-selected="true">Agenda</button>
+      <button role="tab" id="tab-cases" data-view="cases" aria-selected="false">Use cases</button>
       <button role="tab" id="tab-results" data-view="results" aria-selected="false">Results</button>
       <button role="tab" id="tab-tools" data-view="tools" aria-selected="false">Academic tools</button>
     </nav>
@@ -385,7 +417,39 @@ a.msb:hover{background:#0B4A8F;color:#fff}
 </header>
 
 <main class="wrap">
-  <section id="view-cases" aria-labelledby="tab-cases">
+  <section id="view-agenda" aria-labelledby="tab-agenda">
+    <div class="view-head">
+      <div><h1>Generative AI in Your Research</h1>
+        <p>Wednesday 4 November 2026 · 12:45–17:00 · lunch from 12:00</p></div>
+    </div>
+    <div class="ag-grid">
+      <div class="panel"><h2>Agenda</h2><ol class="agenda" id="agenda"></ol></div>
+      <div class="panel"><h2>Your team today</h2><div class="team" id="team"></div></div>
+    </div>
+    <div class="panel steps-ov">
+      <h2>Where does AI actually help me? – how this tool works</h2>
+      <p class="sub">We built this tool for the research-process session: so that the room decides together where AI genuinely helps your research – and where it does not – and everyone leaves with tested starting points.</p>
+      <div class="ov-grid">
+        <div class="ov">
+          <span class="ov-n">Step 1</span><h3>Research value</h3>
+          <p>Your group goes through the phases of the research process and rates use cases: how valuable for your research, what kind of gain, how feasible. Flag what is “not an AI task” or needs a rules check, and add missing use cases.</p>
+          <p class="ov-out">→ Results: the room’s value × feasibility matrix shows which use cases win.</p>
+        </div>
+        <div class="ov">
+          <span class="ov-n">Step 2</span><h3>Try it with Copilot</h3>
+          <p>Each group picks one to three use cases and tests them live with Copilot – with a short guide, a starter prompt and the content pack. Record how it went and what you noticed, then share it with the room.</p>
+          <p class="ov-out">→ Round 1, exchange, round 2: go further or deeper.</p>
+        </div>
+        <div class="ov ov-after">
+          <span class="ov-n">After today</span><h3>Keep using it</h3>
+          <p>The results report, the guides and the overview of academic tools stay available – as a starting point for your own work.</p>
+        </div>
+      </div>
+      <div class="row"><button type="button" class="btn btn-primary" data-view="cases">Start with Step 1 →</button></div>
+    </div>
+  </section>
+
+  <section id="view-cases" aria-labelledby="tab-cases" hidden>
     <div class="view-head">
       <div><h1>Where does AI really help your research?</h1>
         <p>Choose a phase, open a use case and rate it. Step 1 is about the value for your research; in Step 2 your table tries one to three use cases live with Copilot.</p></div>
@@ -746,6 +810,26 @@ const M365 = {
 };
 const M365_TYPE = {copilot:'Copilot connector', word:'Word add-in', teams:'Teams', power:'Power Automate', outlook:'Outlook', files:'OneDrive / SharePoint', edge:'Edge extension', azure:'Azure AI Speech'};
 
+// Agenda (final, as agreed) – titles and times must not change
+const AGENDA = [
+ ['12:45','12:50','Welcome and Setting the Scene','Helen & Ernest'],
+ ['12:50','13:15','So, where do we all stand?','Oliver'],
+ ['13:15','13:30','Wait, where does my data go?','Tom'],
+ ['13:30','14:45','Why did it say that? A common baseline for prompting','Tom'],
+ ['14:45','15:00','Coffee Break',''],
+ ['15:00','16:45','Where does AI actually help me? Let\'s focus on your Research Process','Manuel + Team'],
+ ['16:45','17:00','So, what changes on Monday?','Oliver']
+];
+const AGENDA_DAY = '2026-11-04', TOOL_SLOT = 5;
+// Team: photo = path under assets/team/ once available
+const TEAM = [
+ {n:'Helen', role:'', photo:''},
+ {n:'Ernest', role:'', photo:''},
+ {n:'Oliver', role:'', photo:''},
+ {n:'Tom', role:'', photo:''},
+ {n:'Prof. Dr. Manuel Kern', role:'', photo:'', short:'Manuel'}
+];
+
 const GAINS = [['time','Saves time'],['quality','Better quality'],['new','New possibility'],['learn','I learn']];
 
 const CLUSTERS = [
@@ -796,7 +880,7 @@ let state = blank();
 try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && v.t) state = {t:v.t, c:Array.isArray(v.c) ? v.c : [], a:(v.a && v.a !== 'Table 1' ? v.a : 'Group 1')}; } catch(e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} };
 let session = null;            // {code, role, table, workshop}
-const ui = {view:'cases', lens:1, phase:0, scope:'room', resTable:null, resPhase:null, toolPhase:null, toolMcp:false, open:null};
+const ui = {view:'agenda', lens:1, phase:0, scope:'room', resTable:null, resPhase:null, toolPhase:null, toolMcp:false, open:null};
 const sync = {dirty:false, timer:0, poll:0, last:null, err:null, busy:false};
 
 const remote = () => !!session;
@@ -1196,10 +1280,27 @@ function showLogin(msg){
 }
 
 /* ---------- render ---------- */
+/* ---------- agenda ---------- */
+const initials = n => n.replace(/^(Prof\. )?(Dr\. )?/, '').split(/\s+/).map(w => w[0]).slice(0, 2).join('');
+function londonNow(){
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {timeZone:'Europe/London', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hour12:false}).formatToParts(new Date()).map(x => [x.type, x.value]));
+  return {day:`${p.year}-${p.month}-${p.day}`, min:(+p.hour % 24) * 60 + +p.minute};
+}
+function renderAgenda(){
+  const now = londonNow(), mins = t => +t.slice(0, 2) * 60 + +t.slice(3);
+  $('#agenda').innerHTML = AGENDA.map(([a, b, title, who], i) => {
+    const live = now.day === AGENDA_DAY && now.min >= mins(a) && now.min < mins(b);
+    return `<li class="${who ? '' : 'brk'}${live ? ' live' : ''}"><span class="t">${a}–${b}</span><span><b>${esc(title)}</b>${who ? `<small>${esc(who)}</small>` : ''}${i === TOOL_SLOT ? '<small class="here">This tool · Steps 1 and 2 below</small>' : ''}</span>${live ? '<span class="now">Now</span>' : ''}</li>`;
+  }).join('');
+  $('#team').innerHTML = TEAM.map(m => {
+    const key = m.short || m.n, leads = AGENDA.filter(x => x[3] && x[3].includes(key.split(' ')[0])).map(x => x[2]);
+    return `<div class="member">${m.photo ? `<img src="${esc(m.photo)}" alt="" width="64" height="64">` : `<span class="avatar" aria-hidden="true">${esc(initials(m.n))}</span>`}<div><b>${esc(m.n)}</b>${m.role ? `<small>${esc(m.role)}</small>` : ''}${leads.length ? `<small class="leads">${leads.map(esc).join(' · ')}</small>` : ''}</div></div>`;
+  }).join('');
+}
 function setView(v){
   ui.view = v;
-  ['cases','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
-  if (v === 'results') renderResults(); if (v === 'tools') renderTools();
+  ['agenda','cases','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
+  if (v === 'results') renderResults(); if (v === 'tools') renderTools(); if (v === 'agenda') renderAgenda();
   window.scrollTo({top:0});
 }
 function softRender(){
@@ -1207,7 +1308,7 @@ function softRender(){
   if (ui.view === 'results') renderResults();
   if (ui.open && ui.open !== '__new' && !$('#drawer').hidden && !$('#drawer').contains(document.activeElement)) openDrawer(ui.open);
 }
-function renderAll(){ renderIdent(); renderLens(); renderPhases(); renderIntro(); renderCards(); if (ui.view === 'results') renderResults(); if (ui.view === 'tools') renderTools(); }
+function renderAll(){ renderAgenda(); renderIdent(); renderLens(); renderPhases(); renderIntro(); renderCards(); if (ui.view === 'results') renderResults(); if (ui.view === 'tools') renderTools(); }
 
 /* ---------- events ---------- */
 document.addEventListener('click', e => {

@@ -25,7 +25,7 @@ let state = blank();
 try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && v.t) state = {t:v.t, c:Array.isArray(v.c) ? v.c : [], a:(v.a && v.a !== 'Table 1' ? v.a : 'Group 1')}; } catch(e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} };
 let session = null;            // {code, role, table, workshop}
-const ui = {view:'cases', lens:1, phase:0, scope:'room', resTable:null, resPhase:null, toolPhase:null, toolMcp:false, open:null};
+const ui = {view:'agenda', lens:1, phase:0, scope:'room', resTable:null, resPhase:null, toolPhase:null, toolMcp:false, open:null};
 const sync = {dirty:false, timer:0, poll:0, last:null, err:null, busy:false};
 
 const remote = () => !!session;
@@ -425,10 +425,27 @@ function showLogin(msg){
 }
 
 /* ---------- render ---------- */
+/* ---------- agenda ---------- */
+const initials = n => n.replace(/^(Prof\. )?(Dr\. )?/, '').split(/\s+/).map(w => w[0]).slice(0, 2).join('');
+function londonNow(){
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {timeZone:'Europe/London', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hour12:false}).formatToParts(new Date()).map(x => [x.type, x.value]));
+  return {day:`${p.year}-${p.month}-${p.day}`, min:(+p.hour % 24) * 60 + +p.minute};
+}
+function renderAgenda(){
+  const now = londonNow(), mins = t => +t.slice(0, 2) * 60 + +t.slice(3);
+  $('#agenda').innerHTML = AGENDA.map(([a, b, title, who], i) => {
+    const live = now.day === AGENDA_DAY && now.min >= mins(a) && now.min < mins(b);
+    return `<li class="${who ? '' : 'brk'}${live ? ' live' : ''}"><span class="t">${a}–${b}</span><span><b>${esc(title)}</b>${who ? `<small>${esc(who)}</small>` : ''}${i === TOOL_SLOT ? '<small class="here">This tool · Steps 1 and 2 below</small>' : ''}</span>${live ? '<span class="now">Now</span>' : ''}</li>`;
+  }).join('');
+  $('#team').innerHTML = TEAM.map(m => {
+    const key = m.short || m.n, leads = AGENDA.filter(x => x[3] && x[3].includes(key.split(' ')[0])).map(x => x[2]);
+    return `<div class="member">${m.photo ? `<img src="${esc(m.photo)}" alt="" width="64" height="64">` : `<span class="avatar" aria-hidden="true">${esc(initials(m.n))}</span>`}<div><b>${esc(m.n)}</b>${m.role ? `<small>${esc(m.role)}</small>` : ''}${leads.length ? `<small class="leads">${leads.map(esc).join(' · ')}</small>` : ''}</div></div>`;
+  }).join('');
+}
 function setView(v){
   ui.view = v;
-  ['cases','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
-  if (v === 'results') renderResults(); if (v === 'tools') renderTools();
+  ['agenda','cases','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
+  if (v === 'results') renderResults(); if (v === 'tools') renderTools(); if (v === 'agenda') renderAgenda();
   window.scrollTo({top:0});
 }
 function softRender(){
@@ -436,7 +453,7 @@ function softRender(){
   if (ui.view === 'results') renderResults();
   if (ui.open && ui.open !== '__new' && !$('#drawer').hidden && !$('#drawer').contains(document.activeElement)) openDrawer(ui.open);
 }
-function renderAll(){ renderIdent(); renderLens(); renderPhases(); renderIntro(); renderCards(); if (ui.view === 'results') renderResults(); if (ui.view === 'tools') renderTools(); }
+function renderAll(){ renderAgenda(); renderIdent(); renderLens(); renderPhases(); renderIntro(); renderCards(); if (ui.view === 'results') renderResults(); if (ui.view === 'tools') renderTools(); }
 
 /* ---------- events ---------- */
 document.addEventListener('click', e => {

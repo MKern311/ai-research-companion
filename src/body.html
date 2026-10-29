@@ -6,7 +6,8 @@
       <span class="title">AI in the Research Process</span>
     </div>
     <nav class="tabs" role="tablist" aria-label="Views">
-      <button role="tab" id="tab-cases" data-view="cases" aria-selected="true">Use cases</button>
+      <button role="tab" id="tab-agenda" data-view="agenda" aria-selected="true">Agenda</button>
+      <button role="tab" id="tab-cases" data-view="cases" aria-selected="false">Use cases</button>
       <button role="tab" id="tab-results" data-view="results" aria-selected="false">Results</button>
       <button role="tab" id="tab-tools" data-view="tools" aria-selected="false">Academic tools</button>
     </nav>
@@ -15,7 +16,39 @@
 </header>
 
 <main class="wrap">
-  <section id="view-cases" aria-labelledby="tab-cases">
+  <section id="view-agenda" aria-labelledby="tab-agenda">
+    <div class="view-head">
+      <div><h1>Generative AI in Your Research</h1>
+        <p>Wednesday 4 November 2026 · 12:45–17:00 · lunch from 12:00</p></div>
+    </div>
+    <div class="ag-grid">
+      <div class="panel"><h2>Agenda</h2><ol class="agenda" id="agenda"></ol></div>
+      <div class="panel"><h2>Your team today</h2><div class="team" id="team"></div></div>
+    </div>
+    <div class="panel steps-ov">
+      <h2>Where does AI actually help me? – how this tool works</h2>
+      <p class="sub">We built this tool for the research-process session: so that the room decides together where AI genuinely helps your research – and where it does not – and everyone leaves with tested starting points.</p>
+      <div class="ov-grid">
+        <div class="ov">
+          <span class="ov-n">Step 1</span><h3>Research value</h3>
+          <p>Your group goes through the phases of the research process and rates use cases: how valuable for your research, what kind of gain, how feasible. Flag what is “not an AI task” or needs a rules check, and add missing use cases.</p>
+          <p class="ov-out">→ Results: the room’s value × feasibility matrix shows which use cases win.</p>
+        </div>
+        <div class="ov">
+          <span class="ov-n">Step 2</span><h3>Try it with Copilot</h3>
+          <p>Each group picks one to three use cases and tests them live with Copilot – with a short guide, a starter prompt and the content pack. Record how it went and what you noticed, then share it with the room.</p>
+          <p class="ov-out">→ Round 1, exchange, round 2: go further or deeper.</p>
+        </div>
+        <div class="ov ov-after">
+          <span class="ov-n">After today</span><h3>Keep using it</h3>
+          <p>The results report, the guides and the overview of academic tools stay available – as a starting point for your own work.</p>
+        </div>
+      </div>
+      <div class="row"><button type="button" class="btn btn-primary" data-view="cases">Start with Step 1 →</button></div>
+    </div>
+  </section>
+
+  <section id="view-cases" aria-labelledby="tab-cases" hidden>
     <div class="view-head">
       <div><h1>Where does AI really help your research?</h1>
         <p>Choose a phase, open a use case and rate it. Step 1 is about the value for your research; in Step 2 your table tries one to three use cases live with Copilot.</p></div>

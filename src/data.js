@@ -250,6 +250,26 @@ const M365 = {
 };
 const M365_TYPE = {copilot:'Copilot connector', word:'Word add-in', teams:'Teams', power:'Power Automate', outlook:'Outlook', files:'OneDrive / SharePoint', edge:'Edge extension', azure:'Azure AI Speech'};
 
+// Agenda (final, as agreed) – titles and times must not change
+const AGENDA = [
+ ['12:45','12:50','Welcome and Setting the Scene','Helen & Ernest'],
+ ['12:50','13:15','So, where do we all stand?','Oliver'],
+ ['13:15','13:30','Wait, where does my data go?','Tom'],
+ ['13:30','14:45','Why did it say that? A common baseline for prompting','Tom'],
+ ['14:45','15:00','Coffee Break',''],
+ ['15:00','16:45','Where does AI actually help me? Let\'s focus on your Research Process','Manuel + Team'],
+ ['16:45','17:00','So, what changes on Monday?','Oliver']
+];
+const AGENDA_DAY = '2026-11-04', TOOL_SLOT = 5;
+// Team: photo = path under assets/team/ once available
+const TEAM = [
+ {n:'Helen', role:'', photo:''},
+ {n:'Ernest', role:'', photo:''},
+ {n:'Oliver', role:'', photo:''},
+ {n:'Tom', role:'', photo:''},
+ {n:'Prof. Dr. Manuel Kern', role:'', photo:'', short:'Manuel'}
+];
+
 const GAINS = [['time','Saves time'],['quality','Better quality'],['new','New possibility'],['learn','I learn']];
 
 const CLUSTERS = [
