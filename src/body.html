@@ -8,6 +8,7 @@
     <nav class="tabs" role="tablist" aria-label="Views">
       <button role="tab" id="tab-agenda" data-view="agenda" aria-selected="true">Agenda</button>
       <button role="tab" id="tab-cases" data-view="cases" aria-selected="false">Use cases</button>
+      <button role="tab" id="tab-data" data-view="data" aria-selected="false">Practice data</button>
       <button role="tab" id="tab-results" data-view="results" aria-selected="false">Results</button>
       <button role="tab" id="tab-tools" data-view="tools" aria-selected="false">Academic tools</button>
     </nav>
@@ -38,6 +39,7 @@
           <span class="ov-n">Step 2</span><h3>Try it with Copilot</h3>
           <p>Each group picks one to three use cases and tests them live with Copilot – with a short guide, a starter prompt and the content pack. Record how it went and what you noticed, then share it with the room.</p>
           <p class="ov-out">→ Round 1, exchange, round 2: go further or deeper.</p>
+          <p><button type="button" class="linkbtn" data-view="data">Open the practice data →</button></p>
         </div>
         <div class="ov ov-after">
           <span class="ov-n">After today</span><h3>Keep using it</h3>
@@ -63,6 +65,28 @@
     <div class="phases" id="phases" role="tablist" aria-label="Research phases"></div>
     <details class="intro" id="intro"></details>
     <div class="cards" id="cards"></div>
+  </section>
+
+  <section id="view-data" aria-labelledby="tab-data" hidden>
+    <div class="view-head">
+      <div><h1>Practice data</h1>
+        <p>Open papers and raw datasets on weather and climate change for Step 2 – use them instead of your own unpublished data. Everything here may be shared and uploaded to Copilot under the licence shown for each item.</p></div>
+    </div>
+    <div class="dl-grid">
+      <div class="panel dl-main" id="dlMain"></div>
+      <div class="panel"><h2>How to use it with Copilot</h2>
+        <ol class="howto">
+          <li>Download the data pack and unzip it – or download single files below.</li>
+          <li>In Copilot Chat, attach a file (paperclip) or point Copilot to it in your OneDrive.</li>
+          <li>First ask Copilot to describe the file: columns, units, missing-value codes. Check this against the file.</li>
+          <li>Then run your use case – and check every number Copilot reports against the data or the paper.</li>
+        </ol>
+        <p class="sub">Very large files may exceed Copilot’s upload limit: use a subset (e.g. one country or one decade).</p>
+      </div>
+    </div>
+    <div class="panel" id="dlPairs"></div>
+    <div class="panel" id="dlPapers"></div>
+    <div class="panel" id="dlData"></div>
   </section>
 
   <section id="view-results" aria-labelledby="tab-results" hidden>

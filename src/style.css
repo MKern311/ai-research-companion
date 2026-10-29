@@ -275,7 +275,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 @media print{
   @page{size:A4;margin:14mm}
   body{background:#fff;font-size:11pt}
-  .top .tabs,.ident,#view-agenda,#view-cases,#view-tools,.drawer,.scrim,.modal,.toast,.no-print,#resPhase,.view-head .seg{display:none !important}
+  .top .tabs,.ident,#view-agenda,#view-cases,#view-data,#view-tools,.drawer,.scrim,.modal,.toast,.no-print,#resPhase,.view-head .seg{display:none !important}
   #view-results{display:block !important}
   .top{position:static;border-bottom:2px solid var(--red)}
   .brand .sep,.brand .title{display:inline-block !important}
@@ -387,3 +387,27 @@ a.msb:hover{background:#0B4A8F;color:#fff}
 .ov h3{font-size:1.05rem;margin:8px 0 6px}
 .ov p{font-size:14.5px;color:var(--ink-2);margin:0 0 8px}
 .ov .ov-out{font-weight:600;color:var(--ink)}
+
+/* Practice data */
+.linkbtn{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--red);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.dl-grid{display:grid;grid-template-columns:3fr 2fr;gap:16px;margin-bottom:16px}
+@media (max-width:900px){.dl-grid{grid-template-columns:1fr}}
+.dl-main{border-left:4px solid var(--red)}
+.dl-btns{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 10px}
+.dl-btns a.btn{text-decoration:none}
+#dlPairs,#dlPapers{margin-bottom:16px}
+.dl-grp{font-size:14.5px;margin:18px 0 4px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
+.dl-item{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;padding:12px 0;border-top:1px solid var(--line-2)}
+.dl-id{font-weight:700;font-size:13px;background:var(--surface);border-radius:6px;text-align:center;padding:4px 0;height:fit-content}
+.dl-cite{margin:0;font-size:14.5px}
+.dl-about{margin:4px 0 0;font-size:14px;color:var(--ink-2)}
+.dl-meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:8px 0 0;font-size:13.5px}
+.dl-meta a{color:var(--ink);font-weight:600}
+.dl-meta a:hover{color:var(--red)}
+.dl-meta span{color:var(--muted)}
+.lic{font-size:11.5px;font-weight:700;border-radius:4px;padding:2px 7px;background:#EEF7E7;color:#2F6410}
+.lic.nc{background:#FFF4D6;color:#7A4B00}
+.dl-excl{margin:6px 0 0;padding-left:20px;font-size:14px;color:var(--ink-2)}
+.dl-meta a,.dl-cite{overflow-wrap:anywhere}
+.dl-grid > *,.ag-grid > *{min-width:0}
+@media (max-width:980px){.tabs{justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs button{white-space:nowrap;flex:none;padding:8px 12px}}

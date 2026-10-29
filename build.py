@@ -8,6 +8,7 @@ guides = {}
 for f in sorted((R / 'src' / 'guides').glob('part_*.json')):
     guides.update(json.loads(f.read_text(encoding='utf-8')))
 body = src('body.html').replace('{{WORDMARK}}', svg)
+pack = json.loads((R / 'materials' / 'pack.json').read_text(encoding='utf-8'))
 html = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -25,6 +26,7 @@ html = f"""<!doctype html>
 <script>
 {src('data.js')}
 const GUIDES = {json.dumps(guides, ensure_ascii=False)};
+const PACK = {json.dumps(pack, ensure_ascii=False)};
 {src('app.js')}
 </script>
 </body>

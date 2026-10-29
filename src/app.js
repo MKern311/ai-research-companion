@@ -185,7 +185,8 @@ function guideHtml(u, open){
     <p><b>Bring:</b> ${esc(g.bring)}</p>
     <ol class="howto">${g.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
     <div class="prompt"><div class="ptools"><b>Starter prompt</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-opencopilot title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(g.prompt)}</pre></div>
-    <p><b>Check:</b> ${esc(g.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}</details>`;
+    <p><b>Check:</b> ${esc(g.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}
+    <p class="sub">No suitable material at hand? <button type="button" class="linkbtn" data-view="data">Use the practice data →</button></p></details>`;
 }
 function testHtml(u){
   const r = myR(u.id), n = myTests().length, full = !r.tt && n >= MAXTEST;
@@ -425,6 +426,33 @@ function showLogin(msg){
 }
 
 /* ---------- render ---------- */
+/* ---------- practice data ---------- */
+const PACK_URL = 'https://github.com/MKern311/ai-research-companion/releases/download/practice-data-' + PACK.snapshot + '/';
+const mb = n => n >= 1e6 ? (n / 1e6).toFixed(n >= 1e7 ? 0 : 1) + ' MB' : Math.max(1, Math.round(n / 1e3)) + ' kB';
+const fileUrl = f => 'materials/' + f.split('/').map(encodeURIComponent).join('/');
+const licChip = l => `<span class="lic${/NC/.test(l) ? ' nc' : ''}">${esc(l)}</span>`;
+function renderData(){
+  const date = new Date(PACK.snapshot + 'T12:00:00Z').toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
+  $('#dlMain').innerHTML = `<h2>Download</h2><p class="sub">${PACK.papers.length} papers and ${PACK.data.length} datasets on ${esc(PACK.topic.toLowerCase())} · snapshot of ${date} · with a README listing licences and how to cite.</p>
+    <div class="dl-btns"><a class="btn btn-primary" href="${PACK_URL}ai-research-practice-data.zip" download>Download the data pack (.zip, ${mb(PACK.zips.data)})</a>
+    <a class="btn btn-quiet" href="${PACK_URL}ai-research-practice-pack.zip" download>Everything incl. papers (.zip, ${mb(PACK.zips.all)})</a>
+    <a class="btn btn-quiet" href="materials/README.md" target="_blank" rel="noopener">README</a></div>
+    <p class="sub">On the workshop Wi-Fi, start with the data pack and download single papers below as you need them.</p>`;
+  $('#dlPairs').innerHTML = `<h2>Ideas for your test</h2><p class="sub">Each idea pairs a paper with its source data, so you can check whether Copilot’s summary and analysis reproduce the published findings.</p>
+    <div class="gtable"><table><thead><tr><th>Paper</th><th>Data</th><th>Test idea</th></tr></thead><tbody>${PACK.pairs.map(([a, b, c]) => `<tr><td>${esc(a)}</td><td>${esc(b)}</td><td>${esc(c)}</td></tr>`).join('')}</tbody></table></div>`;
+  let grp = '';
+  $('#dlPapers').innerHTML = `<h2>Papers</h2><p class="sub">Open access. A1 is the accepted manuscript, C6 a preprint.</p>` + PACK.papers.map(p => {
+    const h = p.group !== grp ? `<h3 class="dl-grp">${esc(grp = p.group)}</h3>` : '';
+    return h + `<div class="dl-item"><span class="dl-id">${p.id}</span><div><p class="dl-cite">${esc(p.cite)}</p><p class="dl-about">${esc(p.about)}${p.version ? ` <i>${esc(p.version)}.</i>` : ''}</p>
+      <p class="dl-meta">${licChip(p.licence)}<a href="${fileUrl(p.file)}" target="_blank" rel="noopener">PDF · ${mb(p.size)}</a><a href="https://doi.org/${p.doi}" target="_blank" rel="noopener">doi.org/${esc(p.doi)}</a>${p.data.length ? `<span>Data: ${p.data.join(' · ')}</span>` : ''}</p></div></div>`;
+  }).join('');
+  $('#dlData').innerHTML = `<h2>Raw data</h2><p class="sub">Original provider files, unchanged. Format quirks are part of the exercise.</p>` + PACK.data.map(d => `<div class="dl-item"><span class="dl-id">${d.id}</span><div>
+      <p class="dl-cite"><b>${esc(d.title)}</b> · ${esc(d.provider)}</p><p class="dl-about">${esc(d.span)} · ${esc(d.format)}. ${esc(d.notes)}</p>
+      <p class="dl-meta">${licChip(d.licence)}${d.files.map(x => `<a href="${fileUrl(x.f)}" download>${esc(x.f.split('/').pop())} · ${mb(x.size)}</a>`).join('')}<a href="${d.source}" target="_blank" rel="noopener">Source</a></p>
+      <p class="dl-about"><small>Cite: ${esc(d.cite)}</small></p></div></div>`).join('') +
+    `<h3 class="dl-grp">Not included</h3><ul class="dl-excl">${PACK.excluded.map(([a, b]) => `<li><b>${esc(a)}</b> – ${esc(b)}</li>`).join('')}</ul>`;
+}
+
 /* ---------- agenda ---------- */
 const initials = n => n.replace(/^(Prof\. )?(Dr\. )?/, '').split(/\s+/).map(w => w[0]).slice(0, 2).join('');
 function londonNow(){
@@ -444,8 +472,8 @@ function renderAgenda(){
 }
 function setView(v){
   ui.view = v;
-  ['agenda','cases','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
-  if (v === 'results') renderResults(); if (v === 'tools') renderTools(); if (v === 'agenda') renderAgenda();
+  ['agenda','cases','data','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
+  if (v === 'results') renderResults(); if (v === 'tools') renderTools(); if (v === 'agenda') renderAgenda(); if (v === 'data') renderData();
   window.scrollTo({top:0});
 }
 function softRender(){
@@ -458,7 +486,7 @@ function renderAll(){ renderAgenda(); renderIdent(); renderLens(); renderPhases(
 /* ---------- events ---------- */
 document.addEventListener('click', e => {
   const t = e.target;
-  const tab = t.closest('[data-view]'); if (tab) { setView(tab.dataset.view); return; }
+  const tab = t.closest('[data-view]'); if (tab) { if (!$('#drawer').hidden) closeDrawer(); setView(tab.dataset.view); return; }
   const ln = t.closest('[data-lens]'); if (ln) { ui.lens = +ln.dataset.lens; renderLens(); renderCards(); if (ui.open && !$('#drawer').hidden) openDrawer(ui.open); return; }
   const ph = t.closest('[data-phase]'); if (ph) { ui.phase = +ph.dataset.phase; renderPhases(); renderIntro(); renderCards(); return; }
   const op = t.closest('[data-open]'); if (op) { const u = findUc(op.dataset.open); if (u) { ui.phase = PHASES.findIndex(p => p.id === u.phase); if (ui.view !== 'cases') setView('cases'); renderPhases(); renderIntro(); openDrawer(u.id); } return; }
