@@ -37,8 +37,7 @@
    "about": "The annual IPCC-style update: emissions, concentrations, forcing, observed and human-induced warming, remaining carbon budget.",
    "data": [
     "D3",
-    "D5",
-    "D10"
+    "D5"
    ],
    "size": 7794895
   },
@@ -159,10 +158,10 @@
  "data": [
   {
    "id": "D1",
-   "title": "Central England Temperature – daily",
+   "title": "Central England Temperature – daily maximum",
    "provider": "Met Office (HadCET v2.1)",
    "dir": "data/D01_hadcet-daily",
-   "span": "Mean from 1772, min/max from 1878",
+   "span": "1878 to today",
    "format": "Text, two columns (date, °C)",
    "licence": "Open Government Licence v3",
    "source": "https://www.metoffice.gov.uk/hadobs/hadcet/",
@@ -171,14 +170,6 @@
    "files": [
     {
      "f": "data/D01_hadcet-daily/maxtemp_daily_totals_2026-10-29.txt",
-     "size": 1032804
-    },
-    {
-     "f": "data/D01_hadcet-daily/meantemp_daily_totals_2026-10-29.txt",
-     "size": 1768408
-    },
-    {
-     "f": "data/D01_hadcet-daily/mintemp_daily_totals_2026-10-29.txt",
      "size": 1032804
     }
    ]
@@ -206,17 +197,13 @@
    "title": "Global temperature anomalies – HadCRUT5",
    "provider": "Met Office / University of East Anglia",
    "dir": "data/D03_hadcrut5",
-   "span": "1850 to today, monthly and annual",
+   "span": "1850 to today, monthly",
    "format": "CSV: time, anomaly, 95 % confidence limits",
    "licence": "Open Government Licence v3",
    "source": "https://www.metoffice.gov.uk/hadobs/hadcrut5/",
    "cite": "Morice et al. (2021).",
    "notes": "Anomalies relative to 1961–1990 – other series use other baselines.",
    "files": [
-    {
-     "f": "data/D03_hadcrut5/HadCRUT.5.1.0.0.analysis.summary_series.global.annual_2026-10-29.csv",
-     "size": 7048
-    },
     {
      "f": "data/D03_hadcrut5/HadCRUT.5.1.0.0.analysis.summary_series.global.monthly_2026-10-29.csv",
      "size": 89575
@@ -261,7 +248,7 @@
   },
   {
    "id": "D6",
-   "title": "Sea-ice extent, Arctic and Antarctic – daily",
+   "title": "Arctic sea-ice extent – daily",
    "provider": "NSIDC Sea Ice Index v4",
    "dir": "data/D06_nsidc-seaice-v4",
    "span": "26 October 1978 to today",
@@ -274,19 +261,15 @@
     {
      "f": "data/D06_nsidc-seaice-v4/N_seaice_extent_daily_v4.0_2026-10-29.csv",
      "size": 1909758
-    },
-    {
-     "f": "data/D06_nsidc-seaice-v4/S_seaice_extent_daily_v4.0_2026-10-29.csv",
-     "size": 1836077
     }
    ]
   },
   {
    "id": "D7",
-   "title": "UK station records – Oxford, Durham, Sutton Bonington",
+   "title": "UK station records – Oxford and Durham",
    "provider": "Met Office historic station data",
    "dir": "data/D07_metoffice-stations",
-   "span": "Oxford from 1853, monthly",
+   "span": "Oxford from 1853, Durham from 1880, monthly",
    "format": "Text, header lines; tmax, tmin, air frost, rain, sun",
    "licence": "Open Government Licence v3",
    "source": "https://www.metoffice.gov.uk/research/climate/maps-and-data/historic-station-data",
@@ -300,32 +283,24 @@
     {
      "f": "data/D07_metoffice-stations/oxforddata_2026-10-29.txt",
      "size": 109141
-    },
-    {
-     "f": "data/D07_metoffice-stations/suttonboningtondata_2026-10-29.txt",
-     "size": 42984
     }
    ]
   },
   {
    "id": "D8",
-   "title": "UK mean temperature and rainfall – national series",
+   "title": "UK rainfall – national series",
    "provider": "Met Office HadUK-Grid",
    "dir": "data/D08_metoffice-uk-series",
-   "span": "Temperature from 1884, rainfall from 1836",
+   "span": "1836 to today",
    "format": "Text, wide (year × months + seasons + annual)",
    "licence": "Open Government Licence v3",
    "source": "https://www.metoffice.gov.uk/research/climate/maps-and-data/uk-and-regional-series",
    "cite": "Met Office HadUK-Grid.",
-   "notes": "Areal averages for the UK; --- marks missing seasonal values.",
+   "notes": "Areal average for the UK; --- marks missing seasonal values.",
    "files": [
     {
      "f": "data/D08_metoffice-uk-series/UK_Rainfall_2026-10-29.txt",
      "size": 25028
-    },
-    {
-     "f": "data/D08_metoffice-uk-series/UK_Tmean_2026-10-29.txt",
-     "size": 18830
     }
    ]
   },
@@ -346,29 +321,6 @@
      "size": 1198595
     }
    ]
-  },
-  {
-   "id": "D10",
-   "title": "CO₂ and greenhouse-gas emissions by country",
-   "provider": "Our World in Data",
-   "dir": "data/D10_owid-co2",
-   "span": "About 1750 to today, ~50,000 rows, ~80 columns",
-   "format": "CSV, long format, with codebook",
-   "licence": "CC BY 4.0",
-   "source": "https://github.com/owid/co2-data",
-   "cite": "Our World in Data, based on the Global Carbon Project (Friedlingstein et al., 2025).",
-   "notes": "Contains aggregates (World, Europe, income groups) that must be filtered out before comparing countries. 20 MB – may be too large to upload to Copilot in one piece.",
-   "large": true,
-   "files": [
-    {
-     "f": "data/D10_owid-co2/owid-co2-codebook_2026-10-29.csv",
-     "size": 24149
-    },
-    {
-     "f": "data/D10_owid-co2/owid-co2-data_2026-10-29.csv",
-     "size": 20199517
-    }
-   ]
   }
  ],
  "pairs": [
@@ -385,12 +337,12 @@
   [
    "C2",
    "D7 · D8",
-   "Clean the three station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study."
+   "Clean the two station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study."
   ],
   [
    "A3",
-   "D3 · D5 · D10",
-   "Let Copilot propose testable hypotheses from the emissions data, then critique them."
+   "D3 · D5",
+   "Regress global temperature on CO₂, let Copilot propose testable hypotheses, then critique them against the paper’s indicators."
   ],
   [
    "B2 · B3",
@@ -422,7 +374,7 @@
   ]
  ],
  "zips": {
-  "data": 9537279,
-  "all": 45744341
+  "data": 798405,
+  "all": 37005467
  }
 }

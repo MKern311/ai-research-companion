@@ -41,36 +41,33 @@ All files may be redistributed under the licence named for each item. Cite the s
 
 ## Raw data
 
-- **D1 Central England Temperature – daily** – Met Office (HadCET v2.1). Mean from 1772, min/max from 1878. Format: Text, two columns (date, °C). *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/hadobs/hadcet/. Cite: Met Office HadCET v2.1; Parker et al. (1992); Legg et al. (2025).  
+- **D1 Central England Temperature – daily maximum** – Met Office (HadCET v2.1). 1878 to today. Format: Text, two columns (date, °C). *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/hadobs/hadcet/. Cite: Met Office HadCET v2.1; Parker et al. (1992); Legg et al. (2025).  
   Actual temperatures, not anomalies. The most recent values are provisional.  
-  Files: `data/D01_hadcet-daily/maxtemp_daily_totals_2026-10-29.txt`, `data/D01_hadcet-daily/meantemp_daily_totals_2026-10-29.txt`, `data/D01_hadcet-daily/mintemp_daily_totals_2026-10-29.txt`
+  Files: `data/D01_hadcet-daily/maxtemp_daily_totals_2026-10-29.txt`
 - **D2 Central England Temperature – monthly** – Met Office (HadCET v2.1). 1659 to today. Format: Text, wide (year × 12 months + annual), header lines. *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/hadobs/hadcet/. Cite: Met Office HadCET v2.1; Manley (1974); Parker et al. (1992).  
   The longest instrumental temperature series; needs reshaping from wide to long.  
   Files: `data/D02_hadcet-monthly/meantemp_monthly_totals_2026-10-29.txt`
-- **D3 Global temperature anomalies – HadCRUT5** – Met Office / University of East Anglia. 1850 to today, monthly and annual. Format: CSV: time, anomaly, 95 % confidence limits. *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/hadobs/hadcrut5/. Cite: Morice et al. (2021).  
+- **D3 Global temperature anomalies – HadCRUT5** – Met Office / University of East Anglia. 1850 to today, monthly. Format: CSV: time, anomaly, 95 % confidence limits. *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/hadobs/hadcrut5/. Cite: Morice et al. (2021).  
   Anomalies relative to 1961–1990 – other series use other baselines.  
-  Files: `data/D03_hadcrut5/HadCRUT.5.1.0.0.analysis.summary_series.global.annual_2026-10-29.csv`, `data/D03_hadcrut5/HadCRUT.5.1.0.0.analysis.summary_series.global.monthly_2026-10-29.csv`
+  Files: `data/D03_hadcrut5/HadCRUT.5.1.0.0.analysis.summary_series.global.monthly_2026-10-29.csv`
 - **D4 Global temperature anomalies – GISTEMP v4** – NASA GISS. 1880 to today. Format: CSV, wide (year × months + seasons), title line to skip. *US government open data*. Source: https://data.giss.nasa.gov/gistemp/. Cite: GISTEMP Team (2026), GISS Surface Temperature Analysis v4; Lenssen et al.  
   Baseline 1951–1980; missing values coded as ***.  
   Files: `data/D04_gistemp/GLB.Ts+dSST_2026-10-29.csv`
 - **D5 Atmospheric CO₂ – Mauna Loa, monthly** – NOAA Global Monitoring Laboratory. March 1958 to today. Format: CSV with # comment header. *US government open data (citation requested)*. Source: https://gml.noaa.gov/ccgg/trends/data.html. Cite: Lan, X., Tans, P. & Thoning, K. W., NOAA GML; Scripps Institution of Oceanography.  
   December 2022 – July 2023 measured on Maunakea after the Mauna Loa eruption; negative values are placeholders.  
   Files: `data/D05_noaa-co2-maunaloa/co2_mm_mlo_2026-10-29.csv`
-- **D6 Sea-ice extent, Arctic and Antarctic – daily** – NSIDC Sea Ice Index v4. 26 October 1978 to today. Format: CSV with a units row under the header. *Free use with citation*. Source: https://nsidc.org/data/g02135. Cite: Fetterer, F., et al., Sea Ice Index, Version 4 (G02135), NSIDC.  
+- **D6 Arctic sea-ice extent – daily** – NSIDC Sea Ice Index v4. 26 October 1978 to today. Format: CSV with a units row under the header. *Free use with citation*. Source: https://nsidc.org/data/g02135. Cite: Fetterer, F., et al., Sea Ice Index, Version 4 (G02135), NSIDC.  
   Every other day until mid-1987 and a gap in 1987–88 – good for irregular time series.  
-  Files: `data/D06_nsidc-seaice-v4/N_seaice_extent_daily_v4.0_2026-10-29.csv`, `data/D06_nsidc-seaice-v4/S_seaice_extent_daily_v4.0_2026-10-29.csv`
-- **D7 UK station records – Oxford, Durham, Sutton Bonington** – Met Office historic station data. Oxford from 1853, monthly. Format: Text, header lines; tmax, tmin, air frost, rain, sun. *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/research/climate/maps-and-data/historic-station-data. Cite: Met Office historic station data.  
+  Files: `data/D06_nsidc-seaice-v4/N_seaice_extent_daily_v4.0_2026-10-29.csv`
+- **D7 UK station records – Oxford and Durham** – Met Office historic station data. Oxford from 1853, Durham from 1880, monthly. Format: Text, header lines; tmax, tmin, air frost, rain, sun. *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/research/climate/maps-and-data/historic-station-data. Cite: Met Office historic station data.  
   Codes to clean: --- missing, * estimated, # sensor type, “Provisional” rows. The best file for a data-cleaning test.  
-  Files: `data/D07_metoffice-stations/durhamdata_2026-10-29.txt`, `data/D07_metoffice-stations/oxforddata_2026-10-29.txt`, `data/D07_metoffice-stations/suttonboningtondata_2026-10-29.txt`
-- **D8 UK mean temperature and rainfall – national series** – Met Office HadUK-Grid. Temperature from 1884, rainfall from 1836. Format: Text, wide (year × months + seasons + annual). *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/research/climate/maps-and-data/uk-and-regional-series. Cite: Met Office HadUK-Grid.  
-  Areal averages for the UK; --- marks missing seasonal values.  
-  Files: `data/D08_metoffice-uk-series/UK_Rainfall_2026-10-29.txt`, `data/D08_metoffice-uk-series/UK_Tmean_2026-10-29.txt`
+  Files: `data/D07_metoffice-stations/durhamdata_2026-10-29.txt`, `data/D07_metoffice-stations/oxforddata_2026-10-29.txt`
+- **D8 UK rainfall – national series** – Met Office HadUK-Grid. 1836 to today. Format: Text, wide (year × months + seasons + annual). *Open Government Licence v3*. Source: https://www.metoffice.gov.uk/research/climate/maps-and-data/uk-and-regional-series. Cite: Met Office HadUK-Grid.  
+  Areal average for the UK; --- marks missing seasonal values.  
+  Files: `data/D08_metoffice-uk-series/UK_Rainfall_2026-10-29.txt`
 - **D9 Global air temperature – daily (ERA5)** – Copernicus Climate Change Service / ECMWF (Climate Pulse). 1940 to today. Format: CSV with # description header. *Copernicus licence (free, with attribution)*. Source: https://pulse.climate.copernicus.eu/. Cite: C3S/ECMWF, ERA5 via Climate Pulse.  
   Anomalies relative to 1991–2020; the last weeks are preliminary (ERA5T).  
   Files: `data/D09_copernicus-climatepulse/era5_daily_series_2t_global_2026-10-29.csv`
-- **D10 CO₂ and greenhouse-gas emissions by country** – Our World in Data. About 1750 to today, ~50,000 rows, ~80 columns. Format: CSV, long format, with codebook. *CC BY 4.0*. Source: https://github.com/owid/co2-data. Cite: Our World in Data, based on the Global Carbon Project (Friedlingstein et al., 2025).  
-  Contains aggregates (World, Europe, income groups) that must be filtered out before comparing countries. 20 MB – may be too large to upload to Copilot in one piece.  
-  Files: `data/D10_owid-co2/owid-co2-codebook_2026-10-29.csv`, `data/D10_owid-co2/owid-co2-data_2026-10-29.csv`
 
 ## Not included
 
@@ -85,8 +82,8 @@ All files may be redistributed under the licence named for each item. Cite the s
 |---|---|---|
 | B1 | D1 · D2 | Ask Copilot to explain the file layout and write code that reshapes the monthly series to long format; check the 2022 values by hand. |
 | A1 | D3 · D4 · D9 | Compare the global records on a common baseline; check Copilot’s explanation of the differences against the paper. |
-| C2 | D7 · D8 | Clean the three station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study. |
-| A3 | D3 · D5 · D10 | Let Copilot propose testable hypotheses from the emissions data, then critique them. |
+| C2 | D7 · D8 | Clean the two station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study. |
+| A3 | D3 · D5 | Regress global temperature on CO₂, let Copilot propose testable hypotheses, then critique them against the paper’s indicators. |
 | B2 · B3 | D1 | Count hot days in the Central England maximum series and compare Copilot’s reading of “return period” with the paper. |
 | B2 · C3 · C4 · C5 | – | Ask Copilot for a comparison table of the attribution studies, then check every cell against the PDFs. |
 
