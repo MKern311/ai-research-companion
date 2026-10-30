@@ -263,11 +263,10 @@ const AGENDA = [
 const AGENDA_DAY = '2026-11-04', TOOL_SLOT = 5;
 // Team: photo = path under assets/team/ once available
 const TEAM = [
- {n:'Helen', role:'', photo:''},
- {n:'Ernest', role:'', photo:''},
  {n:'Oliver', role:'', photo:''},
  {n:'Tom', role:'', photo:''},
- {n:'Prof. Dr. Manuel Kern', role:'', photo:'', short:'Manuel'}
+ {n:'Thomas', role:'', photo:''},
+ {n:'Manuel', role:'', photo:''}
 ];
 
 const GAINS = [['time','Saves time'],['quality','Better quality'],['new','New possibility'],['learn','I learn']];
