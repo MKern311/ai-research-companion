@@ -96,7 +96,8 @@
       "licence": "CC BY 4.0",
       "about": "Extreme daily precipitation becomes more frequent with warming – the rarer the event, the larger the increase.",
       "data": [
-        "D7"
+        "D7",
+        "D8"
       ]
     },
     {
@@ -106,7 +107,7 @@
       "cite": "Christidis, N., Mitchell, D., & Stott, P. A. (2023). Rapidly increasing likelihood of exceeding 50 °C in parts of the Mediterranean and the Middle East due to human influence. npj Climate and Atmospheric Science, 6, 45.",
       "doi": "10.1038/s41612-023-00377-4",
       "licence": "CC BY 4.0",
-      "about": "Transfers the UK 40 °C method (B3) to 50 °C days in the Mediterranean and Middle East.",
+      "about": "Transfers the UK 40 °C method (B2) to 50 °C days in the Mediterranean and Middle East.",
       "data": []
     },
     {
@@ -260,14 +261,14 @@
       "Ask Copilot to explain the file layout and write code that reshapes the monthly series to long format; check the 2022 values by hand."
     ],
     [
-      "A1",
-      "D3 · D4 · D9",
-      "Compare the global records on a common baseline; check Copilot’s explanation of the differences against the paper."
+      "C6",
+      "D2",
+      "Ask Copilot to look for changepoints in the Central England series and compare its method and the years it finds with the paper."
     ],
     [
-      "C2",
-      "D7 · D8",
-      "Clean the two station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study."
+      "A1 · A2",
+      "D3 · D4 · D9",
+      "Compare the global records on a common baseline; check Copilot’s explanation of the differences against the paper."
     ],
     [
       "A3",
@@ -278,6 +279,21 @@
       "B2 · B3",
       "D1",
       "Count hot days in the Central England maximum series and compare Copilot’s reading of “return period” with the paper."
+    ],
+    [
+      "C1",
+      "D1",
+      "Let Copilot apply a heatwave definition from the paper to the maximum series; check whether it used that definition or invented its own."
+    ],
+    [
+      "C2",
+      "D7 · D8",
+      "Clean the two station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study."
+    ],
+    [
+      "–",
+      "D6",
+      "Ask Copilot to turn the irregular early sea-ice record into monthly means and explain how it handles the 1987–88 gap."
     ],
     [
       "B2 · C3 · C4 · C5",

@@ -47,19 +47,6 @@ const PHASES = [
   ],
   limits:['Synthetic “respondents” do not validly represent real populations.','Methodological responsibility and disciplinary conventions rest with you and your supervisory team.','Ethics committees expect study-specific reflection – generic AI text on consent or anonymisation can be wrong.'],
   disc:['Where could AI measurably improve the quality of your instruments?','What role should synthetic data be allowed to play in your research?']},
- {id:'foerderung', name:'Funding & Applications', short:'Funding',
-  q:'How do you fund your next step?',
-  goal:'Find suitable fellowships, small grants or travel funding and write a compelling, compliant application.',
-  tasks:['Identify calls (fellowships, small grants, travel funds)','Write the application','Budget and work plan','Approval from supervisor and graduate school'],
-  uc:[
-   U('Funding matching','Filter calls by topic, funding level, deadlines and eligibility, and match them to your profile.',['recherche','agentisch'],2,1,'Delegate'),
-   U('Application structure aligned to criteria','Align structure and argument directly with the call’s assessment criteria.',['generierung','synthese'],3,2,'Co-create'),
-   U('Reviewer simulation','Have your draft critically assessed from a reviewer’s perspective: weaknesses, gaps, ambiguities.',['analyse'],3,1,'Assist'),
-   U('Work plan & timeline','Derive work packages, milestones and dependencies from the project text and present them as a draft Gantt chart.',['generierung'],2,1,'Co-create'),
-   U('Partner search','Identify potential collaborators from publication and project data.',['recherche','analyse'],2,2,'Assist')
-  ],
-  limits:['Funders regulate AI use: applicants remain fully responsible, and reviewers are generally not permitted to use generative AI – check the funder’s policy.','Do not enter confidential application content into tools without data protection.','Generic text stands out in review – sharpen your profile rather than smoothing it.'],
-  disc:['Which rules would you need before using AI for an application?','How do you keep an application sounding like you?']},
  {id:'erhebung', name:'Data Collection', short:'Data Collection',
   q:'How do we obtain the data we need – efficiently and lawfully?',
   goal:'Collect, capture and document high-quality data.',
@@ -261,6 +248,11 @@ const AGENDA = [
  ['16:45','17:00','So, what changes on Monday?','Oliver']
 ];
 const AGENDA_DAY = '2026-11-04', TOOL_SLOT = 5;
+
+/* Slides of Tom's sessions: assets/slides/tom/sNN.webp, exported from PowerPoint (hidden slides left out) */
+const SLIDES = {title:'Where does my data go? · Effective prompting', who:'Tom', n:31, dir:'assets/slides/tom/', pdf:'assets/slides/tom/tom-slides.pdf', pdfSize:3006040,
+ start:{2:1, 3:11},
+ prompts:[["The GCSE formula", "Act as a [Context].\nHelp me [Goal].\nUse [Source].\nGive me the result as [Expectations]."], ["Let Copilot remind you", "Remember that whenever my prompt is vague, remind me to use the GCSE framework: Goal, Context, Sources, Expectations."], ["Working with two open-access papers", "Summarise this paper’s methods and findings in 5 bullets.\nCompare the methods in these two papers. Cite the relevant sections.\nList the limitations the authors report. Flag any missing information."], ["Full example: from a broad interest to research directions", "I am at the early stage of developing a postgraduate research project. Help me turn my broad interest in how generative AI is changing the way university students learn into a small number of credible research directions that I could investigate.\n\nI am interested in the relationship between generative AI, student learning behaviours and independent learning in higher education. I haven't yet decided on a precise research question, methodology or theoretical framework. I want to explore the topic before narrowing it down, rather than jumping immediately to a finished research question. Treat me as the researcher. Your role is to help me explore and challenge my thinking, not to make the research decisions for me.\n\nFor this initial exploration, use the information I have provided above and your general knowledge to help me map the topic. Clearly distinguish between:\n1. ideas or hypotheses that need testing,\n2. established concepts or bodies of research that may be relevant, and\n3. claims for which I should seek supporting academic evidence.\nDo not invent citations or references. Where literature would be useful, suggest search concepts and keywords I could investigate through my university's academic databases rather than presenting unverified references as evidence.\n\nStructure your response in five parts:\n1. Identify 5 possible research directions within this broad topic.\n2. For each, explain why it could be interesting to investigate and what remains uncertain.\n3. Suggest 2 possible research questions for each direction.\n4. Identify useful keywords and search terms that could help me begin exploring the academic literature.\n5. Finish by asking me 5 challenging questions, one at a time, to help me decide which direction best fits my interests, research context and intended contribution.\nDo not select the “best” topic for me. Help me make that judgement myself."]]};
 // Team: photo = path under assets/team/ once available
 const TEAM = [
  {n:'Oliver', role:'', photo:''},
@@ -276,7 +268,7 @@ const CLUSTERS = [
  {n:'Data collection', ph:['design','erhebung']},
  {n:'Analysis', ph:['analyse']},
  {n:'Writing and publishing', ph:['publikation','transfer']},
- {n:'Planning and admin', ph:['foerderung','querschnitt']}
+ {n:'PhD toolkit', ph:['querschnitt']}
 ];
 
 const SOURCES = [
@@ -289,4 +281,4 @@ const SOURCES = [
  ['Microsoft Learn – Federated Copilot connectors','https://learn.microsoft.com/en-us/microsoftsearch/federated-connectors-overview'],
  ['Microsoft Learn – Purchase and manage agents in Copilot Chat','https://learn.microsoft.com/en-us/copilot/manage-agents-copilot-chat']
 ];
-const VERSION = 'v5 · 28 October 2026';
+const VERSION = 'v5 · 30 October 2026';

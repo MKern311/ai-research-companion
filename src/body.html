@@ -48,6 +48,7 @@
       </div>
       <div class="row"><button type="button" class="btn btn-primary" data-view="cases">Start with Step 1 →</button></div>
     </div>
+    <div class="panel slides-panel" id="slidesPanel"></div>
   </section>
 
   <section id="view-cases" aria-labelledby="tab-cases" hidden>
@@ -76,12 +77,13 @@
       <div class="panel dl-main" id="dlMain"></div>
       <div class="panel"><h2>How to use it with Copilot</h2>
         <ol class="howto">
-          <li>Download the data pack and unzip it – or download single files below.</li>
-          <li>In Copilot Chat, attach a file (paperclip) or point Copilot to it in your OneDrive.</li>
-          <li>First ask Copilot to describe the file: columns, units, missing-value codes. Check this against the file.</li>
-          <li>Then run your use case – and check every number Copilot reports against the data or the paper.</li>
+          <li>Download papers and data and unzip the pack – or download single files below.</li>
+          <li>Pick a test idea below, or any paper or data file that fits your use case.</li>
+          <li>In Copilot Chat, upload the paper or data file you need for your prompt.</li>
+          <li>For a data file, first ask Copilot to describe it: columns, units, missing-value codes. Check this against the file.</li>
+          <li>Then run your use case – and check every number, quote and citation against the data or the PDF.</li>
         </ol>
-        <p class="sub">Very large files may exceed Copilot’s upload limit: use a subset (e.g. one country or one decade).</p>
+        <p class="sub">Copilot reads a PDF as text, so tables, figures and equations are easily misread – check them in the paper itself. If Copilot does not accept a .txt file, rename it to .csv or paste its content into the chat.</p>
       </div>
     </div>
     <div class="panel" id="dlPairs"></div>
@@ -176,5 +178,18 @@
 <div class="scrim" id="scrim" hidden></div>
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden></aside>
 <div class="modal" id="modal" hidden></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="vwTitle" hidden>
+  <div class="vw-bar">
+    <h2 id="vwTitle"></h2><span class="vw-no" id="vwNo" aria-live="polite"></span>
+    <a class="btn btn-quiet btn-sm" id="vwPdf" download>PDF</a>
+    <button class="icon-btn" type="button" id="vwFull" aria-label="Full screen" title="Full screen (F)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <button class="icon-btn" type="button" id="vwClose" aria-label="Close slides">✕</button>
+  </div>
+  <div class="vw-stage">
+    <button class="vw-nav" type="button" id="vwPrev" aria-label="Previous slide"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <img id="vwImg" alt="" draggable="false">
+    <button class="vw-nav" type="button" id="vwNext" aria-label="Next slide"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+</div>
 <div class="modal login" id="login" hidden></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>

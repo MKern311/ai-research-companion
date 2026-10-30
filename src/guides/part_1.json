@@ -201,28 +201,5 @@
     ],
     "prompt": "I am preparing a [ethics application or data management plan] for a study on [topic]. The template headings are: [headings]. My study in brief: [summary]. For each heading, give: what reviewers usually expect, the questions I must answer myself, and a short skeleton with [placeholders]. Do not write study-specific reasoning on consent, risks or anonymisation; leave clear prompts for me instead. Do not state institutional rules or legal requirements unless you are sure; if you are not sure, say so.",
     "check": "Each section matches the official template guidance, no institutional rule or legal claim (for example on UK GDPR) appears that you cannot confirm, and the consent and risk reasoning is left for you to write."
-  },
-  "foerderung-0": {
-    "bring": "A three-sentence summary of your research profile and career stage, and one or two funders you know (for example UKRI, British Academy, Wellcome, Leverhulme).",
-    "steps": [
-      "Paste your profile and career stage.",
-      "Ask for matching open or recurring calls with links to funder pages.",
-      "Ask for a table with amount, deadline, eligibility and fit.",
-      "Open each link and confirm deadline and eligibility on the funder's site."
-    ],
-    "prompt": "I am a [career stage] researcher in [discipline] at a UK university. My research profile: [three sentences]. Search for open or recurring funding calls that fit, starting with [funders]. Show a table: funder, scheme, typical amount, next deadline, key eligibility rules, link to the funder's page, one sentence on fit. Only include calls with a link to the funder's own page. Flag any deadline that may be out of date. If you are not sure, say so.",
-    "check": "Every link opens the funder's own page, and the deadline and eligibility shown there match the table.",
-    "limit": "Copilot searches the open web, so it may miss calls or show outdated deadlines; it does not replace your research office or a funding database."
-  },
-  "foerderung-1": {
-    "bring": "The public assessment criteria from a funding call page and your own short project outline, nothing written with co-authors without their consent.",
-    "steps": [
-      "Paste the call's assessment criteria and your project outline.",
-      "Ask Copilot to map each criterion to where your outline addresses it.",
-      "Ask for gaps and a proposed section structure following the criteria.",
-      "Check every criterion from the call appears in the table."
-    ],
-    "prompt": "I am preparing an application to [funder and scheme]. The call's assessment criteria are: [paste criteria, with weightings if given]. My project outline is: [outline]. Show a table: criterion (quoted exactly from the call), where my outline addresses it, what is missing or weak, one concrete suggestion. Then propose a section structure for the application that follows the criteria, with a rough word allocation per section based on the weightings. Do not write the content for me and do not add criteria that are not in the call.",
-    "check": "Every criterion from the call page appears in the table word for word, none is invented, and the gaps named match what you would expect a reviewer to notice."
   }
 }

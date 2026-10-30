@@ -272,10 +272,30 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 #resPhase{margin-bottom:14px}
 
 /* PDF export of the results view (browser print → Save as PDF) */
+/* ---------- slides ---------- */
+.slides-panel h3{font-size:15px;margin:18px 0 4px}
+.sl-head{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:20px;align-items:center}
+.sl-head .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sl-thumb{padding:0;border-radius:8px;overflow:hidden;box-shadow:0 0 0 1px var(--line);line-height:0}
+.sl-thumb img{width:100%;height:auto;display:block}
+.sl-thumb:hover{box-shadow:0 0 0 2px var(--ink-2)}
+@media (max-width:640px){.sl-head{grid-template-columns:minmax(0,1fr)}}
+.viewer{position:fixed;inset:0;z-index:70;background:#141414;display:flex;flex-direction:column}
+.vw-bar{display:flex;align-items:center;gap:10px;padding:10px 16px;color:#fff}
+.vw-bar h2{flex:1;min-width:0;font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vw-no{font-size:14px;font-variant-numeric:tabular-nums;color:#E0E0E0;white-space:nowrap}
+.vw-stage{flex:1;min-height:0;display:grid;grid-template-columns:52px minmax(0,1fr) 52px;grid-template-rows:minmax(0,1fr);align-items:center;gap:8px;padding:0 8px 16px}
+.vw-stage img{width:100%;height:100%;object-fit:contain;cursor:pointer;user-select:none;-webkit-user-select:none}
+.vw-nav{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.14)}
+.vw-nav:hover:not(:disabled){background:rgba(255,255,255,.26)}
+.vw-nav:disabled{opacity:.3;cursor:default}
+.viewer :focus-visible{outline-color:#8AB4F8}
+@media (max-width:640px){.vw-bar h2{display:none}.vw-bar .vw-no{flex:1}.vw-stage{position:relative;grid-template-columns:minmax(0,1fr);padding:0 0 12px}.vw-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:1;width:40px;height:40px;background:rgba(0,0,0,.45)}#vwPrev{left:6px}#vwNext{right:6px}}
+
 @media print{
   @page{size:A4;margin:14mm}
   body{background:#fff;font-size:11pt}
-  .top .tabs,.ident,#view-agenda,#view-cases,#view-data,#view-tools,.drawer,.scrim,.modal,.toast,.no-print,#resPhase,.view-head .seg{display:none !important}
+  .top .tabs,.ident,#view-agenda,#view-cases,#view-data,#view-tools,.drawer,.scrim,.modal,.viewer,.toast,.no-print,#resPhase,.view-head .seg{display:none !important}
   #view-results{display:block !important}
   .top{position:static;border-bottom:2px solid var(--red)}
   .brand .sep,.brand .title{display:inline-block !important}

@@ -433,11 +433,11 @@ const fileUrl = f => 'materials/' + f.split('/').map(encodeURIComponent).join('/
 const licChip = l => `<span class="lic${/NC/.test(l) ? ' nc' : ''}">${esc(l)}</span>`;
 function renderData(){
   const date = new Date(PACK.snapshot + 'T12:00:00Z').toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
-  $('#dlMain').innerHTML = `<h2>Download</h2><p class="sub">${PACK.papers.length} papers and ${PACK.data.length} datasets on ${esc(PACK.topic.toLowerCase())} · snapshot of ${date} · with a README listing licences and how to cite.</p>
-    <div class="dl-btns"><a class="btn btn-primary" href="${PACK_URL}ai-research-practice-data.zip" download>Download the data pack (.zip, ${mb(PACK.zips.data)})</a>
-    <a class="btn btn-quiet" href="${PACK_URL}ai-research-practice-pack.zip" download>Everything incl. papers (.zip, ${mb(PACK.zips.all)})</a>
+  $('#dlMain').innerHTML = `<h2>Download</h2><p class="sub">${PACK.papers.length} papers and ${PACK.data.reduce((n, d) => n + d.files.length, 0)} data files on ${esc(PACK.topic.toLowerCase())} · snapshot of ${date} · with a README listing licences and how to cite.</p>
+    <div class="dl-btns"><a class="btn btn-primary" href="${PACK_URL}ai-research-practice-pack.zip" download>Download papers and data (.zip, ${mb(PACK.zips.all)})</a>
+    <a class="btn btn-quiet" href="${PACK_URL}ai-research-practice-data.zip" download>Data only (.zip, ${mb(PACK.zips.data)})</a>
     <a class="btn btn-quiet" href="materials/README.md" target="_blank" rel="noopener">README</a></div>
-    <p class="sub">On the workshop Wi-Fi, start with the data pack and download single papers below as you need them.</p>`;
+    <p class="sub">If the download is slow on the workshop Wi-Fi, take the data-only pack and download single papers below as you need them.</p>`;
   $('#dlPairs').innerHTML = `<h2>Ideas for your test</h2><p class="sub">Each idea pairs a paper with its source data, so you can check whether Copilot’s summary and analysis reproduce the published findings.</p>
     <div class="gtable"><table><thead><tr><th>Paper</th><th>Data</th><th>Test idea</th></tr></thead><tbody>${PACK.pairs.map(([a, b, c]) => `<tr><td>${esc(a)}</td><td>${esc(b)}</td><td>${esc(c)}</td></tr>`).join('')}</tbody></table></div>`;
   let grp = '';
@@ -462,13 +462,46 @@ function renderAgenda(){
   const now = londonNow(), mins = t => +t.slice(0, 2) * 60 + +t.slice(3);
   $('#agenda').innerHTML = AGENDA.map(([a, b, title, who], i) => {
     const live = now.day === AGENDA_DAY && now.min >= mins(a) && now.min < mins(b);
-    return `<li class="${who ? '' : 'brk'}${live ? ' live' : ''}"><span class="t">${a}–${b}</span><span><b>${esc(title)}</b>${who ? `<small>${esc(who)}</small>` : ''}${i === TOOL_SLOT ? '<small class="here">This tool · Steps 1 and 2 below</small>' : ''}</span>${live ? '<span class="now">Now</span>' : ''}</li>`;
+    return `<li class="${who ? '' : 'brk'}${live ? ' live' : ''}"><span class="t">${a}–${b}</span><span><b>${esc(title)}</b>${who ? `<small>${esc(who)}</small>` : ''}${i === TOOL_SLOT ? '<small class="here">This tool · Steps 1 and 2 below</small>' : ''}${SLIDES.start[i] ? `<small><button type="button" class="linkbtn" data-slides="${SLIDES.start[i]}">View slides</button></small>` : ''}</span>${live ? '<span class="now">Now</span>' : ''}</li>`;
   }).join('');
   $('#team').innerHTML = TEAM.map(m => {
     const leads = AGENDA.filter(x => x[3] && x[3].includes(m.n)).map(x => x[2]);
     return `<div class="member">${m.photo ? `<img src="${esc(m.photo)}" alt="" width="64" height="64">` : `<span class="avatar" aria-hidden="true">${esc(m.n[0])}</span>`}<div><b>${esc(m.n)}</b>${m.role ? `<small>${esc(m.role)}</small>` : ''}${leads.length ? `<small class="leads">${leads.map(esc).join(' · ')}</small>` : ''}</div></div>`;
   }).join('');
+  $('#slidesPanel').innerHTML = `<div class="sl-head"><button type="button" class="sl-thumb" data-slides="1" aria-label="Open the slides"><img src="${slideSrc(1)}" alt="" width="320" height="180" loading="lazy"></button>
+    <div><h2>Slides · ${esc(SLIDES.title)}</h2><p class="sub">${SLIDES.n} slides from ${esc(SLIDES.who)}’s sessions. Move through them with the arrow keys or by swiping.</p>
+    <div class="row"><button type="button" class="btn btn-primary btn-sm" data-slides="1">View slides</button><a class="btn btn-quiet btn-sm" href="${SLIDES.pdf}" download>PDF · ${mb(SLIDES.pdfSize)}</a></div></div></div>
+    <h3>Prompts from the session</h3>` + SLIDES.prompts.map(([t, p], i) => `<div class="prompt"><div class="ptools"><b>${esc(t)}</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-slcopy="${i}">Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-slcopy="${i}" title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(p)}</pre></div>`).join('');
 }
+
+/* ---------- slides viewer ---------- */
+const slideSrc = i => SLIDES.dir + 's' + String(i).padStart(2, '0') + '.webp';
+let slideAt = 1, slideFrom = null, touchX = null;
+function showSlide(i){
+  slideAt = Math.min(SLIDES.n, Math.max(1, i));
+  const img = $('#vwImg'); img.src = slideSrc(slideAt); img.alt = `Slide ${slideAt} of ${SLIDES.n}`;
+  $('#vwNo').textContent = `${slideAt} / ${SLIDES.n}`;
+  $('#vwPrev').disabled = slideAt === 1; $('#vwNext').disabled = slideAt === SLIDES.n;
+  [slideAt - 1, slideAt + 1].forEach(k => { if (k >= 1 && k <= SLIDES.n) new Image().src = slideSrc(k); });
+}
+function openSlides(i){
+  slideFrom = document.activeElement; $('#vwTitle').textContent = SLIDES.title; $('#vwPdf').href = SLIDES.pdf;
+  $('#vwFull').hidden = !document.fullscreenEnabled;
+  $('#viewer').hidden = false; document.body.style.overflow = 'hidden'; showSlide(i); $('#vwClose').focus();
+}
+function closeSlides(){
+  if (document.fullscreenElement) document.exitFullscreen();
+  $('#viewer').hidden = true; document.body.style.overflow = ''; if (slideFrom) slideFrom.focus();
+}
+const toggleFull = () => document.fullscreenElement ? document.exitFullscreen() : $('#viewer').requestFullscreen().catch(() => {});
+$('#vwPrev').onclick = () => showSlide(slideAt - 1);
+$('#vwNext').onclick = () => showSlide(slideAt + 1);
+$('#vwClose').onclick = closeSlides;
+$('#vwFull').onclick = toggleFull;
+$('#vwImg').onclick = e => { const r = e.target.getBoundingClientRect(); showSlide(slideAt + (e.clientX - r.left < r.width / 3 ? -1 : 1)); };
+$('#viewer').addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
+$('#viewer').addEventListener('touchend', e => { if (touchX === null) return; const dx = e.changedTouches[0].clientX - touchX; touchX = null; if (Math.abs(dx) > 40) showSlide(slideAt + (dx < 0 ? 1 : -1)); });
+
 function setView(v){
   ui.view = v;
   ['agenda','cases','data','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
@@ -503,6 +536,8 @@ document.addEventListener('click', e => {
   if (t.closest('#menuBtn')) { openMenu(); return; }
   if (t.closest('[data-mclose]') || t === $('#modal')) { closeMenu(); return; }
   if (t.closest('[data-opencopilot]') && ui.open) { const g = (typeof GUIDES !== 'undefined' && GUIDES[ui.open]) || GENERIC; copyText(g.prompt, 'Prompt', 'Prompt copied – paste it into Copilot'); return; }
+  const slb = t.closest('[data-slides]'); if (slb) { openSlides(+slb.dataset.slides); return; }
+  const slc = t.closest('[data-slcopy]'); if (slc) { const p = SLIDES.prompts[+slc.dataset.slcopy][1]; if (slc.tagName === 'A') copyText(p, 'Prompt', 'Prompt copied – paste it into Copilot'); else { e.preventDefault(); copyText(p, 'Prompt'); } return; }
   if (t.closest('[data-copyprompt]') && ui.open) { const g = (typeof GUIDES !== 'undefined' && GUIDES[ui.open]) || GENERIC; copyText(g.prompt, 'Prompt'); return; }
   if (t.closest('#repCopy')) { copyText(reportMarkdown(), 'Report'); return; }
   if (t.closest('#repDl')) { download(`${stamp()}_ai-research-process_report.md`, reportMarkdown(), 'text/markdown'); return; }
@@ -555,6 +590,14 @@ document.addEventListener('submit', async e => {
   }
 });
 document.addEventListener('keydown', e => {
+  if (!$('#viewer').hidden) {
+    const k = e.key, go = {ArrowRight:1, ArrowDown:1, PageDown:1, ' ':1, ArrowLeft:-1, ArrowUp:-1, PageUp:-1}[k];
+    if (go) { e.preventDefault(); showSlide(slideAt + go); } else if (k === 'Home') showSlide(1); else if (k === 'End') showSlide(SLIDES.n);
+    else if (k === 'f' || k === 'F') toggleFull(); else if (k === 'Escape') closeSlides();
+    else if (k === 'Tab') { const f = [...$('#viewer').querySelectorAll('a,button:not([disabled]):not([hidden])')], a = f.indexOf(document.activeElement);
+      if (e.shiftKey && a <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && a === f.length - 1) { e.preventDefault(); f[0].focus(); } }
+    return;
+  }
   if (e.key === 'Escape') { if (!$('#modal').hidden) closeMenu(); else if (!$('#drawer').hidden) closeDrawer(); }
   if (e.key === 'Enter' && e.target.matches && e.target.matches('li[data-open], tr[data-group]')) e.target.click();
 });
