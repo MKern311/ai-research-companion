@@ -464,10 +464,7 @@ function renderAgenda(){
     const live = now.day === AGENDA_DAY && now.min >= mins(a) && now.min < mins(b);
     return `<li class="${who ? '' : 'brk'}${live ? ' live' : ''}"><span class="t">${a}–${b}</span><span><b>${esc(title)}</b>${who ? `<small>${esc(who)}</small>` : ''}${i === TOOL_SLOT ? '<small class="here">This tool · Steps 1 and 2 below</small>' : ''}${SLIDES.start[i] ? `<small><button type="button" class="linkbtn" data-slides="${SLIDES.start[i]}">View slides</button></small>` : ''}</span>${live ? '<span class="now">Now</span>' : ''}</li>`;
   }).join('');
-  $('#team').innerHTML = TEAM.map(m => {
-    const leads = AGENDA.filter(x => x[3] && x[3].includes(m.n)).map(x => x[2]);
-    return `<div class="member">${m.photo ? `<img src="${esc(m.photo)}" alt="" width="64" height="64">` : `<span class="avatar" aria-hidden="true">${esc(m.n[0])}</span>`}<div><b>${esc(m.n)}</b>${m.role ? `<small>${esc(m.role)}</small>` : ''}${leads.length ? `<small class="leads">${leads.map(esc).join(' · ')}</small>` : ''}</div></div>`;
-  }).join('');
+  $('#team').innerHTML = TEAM.map(m => `<div class="member">${m.photo ? `<img src="${esc(m.photo)}" alt="" width="64" height="64">` : `<span class="avatar" aria-hidden="true">${esc(m.n[0])}</span>`}<b>${esc(m.n)}</b></div>`).join('');
   $('#slidesPanel').innerHTML = `<div class="sl-head"><button type="button" class="sl-thumb" data-slides="1" aria-label="Open the slides"><img src="${slideSrc(1)}" alt="" width="320" height="180" loading="lazy"></button>
     <div><h2>Slides · ${esc(SLIDES.title)}</h2><p class="sub">${SLIDES.n} slides from ${esc(SLIDES.who)}’s sessions. Move through them with the arrow keys or by swiping.</p>
     <div class="row"><button type="button" class="btn btn-primary btn-sm" data-slides="1">View slides</button><a class="btn btn-quiet btn-sm" href="${SLIDES.pdf}" download>PDF · ${mb(SLIDES.pdfSize)}</a></div></div></div>
