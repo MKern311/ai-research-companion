@@ -26,12 +26,12 @@
     "bring": "A draft research question of your own in one or two sentences.",
     "steps": [
       "Paste your research question and name your discipline.",
-      "Ask which framework fits best (PICO, PEO, SPIDER or other) and why.",
-      "Ask for the question broken down into the framework's elements in a table.",
-      "Ask which constructs are vague and how each could be defined or measured."
+      "Ask which framework fits best (PICO, PICOC, PEO, SPIDER or other) and why.",
+      "Ask for the question broken down into the framework's elements, with sub-questions and English search terms per element.",
+      "Ask for a FINER check and which constructs are vague."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline]. My draft research question is: [question]. Suggest the most suitable framework for structuring it (for example PICO, PEO or SPIDER) and explain in two sentences why it fits better than the others. Then show a table: framework element, the part of my question it covers, what is still missing or unclear. Finally, list the key constructs, say which are vague, and propose a working definition and one possible way to measure or observe each.",
-    "check": "Every element in the table maps to words actually in your question, nothing has been added that you did not intend, and the element labels match the framework's standard definitions."
+    "prompt": "I am a postgraduate researcher in [discipline]. My draft research question is: [question]. Suggest the most suitable framework for structuring it (for example PICO, PICOC, PEO or SPIDER) and explain in two sentences why it fits better than the others. Then show a table: framework element, the part of my question it covers, what is still missing or unclear, and three English search terms or synonyms. Mark any element you had to assume rather than take from my question. Next, propose three to five sub-questions, each linked to one element. Rate the question briefly against FINER (feasible, interesting, novel, ethical, relevant), giving one reason per criterion. Finally, list the key constructs, say which are vague, and propose a working definition and one possible way to measure or observe each.",
+    "check": "Every element in the table maps to words actually in your question, assumed elements are marked, and the FINER reasons refer to your project rather than to research in general."
   },
   "idee-3": {
     "bring": "A short summary (about 150 words) of your planned project or your draft research question.",
@@ -61,10 +61,10 @@
     "steps": [
       "Paste your research question and name the database.",
       "Ask for a Boolean search string with synonyms and subject headings.",
-      "Ask what each block of the string covers and what it may miss.",
+      "Ask for a PRESS check of the string and what each block may miss.",
       "Run the string in the database and compare the hit count with your usual search."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. Build a Boolean search string for [database] with three concept blocks, synonyms joined by OR, blocks joined by AND, and truncation where useful. Suggest subject headings (for example MeSH) if the database uses them. Show the string in a code block, then a short table: block, terms, what it may miss. Use only syntax that [database] supports; if unsure about a field code, say so.",
+    "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. Build a Boolean search string for [database] with three concept blocks, synonyms joined by OR, blocks joined by AND, and truncation where useful. Suggest subject headings (for example MeSH) if the database uses them. Show the string in a code block, then a short table: block, terms, what it may miss. Then review the string against the PRESS checklist: translation of the question, Boolean and proximity operators, subject headings, text words and spelling variants, spelling and syntax, limits and filters. Say whether the string leans towards sensitivity or specificity. Use only syntax that [database] supports; if unsure about a field code, say so.",
     "check": "The string runs in the database without syntax errors and finds two or three papers you already know are relevant."
   },
   "literatur-1": {
@@ -122,7 +122,7 @@
       "Ask where the studies agree, contradict each other, and why that might be.",
       "Check every cell for two studies against the originals."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline] working on a review of [topic]. Using only the studies I provide, build a concept matrix: one row per study, columns for [concept 1], [concept 2], [concept 3]. In each cell, give the finding in a few words, including direction of effect, or 'not addressed'. Then list where the studies agree and where they contradict each other, with possible reasons such as method, sample or context, naming the study for each point. Do not add studies I have not given you.\n\n[paste abstracts or attach files]",
+    "prompt": "I am a postgraduate researcher in [discipline] working on a review of [topic]. Using only the studies I provide, build a concept matrix: one row per study, columns for [concept 1], [concept 2], [concept 3]. In each cell, say whether the study addresses the concept fully, partly or not at all, and give the finding in a few words, including direction of effect, with a short supporting passage. Then list where the studies agree and where they contradict each other, with possible reasons such as method, sample or context, naming the study for each point. Do not add studies I have not given you.\n\n[paste abstracts or attach files]",
     "check": "Every cell for two studies matches the originals; be cautious, because Copilot can smooth over contradictions or overstate agreement, so the synthesis and its argument must be your own."
   },
   "literatur-6": {

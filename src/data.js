@@ -12,25 +12,29 @@ const PHASES = [
   uc:[
    U('Topic and trend scouting','Analyse publication and citation data to reveal growing topics, clusters and under-researched intersections.',['recherche','analyse'],2,1,'Assist'),
    U('Sparring partner for research questions','Turn rough ideas into alternative research questions, surface assumptions, and generate counter-positions and objections.',['generierung'],3,1,'Co-create'),
-   U('Structured operationalisation','Structure questions with established frameworks (e.g. PICO, SPIDER, PEO) and sharpen the constructs.',['generierung','synthese'],2,1,'Co-create'),
+   U('Structured operationalisation','Structure questions with established frameworks (e.g. PICO, PICOC, SPIDER, PEO), derive sub-questions and search terms per element, sharpen the constructs and test the question against FINER.',['generierung','synthese'],2,1,'Co-create'),
    U('Novelty check','Semantic search for closely related work to spot duplication early and sharpen your positioning.',['recherche'],3,2,'Assist'),
-   U('Interdisciplinary bridges','Suggest concepts and methods from neighbouring disciplines that transfer to your research question.',['generierung','recherche'],2,2,'Co-create')
+   U('Interdisciplinary bridges','Suggest concepts and methods from neighbouring disciplines that transfer to your research question.',['generierung','recherche'],2,2,'Co-create'),
+   U('Research gap mapping','Sort the gaps a body of literature leaves into types – empirical, methodological, theoretical, practical or contradictory findings – and back each one with the studies that show it.',['synthese','analyse'],3,2,'Co-create')
   ],
   limits:['Apparent “gaps” may simply be gaps in the model’s knowledge – always verify against subject databases.','Popularity bias: models reinforce established mainstream topics.','Judging originality and relevance remains your task – and your supervisor’s.'],
   disc:['Where do you get stuck most when narrowing down a topic?','Under what conditions would you trust an AI-generated research question?']},
  {id:'literatur', name:'Literature Search & Review', short:'Literature',
   q:'What do we already know – and how robust is it?',
   goal:'Find, understand, appraise and synthesise relevant literature into a state of the art.',
-  tasks:['Develop a search strategy','Search subject databases','Read and understand key papers','Screen, extract and appraise','Synthesise findings'],
+  tasks:['Choose the review type and protocol','Develop a search strategy','Search subject databases','Read and understand key papers','Screen, extract and appraise','Synthesise findings'],
   uc:[
-   U('Search string development','Draft and iteratively refine Boolean search strings, including synonyms and subject headings, for bibliographic databases.',['generierung'],3,1,'Co-create'),
+   U('Search string development','Draft and iteratively refine Boolean search strings, including synonyms and subject headings, for bibliographic databases – and check them against the PRESS checklist before you run them.',['generierung'],3,1,'Co-create'),
    U('Semantic search & citation networks','Search by meaning rather than keywords and follow forward and backward citations to find key works.',['recherche'],3,1,'Assist'),
-   U('AI-assisted screening','Prioritise results by relevance (active learning) and suggest inclusion/exclusion decisions; you make the final call.',['analyse','agentisch'],3,2,'Delegate'),
+   U('AI-assisted screening','Prioritise results by relevance (active learning) and get include / exclude / unclear suggestions with the deciding criterion, at title-and-abstract and full-text stage; you make the final call.',['analyse','agentisch'],3,2,'Delegate'),
    U('Data extraction into evidence tables','Transfer sample, method, variables and effects from full texts into structured tables – with a second, independent check.',['analyse'],3,2,'Co-create'),
    U('Querying your own PDF corpus','Make your literature library searchable and get answers with verified source passages (retrieval-augmented).',['recherche','synthese'],3,2,'Assist'),
-   U('Synthesis & concept matrix','Compare findings across studies, flag contradictions and draft a concept matrix.',['synthese'],2,3,'Co-create'),
+   U('Synthesis & concept matrix','Compare findings across studies, flag contradictions and draft a concept matrix (Webster & Watson) showing which concepts each study covers fully, partly or not at all.',['synthese'],2,3,'Co-create'),
    U('Understanding difficult papers & methods','Have concepts, methods, notation or statistics explained in plain language, ask follow-up questions – and check against the original.',['synthese','generierung'],3,2,'Assist'),
-   U('Reading non-English literature','Translate and summarise sources in other languages to judge their relevance; quote only from verified translations.',['generierung','synthese'],2,2,'Assist')
+   U('Reading non-English literature','Translate and summarise sources in other languages to judge their relevance; quote only from verified translations.',['generierung','synthese'],2,2,'Assist'),
+   U('Choosing the review type & protocol','Check whether a systematic, scoping or narrative review fits your question, the literature and your time – and draft the review protocol.',['generierung','synthese'],2,1,'Co-create'),
+   U('Inclusion & exclusion criteria','Derive testable criteria from your research question, mark which can be judged from title and abstract and which only from the full text, and list borderline cases.',['generierung','analyse'],3,1,'Co-create'),
+   U('Documenting the review (PRISMA)','Turn your search log, counts per stage and exclusion reasons into the numbers for a PRISMA flow diagram and a draft methods paragraph.',['synthese','generierung'],2,1,'Assist')
   ],
   limits:['Fabricated or misattributed references – verify every source.','Uploading papers: publisher licences and your library’s guidance decide what may be shared with AI tools.','Coverage gaps: paywalled content and non-English literature are often missing.','Systematic reviews require reproducible decisions (e.g. PRISMA) – document every AI step.'],
   disc:['Which review step takes you the most time?','How would you document AI steps so that your review stays reproducible?']},
@@ -43,7 +47,8 @@ const PHASES = [
    U('Instrument development','Draft items, interview guides and response scales; check for clarity and for double-barrelled or leading questions.',['generierung'],3,2,'Co-create'),
    U('Pre-testing with synthetic personas','Test instruments with simulated respondents for comprehension issues – as a supplement to real pre-tests, never a replacement.',['generierung','analyse'],2,3,'Assist'),
    U('Sample size & power analysis','Generate calculations as traceable code (e.g. R or Python) and make assumptions explicit.',['analyse'],2,2,'Assist'),
-   U('Ethics application & data management plan','Structure drafts along your institution’s templates – the study-specific reasoning on consent, risks and anonymisation must be your own.',['generierung'],3,2,'Co-create')
+   U('Ethics application & data management plan','Structure drafts along your institution’s templates – the study-specific reasoning on consent, risks and anonymisation must be your own.',['generierung'],3,2,'Co-create'),
+   U('Final survey check','Let Copilot walk through the finished questionnaire along different answer paths to find broken routing, missing or overlapping answer options and inconsistent scales – and proofread it as a whole.',['analyse','generierung'],3,1,'Assist')
   ],
   limits:['Synthetic “respondents” do not validly represent real populations.','Methodological responsibility and disciplinary conventions rest with you and your supervisory team.','Ethics committees expect study-specific reflection – generic AI text on consent or anonymisation can be wrong.'],
   disc:['Where could AI measurably improve the quality of your instruments?','What role should synthetic data be allowed to play in your research?']},
@@ -73,7 +78,8 @@ const PHASES = [
    U('Text as data','Classification, sentiment analysis and topic modelling of large text corpora with language models.',['analyse'],3,2,'Delegate'),
    U('Conversational exploratory analysis','Explore datasets in natural language (“How is … distributed?”) and surface initial patterns.',['analyse','agentisch'],2,2,'Assist'),
    U('Visualisation','Create chart suggestions and publication-ready figures as reproducible code.',['generierung'],2,1,'Co-create'),
-   U('Research software & simulation code','Write, refactor, test and document code for models, simulations or lab data pipelines.',['generierung','analyse'],3,2,'Co-create')
+   U('Research software & simulation code','Write, refactor, test and document code for models, simulations or lab data pipelines.',['generierung','analyse'],3,2,'Co-create'),
+   U('Codebook with anchor examples','Turn a category system into a codebook – definition, inclusion and exclusion rules, anchor example and rule for borderline cases – and test it on a sample passage.',['analyse','generierung'],3,2,'Co-create')
   ],
   limits:['Plausible-looking but wrong code – verify results independently.','Easier “fishing” for significance: pre-specify analysis plans.','Reproducibility: record date, tool, prompt and the saved output; keep analyses as code.'],
   disc:['Which analysis steps would you never leave to AI without checking?','How do you keep your analysis reproducible when the tools keep changing?']},

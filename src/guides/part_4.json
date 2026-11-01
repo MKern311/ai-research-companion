@@ -1,0 +1,72 @@
+{
+  "idee-5": {
+    "bring": "Abstracts of five to eight studies on your topic (or their open-access PDFs) and your draft research question.",
+    "steps": [
+      "Paste or attach the studies and your draft research question.",
+      "Ask for the gaps they leave, sorted by type, each with the studies that show it.",
+      "Ask which gap your research question addresses and how convincingly.",
+      "Open two of the cited studies and check they really say this."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline]. Using only the studies I provide, identify the research gaps they leave. Sort them by type: empirical (missing populations, settings, countries or periods), methodological (similar designs, missing methods or data sources), theoretical (phenomenon not yet explained or compared with certain theories), practical (missing evidence on implementation or use), and contradictory findings. Show a table: gap type, the gap in one sentence, studies that show it, and the passage that supports it. Then say which gap my draft research question addresses and how convincingly it does so. My question: [question]. Do not add studies I have not given you.\n\n[paste abstracts or attach files]",
+    "check": "Every supporting passage appears in the study it is attributed to, and each gap follows from what the studies say rather than from what they simply do not mention.",
+    "limit": "Copilot only sees the studies you give it; a gap in five abstracts is not yet a gap in the field – confirm it with a database search."
+  },
+  "literatur-8": {
+    "bring": "Your research question, a rough idea of how much literature exists, and your deadline for the review.",
+    "steps": [
+      "Paste your research question, the expected amount of literature and your deadline.",
+      "Ask Copilot to compare systematic, scoping, narrative and rapid reviews for your case.",
+      "Ask for a recommendation and the conditions under which it would change.",
+      "Ask for a protocol outline and compare it with your field's reporting guideline."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline] planning a literature review. My research question: [question]. Expected amount of literature: [few / moderate / large, if known]. Time available: [weeks or months]. Compare a systematic review, a scoping review, a narrative review and a rapid review for my case in a table: purpose, what my question would need, effort, and risks. Recommend one type and name the conditions under which you would recommend another. Then draft a protocol outline: review question, its elements (for example PICOC), sources and databases, time span and languages, inclusion and exclusion criteria, screening stages, data extraction and synthesis approach, and whether registering the protocol (for example on PROSPERO or OSF) is usual in my field. Mark anything you are unsure about.",
+    "check": "The recommendation fits your question and your time, and the protocol outline covers the items of the reporting guideline your field uses (for example PRISMA-P or the JBI guidance for scoping reviews).",
+    "limit": "Choosing the review type is a methodological decision for you and your supervisors; Copilot's outline is a starting point, not a protocol."
+  },
+  "literatur-9": {
+    "bring": "Your research question with a sentence on its context, and five titles with abstracts you already know well.",
+    "steps": [
+      "Paste your research question and its context.",
+      "Ask for inclusion and exclusion criteria, borderline cases and the stage at which each can be judged.",
+      "Ask Copilot to critique its own criteria for overlap, vagueness and testability.",
+      "Apply the criteria yourself to five known abstracts."
+    ],
+    "prompt": "I am preparing a literature review. Research question: [question]. Context and aim: [context]. Derive inclusion and exclusion criteria from the research question only; do not add subject requirements that do not follow from it. Show a table: criterion, include or exclude, judged at title-and-abstract or full-text stage, and an example of a borderline case. Then review the criteria critically: are they clear, free of overlap, and testable from an abstract? Which are too open or too strict? Suggest more precise wording, but do not change the research question.",
+    "check": "Applying the criteria to five abstracts you know gives the decisions you expect, and every criterion can be traced back to a part of your research question."
+  },
+  "literatur-10": {
+    "bring": "A search log: databases, search dates, search strings and the number of records at each stage – from your own review or from a practice search.",
+    "steps": [
+      "Paste your search log and the counts per stage.",
+      "Ask for the PRISMA 2020 flow numbers in a table and a check that they add up.",
+      "Ask for a draft methods paragraph on search and selection.",
+      "Ask which reporting items are still missing from your log."
+    ],
+    "prompt": "I am documenting the search and selection for a literature review. Below is my search log: databases, search dates, search strings and the number of records at each stage, with exclusion reasons. Arrange the numbers for a PRISMA 2020 flow diagram in a table: identified per source, duplicates removed, screened, excluded at title and abstract, reports sought, not retrieved, assessed in full text, excluded with reasons, included. Check that the numbers add up and flag every inconsistency instead of correcting it. Then draft a methods paragraph on the search and selection, using only the facts in my log, and list which PRISMA 2020 items my log does not yet cover.\n\n[paste search log]",
+    "check": "Every number in the table and the paragraph matches your log, and each inconsistency Copilot flags is real when you recount.",
+    "limit": "Draw the diagram itself with the official PRISMA 2020 template or a dedicated tool; Copilot prepares the numbers and the text, it does not produce a reliable diagram."
+  },
+  "analyse-7": {
+    "bring": "Your research question, four to six categories with a one-line description each, and a short passage from an open-access paper or an invented text – never participants' data.",
+    "steps": [
+      "Paste your research question and categories.",
+      "Ask for a codebook with definitions, inclusion and exclusion rules and borderline rules.",
+      "Paste the sample passage and ask Copilot to code it with the codebook.",
+      "Check each assignment and tighten the rules where it was unclear."
+    ],
+    "prompt": "I am doing a qualitative content analysis (for example following Mayring or Kuckartz). Research question: [question]. Categories: [list with one-line descriptions]. Build a codebook: for each category give the name, a definition, an inclusion rule, an exclusion rule, and a rule for borderline cases. Do not invent anchor examples; write 'add anchor example from material' instead. Then code the passage below with this codebook: for each coded segment, give the category, the exact quote, whether the decision was clear, unclear or problematic, and how the codebook should change. Use only direct quotes from the passage.\n\n[paste passage]",
+    "check": "Every quote appears word for word in the passage, no category overlaps with another, and a second person coding the same passage with the codebook reaches mostly the same decisions."
+  },
+  "design-5": {
+    "bring": "Your finished questionnaire exported as a Word or PDF file with its routing (filters, skip and display logic) visible, on a non-sensitive topic.",
+    "steps": [
+      "Attach the exported questionnaire and describe the target group.",
+      "Ask Copilot to walk through it along three different answer paths.",
+      "Ask for a list of logic and answer-option problems, then a language check.",
+      "Test every flagged routing problem in the survey tool's preview."
+    ],
+    "prompt": "I have finished a questionnaire on [topic] for [target group]; it is attached with its routing. Act as a careful survey methodologist. First, walk through the questionnaire as three respondents taking different paths (for example someone who answers 'no' at the first filter, someone who answers 'yes' everywhere, and someone who skips optional questions), listing the questions each one sees. Then show a table of problems: question number, type of problem (broken or missing routing, question shown to people it does not apply to, answer options missing or overlapping, inconsistent scale direction or labels, reference to an earlier answer that may not exist, unclear instruction), and a suggested fix. Next, check the language: spelling, grammar, consistent terms and form of address, and wording that is hard to read for the target group. Finally, estimate the completion time. Do not change the meaning of any question.",
+    "check": "Each routing problem shows up when you follow the same path in the survey tool's preview, and each language fix keeps the question's meaning.",
+    "limit": "Copilot reads the exported text, not the live survey; logic that the export does not show cannot be checked, and a pilot with real respondents is still needed."
+  }
+}
