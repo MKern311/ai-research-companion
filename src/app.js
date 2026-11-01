@@ -217,6 +217,7 @@ function openDrawer(id){
         ${u.d ? `<p class="desc">${esc(u.d)}</p>` : ''}
         <div class="meta">${u.custom ? `<span>${u.by === 'Survey' ? 'From the pre-event survey' : 'Added in the workshop'} · ${SHORT[u.phase]}</span>` :
           `<span><b>${u.mode}:</b> ${MODE_DEF[u.mode]}</span><span><b>${RISK[u.risk]}:</b> ${RISK_DEF[u.risk]}</span>`}</div>
+        ${ixHtml(u)}
         <div class="block">
           <h3>Step 1 · Research value${session ? ' · ' + esc(myTable()) : ''}</h3>
           ${ro ? '<p class="later">View only – this code cannot rate.</p>' : `
@@ -377,6 +378,13 @@ function reportMarkdown(){
   return L.join('\n');
 }
 /* ---------- tools view ---------- */
+function ixHtml(u){
+  if (!u.ix || !u.ix.length) return '';
+  return `<div class="uix"><h3>Tools that connect to Copilot</h3><ul>${u.ix.map(n => {
+    const m = MCP[n], c = (M365[n] || []).find(x => x[0] === 'copilot');
+    return `<li><b>${esc(n)}</b>${c ? `<a class="msb cp" href="${c[1]}" target="_blank" rel="noopener">Copilot connector</a>` : ''}${m ? `<a class="mcpb ${m[0]}" href="${m[2]}" target="_blank" rel="noopener" title="${m[0] === 'o' ? 'Official MCP server' : 'Community MCP server'} – open the documentation">MCP · ${m[0] === 'o' ? 'official' : 'community'}</a>` : ''}</li>`;
+  }).join('')}</ul><button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How to connect a tool to Copilot →</button></div>`;
+}
 function mcpHtml(t){
   const m = MCP[t.n], ms = M365[t.n];
   const m365 = ms ? `<span class="mcp m365"><span class="mlab">Microsoft 365</span>${ms.map(([k, url]) => `<a class="msb${k === 'copilot' ? ' cp' : ''}" href="${url}" target="_blank" rel="noopener">${M365_TYPE[k]}</a>`).join('')}</span>` : '';
@@ -515,7 +523,7 @@ function renderAll(){ renderAgenda(); renderIdent(); renderLens(); renderPhases(
 /* ---------- events ---------- */
 document.addEventListener('click', e => {
   const t = e.target;
-  const tab = t.closest('[data-view]'); if (tab) { if (!$('#drawer').hidden) closeDrawer(); setView(tab.dataset.view); return; }
+  const tab = t.closest('[data-view]'); if (tab) { if (!$('#drawer').hidden) closeDrawer(); setView(tab.dataset.view); if (tab.hasAttribute('data-mcpinfo')) { const b = $('#mcpBox'); b.open = true; b.scrollIntoView(); } return; }
   const ln = t.closest('[data-lens]'); if (ln) { ui.lens = +ln.dataset.lens; renderLens(); renderCards(); if (ui.open && !$('#drawer').hidden) openDrawer(ui.open); return; }
   const ph = t.closest('[data-phase]'); if (ph) { ui.phase = +ph.dataset.phase; renderPhases(); renderIntro(); renderCards(); return; }
   const op = t.closest('[data-open]'); if (op) { const u = findUc(op.dataset.open); if (u) { ui.phase = PHASES.findIndex(p => p.id === u.phase); if (ui.view !== 'cases') setView('cases'); renderPhases(); renderIntro(); openDrawer(u.id); } return; }

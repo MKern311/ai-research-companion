@@ -5,20 +5,20 @@
       "Paste your abstract and ask for five candidate journals with links to their author guidelines.",
       "Open two of the linked guideline pages and compare scope and word limits.",
       "Paste one journal's author guidelines and ask for a formatting checklist.",
-      "Tick the checklist against your manuscript and note what needs changing."
+      "Tick the checklist against your manuscript, including citation style and, if you write in LaTeX, the BibTeX entries."
     ],
-    "prompt": "I am a PhD researcher in [discipline] preparing a manuscript. My abstract is: [paste abstract]. Suggest five peer-reviewed journals whose published aims and scope fit this work, including [journal I am considering]. Give a table with: journal, publisher, why it fits, article type and word limit, reference style, open-access options, and a link to the author guidelines page. Use only information from the journals' own websites and cite the link. If you are not sure about a detail, say so; do not invent journals or requirements.",
+    "prompt": "I am a PhD researcher in [discipline] preparing a manuscript. My abstract is: [paste abstract]. Suggest five peer-reviewed journals whose published aims and scope fit this work, including [journal I am considering]. Give a table with: journal, publisher, why it fits, article type and word limit, reference style, open-access options, and a link to the author guidelines page. Use only information from the journals' own websites and cite the link. If I paste a few references or BibTeX entries, convert them to the journal's citation style and flag missing fields. If you are not sure about a detail, say so; do not invent journals or requirements.",
     "check": "Open the author guidelines of two suggested journals and confirm that the scope, word limit and reference style match what Copilot stated."
   },
   "publikation-4": {
     "bring": "Two to three pages of your own draft (for example methods and discussion) that you are sole author of or have co-authors' consent to share, or an open-access paper from your field.",
     "steps": [
       "Attach or paste the text and name the target journal and article type.",
-      "Ask for a reviewer report with major and minor comments.",
-      "Ask Copilot to quote the passage behind each major comment.",
-      "Choose the two most useful comments and draft how you would address them."
+      "Ask for three short reviews from different roles: methods, theory, devil's advocate.",
+      "Ask Copilot to quote the passage behind each major comment and name missing reporting items.",
+      "Ask for a revision roadmap and draft how you would address the two most useful comments."
     ],
-    "prompt": "I am a PhD researcher in [discipline] and plan to submit this [article type] to [journal]. Attached is [section of my draft]. Act as a critical but fair peer reviewer. Assess the contribution, the fit between research question and method, the strength of the evidence, and how openly limitations are discussed. Give: a two-sentence overall assessment, up to five major comments and up to five minor comments. For each comment, quote the passage it refers to and suggest a concrete fix. Comment only on what is in the text; if something may be covered elsewhere in the paper, say so.",
+    "prompt": "I am a PhD researcher in [discipline] and plan to submit this [article type] to [journal]. Attached is [section of my draft]. Act as a panel of three critical but fair peer reviewers: a methods expert, a theory expert and a devil's advocate who challenges the central claim. Each reviewer gives a two-sentence assessment and up to four major comments; for each comment, quote the passage it refers to and suggest a concrete fix. Then name any items the reporting guideline for my design would expect that are missing (for example CONSORT, STROBE, COREQ or SRQR – say which one applies). Finish with a revision roadmap: the changes in order of priority, with effort (small, medium, large). Comment only on what is in the text; if something may be covered elsewhere in the paper, say so.",
     "check": "Each comment points to a passage you can find in your text, and at least one names a weakness that you or a supervisor had already noticed."
   },
   "publikation-5": {
@@ -147,7 +147,7 @@
     "check": "The dates add up to your submission date, the fixed milestones fall on the right dates, and the weekly plan fits your actual available hours."
   },
   "querschnitt-3": {
-    "bring": "Three to five of your own reading notes or abstracts of open-access papers, as one Word file or pasted text.",
+    "bring": "Three to five of your own reading notes, highlights or annotations, or abstracts of open-access papers, as one Word file or pasted text.",
     "steps": [
       "Attach or paste the notes and ask for a summary table.",
       "Ask for links between sources: agree, contradict, build on.",
@@ -156,7 +156,7 @@
     ],
     "prompt": "I am a PhD researcher in [discipline] organising my reading. Attached are my notes on [number] sources. Create a table: source, key claim, method, main concepts, three suggested tags. Then list up to five links between sources, saying whether they agree, contradict or build on each other, and name the note each link is based on. Finally, suggest a simple tagging scheme of 10 to 15 tags I could use in [Zotero / OneNote / Obsidian]. Use only what is in my notes; if a link is uncertain, say so.",
     "check": "Pick two suggested links and confirm that both notes really say what Copilot claims they say.",
-    "limit": "Copilot Chat does not keep a searchable library of your files, so this tests connecting a handful of notes, not building a lasting knowledge base."
+    "limit": "Copilot Chat does not keep a searchable library of your files; for a lasting knowledge base, connect your notes or reference tool (for example Zotero, Notion or Obsidian) via MCP or use a Copilot notebook."
   },
   "querschnitt-4": {
     "bring": "A small public or dummy dataset as CSV or Excel, for example from data.gov.uk or the UK Data Service open data.",
@@ -166,18 +166,18 @@
       "Ask for a README and key repository metadata fields.",
       "Check ranges and missing counts for two columns in the file."
     ],
-    "prompt": "I am preparing a dataset for deposit in [repository]. Attached is [file name]; it contains [short description and how it was collected]. Use Python to inspect the file, then create a codebook table: variable name, description, type, unit, range or allowed values, number of missing values, missing-value code. Then draft a README with: title, creators [placeholder], description, methods, file list, variables, licence [placeholder], how to cite, contact. Mark any variable meaning you have guessed with [CHECK]. Finally, list the core metadata fields the repository will likely ask for.",
+    "prompt": "I am preparing a dataset for deposit in [repository]. Attached is [file name]; it contains [short description and how it was collected]. Use Python to inspect the file, then create a codebook table: variable name, description, type, unit, range or allowed values, number of missing values, missing-value code. Then draft a README with: title, creators [placeholder], description, methods, file list, variables, licence [placeholder], how to cite, contact. Mark any variable meaning you have guessed with [CHECK]. Then list the core metadata fields the repository will likely ask for. Finally, give a checklist for a replication package (data, code, software versions, run order, expected outputs) and say how I can check that each number in my paper is reproduced by the code.",
     "check": "For two columns, the ranges and missing counts in the codebook match the file, and every variable meaning Copilot guessed is marked [CHECK]."
   },
   "querschnitt-5": {
     "bring": "A short description of one AI task you did today (for example in this workshop) and, if available, your university's guidance on declaring AI use.",
     "steps": [
       "Describe today's AI task: tool, purpose, prompt and how you checked it.",
-      "Ask for a log table template with your task as row one.",
+      "Ask for a log table template with your task as row one, including the research decision it informed.",
       "Save the table as a Copilot Page or copy it into Word or Excel.",
       "Ask for a short draft AI declaration based only on the log."
     ],
-    "prompt": "I am a PhD researcher and want to keep a log of my AI use as the basis for the AI declaration in my thesis. Create a log table with columns: date, tool, task, prompt (full or summary), where the output is saved, how I checked it, what I used in my work. Fill in the first row from this description: [describe today's task]. Then draft a declaration of about 100 words, in a neutral tone, that describes only the uses in the log. Do not add uses I have not listed. [Paste university guidance if available.]",
+    "prompt": "I am a PhD researcher and want to keep a log of my AI use as the basis for the AI declaration in my thesis. Create a log table with columns: date, tool, task, prompt (full or summary), where the output is saved, how I checked it, what I used in my work, which research decision it informed. Fill in the first row from this description: [describe today's task]. Then draft a declaration of about 100 words, in a neutral tone, that describes only the uses in the log. Do not add uses I have not listed. [Paste university guidance if available.]",
     "check": "Someone else could retrace your step from the log row (tool, date, prompt, saved output), and the declaration mentions nothing that is not in the log; check it against your university's policy."
   },
   "querschnitt-6": {
@@ -192,14 +192,14 @@
     "check": "Run one example in your own software or compare it with the official documentation, and confirm that it works or matches."
   },
   "querschnitt-7": {
-    "bring": "A narrow research question and two or three trusted public websites (for example an organisation's reports page) to use as sources.",
+    "bring": "Your standing rules for working with AI (citation style, key terms, what must never happen) – and, for the agent part, a narrow research question and two or three trusted public websites.",
     "steps": [
       "Create a new agent in Copilot Chat and paste the prompt as its instructions.",
-      "Add your two or three public websites as its knowledge sources.",
-      "Run stage 1 only and check every source before you approve it.",
-      "Approve extraction, then the report, and note where you corrected it."
+      "Add your rules and, for the agent part, your public websites as knowledge sources.",
+      "Ask one normal question and check that the agent follows your rules.",
+      "Run stage 1 only, check every source, then approve extraction and the report."
     ],
-    "prompt": "You support a [discipline] researcher with a small scoping task on [research question]. Work in three stages and stop after each one for my approval. Stage 1, search: list up to eight sources from [websites] or the web, with title, year, link and one line on relevance. Stage 2, extraction: for the sources I approve, fill a table with aim, method, sample and main finding. Stage 3, report: write a 300-word summary that cites only approved sources. If you are not sure, say so; do not invent sources.",
+    "prompt": "You are the research assistant of a [discipline] PhD researcher. Always follow these standing rules: use [citation style]; use these terms consistently: [key terms with definitions]; never invent sources, quotes or numbers – say when you are unsure; [further rules]. When I ask for a scoping task on [research question], work in three stages and stop after each one for my approval. Stage 1, search: list up to eight sources from [websites] or the web, with title, year, link and one line on relevance. Stage 2, extraction: for the sources I approve, fill a table with aim, method, sample and main finding. Stage 3, report: write a 300-word summary that cites only approved sources.",
     "check": "Before approving each stage, open every link and confirm the source exists and says what the table claims; treat the final report as an unverified draft that still needs your own reading.",
     "limit": "Copilot runs short web-based steps that you approve one by one; it cannot search library databases or run the pipeline on its own, so this tests the checkpoint workflow, not full automation."
   }

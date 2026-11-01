@@ -11,48 +11,13 @@
     "check": "Every supporting passage appears in the study it is attributed to, and each gap follows from what the studies say rather than from what they simply do not mention.",
     "limit": "Copilot only sees the studies you give it; a gap in five abstracts is not yet a gap in the field – confirm it with a database search."
   },
-  "literatur-8": {
-    "bring": "Your research question, a rough idea of how much literature exists, and your deadline for the review.",
-    "steps": [
-      "Paste your research question, the expected amount of literature and your deadline.",
-      "Ask Copilot to compare systematic, scoping, narrative and rapid reviews for your case.",
-      "Ask for a recommendation and the conditions under which it would change.",
-      "Ask for a protocol outline and compare it with your field's reporting guideline."
-    ],
-    "prompt": "I am a postgraduate researcher in [discipline] planning a literature review. My research question: [question]. Expected amount of literature: [few / moderate / large, if known]. Time available: [weeks or months]. Compare a systematic review, a scoping review, a narrative review and a rapid review for my case in a table: purpose, what my question would need, effort, and risks. Recommend one type and name the conditions under which you would recommend another. Then draft a protocol outline: review question, its elements (for example PICOC), sources and databases, time span and languages, inclusion and exclusion criteria, screening stages, data extraction and synthesis approach, and whether registering the protocol (for example on PROSPERO or OSF) is usual in my field. Mark anything you are unsure about.",
-    "check": "The recommendation fits your question and your time, and the protocol outline covers the items of the reporting guideline your field uses (for example PRISMA-P or the JBI guidance for scoping reviews).",
-    "limit": "Choosing the review type is a methodological decision for you and your supervisors; Copilot's outline is a starting point, not a protocol."
-  },
-  "literatur-9": {
-    "bring": "Your research question with a sentence on its context, and five titles with abstracts you already know well.",
-    "steps": [
-      "Paste your research question and its context.",
-      "Ask for inclusion and exclusion criteria, borderline cases and the stage at which each can be judged.",
-      "Ask Copilot to critique its own criteria for overlap, vagueness and testability.",
-      "Apply the criteria yourself to five known abstracts."
-    ],
-    "prompt": "I am preparing a literature review. Research question: [question]. Context and aim: [context]. Derive inclusion and exclusion criteria from the research question only; do not add subject requirements that do not follow from it. Show a table: criterion, include or exclude, judged at title-and-abstract or full-text stage, and an example of a borderline case. Then review the criteria critically: are they clear, free of overlap, and testable from an abstract? Which are too open or too strict? Suggest more precise wording, but do not change the research question.",
-    "check": "Applying the criteria to five abstracts you know gives the decisions you expect, and every criterion can be traced back to a part of your research question."
-  },
-  "literatur-10": {
-    "bring": "A search log: databases, search dates, search strings and the number of records at each stage – from your own review or from a practice search.",
-    "steps": [
-      "Paste your search log and the counts per stage.",
-      "Ask for the PRISMA 2020 flow numbers in a table and a check that they add up.",
-      "Ask for a draft methods paragraph on search and selection.",
-      "Ask which reporting items are still missing from your log."
-    ],
-    "prompt": "I am documenting the search and selection for a literature review. Below is my search log: databases, search dates, search strings and the number of records at each stage, with exclusion reasons. Arrange the numbers for a PRISMA 2020 flow diagram in a table: identified per source, duplicates removed, screened, excluded at title and abstract, reports sought, not retrieved, assessed in full text, excluded with reasons, included. Check that the numbers add up and flag every inconsistency instead of correcting it. Then draft a methods paragraph on the search and selection, using only the facts in my log, and list which PRISMA 2020 items my log does not yet cover.\n\n[paste search log]",
-    "check": "Every number in the table and the paragraph matches your log, and each inconsistency Copilot flags is real when you recount.",
-    "limit": "Draw the diagram itself with the official PRISMA 2020 template or a dedicated tool; Copilot prepares the numbers and the text, it does not produce a reliable diagram."
-  },
   "analyse-7": {
     "bring": "Your research question, four to six categories with a one-line description each, and a short passage from an open-access paper or an invented text – never participants' data.",
     "steps": [
       "Paste your research question and categories.",
       "Ask for a codebook with definitions, inclusion and exclusion rules and borderline rules.",
       "Paste the sample passage and ask Copilot to code it with the codebook.",
-      "Check each assignment and tighten the rules where it was unclear."
+      "Ask a colleague to code the same passage with the codebook, compare decisions and tighten the rules."
     ],
     "prompt": "I am doing a qualitative content analysis (for example following Mayring or Kuckartz). Research question: [question]. Categories: [list with one-line descriptions]. Build a codebook: for each category give the name, a definition, an inclusion rule, an exclusion rule, and a rule for borderline cases. Do not invent anchor examples; write 'add anchor example from material' instead. Then code the passage below with this codebook: for each coded segment, give the category, the exact quote, whether the decision was clear, unclear or problematic, and how the codebook should change. Use only direct quotes from the passage.\n\n[paste passage]",
     "check": "Every quote appears word for word in the passage, no category overlaps with another, and a second person coding the same passage with the codebook reaches mostly the same decisions."
@@ -68,5 +33,101 @@
     "prompt": "I have finished a questionnaire on [topic] for [target group]; it is attached with its routing. Act as a careful survey methodologist. First, walk through the questionnaire as three respondents taking different paths (for example someone who answers 'no' at the first filter, someone who answers 'yes' everywhere, and someone who skips optional questions), listing the questions each one sees. Then show a table of problems: question number, type of problem (broken or missing routing, question shown to people it does not apply to, answer options missing or overlapping, inconsistent scale direction or labels, reference to an earlier answer that may not exist, unclear instruction), and a suggested fix. Next, check the language: spelling, grammar, consistent terms and form of address, and wording that is hard to read for the target group. Finally, estimate the completion time. Do not change the meaning of any question.",
     "check": "Each routing problem shows up when you follow the same path in the survey tool's preview, and each language fix keeps the question's meaning.",
     "limit": "Copilot reads the exported text, not the live survey; logic that the export does not show cannot be checked, and a pilot with real respondents is still needed."
+  },
+  "literatur-7": {
+    "bring": "Your research question, a rough idea of how much literature exists, and your deadline for the review.",
+    "steps": [
+      "Paste your research question, the expected amount of literature and your deadline.",
+      "Ask Copilot to compare systematic, scoping, narrative and rapid reviews for your case.",
+      "Ask for a protocol outline with testable inclusion and exclusion criteria and borderline cases.",
+      "Apply the criteria to five abstracts you know and compare the outline with your field's reporting guideline."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline] planning a literature review. My research question: [question]. Expected amount of literature: [few / moderate / large, if known]. Time available: [weeks or months]. Compare a systematic review, a scoping review, a narrative review and a rapid review for my case in a table: purpose, what my question would need, effort, and risks. Recommend one type and name the conditions under which you would recommend another. Then draft a protocol outline: review question, its elements (for example PICOC), sources and databases, time span and languages, inclusion and exclusion criteria, screening stages, data extraction and synthesis approach, and whether registering the protocol (for example on PROSPERO or OSF) is usual in my field. For the inclusion and exclusion criteria, derive them from the research question only, show a table (criterion, include or exclude, judged at title-and-abstract or full-text stage, example of a borderline case) and say which criteria are too open, too strict or hard to judge from an abstract. Mark anything you are unsure about.",
+    "check": "The recommendation fits your question and your time, the criteria give the decisions you expect for five abstracts you know, and the outline covers the items of your field's reporting guideline (for example PRISMA-P or the JBI guidance for scoping reviews).",
+    "limit": "Choosing the review type is a methodological decision for you and your supervisors; Copilot's outline is a starting point, not a protocol."
+  },
+  "literatur-8": {
+    "bring": "A search log: databases, search dates, search strings and the number of records at each stage – from your own review or from a practice search.",
+    "steps": [
+      "Paste your search log and the counts per stage.",
+      "Ask for the PRISMA 2020 flow numbers in a table and a check that they add up, including duplicates removed.",
+      "Ask for a draft methods paragraph on search and selection.",
+      "Ask which PRISMA 2020 checklist items your report does not yet cover."
+    ],
+    "prompt": "I am documenting the search and selection for a literature review. Below is my search log: databases, search dates, search strings and the number of records at each stage, with exclusion reasons. Arrange the numbers for a PRISMA 2020 flow diagram in a table: identified per source, duplicates removed, screened, excluded at title and abstract, reports sought, not retrieved, assessed in full text, excluded with reasons, included. Check that the numbers add up and flag every inconsistency instead of correcting it. Then draft a methods paragraph on the search and selection, using only the facts in my log, and go through the 27 items of the PRISMA 2020 checklist and list which ones my log and draft do not yet cover. If I paste a list of records, mark likely duplicates (same DOI, or same title, year and first author) rather than deleting them.\n\n[paste search log]",
+    "check": "Every number in the table and the paragraph matches your log, and each inconsistency Copilot flags is real when you recount.",
+    "limit": "Draw the diagram itself with the official PRISMA 2020 template or a dedicated tool; Copilot prepares the numbers and the text, it does not produce a reliable diagram."
+  },
+  "idee-6": {
+    "bring": "Your research question, the two or three theories or models you are considering, and abstracts of three key studies.",
+    "steps": [
+      "Paste your research question, candidate theories and the abstracts.",
+      "Ask for a comparison of the theories for your question.",
+      "Ask for hypotheses or propositions, each with its reasoning and source.",
+      "Check every reasoning step against the original theory."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. I am considering these theories or models: [theories]. Compare them for my question in a table: core idea, key constructs, what each would predict or help explain in my case, typical methods, and limitations. Then derive three to five hypotheses (or, for qualitative work, propositions or sensitising questions), each with a short line of reasoning that names the theory and, where possible, one of the studies I provide. Finally, describe the conceptual model in words: constructs, expected relationships and their direction, and possible moderators or mediators. Do not invent studies; mark any link you are unsure about.\n\n[paste abstracts]",
+    "check": "Each hypothesis follows from the theory as its authors describe it, and every study cited is one you provided and says what Copilot claims.",
+    "limit": "Building the theoretical argument is a core part of your own contribution; use the output to test your reasoning, not to replace it."
+  },
+  "literatur-9": {
+    "bring": "One open-access empirical paper as a PDF and the name of the appraisal checklist your field uses (for example CASP, MMAT or JBI) – or let Copilot suggest one.",
+    "steps": [
+      "Attach the paper and name the study design and checklist.",
+      "Ask for each checklist item with a rating and the supporting passage.",
+      "Rate the paper yourself on two or three items first.",
+      "Compare and look up every passage Copilot quotes."
+    ],
+    "prompt": "I am appraising studies for a literature review in [discipline]. The attached paper is a [study design]. Use [checklist, e.g. CASP for qualitative studies, MMAT for mixed studies, JBI for the design] – or, if I have not named one, suggest the most suitable established checklist and say why. Go through the checklist item by item: item, rating (yes, no, can't tell), the exact passage with page or section that supports the rating, and a one-line comment. Use 'can't tell' when the paper does not report enough; do not infer. Finally, summarise the main strengths and concerns in three sentences, without giving an overall score.",
+    "check": "Every quoted passage is in the paper at the place given, and on the items you rated yourself any disagreement can be explained.",
+    "limit": "Appraisal is a judgement that has to be yours (often with a second reviewer); checklists differ by design and field, so use the one your supervisors or guidelines expect."
+  },
+  "analyse-8": {
+    "bring": "Output from an analysis you ran on public or dummy data (for example a regression table, a reliability or factor analysis, or a model-fit summary), copied as text.",
+    "steps": [
+      "Paste the output and say which analysis and software produced it.",
+      "Ask for each number to be explained and the assumptions and quality criteria to be checked.",
+      "Ask for an APA-style results paragraph using only the numbers in the output.",
+      "Check every number in the paragraph against the output."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline]. Below is the output of a [analysis] I ran in [software] on [public or dummy] data, with [n] cases. 1) Explain each part of the output in plain language. 2) List the assumptions and quality criteria I should check for this analysis (for example normality, multicollinearity, reliability such as Cronbach's alpha or omega, model fit such as CFI, RMSEA and SRMR, or for PLS-SEM AVE and HTMT), say which ones the output shows and whether they meet common thresholds, and name the source of each threshold. 3) Draft a results paragraph in APA 7 style using only numbers from the output. Do not round differently, recompute or add numbers that are not in the output; mark anything you are unsure about.\n\n[paste output]",
+    "check": "Every number in the paragraph appears in the output, and the thresholds named match a methods textbook or the guidance your field uses.",
+    "limit": "Copilot interprets what you paste; it cannot see your data or the code that produced the output, so check that the analysis itself was the right one."
+  },
+  "publikation-8": {
+    "bring": "A paragraph of your own writing with five to eight citations and the matching reference list entries.",
+    "steps": [
+      "Paste the paragraph and its references.",
+      "Ask Copilot to check that each reference exists, with a link or DOI.",
+      "Ask whether each source supports the sentence it is cited for.",
+      "Open each flagged source and decide yourself."
+    ],
+    "prompt": "I am checking the references in a paragraph of my [thesis or paper]. For each reference below: 1) search for it and give a working link or DOI; say 'not found' if you cannot find it, and flag differences in authors, year, title or journal. 2) For each sentence with a citation, say whether the cited source – as far as you can see from its abstract or full text – supports the claim, partly supports it, or does not, and quote the passage you rely on. Do not guess; if you cannot see enough of a source, say so.\n\nParagraph: [paste]\nReferences: [paste]",
+    "check": "Each 'found' reference opens the right paper, and for two sentences you read the source yourself to confirm Copilot's judgement.",
+    "limit": "Copilot searches the open web and may not see paywalled full texts; a connected database (for example OpenAlex, which can check whether references exist, or scite for citation statements) makes this more reliable."
+  },
+  "publikation-9": {
+    "bring": "Your own notes on a section you are about to write (bullet points are fine) and the sources each point relies on; not a co-author's material without their consent.",
+    "steps": [
+      "Check your university's rules on AI-assisted drafting first.",
+      "Paste your notes and sources and ask for an evidence map, then a first draft.",
+      "Check that every claim in the draft is in your notes and linked to a source.",
+      "Rewrite the section in your own words and log the AI use."
+    ],
+    "prompt": "I am writing the [section, e.g. literature review section on X] of my [thesis or paper] in [discipline]. Below are my own notes and the sources each point relies on. First, build an evidence map: the main points in a logical order, each with the source(s) that support it and any gaps where a point has no source. Then write a first draft of about [length] words that uses only my points and sources, cites them in [citation style], and marks with [GAP] every place where my notes do not support a sentence. Do not add claims, sources or numbers of your own. This is a draft that I will rework myself.\n\n[paste notes and sources]",
+    "check": "Every sentence in the draft can be traced to your notes and a source, nothing new has been added, and the [GAP] marks show where you still need evidence.",
+    "limit": "Use this only where your university allows AI-assisted drafting; the final text must be your own work, reworked by you, and the AI use declared."
+  },
+  "querschnitt-8": {
+    "bring": "A list of 10 to 20 new titles (with abstracts if possible) from a recent alert, for example from Google Scholar, a journal's table of contents or a database alert, and your research question.",
+    "steps": [
+      "Paste your research question and the new titles and abstracts.",
+      "Ask for a must-read, maybe and skip rating with a reason for each.",
+      "Ask how the must-reads relate to your work.",
+      "Open the must-reads and decide yourself what to read."
+    ],
+    "prompt": "I am a PhD researcher in [discipline]. My research question is: [question]. Below are new publications from this week's alerts. Sort them into must-read, maybe and skip, with one line on why, based only on the title and abstract given. For the must-reads, say in one sentence whether each supports, challenges or extends my work, or offers a method I could use. Finish with a short list of search terms worth adding to my alerts. Do not add papers that are not in the list.\n\n[paste titles and abstracts]",
+    "check": "For two papers you rated differently from Copilot, read the abstract again and decide who was right; nothing in the output is a paper you did not paste.",
+    "limit": "Copilot rates on title and abstract only; set up the alerts themselves in the databases you use – or connect a source such as OpenAlex via MCP to search for new work directly."
   }
 }

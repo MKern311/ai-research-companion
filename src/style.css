@@ -272,6 +272,14 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 #resPhase{margin-bottom:14px}
 
 /* PDF export of the results view (browser print → Save as PDF) */
+#mcpBox{scroll-margin-top:150px}
+.uix{border-radius:var(--radius-s);background:var(--surface);padding:12px 14px}
+.uix h3{font-size:14px}
+.uix ul{list-style:none;margin:8px 0 8px;padding:0;display:flex;flex-direction:column;gap:6px}
+.uix li{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:14px}
+.uix li b{margin-right:2px}
+.uix .linkbtn{font-size:14px}
+
 /* ---------- slides ---------- */
 .slides-panel h3{font-size:15px;margin:18px 0 4px}
 .sl-head{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:20px;align-items:center}

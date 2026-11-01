@@ -3,19 +3,20 @@ const RISK = {1:'Low risk',2:'Medium risk',3:'High risk'};
 const RISK_DEF = {1:'Public or your own non-sensitive material; errors are easy to spot.',2:'Unpublished work, third-party content or errors that propagate into results.',3:'Personal or sensitive data, or integrity-critical decisions.'};
 const MODE_DEF = {'Assist':'You lead; AI provides suggestions on request.','Co-create':'You and AI develop the result iteratively together.','Delegate':'AI carries out a sub-task; you check the result at defined points.'};
 
-const U = (t,d,cap,pot,risk,mode)=>({t,d,cap,pot,risk,mode});
+const U = (t,d,cap,pot,risk,mode,ix=[])=>({t,d,cap,pot,risk,mode,ix});   // ix: tools in MCP/M365 that connect to Copilot
 const PHASES = [
  {id:'idee', name:'Ideation & Research Question', short:'Idea & Question',
   q:'Which relevant, open question is worth investigating?',
   goal:'Identify a research gap and formulate a precise, answerable research question.',
   tasks:['Scope the research field','Check relevance and novelty','Formulate the research question and objectives','Derive hypotheses or propositions'],
   uc:[
-   U('Topic and trend scouting','Analyse publication and citation data to reveal growing topics, clusters and under-researched intersections.',['recherche','analyse'],2,1,'Assist'),
+   U('Topic and trend scouting','Analyse publication and citation data to reveal growing topics, clusters and under-researched intersections.',['recherche','analyse'],2,1,'Assist',['OpenAlex','Litmaps']),
    U('Sparring partner for research questions','Turn rough ideas into alternative research questions, surface assumptions, and generate counter-positions and objections.',['generierung'],3,1,'Co-create'),
    U('Structured operationalisation','Structure questions with established frameworks (e.g. PICO, PICOC, SPIDER, PEO), derive sub-questions and search terms per element, sharpen the constructs and test the question against FINER.',['generierung','synthese'],2,1,'Co-create'),
-   U('Novelty check','Semantic search for closely related work to spot duplication early and sharpen your positioning.',['recherche'],3,2,'Assist'),
+   U('Novelty check','Semantic search for closely related work to spot duplication early and sharpen your positioning.',['recherche'],3,2,'Assist',['Semantic Scholar','OpenAlex','Consensus','Elicit']),
    U('Interdisciplinary bridges','Suggest concepts and methods from neighbouring disciplines that transfer to your research question.',['generierung','recherche'],2,2,'Co-create'),
-   U('Research gap mapping','Sort the gaps a body of literature leaves into types – empirical, methodological, theoretical, practical or contradictory findings – and back each one with the studies that show it.',['synthese','analyse'],3,2,'Co-create')
+   U('Research gap mapping','Sort the gaps a body of literature leaves into types – empirical, methodological, theoretical, practical or contradictory findings – and back each one with the studies that show it.',['synthese','analyse'],3,2,'Co-create'),
+   U('Theoretical framework & hypotheses','Compare candidate theories for your question, derive hypotheses or propositions with their reasoning, and sketch the conceptual model.',['generierung','synthese'],3,2,'Co-create')
   ],
   limits:['Apparent “gaps” may simply be gaps in the model’s knowledge – always verify against subject databases.','Popularity bias: models reinforce established mainstream topics.','Judging originality and relevance remains your task – and your supervisor’s.'],
   disc:['Where do you get stuck most when narrowing down a topic?','Under what conditions would you trust an AI-generated research question?']},
@@ -25,16 +26,15 @@ const PHASES = [
   tasks:['Choose the review type and protocol','Develop a search strategy','Search subject databases','Read and understand key papers','Screen, extract and appraise','Synthesise findings'],
   uc:[
    U('Search string development','Draft and iteratively refine Boolean search strings, including synonyms and subject headings, for bibliographic databases – and check them against the PRESS checklist before you run them.',['generierung'],3,1,'Co-create'),
-   U('Semantic search & citation networks','Search by meaning rather than keywords and follow forward and backward citations to find key works.',['recherche'],3,1,'Assist'),
-   U('AI-assisted screening','Prioritise results by relevance (active learning) and get include / exclude / unclear suggestions with the deciding criterion, at title-and-abstract and full-text stage; you make the final call.',['analyse','agentisch'],3,2,'Delegate'),
-   U('Data extraction into evidence tables','Transfer sample, method, variables and effects from full texts into structured tables – with a second, independent check.',['analyse'],3,2,'Co-create'),
-   U('Querying your own PDF corpus','Make your literature library searchable and get answers with verified source passages (retrieval-augmented).',['recherche','synthese'],3,2,'Assist'),
+   U('Semantic search & citation networks','Search by meaning rather than keywords, follow forward and backward citations, or let a research agent run a multi-step search and draft a cited overview.',['recherche'],3,1,'Assist',['Semantic Scholar','OpenAlex','Consensus','Litmaps','Paper Search MCP']),
+   U('AI-assisted screening','Prioritise results by relevance and get include / exclude / unclear suggestions with the deciding criterion, at title-and-abstract and full-text stage; use AI as a second screener and measure agreement (e.g. Cohen’s kappa) – you make the final call.',['analyse','agentisch'],3,2,'Delegate'),
+   U('Data extraction into evidence tables','Transfer sample, method, variables and effects – including effect sizes for a meta-analysis – from full texts into structured tables, with a second, independent check.',['analyse'],3,2,'Co-create',['Elicit']),
+   U('Querying your own PDF corpus','Make your literature library searchable – for example in a Copilot notebook or through your reference manager – and get answers with verified source passages.',['recherche','synthese'],3,2,'Assist',['Zotero','EndNote','Mendeley']),
    U('Synthesis & concept matrix','Compare findings across studies, flag contradictions and draft a concept matrix (Webster & Watson) showing which concepts each study covers fully, partly or not at all.',['synthese'],2,3,'Co-create'),
-   U('Understanding difficult papers & methods','Have concepts, methods, notation or statistics explained in plain language, ask follow-up questions – and check against the original.',['synthese','generierung'],3,2,'Assist'),
-   U('Reading non-English literature','Translate and summarise sources in other languages to judge their relevance; quote only from verified translations.',['generierung','synthese'],2,2,'Assist'),
-   U('Choosing the review type & protocol','Check whether a systematic, scoping or narrative review fits your question, the literature and your time – and draft the review protocol.',['generierung','synthese'],2,1,'Co-create'),
-   U('Inclusion & exclusion criteria','Derive testable criteria from your research question, mark which can be judged from title and abstract and which only from the full text, and list borderline cases.',['generierung','analyse'],3,1,'Co-create'),
-   U('Documenting the review (PRISMA)','Turn your search log, counts per stage and exclusion reasons into the numbers for a PRISMA flow diagram and a draft methods paragraph.',['synthese','generierung'],2,1,'Assist')
+   U('Understanding difficult or non-English papers','Have concepts, methods, notation or statistics explained in plain language, or translate and summarise sources in other languages – then check against the original and quote only verified translations.',['synthese','generierung'],3,2,'Assist'),
+   U('Choosing the review type & protocol','Check whether a systematic, scoping or narrative review fits your question, the literature and your time – and draft the protocol, including testable inclusion and exclusion criteria and borderline cases.',['generierung','synthese'],2,1,'Co-create'),
+   U('Documenting the review (PRISMA)','Turn your search log, counts per stage and exclusion reasons into PRISMA flow numbers, remove duplicates, check your report against the PRISMA 2020 checklist and draft the methods paragraph.',['synthese','generierung'],2,1,'Assist'),
+   U('Quality appraisal of studies','Appraise each study with an established checklist (e.g. CASP, MMAT, JBI), criterion by criterion with the supporting passage – the judgement stays yours.',['analyse'],3,2,'Co-create')
   ],
   limits:['Fabricated or misattributed references – verify every source.','Uploading papers: publisher licences and your library’s guidance decide what may be shared with AI tools.','Coverage gaps: paywalled content and non-English literature are often missing.','Systematic reviews require reproducible decisions (e.g. PRISMA) – document every AI step.'],
   disc:['Which review step takes you the most time?','How would you document AI steps so that your review stays reproducible?']},
@@ -43,8 +43,8 @@ const PHASES = [
   goal:'Develop a robust design with a suitable method, sample and instruments, plus ethics approval and a data management plan.',
   tasks:['Choose method and design','Develop instruments (questionnaire, interview guide, protocol)','Plan the sample','Ethics approval and data management plan','Pre-registration where relevant'],
   uc:[
-   U('Methods advice','Compare design alternatives with their pros and cons and work systematically through threats to validity.',['generierung','synthese'],2,2,'Co-create'),
-   U('Instrument development','Draft items, interview guides and response scales; check for clarity and for double-barrelled or leading questions.',['generierung'],3,2,'Co-create'),
+   U('Methods advice','Compare design alternatives with their pros and cons, plan experiments (conditions, variables, controls) and work systematically through threats to validity.',['generierung','synthese'],2,2,'Co-create'),
+   U('Instrument development','Draft items, interview guides and response scales; check for clarity and for double-barrelled or leading questions, and map every item to your research questions – also across survey and interview in mixed methods.',['generierung'],3,2,'Co-create'),
    U('Pre-testing with synthetic personas','Test instruments with simulated respondents for comprehension issues – as a supplement to real pre-tests, never a replacement.',['generierung','analyse'],2,3,'Assist'),
    U('Sample size & power analysis','Generate calculations as traceable code (e.g. R or Python) and make assumptions explicit.',['analyse'],2,2,'Assist'),
    U('Ethics application & data management plan','Structure drafts along your institution’s templates – the study-specific reasoning on consent, risks and anonymisation must be your own.',['generierung'],3,2,'Co-create'),
@@ -57,13 +57,13 @@ const PHASES = [
   goal:'Collect, capture and document high-quality data.',
   tasks:['Field access and recruitment','Fieldwork (interviews, surveys, experiments, archives)','Transcription','Capturing unstructured sources','Documentation'],
   uc:[
-   U('Transcription & translation','Transcribe interviews and focus groups, separate speakers and translate where needed – only with approved tools.',['analyse'],3,3,'Delegate'),
+   U('Transcription & translation','Transcribe interviews and focus groups, separate speakers and translate where needed – only with approved tools.',['analyse'],3,3,'Delegate',['Otter.ai','Whisper (OpenAI)']),
    U('Extraction from documents','Obtain structured data from PDFs, reports, websites or archives (e.g. key figures, statements, metadata).',['analyse','agentisch'],3,2,'Delegate'),
    U('LLM as annotator','Pre-annotate large volumes of text against a coding scheme; humans check samples using an agreement measure.',['analyse'],3,2,'Delegate'),
    U('Adaptive surveying','Conversational interviews or surveys that ask follow-up questions dynamically – with clear ethical guardrails.',['generierung','agentisch'],2,3,'Delegate'),
    U('Dataset discovery','Find open secondary data and repositories for the research question and assess their suitability.',['recherche'],2,1,'Assist'),
    U('Pseudonymising transcripts','Detect and replace names, places and other identifiers before analysis – in an approved environment, always checked by hand.',['analyse'],2,3,'Assist'),
-   U('Reading historical & handwritten sources','Transcribe printed or handwritten archival material (OCR/HTR) and draft first translations for close reading.',['analyse','generierung'],2,2,'Co-create')
+   U('Reading historical & handwritten sources','Transcribe printed or handwritten archival material (OCR/HTR) and draft first translations for close reading.',['analyse','generierung'],2,2,'Co-create',['Transkribus'])
   ],
   limits:['Process personal and sensitive data only in approved, protected environments – and only as your ethics approval allows.','Participant information and ethics approval must cover AI processing; clarify the legal basis with your ethics committee or data protection officer.','Check transcription and annotation errors systematically through sampling.'],
   disc:['Do you know which of your data may go into which AI tool?','Where is your biggest manual data-capture effort?']},
@@ -72,14 +72,15 @@ const PHASES = [
   goal:'Clean and analyse data and derive results transparently and reproducibly.',
   tasks:['Data cleaning','Quantitative analysis','Qualitative analysis','Code, simulation and visualisation','Robustness checks'],
   uc:[
-   U('Coding assistance for statistics','Generate, explain, debug and document analysis code (R, Python, Stata, SPSS syntax).',['generierung','analyse'],3,2,'Co-create'),
+   U('Coding assistance for statistics','Generate, explain, debug and document analysis code (R, Python, Stata, SPSS syntax) – from regression to structural equation models or a meta-analysis.',['generierung','analyse'],3,2,'Co-create',['JASP','Jamovi','GitHub Copilot']),
    U('Data cleaning','Detect inconsistencies, outliers and missing values; record cleaning steps as a script.',['analyse'],3,1,'Co-create'),
-   U('Qualitative coding','Propose a coding frame, carry out first-pass coding and condense categories – with human validation. Check whether this fits your approach: reflexive methods are critical of AI coding.',['analyse','synthese'],3,2,'Co-create'),
+   U('Qualitative coding','Propose a coding frame, do first-pass coding, develop themes (e.g. Braun & Clarke, grounded theory), check saturation and verify every quote – with human validation. Check whether this fits your approach: reflexive methods are critical of AI coding.',['analyse','synthese'],3,2,'Co-create'),
    U('Text as data','Classification, sentiment analysis and topic modelling of large text corpora with language models.',['analyse'],3,2,'Delegate'),
    U('Conversational exploratory analysis','Explore datasets in natural language (“How is … distributed?”) and surface initial patterns.',['analyse','agentisch'],2,2,'Assist'),
    U('Visualisation','Create chart suggestions and publication-ready figures as reproducible code.',['generierung'],2,1,'Co-create'),
-   U('Research software & simulation code','Write, refactor, test and document code for models, simulations or lab data pipelines.',['generierung','analyse'],3,2,'Co-create'),
-   U('Codebook with anchor examples','Turn a category system into a codebook – definition, inclusion and exclusion rules, anchor example and rule for borderline cases – and test it on a sample passage.',['analyse','generierung'],3,2,'Co-create')
+   U('Research software & simulation code','Write, refactor, test and document code for models, simulations or lab data pipelines.',['generierung','analyse'],3,2,'Co-create',['GitHub Copilot']),
+   U('Codebook with anchor examples','Turn a category system into a codebook – definition, inclusion and exclusion rules, anchor example and rule for borderline cases – and test it on a sample passage and with a second coder.',['analyse','generierung'],3,2,'Co-create'),
+   U('Interpreting & reporting results','Have your own statistical output explained, check assumptions and quality criteria (e.g. reliability, model fit, validity of scales) and draft an APA-style results paragraph.',['analyse','generierung'],3,2,'Co-create')
   ],
   limits:['Plausible-looking but wrong code – verify results independently.','Easier “fishing” for significance: pre-specify analysis plans.','Reproducibility: record date, tool, prompt and the saved output; keep analyses as code.'],
   disc:['Which analysis steps would you never leave to AI without checking?','How do you keep your analysis reproducible when the tools keep changing?']},
@@ -89,15 +90,17 @@ const PHASES = [
   tasks:['Structure and write chapters and papers','Revise language and style','Select a journal and format','Submission, peer review and revision','Viva preparation'],
   uc:[
    U('Structure & line of argument','Check the narrative thread, uncover gaps in the argument and adapt the structure to journal conventions.',['synthese','analyse'],3,1,'Co-create'),
-   U('Language editing','Improve clarity, precision and flow – especially when writing in a second language. For the thesis, check your university’s rules on editing and proofreading.',['generierung'],3,2,'Assist'),
-   U('Consistency check','Reconcile figures across text, tables and abstract, harmonise terminology and check citations against the reference list.',['analyse'],3,1,'Delegate'),
-   U('Journal selection & formatting','Find suitable journals by scope and requirements; apply formatting guidelines.',['recherche','agentisch'],2,1,'Delegate'),
-   U('Pre-submission review','Have the text assessed as a critical reviewer would: weaknesses in method, contribution and limitations.',['analyse'],3,1,'Assist'),
+   U('Language editing','Improve clarity, precision and flow – especially in a second language – and spot generic or AI-sounding phrasing so the text stays yours. For the thesis, check your university’s rules on editing and proofreading.',['generierung'],3,2,'Assist',['DeepL Write']),
+   U('Consistency check','Reconcile figures across text, tables and abstract, harmonise terminology and match in-text citations to the reference list.',['analyse'],3,1,'Delegate'),
+   U('Journal selection & formatting','Find suitable journals by scope and requirements; apply formatting guidelines, citation styles and LaTeX or BibTeX conventions.',['recherche','agentisch'],2,1,'Delegate',['Zotero','Overleaf']),
+   U('Pre-submission review','Have the text assessed by a panel of critical reviewers – methods, theory, devil’s advocate – including missing reporting items for your design, and turn it into a revision roadmap.',['analyse'],3,1,'Assist'),
    U('Responding to reviewers','Structure reviewer comments and draft the response letter and summary of changes.',['synthese','generierung'],2,1,'Co-create'),
    U('Thesis structure across chapters','Check the golden thread from research questions to conclusions across chapters; spot gaps, overlaps and repetition.',['synthese','analyse'],3,2,'Co-create'),
-   U('Mock viva preparation','Generate likely examiner questions from your thesis and practise your answers – a complement to, not a substitute for, your supervisors.',['generierung','analyse'],3,1,'Co-create')
+   U('Mock viva preparation','Generate likely examiner questions from your thesis and practise your answers – a complement to, not a substitute for, your supervisors.',['generierung','analyse'],3,1,'Co-create'),
+   U('Reference & claim check','Check that every reference exists and its details are correct – and that each cited source really supports the sentence it is cited for.',['recherche','analyse'],3,1,'Assist',['OpenAlex','scite','Zotero']),
+   U('Section draft from your own notes','Turn your own notes and evidence map into a first draft of a section, every claim linked to its source. Rework it in your own words and declare the AI use – check your university’s rules first.',['generierung','synthese'],2,3,'Co-create')
   ],
-  limits:['AI cannot be an author; responsibility lies with you (COPE). In a thesis, you must be able to explain and defend every passage.','Declare AI use as your university and publisher require.','Co-authored or third parties’ unpublished manuscripts only with their consent – never upload peer-review manuscripts.'],
+  limits:['AI-drafted text must be reworked and declared – many universities restrict it in the thesis, so check the rules before drafting with AI.','AI cannot be an author; responsibility lies with you (COPE). In a thesis, you must be able to explain and defend every passage.','Declare AI use as your university and publisher require.','Co-authored or third parties’ unpublished manuscripts only with their consent – never upload peer-review manuscripts.'],
   disc:['How would you declare AI use in your thesis or paper?','Where does language polishing end and substantive contribution begin?']},
  {id:'transfer', name:'Knowledge Exchange & Impact', short:'Impact',
   q:'Who should know about it – and what should change?',
@@ -105,7 +108,7 @@ const PHASES = [
   tasks:['Conference talks and posters','Science communication','Transfer to practice and policy','Teaching duties','Documenting impact'],
   uc:[
    U('Audience-specific formats','Derive lay summaries, policy briefs, blog posts or social media posts from a paper.',['generierung','synthese'],3,1,'Co-create'),
-   U('Presentations & visuals','Draft slides, posters, infographics and explanatory graphics from results.',['generierung'],3,1,'Co-create'),
+   U('Presentations & visuals','Draft slides, posters, infographics and explanatory graphics from results.',['generierung'],3,1,'Co-create',['Napkin AI']),
    U('Research-informed teaching','Develop case studies, exercises and questions for your teaching from current research findings.',['generierung'],2,1,'Co-create'),
    U('Gathering impact evidence','Find mentions in policy, media and practice and structure them as evidence of impact.',['recherche','agentisch'],2,2,'Delegate'),
    U('Multilingual dissemination','Translate content for international audiences and adapt it culturally.',['generierung'],2,1,'Assist')
@@ -117,14 +120,15 @@ const PHASES = [
   goal:'Plan your doctorate, work well with your supervisors, manage your data and build skills – responsibly.',
   tasks:['PhD planning and time management','Supervision','Annual and progress reviews','Research data management','Skills development','AI declarations and integrity'],
   uc:[
-   U('Supervision meetings','Prepare agendas and questions for supervision and summarise agreed actions afterwards from your own notes.',['synthese','generierung'],3,1,'Assist'),
+   U('Supervision meetings','Prepare agendas and questions for supervision and summarise agreed actions afterwards from your own notes.',['synthese','generierung'],3,1,'Assist',['Otter.ai']),
    U('Annual review & progress reports','Structure progress, plans and risks for annual, transfer or confirmation reviews from your notes and earlier reports.',['generierung','synthese'],2,2,'Co-create'),
    U('PhD planning & time management','Break the doctorate into milestones, plan your weeks and re-plan after setbacks.',['generierung'],2,1,'Assist'),
-   U('Personal knowledge base','Bring notes, papers and ideas together so that you can search and connect them.',['recherche','synthese'],3,2,'Assist'),
-   U('Metadata & FAIR data','Suggest metadata, codebooks and README files for data publications.',['generierung'],2,1,'Co-create'),
-   U('AI use log','Record date, tool, prompt and saved output for each step – the basis for your AI declaration in the thesis.',['agentisch'],2,1,'Assist'),
+   U('Personal knowledge base','Bring notes, papers, highlights and annotations together so that you can search and connect them.',['recherche','synthese'],3,2,'Assist',['Zotero','Notion','Obsidian']),
+   U('Metadata, FAIR data & replication','Suggest metadata, codebooks and README files for data publications, assemble a replication package and check that every number in the paper can be reproduced from the code.',['generierung'],2,1,'Co-create',['GitHub Copilot']),
+   U('AI use & decision log','Record date, tool, prompt, saved output and the research decisions they informed – the basis for your AI declaration and a traceable thesis.',['agentisch'],2,1,'Assist'),
    U('Learning new skills','Learn a method, statistics package or programming language step by step with an AI tutor – and test yourself.',['generierung'],2,1,'Assist'),
-   U('Research agents with checkpoints','Let agents carry out multi-step tasks (search → extraction → report) with defined human checkpoints.',['agentisch'],3,3,'Delegate')
+   U('Project assistant & research agents','Set up an assistant that follows your standing rules (citation style, terminology, no invented sources), or let agents carry out multi-step tasks with defined human checkpoints.',['agentisch'],3,3,'Delegate'),
+   U('Staying up to date','Sort new publications from alerts and journal tables of contents against your research question each week and decide what to read.',['recherche','synthese'],2,1,'Assist',['OpenAlex','Semantic Scholar'])
   ],
   limits:['Your university’s AI policy and data rules decide which tools you may use – check before uploading anything.','Use the university-provided tool with your university login rather than personal accounts.','Keep your thesis your own: be ready to explain and defend every passage in your viva.'],
   disc:['What would go into your own AI use log – and who would read it?','Which part of your doctorate would you never hand to AI?']}
@@ -194,6 +198,8 @@ const TOOLS = [
 
 // MCP servers per tool (checked 28 October 2026): [o = official / c = community, remote server?, source, note]
 const MCP = {
+ 'OpenAlex':['o',1,'https://help.openalex.org/access/connector/','Run by OpenAlex; sign-in, free daily allowance; can also check whether references exist.'],
+ 'Paper Search MCP':['c',0,'https://github.com/openags/paper-search-mcp','Searches several open sources at once (e.g. OpenAlex, Crossref, Semantic Scholar).'],
  'Semantic Scholar':['o',1,'https://allenai.org/asta/resources/mcp','Ai2 Asta server on the Semantic Scholar corpus; API key optional.'],
  'Elicit':['o',1,'https://support.elicit.com/en/articles/14757404-use-elicit-via-mcp-server','Sign-in with your account; Pro plan or higher.'],
  'Perplexity':['o',1,'https://docs.perplexity.ai/guides/mcp-server','Remote or local; uses the paid Perplexity API.'],
@@ -287,4 +293,4 @@ const SOURCES = [
  ['Microsoft Learn – Federated Copilot connectors','https://learn.microsoft.com/en-us/microsoftsearch/federated-connectors-overview'],
  ['Microsoft Learn – Purchase and manage agents in Copilot Chat','https://learn.microsoft.com/en-us/copilot/manage-agents-copilot-chat']
 ];
-const VERSION = 'v5 · 30 October 2026';
+const VERSION = 'v5 · 1 November 2026';

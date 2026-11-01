@@ -89,7 +89,7 @@
       "For Python, ask Copilot to run it; otherwise run it in your own software.",
       "Paste any error message back and ask for a fix with an explanation."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline] using [R, Python, Stata or SPSS]. The attached file is a [public or dummy] dataset with the variables [key variables]. I want to [analysis, e.g. run a linear regression of Y on X1 and X2 with robust standard errors]. Write commented code that loads the data, checks variable types and missing values, runs the analysis and prints the results. Then explain in plain language what each block does and which assumptions I should check. If a function or option may not exist in my version, say so.",
+    "prompt": "I am a postgraduate researcher in [discipline] using [R, Python, Stata or SPSS]. The attached file is a [public or dummy] dataset with the variables [key variables]. I want to [analysis, e.g. run a linear regression of Y on X1 and X2 with robust standard errors]. Write commented code that loads the data, checks variable types and missing values, runs the analysis and prints the results. Then explain in plain language what each block does and which assumptions I should check. If a function or option may not exist in my version, say so. (For more complex models – for example structural equation models with lavaan or seminr, or a meta-analysis with metafor – name the package and paste a short excerpt of its documentation, so the code follows it.)",
     "check": "The code runs without errors and one key number, such as the sample size or a mean, matches what you get by checking the data directly.",
     "limit": "Copilot runs Python only; code in R, Stata or SPSS has to be run and checked in your own software."
   },
@@ -109,10 +109,10 @@
     "steps": [
       "Paste the starter prompt with your research question and the excerpts.",
       "Check that each code has a clear definition and a fitting example quote.",
-      "Compare the coding with your own first reading of the excerpts.",
-      "Note what Copilot missed, flattened or over-interpreted."
+      "Ask how the codes group into candidate themes and whether new codes still appear.",
+      "Compare with your own reading and note what Copilot missed, flattened or over-interpreted."
     ],
-    "prompt": "I am a qualitative researcher in [discipline]. My research question is: [question]. Below are [number] short excerpts for practice. Propose a coding frame of 5–8 codes, each with a one-line definition and an example quote. Then code each excerpt, showing the exact passage for every code applied. Finally, suggest how the codes might group into 2–3 broader categories, and point out where an excerpt could be read in more than one way. Do not go beyond what the text says. Excerpts: [paste text]",
+    "prompt": "I am a qualitative researcher in [discipline]. My research question is: [question]. Below are [number] short excerpts for practice. Propose a coding frame of 5–8 codes, each with a one-line definition and an example quote. Then code each excerpt, showing the exact passage for every code applied. Finally, suggest how the codes might group into 2–3 candidate themes (for example in the sense of Braun & Clarke), say whether the last excerpt still produced new codes (a first hint on saturation), and point out where an excerpt could be read in more than one way. Do not go beyond what the text says. Excerpts: [paste text]",
     "check": "Every quoted passage appears word for word in the excerpts and you can name at least one code you would define differently; in reflexive approaches, treat the output as a prompt for your own thinking, not as coding."
   },
   "analyse-3": {
@@ -179,7 +179,7 @@
       "Rewrite any sentence where the edit no longer sounds like you.",
       "Check your university's rules on proofreading before using this on a thesis."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline] writing in English as my [first or second] language, for [readership, e.g. a journal in my field]. Edit the paragraph below for clarity, precision and flow in UK English, keeping my meaning, terminology and citations unchanged. Do not add new content or claims. Return 1) the edited paragraph and 2) a table: original phrase, change, reason. Mark any sentence where my meaning is unclear instead of guessing. Paragraph: [paste text]",
+    "prompt": "I am a postgraduate researcher in [discipline] writing in English as my [first or second] language, for [readership, e.g. a journal in my field]. Edit the paragraph below for clarity, precision and flow in UK English, keeping my meaning, terminology and citations unchanged. Do not add new content or claims. Return 1) the edited paragraph and 2) a table: original phrase, change, reason. Mark any sentence where my meaning is unclear instead of guessing, and flag generic or typically AI-sounding phrases (for example 'delve into', 'plays a crucial role', empty intensifiers) so I can rewrite them in my own voice. Paragraph: [paste text]",
     "check": "Read both versions side by side: no technical term, number, hedge or citation has changed, and you understand and agree with every change in the table."
   },
   "publikation-2": {
@@ -190,7 +190,7 @@
       "Change one number in your copy on purpose and attach it again.",
       "See whether a rerun of the prompt catches the planted mismatch."
     ],
-    "prompt": "I am checking my own [paper or chapter] before submission. In the attached document, check consistency: 1) numbers (sample sizes, percentages, statistics) that differ between the abstract, main text and tables; 2) key terms or abbreviations used inconsistently; 3) in-text citations missing from the reference list, and references never cited. Return a table: issue type, location (section or page), what each place says, suggested fix. Only report what you find in the document; if parts were too long to read fully, say which.",
+    "prompt": "I am checking my own [paper or chapter] before submission. In the attached document, check consistency: 1) numbers (sample sizes, percentages, statistics) that differ between the abstract, main text and tables; 2) key terms or abbreviations used inconsistently; 3) in-text citations missing from the reference list, and references never cited. (Whether the references themselves exist and support the text is a separate check.) Return a table: issue type, location (section or page), what each place says, suggested fix. Only report what you find in the document; if parts were too long to read fully, say which.",
     "check": "At least three flagged issues are real when you look them up, and the planted mismatch is caught; if not, check long documents section by section."
   }
 }

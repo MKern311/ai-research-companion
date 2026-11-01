@@ -75,9 +75,9 @@
       "Ask for related papers that use different terms for the same problem.",
       "Check the results against the paper's Google Scholar 'Cited by' list and reference list."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline]. A key paper for my work is [title, authors, year, DOI]. First, describe its core problem and idea in three plain sentences without its own jargon. Then search for up to six papers that address the same problem, including ones that use different terminology, and up to three that cite this paper. For each, give authors, year, title, a working link and one sentence on the connection. If you are not sure, say so; do not invent sources.",
+    "prompt": "I am a postgraduate researcher in [discipline]. A key paper for my work is [title, authors, year, DOI]. First, describe its core problem and idea in three plain sentences without its own jargon. Then search for up to six papers that address the same problem, including ones that use different terminology, and up to three that cite this paper. For each, give authors, year, title, a working link and one sentence on the connection. Finish with a 150-word overview of how these papers relate, citing each one. If you are not sure, say so; do not invent sources.",
     "check": "Every link opens a real paper, and at least one relevant result is not already in your reference list or easy to find with your usual keywords.",
-    "limit": "Copilot cannot browse citation databases; this tests meaning-based web search, and the citation trail must be checked by hand in Google Scholar."
+    "limit": "Copilot searches the open web, not citation databases; check the citation trail by hand in Google Scholar – or connect a scholarly database (for example OpenAlex or Semantic Scholar) to Copilot via MCP."
   },
   "literatur-2": {
     "bring": "Your inclusion and exclusion criteria and 10 titles with abstracts from a public search, which you screen yourself first.",
@@ -85,7 +85,7 @@
       "Screen the 10 abstracts yourself and note your decisions.",
       "Paste your criteria and the 10 numbered abstracts into Copilot Chat.",
       "Ask for include, exclude or unsure per abstract, with a supporting quote.",
-      "Compare its decisions with yours and discuss each disagreement."
+      "Compare its decisions with yours, count the agreements (or compute Cohen's kappa) and discuss each disagreement."
     ],
     "prompt": "I am screening records for a literature review on [topic]. Inclusion criteria: [criteria]. Exclusion criteria: [criteria]. Below are 10 numbered titles with abstracts. For each, give a table row: number, decision (include, exclude or unsure), the criterion that decides it, and a short quote from the abstract that supports the decision. Use 'unsure' when the abstract does not give enough information; do not guess. I will make the final decision.\n\n[paste numbered titles and abstracts]",
     "check": "Count how many of the 10 decisions match yours and read each quoted passage to confirm it is really in the abstract and supports the decision.",
@@ -99,7 +99,7 @@
       "Ask it to mark missing information as 'not reported'.",
       "Check three values, including sample size and main effect, against the PDF."
     ],
-    "prompt": "I am building an evidence table for a review on [topic]. From the attached paper(s), extract one table row per study with these columns: citation, design, sample size and population, setting, key variables or measures, main result with the reported statistic, stated limitations. After each value give the page or section where you found it. Copy numbers exactly as reported; do not calculate, round or infer. If a field is not in the paper, write 'not reported'.",
+    "prompt": "I am building an evidence table for a review on [topic]. From the attached paper(s), extract one table row per study with these columns: citation, design, sample size and population, setting, key variables or measures, main result with the reported statistic, stated limitations – and, if the paper reports the statistics for it, the effect size (for example d, r or an odds ratio) with its confidence interval. After each value give the page or section where you found it. Copy numbers exactly as reported; do not calculate, round or infer. If a field is not in the paper, write 'not reported'.",
     "check": "Three values you pick, including sample size and the main statistic, match the PDF exactly at the page or section Copilot gave."
   },
   "literatur-4": {
@@ -112,7 +112,7 @@
     ],
     "prompt": "I am a postgraduate researcher in [discipline]. Answer my question using only the attached PDFs. My question is: [question]. Give a short answer (up to 200 words), then a list of supporting passages: file name, page, exact quote of one to three sentences. Only quote text that appears word for word in the files. If the files do not answer the question, or only partly, say so clearly instead of using outside knowledge.",
     "check": "Each quote is found word for word in the PDF (Ctrl+F) and supports the claim, and Copilot says 'not in the files' for the question you know is not answered.",
-    "limit": "Copilot Chat answers over a few attached PDFs, not your whole library, and may partly ignore long documents."
+    "limit": "Copilot Chat answers over a few attached PDFs; for a larger set, use a Copilot notebook or connect your reference manager (for example Zotero) via MCP."
   },
   "literatur-5": {
     "bring": "Abstracts or short summaries of five or six studies you already know well, or their open-access PDFs.",
@@ -126,36 +126,25 @@
     "check": "Every cell for two studies matches the originals; be cautious, because Copilot can smooth over contradictions or overstate agreement, so the synthesis and its argument must be your own."
   },
   "literatur-6": {
-    "bring": "An open-access paper with a method, formula or statistic you find hard, as a PDF or the copied passage.",
+    "bring": "An open-access paper with a method, formula or statistic you find hard – or the abstract or a page of a paper in a language other than English.",
     "steps": [
-      "Attach the paper or paste the difficult passage.",
-      "Ask for a plain-language, step-by-step explanation with every symbol defined.",
+      "Attach the paper or paste the difficult or non-English passage.",
+      "Ask for a plain-language explanation with every symbol defined, or an English translation with a relevance summary.",
       "Ask a follow-up question about the part that is still unclear.",
-      "Re-read the original passage and check the explanation matches it."
+      "Check the result against the original, the paper's English abstract or a colleague."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline] and new to [method or statistic]. Explain the passage below (or section [x] of the attached paper) in plain language. Go step by step, define every symbol and term, and give a small worked example with made-up numbers. Then name the key assumptions the method relies on. Keep it under 400 words. Mark clearly which parts of your explanation go beyond what the paper itself says.\n\n[paste passage]",
-    "check": "The explanation uses the same notation and numbers as the paper, and one key point is confirmed by a methods textbook or reliable methods source."
-  },
-  "literatur-7": {
-    "bring": "The abstract or one or two pages of an open-access paper in a language other than English, ideally one with an English abstract too.",
-    "steps": [
-      "Paste the non-English text and state your research question.",
-      "Ask for an English (UK) translation, then a short relevance summary.",
-      "Ask it to flag uncertain terms with the original word in brackets.",
-      "Compare with the paper's English abstract or a colleague who reads the language."
-    ],
-    "prompt": "I am a postgraduate researcher in [discipline] deciding whether a [language] paper is relevant to my research question: [question]. Translate the text below into English (UK spelling). Keep technical terms precise and put the original word in brackets wherever you are unsure of the translation. Then give a five-bullet summary: research question, method, sample, main findings, relevance to my question. Note that this translation is for screening only.\n\n[paste text]",
-    "check": "Key facts (method, sample, main finding) match the paper's English abstract or a colleague's reading; quote only from a translation you have verified."
+    "prompt": "I am a postgraduate researcher in [discipline]. Choose the part that applies.\n\nA – difficult method: I am new to [method or statistic]. Explain the passage below (or section [x] of the attached paper) in plain language. Go step by step, define every symbol and term, and give a small worked example with made-up numbers. Then name the key assumptions the method relies on. Keep it under 400 words. Mark clearly which parts of your explanation go beyond what the paper itself says.\n\nB – non-English paper: I am deciding whether a [language] paper is relevant to my research question: [question]. Translate the text below into English (UK spelling), keep technical terms precise and put the original word in brackets wherever you are unsure. Then give a five-bullet summary: research question, method, sample, main findings, relevance to my question. This translation is for screening only.\n\n[paste passage]",
+    "check": "The explanation uses the same notation and numbers as the paper, or the key facts of the translation match the English abstract or a colleague's reading; quote only from a translation you have verified."
   },
   "design-0": {
     "bring": "Your research question and your planned design in two or three sentences.",
     "steps": [
       "Paste your research question and planned design.",
       "Ask for a comparison of three design alternatives in a table.",
-      "Ask for the main threats to validity of your preferred design, with mitigations.",
+      "Ask for the main threats to validity of your preferred design, with mitigations – and, for an experiment, a plan of conditions, variables and controls.",
       "Compare the threats with what your methods textbook or supervisor would name."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. My planned design is: [design]. Compare it with two realistic alternatives in a table: design, what it can answer, main strengths, main weaknesses, practical demands (time, access, data). Then, for my planned design, list the main threats to validity (or, for qualitative work, to trustworthiness), each with a concrete way to reduce it. Be specific to my study rather than generic. Keep it under 450 words.",
+    "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. My planned design is: [design]. Compare it with two realistic alternatives in a table: design, what it can answer, main strengths, main weaknesses, practical demands (time, access, data). Then, for my planned design, list the main threats to validity (or, for qualitative work, to trustworthiness), each with a concrete way to reduce it. If my design is an experiment, add a short plan: conditions, independent and dependent variables, controls and randomisation. Be specific to my study rather than generic. Keep it under 450 words.",
     "check": "The threats named include those you already know about from your methods training, and each one is specific to your study rather than a textbook list."
   },
   "design-1": {
@@ -164,9 +153,9 @@
       "Paste your draft items and describe the construct and target group.",
       "Ask Copilot to flag double-barrelled, leading, ambiguous or jargon-heavy items.",
       "Ask for revised wording and a suitable response scale.",
-      "Check that each revision still measures your intended construct."
+      "Check that each revision still measures your intended construct and every research question is covered."
     ],
-    "prompt": "I am developing a [survey or interview guide] on [construct] for [target group]. Review the draft items below. Show a table: item number, original wording, problem (double-barrelled, leading, ambiguous, jargon, mismatch with response scale, or none), revised wording. Keep the meaning and the construct unchanged. Then suggest a suitable response scale and say whether a validated scale for this construct might already exist; if you are not sure, say so; do not invent sources.\n\n[paste items]",
+    "prompt": "I am developing a [survey or interview guide] on [construct] for [target group]. Review the draft items below. Show a table: item number, original wording, problem (double-barrelled, leading, ambiguous, jargon, mismatch with response scale, or none), revised wording. Keep the meaning and the construct unchanged. Add a column mapping each item to the research question or construct it serves, and flag research questions that no item covers. Then suggest a suitable response scale and say whether a validated scale for this construct might already exist; if you are not sure, say so; do not invent sources.\n\n[paste items]",
     "check": "Each flagged problem is real when you re-read the original item, and each revised item still asks about the construct you intended."
   },
   "design-2": {
