@@ -303,7 +303,7 @@ const AGENDA = [
  ['15:00','16:45','Where does AI actually help me? Let\'s focus on your Research Process','Manuel + Team'],
  ['16:45','17:00','So, what changes on Monday?','Oliver']
 ];
-const AGENDA_DAY = '2026-11-04', TOOL_SLOT = 5;
+const AGENDA_DAY = '2026-11-04', TOOL_SLOT = 5, SURVEY_SLOT = 1;
 
 /* Slides of Tom's sessions: assets/slides/tom/sNN.webp, exported from PowerPoint (hidden slides left out) */
 const SLIDES = {title:'Wait, where does my data go? · Why did it say that? A common baseline for prompting', who:'Tom', n:31, dir:'assets/slides/tom/', pdf:'assets/slides/tom/tom-slides.pdf', pdfSize:3006040,

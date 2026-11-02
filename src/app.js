@@ -650,7 +650,7 @@ function renderAgenda(){
   const now = londonNow(), mins = t => +t.slice(0, 2) * 60 + +t.slice(3);
   $('#agenda').innerHTML = AGENDA.map(([a, b, title, who], i) => {
     const live = now.day === AGENDA_DAY && now.min >= mins(a) && now.min < mins(b);
-    return `<li class="${who ? '' : 'brk'}${live ? ' live' : ''}"><span class="t">${a}–${b}</span><span><b>${esc(title)}</b>${who ? `<small>${esc(who)}</small>` : ''}${i === TOOL_SLOT ? '<small class="here">This tool · Steps 1 and 2 below</small>' : ''}${SLIDES.start[i] ? `<small><button type="button" class="linkbtn" data-slides="${SLIDES.start[i]}">View slides</button></small>` : ''}</span>${live ? '<span class="now">Now</span>' : ''}</li>`;
+    return `<li class="${who ? '' : 'brk'}${live ? ' live' : ''}"><span class="t">${a}–${b}</span><span><b>${esc(title)}</b>${who ? `<small>${esc(who)}</small>` : ''}${i === TOOL_SLOT ? '<small class="here">This tool · Steps 1 and 2 below</small>' : ''}${i === SURVEY_SLOT ? '<small><button type="button" class="linkbtn" data-view="survey">Survey results: you told us</button></small>' : ''}${SLIDES.start[i] ? `<small><button type="button" class="linkbtn" data-slides="${SLIDES.start[i]}">View slides</button></small>` : ''}</span>${live ? '<span class="now">Now</span>' : ''}</li>`;
   }).join('');
   $('#team').innerHTML = TEAM.map(m => `<div class="member">${m.photo ? `<img src="${esc(m.photo)}" alt="" width="64" height="64">` : `<span class="avatar" aria-hidden="true">${esc(m.n[0])}</span>`}<b>${esc(m.n)}</b></div>`).join('');
   $('#slidesPanel').innerHTML = `<div class="sl-head"><button type="button" class="sl-thumb" data-slides="1" aria-label="Open the slides"><img src="${slideSrc(1)}" alt="" width="320" height="180" loading="lazy"></button>
@@ -689,7 +689,7 @@ $('#viewer').addEventListener('touchend', e => { if (touchX === null) return; co
 
 function setView(v, back){
   ui.view = v; ui.back = back || null;
-  ['agenda','cases','data','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
+  ['agenda','survey','cases','data','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
   if (v === 'results') renderResults(); if (v === 'tools') renderTools(); if (v === 'agenda') renderAgenda(); if (v === 'data') renderData();
   $('#dataBack').innerHTML = v === 'data' ? backHtml() : ''; $('#toolsBack').innerHTML = v === 'tools' ? backHtml() : '';
   window.scrollTo({top:0});

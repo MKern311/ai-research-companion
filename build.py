@@ -7,7 +7,7 @@ svg = src('hitachi-wordmark.svg').strip()
 guides = {}
 for f in sorted((R / 'src' / 'guides').glob('part_*.json')):
     guides.update(json.loads(f.read_text(encoding='utf-8')))
-body = src('body.html').replace('{{WORDMARK}}', svg)
+body = src('body.html').replace('{{WORDMARK}}', svg).replace('{{SURVEY}}', src('survey/story.html'))   # survey story: self-contained block (scoped CSS, one IIFE)
 pack = json.loads((R / 'materials' / 'pack.json').read_text(encoding='utf-8'))
 details = json.loads((R / 'src' / 'usecases' / 'details.json').read_text(encoding='utf-8'))
 html = f"""<!doctype html>

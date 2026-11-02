@@ -7,6 +7,7 @@
     </div>
     <nav class="tabs" role="tablist" aria-label="Views">
       <button role="tab" id="tab-agenda" data-view="agenda" aria-selected="true">Agenda</button>
+      <button role="tab" id="tab-survey" data-view="survey" aria-selected="false">You told us</button>
       <button role="tab" id="tab-cases" data-view="cases" aria-selected="false">Use cases</button>
       <button role="tab" id="tab-data" data-view="data" aria-selected="false">Practice data</button>
       <button role="tab" id="tab-results" data-view="results" aria-selected="false">Results</button>
@@ -49,6 +50,14 @@
       <div class="row"><button type="button" class="btn btn-primary" data-view="cases">Start with Step 1 →</button></div>
     </div>
     <div class="panel slides-panel" id="slidesPanel"></div>
+  </section>
+
+  <section id="view-survey" aria-labelledby="tab-survey" hidden>
+    <div class="view-head">
+      <div><h1>You told us</h1>
+        <p>What 37 of you said in the pre-workshop survey – and how it shaped this afternoon. Move through the slides with the arrow keys or the buttons; F opens full screen.</p></div>
+    </div>
+{{SURVEY}}
   </section>
 
   <section id="view-cases" aria-labelledby="tab-cases" hidden>

@@ -358,7 +358,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 @media print{
   @page{size:A4;margin:14mm}
   body{background:#fff;font-size:11pt}
-  .top .tabs,.ident,#view-agenda,#view-cases,#view-data,#view-tools,.drawer,.scrim,.modal,.viewer,.toast,.no-print,#resPhase,.view-head .seg{display:none !important}
+  .top .tabs,.ident,#view-agenda,#view-survey,#view-cases,#view-data,#view-tools,.drawer,.scrim,.modal,.viewer,.toast,.no-print,#resPhase,.view-head .seg{display:none !important}
   #view-results{display:block !important}
   .top{position:static;border-bottom:2px solid var(--red)}
   .brand .sep,.brand .title{display:inline-block !important}
@@ -543,6 +543,7 @@ li[role=button]:focus-visible,tr[data-group]:focus-within,.linkbtn:focus-visible
 .gtable th .linkbtn{color:var(--ink)}
 .tchips .tlab{align-self:center;font-size:13px;font-weight:700;color:var(--ink-2);margin-right:4px}
 .rank li.pnote{display:none;cursor:default;color:var(--muted);font-size:13px}
+#view-survey .pgr-story{margin-bottom:24px}
 
 </style>
 </head>
@@ -556,6 +557,7 @@ li[role=button]:focus-visible,tr[data-group]:focus-within,.linkbtn:focus-visible
     </div>
     <nav class="tabs" role="tablist" aria-label="Views">
       <button role="tab" id="tab-agenda" data-view="agenda" aria-selected="true">Agenda</button>
+      <button role="tab" id="tab-survey" data-view="survey" aria-selected="false">You told us</button>
       <button role="tab" id="tab-cases" data-view="cases" aria-selected="false">Use cases</button>
       <button role="tab" id="tab-data" data-view="data" aria-selected="false">Practice data</button>
       <button role="tab" id="tab-results" data-view="results" aria-selected="false">Results</button>
@@ -598,6 +600,475 @@ li[role=button]:focus-visible,tr[data-group]:focus-within,.linkbtn:focus-visible
       <div class="row"><button type="button" class="btn btn-primary" data-view="cases">Start with Step 1 →</button></div>
     </div>
     <div class="panel slides-panel" id="slidesPanel"></div>
+  </section>
+
+  <section id="view-survey" aria-labelledby="tab-survey" hidden>
+    <div class="view-head">
+      <div><h1>You told us</h1>
+        <p>What 37 of you said in the pre-workshop survey – and how it shaped this afternoon. Move through the slides with the arrow keys or the buttons; F opens full screen.</p></div>
+    </div>
+<!-- ===== "You told us" survey story block (PGR workshop, 4 Nov 2026) =====
+     Drop-in block: paste this whole snippet where the block should appear.
+     All CSS is scoped to .pgr-story, all JS lives in one IIFE (no globals except window.PgrSurveyStory).
+     Theme: data-theme="light" | "dark" | "auto". SPA: call window.PgrSurveyStory.init(element) after mounting.
+     Keys while visible: ←/→ or PageUp/PageDown (presenter clickers), N = talk track, F = full screen. -->
+<div class="pgr-story" data-pgr-story data-theme="light" lang="en" aria-label="Survey insights: You told us"></div>
+<style>
+.pgr-story{--paper:#F4F4F4;--surface:#FFFFFF;--soft:#EBEBEB;--ink:#1F1F1F;--muted:#5F5F5F;--faint:#8C8C8C;--line:#D6D6D6;--accent:#CC0000;--accent-soft:#FDF2F2;--verify:#2F6410;--verify-soft:#E6F2DD;--ochre:#7A4700;--ochre-soft:#FCEFD9;--blue:#0B4A8F;--blue-soft:#EAF1FB;--plum:#5E4B86;--plum-soft:#ECE8F3;--shadow:0 1px 2px rgba(20,20,30,.05),0 8px 24px rgba(20,20,30,.06);--serif:"HitachiSans","Segoe UI",system-ui,-apple-system,Arial,sans-serif;--sans:"HitachiSans","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  position:relative;font-family:var(--sans);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-sizing:border-box;line-height:1.45;-webkit-font-smoothing:antialiased}
+.pgr-story[data-theme="dark"]{--paper:#111216;--surface:#191B20;--soft:#21242A;--ink:#ECEAE5;--muted:#A6AAB3;--faint:#7D828B;--line:#2D3038;--accent:#E5707A;--accent-soft:#3A2226;--verify:#6BBFB7;--verify-soft:#1B302E;--ochre:#DDB25E;--ochre-soft:#352C1A;--blue:#8FB0E3;--blue-soft:#1F2A3B;--plum:#B7A6DA;--plum-soft:#2A2536;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25)}
+@media (prefers-color-scheme:dark){.pgr-story[data-theme="auto"]{--paper:#111216;--surface:#191B20;--soft:#21242A;--ink:#ECEAE5;--muted:#A6AAB3;--faint:#7D828B;--line:#2D3038;--accent:#E5707A;--accent-soft:#3A2226;--verify:#6BBFB7;--verify-soft:#1B302E;--ochre:#DDB25E;--ochre-soft:#352C1A;--blue:#8FB0E3;--blue-soft:#1F2A3B;--plum:#B7A6DA;--plum-soft:#2A2536}}
+.pgr-story *,.pgr-story *::before,.pgr-story *::after{box-sizing:border-box}
+.pgr-story button{font:inherit;color:inherit;cursor:pointer}
+.pgr-story:fullscreen{border-radius:0;border:0;display:flex;flex-direction:column;height:100vh}
+.pgr-story:fullscreen .ps-stage{flex:1;min-height:0}
+.pgr-story .ps-top{display:flex;align-items:center;gap:14px;padding:12px 22px;border-block-end:1px solid var(--line);background:var(--surface);font-size:12.5px;color:var(--muted)}
+.pgr-story .ps-brand{font-weight:600;color:var(--ink);letter-spacing:.02em}
+.pgr-story .ps-brand b{color:var(--accent)}
+.pgr-story .ps-chapter{margin-inline-start:auto;font-variant-numeric:tabular-nums}
+.pgr-story .ps-progress{height:3px;background:var(--soft)}
+.pgr-story .ps-progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.pgr-story .ps-stage{position:relative;min-height:720px;overflow:hidden}
+.pgr-story .ps-slide{position:absolute;inset:0;padding:30px 40px 22px;display:flex;flex-direction:column;gap:18px;opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.8,.2,1),visibility 0s linear .6s;overflow:auto}
+.pgr-story .ps-slide.is-prev{transform:translateX(-40px)}
+.pgr-story .ps-slide.is-on{opacity:1;visibility:visible;transform:none;transition:opacity .5s ease .08s,transform .6s cubic-bezier(.2,.8,.2,1) .08s,visibility 0s}
+.pgr-story .ps-kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:650}
+.pgr-story .ps-h{font-family:var(--serif);font-size:clamp(26px,3.1vw,40px);line-height:1.12;margin:4px 0 0;font-weight:600;max-width:24ch}
+.pgr-story .ps-h em{font-style:normal;color:var(--accent)}
+.pgr-story .ps-lede{color:var(--muted);font-size:clamp(14px,1.25vw,17px);max-width:68ch;margin:8px 0 0}
+.pgr-story .ps-body{flex:1 0 auto;display:grid;gap:22px;align-content:safe center}   /* taller content scrolls inside the slide instead of sliding under the heading */
+.pgr-story .ps-2col{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}
+.pgr-story .ps-2col-r{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+.pgr-story .ps-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
+.pgr-story .ps-card h4{margin:0 0 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:650}
+/* reveal */
+.pgr-story .rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .6s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*1ms + 150ms)}
+.pgr-story .is-on .rv{opacity:1;transform:none}
+/* big number */
+.pgr-story .ps-big{font-family:var(--serif);font-size:clamp(64px,8vw,116px);line-height:.9;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.pgr-story .ps-big small{font-size:.42em;color:var(--muted);margin-inline-start:4px}
+.pgr-story .ps-bigcap{font-size:clamp(15px,1.4vw,19px);margin-top:10px;max-width:30ch}
+.pgr-story .ps-bigcap b{color:var(--ink)}
+.pgr-story .ps-sub{color:var(--muted);font-size:13.5px;margin-top:8px}
+/* bars */
+.pgr-story .ps-bars{display:grid;gap:9px}
+.pgr-story .ps-bar{display:grid;grid-template-columns:minmax(120px,var(--lw,46%)) 1fr auto;align-items:center;gap:12px;font-size:14px}
+.pgr-story .ps-bar .lb{color:var(--ink);line-height:1.25}
+.pgr-story .ps-bar .tr{height:12px;background:var(--soft);border-radius:99px;overflow:hidden}
+.pgr-story .ps-bar .fl{display:block;height:100%;width:0;border-radius:99px;background:var(--c,var(--accent));transition:width 1s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*1ms + 250ms)}
+.pgr-story .is-on .ps-bar .fl{width:calc(var(--v)*1%)}
+.pgr-story .ps-bar .vl{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px;min-width:62px;text-align:end}
+.pgr-story .ps-bar .vl b{color:var(--ink)}
+.pgr-story .ps-bar.dim .lb{color:var(--muted)}
+.pgr-story .ps-bar.dim .fl{background:var(--faint)}
+/* waffle */
+.pgr-story .ps-waffle{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;max-width:420px}
+.pgr-story .ps-dot{aspect-ratio:1;border-radius:50%;background:var(--c);transform:scale(0);transition:transform .45s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--i)*28ms + 300ms)}
+.pgr-story .is-on .ps-dot{transform:scale(1)}
+.pgr-story .ps-legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted);margin-top:14px}
+.pgr-story .ps-legend span{display:inline-flex;align-items:center;gap:6px}
+.pgr-story .ps-legend i{width:11px;height:11px;border-radius:50%;background:var(--c);display:inline-block}
+.pgr-story .ps-legend b{color:var(--ink);font-variant-numeric:tabular-nums}
+/* stacked */
+.pgr-story .ps-stack{display:flex;height:46px;border-radius:12px;overflow:hidden;background:var(--soft)}
+.pgr-story .ps-stack > div{flex:0 0 0%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;transition:flex-basis 1s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*1ms + 300ms)}
+.pgr-story .is-on .ps-stack > div{flex-basis:calc(var(--v)*1%)}
+/* histogram */
+.pgr-story .ps-hist{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:end;height:260px;padding-top:24px}
+.pgr-story .ps-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px}
+.pgr-story .ps-col .cb{width:100%;max-width:84px;height:0;border-radius:10px 10px 4px 4px;background:var(--c);transition:height 1s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*1ms + 300ms);position:relative}
+.pgr-story .is-on .ps-col .cb{height:calc(var(--v)*1%)}
+.pgr-story .ps-col .cn{font-weight:650;font-variant-numeric:tabular-nums}
+.pgr-story .ps-col .cx{font-family:var(--serif);font-size:22px;color:var(--muted)}
+.pgr-story .ps-scale{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:8px;gap:20px}
+.pgr-story .ps-bracket{margin-top:12px;border-top:2px solid var(--accent);width:calc(60% - 6px);padding-top:6px;font-size:13px;color:var(--accent);font-weight:600}
+/* rings */
+.pgr-story .ps-rings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pgr-story .ps-ring{display:flex;gap:16px;align-items:center}
+.pgr-story .ps-ring svg{width:118px;height:118px;flex:none;transform:rotate(-90deg)}
+.pgr-story .ps-ring circle{fill:none;stroke-width:12}
+.pgr-story .ps-ring .bg{stroke:var(--soft)}
+.pgr-story .ps-ring .fg{stroke:var(--c);stroke-linecap:round;stroke-dasharray:0 400;transition:stroke-dasharray 1.2s cubic-bezier(.2,.8,.2,1) .35s}
+.pgr-story .ps-ring .rn{font-family:var(--serif);font-size:38px;font-weight:600;line-height:1;color:var(--c)}
+.pgr-story .ps-ring .rt{font-size:14px;margin-top:4px}
+.pgr-story .ps-ring .rs{font-size:12.5px;color:var(--muted);margin-top:4px}
+/* agenda link footer */
+.pgr-story .ps-link{display:flex;gap:14px;align-items:center;background:var(--ink);color:var(--paper);border-radius:14px;padding:12px 18px;font-size:14.5px}
+.pgr-story .ps-link .lt{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;white-space:nowrap}
+.pgr-story .ps-link .tm{font-variant-numeric:tabular-nums;font-weight:700;background:var(--accent);color:#fff;border-radius:8px;padding:3px 9px;white-space:nowrap}
+.pgr-story .ps-link .tx b{font-weight:650}
+.pgr-story .ps-arrow{display:inline-block;transition:transform .6s ease .9s;transform:translateX(-6px)}
+.pgr-story .is-on .ps-arrow{transform:none}
+/* callout */
+.pgr-story .ps-callout{border-inline-start:4px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:14px 16px;font-size:15px}
+.pgr-story .ps-callout b{color:var(--accent)}
+/* quotes */
+.pgr-story .ps-q{display:block;font-family:var(--serif);font-size:clamp(15px,1.3vw,18px);line-height:1.4;margin:0;padding:10px 0 10px 16px;border-inline-start:3px solid var(--c,var(--accent))}
+.pgr-story .ps-q::before{content:"\201C"}
+.pgr-story .ps-q::after{content:"\201D"}
+/* hero */
+.pgr-story .ps-hero{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:10px}
+.pgr-story .ps-kpi{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.pgr-story .ps-kpi .n{font-family:var(--serif);font-size:clamp(36px,4vw,54px);font-weight:600;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.pgr-story .ps-kpi .t{font-size:13.5px;color:var(--muted);margin-top:8px}
+.pgr-story .ps-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;color:var(--muted)}
+.pgr-story .ps-flow span{background:var(--surface);border:1px solid var(--line);padding:6px 11px;border-radius:99px;color:var(--ink)}
+/* mosaic */
+.pgr-story .ps-mosaic{display:flex;gap:6px;height:190px}
+.pgr-story .ps-tile{flex:var(--v) 1 0;min-width:28px;border-radius:12px;background:var(--c);color:#fff;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;transform-origin:bottom;transform:scaleY(0);transition:transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*1ms + 300ms);overflow:hidden}
+.pgr-story .is-on .ps-tile{transform:none}
+.pgr-story .ps-tile .n{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1}
+.pgr-story .ps-tile .t{font-size:12.5px;line-height:1.2;margin-top:6px}
+.pgr-story .ps-tile.sm .t{display:none}
+/* chips */
+.pgr-story .ps-chips{display:flex;flex-wrap:wrap;gap:6px}
+.pgr-story .ps-chip{font-size:12px;border:1px solid var(--line);background:var(--soft);border-radius:99px;padding:3px 10px;color:var(--muted)}
+/* interactive list */
+.pgr-story .ps-pick{display:grid;gap:6px}
+.pgr-story .ps-pick button{display:grid;grid-template-columns:1fr 120px 34px;align-items:center;gap:10px;text-align:start;background:transparent;border:1px solid transparent;border-radius:10px;padding:7px 10px;font-size:13.5px;transition:background .2s,border-color .2s}
+.pgr-story .ps-pick button:hover{background:var(--soft)}
+.pgr-story .ps-pick button[aria-pressed="true"]{background:var(--surface);border-color:var(--c,var(--accent));box-shadow:var(--shadow)}
+.pgr-story .ps-pick .tr{height:9px;background:var(--soft);border-radius:99px;overflow:hidden}
+.pgr-story .ps-pick .fl{display:block;height:100%;width:0;background:var(--c,var(--accent));border-radius:99px;transition:width 1s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*1ms + 250ms)}
+.pgr-story .is-on .ps-pick .fl{width:calc(var(--v)*1%)}
+.pgr-story .ps-pick .vl{font-variant-numeric:tabular-nums;font-weight:650;text-align:end}
+.pgr-story .ps-panel{display:flex;flex-direction:column;gap:10px}
+.pgr-story .ps-panel .pt{font-family:var(--serif);font-size:22px;font-weight:600;line-height:1.2}
+.pgr-story .ps-panel .pm{font-size:13px;color:var(--muted)}
+.pgr-story .ps-fade{animation:psFade .45s ease both}
+@keyframes psFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pgr-story .ps-tag{display:inline-block;font-size:11px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px;background:var(--cs,var(--soft));color:var(--c,var(--muted))}
+/* question cards */
+.pgr-story .ps-qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pgr-story .ps-qc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-align:start;display:flex;flex-direction:column;gap:6px;transition:border-color .2s,transform .2s,box-shadow .2s}
+.pgr-story .ps-qc:hover,.pgr-story .ps-qc[aria-pressed="true"]{border-color:var(--c);box-shadow:var(--shadow);transform:translateY(-2px)}
+.pgr-story .ps-qc .qh{font-weight:650;font-size:15px;line-height:1.25}
+.pgr-story .ps-qc .qn{font-size:12.5px;color:var(--muted)}
+.pgr-story .ps-qc .ps-q{font-size:14px;padding:4px 0 4px 10px}
+.pgr-story .ps-bar.hl .lb{font-weight:650}
+.pgr-story .ps-bar.lo{opacity:.35;transition:opacity .25s}
+/* outcome map */
+.pgr-story .ps-map{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) 110px minmax(0,1fr);gap:0;align-items:stretch}
+.pgr-story .ps-map svg.ln{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.pgr-story .ps-map path{fill:none;stroke:var(--c);stroke-width:2.5;opacity:.28;transition:opacity .3s,stroke-width .3s}
+.pgr-story .ps-map path.on{opacity:.95;stroke-width:3.5}
+.pgr-story .ps-map path.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:psDraw 1.1s cubic-bezier(.3,.7,.2,1) forwards;animation-delay:calc(var(--d,0)*1ms)}
+@keyframes psDraw{to{stroke-dashoffset:0}}
+.pgr-story .ps-og{display:flex;flex-direction:column;gap:10px}
+.pgr-story .ps-ob{background:var(--surface);border:1px solid var(--line);border-inline-start:5px solid var(--c);border-radius:12px;padding:10px 14px;text-align:start;display:flex;flex-direction:column;gap:6px;transition:box-shadow .2s,transform .2s,opacity .25s}
+.pgr-story .ps-ob[aria-pressed="true"]{box-shadow:var(--shadow);transform:translateX(4px)}
+.pgr-story .ps-map.focus .ps-ob:not([aria-pressed="true"]){opacity:.45}
+.pgr-story .ps-ob .oh{font-weight:650;font-size:14.5px;display:flex;justify-content:space-between;gap:10px}
+.pgr-story .ps-ob .os{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--muted)}
+.pgr-story .ps-ob .os b{color:var(--ink);font-variant-numeric:tabular-nums}
+.pgr-story .ps-ob .ps-q{font-size:13.5px;padding:2px 0 2px 10px;display:none}
+.pgr-story .ps-ob[aria-pressed="true"] .ps-q{display:block;animation:psFade .4s ease both}
+.pgr-story .ps-ag{display:flex;flex-direction:column;gap:8px;justify-content:space-between}
+.pgr-story .ps-an{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:13.5px;transition:opacity .25s,border-color .25s}
+.pgr-story .ps-an .at{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);font-size:12.5px}
+.pgr-story .ps-an .ah{font-weight:600;line-height:1.25}
+.pgr-story .ps-map.focus .ps-an{opacity:.35}
+.pgr-story .ps-map.focus .ps-an.on{opacity:1;border-color:var(--ink)}
+/* timeline */
+.pgr-story .ps-tl{display:grid;gap:8px}
+.pgr-story .ps-tr{display:grid;grid-template-columns:110px minmax(0,1.1fr) minmax(0,1.4fr);gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;border-inline-start:5px solid var(--c)}
+.pgr-story .ps-tr .tt{font-variant-numeric:tabular-nums;font-weight:700;font-size:13.5px}
+.pgr-story .ps-tr .th{font-weight:650;font-size:15px;line-height:1.2}
+.pgr-story .ps-tr .tw{font-size:12px;color:var(--muted)}
+.pgr-story .ps-tr .tb{font-size:13px;color:var(--muted);line-height:1.35}
+.pgr-story .ps-tr .tb b{color:var(--c);font-variant-numeric:tabular-nums}
+.pgr-story .ps-tr.brk{background:transparent;box-shadow:none;border-style:dashed;padding:6px 14px}
+/* nav */
+.pgr-story .ps-nav{display:flex;align-items:center;gap:10px;padding:10px 18px;border-block-start:1px solid var(--line);background:var(--surface)}
+.pgr-story .ps-btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:7px 14px;font-size:13.5px;transition:background .2s}
+.pgr-story .ps-btn:hover{background:var(--soft)}
+.pgr-story .ps-btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.pgr-story .ps-btn:disabled{opacity:.4;cursor:default}
+.pgr-story .ps-dots{display:flex;gap:6px;flex:1;justify-content:center;flex-wrap:wrap}
+.pgr-story .ps-dots button{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);padding:0;transition:background .2s,transform .2s}
+.pgr-story .ps-dots button[aria-current="step"]{background:var(--accent);transform:scale(1.3)}
+.pgr-story .ps-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pgr-story .ps-notes{position:absolute;inset-inline-end:16px;inset-block-end:70px;width:min(420px,calc(100% - 32px));background:var(--ink);color:var(--paper);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.45;box-shadow:0 12px 32px rgba(0,0,0,.25);z-index:5;display:none}
+.pgr-story.show-notes .ps-notes{display:block;animation:psFade .3s ease both}
+.pgr-story .ps-notes .nh{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.65;margin-bottom:6px}
+.pgr-story .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:900px){.pgr-story .ps-2col,.pgr-story .ps-2col-r{grid-template-columns:1fr}.pgr-story .ps-hero{grid-template-columns:repeat(2,1fr)}.pgr-story .ps-slide{padding:22px 18px}.pgr-story .ps-stage{min-height:880px}.pgr-story .ps-map{grid-template-columns:1fr 40px 1fr}.pgr-story .ps-tr{grid-template-columns:80px 1fr}.pgr-story .ps-tr .tb{grid-column:1/-1}.pgr-story .ps-qs{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.pgr-story *{transition-duration:.01ms!important;animation-duration:.01ms!important;transition-delay:0ms!important;animation-delay:0ms!important}}
+</style>
+<script>
+(function(){
+"use strict";
+var D = {"n": 37, "registered": 60, "freq": [["Daily", 22], ["Weekly", 7], ["Occasionally", 5], ["Tried it, didn't stick", 2], ["Never", 1]], "stage": [["Literature & research question", 13], ["Data analysis", 9], ["Writing & publishing", 8], ["Data collection", 7]], "topics": [["Data analysis and visualisation", 26], ["Writing and structure", 23], ["Literature search and synthesis", 22], ["Project and time planning", 13], ["Coding support", 13], ["Building agents", 12], ["Research data handling and ethics", 12], ["Sustainability and environmental impact", 4]], "prompt": [[1, 7], [2, 8], [3, 14], [4, 5], [5, 3]], "dailyLow": 15, "daily": 22, "code": [["Regularly", 11], ["Occasionally", 6], ["No", 20]], "agent": [["Built one", 5], ["Not yet", 27], ["Not sure what that is", 5]], "agentInterest": 12, "policy": [["Read it", 14], ["Roughly", 19], ["No", 4]], "sup": [["Yes · supportive", 11], ["Yes · cautious", 16], ["Not yet", 10]], "copilot": [["Microsoft 365 Copilot licence", 22], ["Free Copilot Chat", 5], ["Not sure", 10]], "tools": [["ChatGPT", 17], ["Copilot Chat", 9], ["Claude", 7], ["Gemini", 2], ["Consensus", 2], ["DeepSeek", 1], ["Zotero", 1], ["Covidence", 1], ["Research Rabbit", 1], ["Subject-specific tools such as Elicit, Semantic Scholar or Zotero", 1]], "disc": [["Social sciences, humanities & education", 11], ["Engineering, technology & applied science", 10], ["Health, clinical & sport sciences", 9], ["Business, management & finance", 4], ["Other / interdisciplinary", 1], ["Environment & earth sciences", 1], ["AI, computing & mathematics", 1]], "usecases": [["Data analysis, statistics & interpretation", 16], ["Writing, editing & communication", 16], ["Literature discovery, synthesis & gap mapping", 15], ["Coding, debugging & simulation", 13], ["Research design, methods & experimentation", 11], ["Workflow, productivity & knowledge organisation", 7], ["Validation, verification & quality assurance", 6], ["Ideation, theory & critical challenge", 5], ["Translation & multilingual research", 2], ["Broad / exploratory AI support", 1]], "bounds": [["Human judgement, final interpretation & conclusions", 13], ["Original writing, authorship & intellectual ownership", 12], ["Accuracy, hallucinations, citations & verification", 10], ["Ethics, bias, integrity & responsible use", 8], ["Privacy, confidentiality, IP & sensitive data", 8], ["Other / context-specific boundary", 7], ["Creative/narrative work & presentation structure", 2], ["Qualitative/lived-experience analysis", 2], ["No clear boundary stated", 1], ["Experimental design / research execution", 1]], "outcomes": [["Practical workflows, hands-on examples & reusable prompts", 12], ["No response", 10], ["Responsible use, ethics, integrity & policy clarity", 9], ["Writing, structure & productivity", 7], ["Use-case discovery and effective tool selection", 7], ["Coding, data analysis & technical research support", 6], ["Output verification, reliability & human judgement", 4], ["Literature review, synthesis & research gaps", 4], ["Peer exchange, networking & shared learning", 4], ["Agents and research assistants", 3], ["General learning / broader perspective", 2], ["Translation & multilingual literature", 1]], "outcomeAnswered": 27, "uq": {"Data analysis, statistics & interpretation": ["data extraction for systematic review. data analysis for stats. understanding stats.", "I would like AI to help me develop and check analysis code, identify which measured signals reveal degradation, and interpret the results.", "to double check what things I might have missed covering during data analysis"], "Writing, editing & communication": ["…taking something I have already drafted and refining it to better meet the requirements of the writing brief or specific format.", "Understanding complex literature on my project. To give structure to my writing.", "what changes would you suggest for submission to conference/journal X"], "Literature discovery, synthesis & gap mapping": ["When I start a new strand of my project, I spend weeks screening and summarising literature… I'd like AI to help me map that literature quickly", "AI helps me make sense of very disorganised bodies of research.", "Literature bridging and evidence mapping"], "Coding, debugging & simulation": ["ideation , planning and code generation and iteration", "how generative AI can help with scientific coding, debugging and verifying numerical results", "I would like AI to help with coding during the data cleaning and processing."], "Research design, methods & experimentation": ["help improve experimental design so I can obtain more meaningful data with fewer iterations", "I would like AI to suggest ways forward when I encounter unfamiliar research questions"], "Workflow, productivity & knowledge organisation": ["A way to pass my lab notes to word, so it can make a report of what I have done in the month.", "To assist in the planning the schedule of my whole project."], "Validation, verification & quality assurance": ["…while ensuring that its recommendations remain physically correct and properly verified.", "to be a second eye as I cite and to challenge my citations."], "Ideation, theory & critical challenge": ["I also use AI to brainstorm ideas for my writing and critically evaluate my research ideas.", "ask AI to check my thesis writing from the examiner role (I created an agent to do this role)"], "Translation & multilingual research": ["effectively translating foreign-language materials.", "make the reading process more effective without relying on word-for-word translation"], "Broad / exploratory AI support": ["My research is in AI, so I am exploring ways to harness its potential."]}, "bq": {"Human judgement, final interpretation & conclusions": ["I would not use AI to make final decisions about research findings… These tasks require human judgement, contextual understanding, confidentiality, and accountability."], "Original writing, authorship & intellectual ownership": ["the written word should come from me first, with AI doing some of the support roles around that"], "Accuracy, hallucinations, citations & verification": ["its answers can sound convincing even when they are incorrect.", "it can fabricate citations, invent non-existent publications"], "Ethics, bias, integrity & responsible use": ["AI is prone to errors and may produce biased outputs or inaccurate interpretations.", "it gave weird answers based on my gender and I stopped trusting it"], "Privacy, confidentiality, IP & sensitive data": ["I cannot be certain where such data might be stored or who might gain unauthorised access to it.", "I wouldn't use it on confidential participant data, unpublished results, or peer review", "avoid uploading confidential industrial data without permission."], "Qualitative/lived-experience analysis": ["lacking the capacity to interpret patients' lived experiences"]}, "oq": {"A": ["I'd leave with one concrete workflow I can use on my own project tomorrow, such as a tested prompt", "Tips for writing better prompts"], "B": ["reassurance that i am using it in a reasonable way and not \"cheating\" a PhD", "To understand where you can/can't use AI- particularly around research integrity principles"], "C": ["learning about new ways to use AI", "If you could show me how to build AI agent I would appreciate it."], "D": ["especially from the shared experiences of other PGRs on the use of AI in their research.", "I'd like to meet some fascinating, intelligent people"]}};
+var N = D.n;
+function pct(n){ return Math.round(100*n/N); }
+function sum(list){ return list.reduce(function(a,x){return a+x[1];},0); }
+function get(list,label){ for(var i=0;i<list.length;i++){ if(list[i][0]===label) return list[i][1]; } throw new Error('missing '+label); }
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function cnt(v,suf){ return '<span data-count="'+v+'" data-suf="'+(suf||'')+'">'+v+(suf||'')+'</span>'; }
+var COL = {accent:'var(--accent)',verify:'var(--verify)',ochre:'var(--ochre)',blue:'var(--blue)',plum:'var(--plum)',ink:'var(--ink)',faint:'var(--faint)'};
+
+function bars(items,opt){
+  opt = opt||{}; var max = opt.max || N;
+  return '<div class="ps-bars" style="--lw:'+(opt.lw||'46%')+'">'+items.map(function(it,i){
+    var v = Math.round(1000*it.n/max)/10;
+    return '<div class="ps-bar'+(it.dim?' dim':'')+'" data-key="'+esc(it.key||it.label)+'" style="--v:'+v+';--c:'+(it.c||COL.accent)+';--d:'+(i*90)+'"><span class="lb">'+esc(it.label)+'</span><span class="tr"><i class="fl"></i></span><span class="vl"><b>'+it.n+'</b> · '+pct(it.n)+'%</span></div>';
+  }).join('')+'</div>';
+}
+function stack(items){
+  var t = items.reduce(function(a,x){return a+x.n;},0);
+  return '<div class="ps-stack">'+items.map(function(it,i){
+    return '<div style="--v:'+(100*it.n/t)+';--c:'+it.c+';--d:'+(i*150)+'" title="'+esc(it.label)+': '+it.n+'">'+it.n+'</div>';
+  }).join('')+'</div><div class="ps-legend">'+items.map(function(it){
+    return '<span style="--c:'+it.c+'"><i></i>'+esc(it.label)+' <b>'+it.n+'</b></span>';
+  }).join('')+'</div>';
+}
+function ring(n,c,title,sub){
+  var r=50, C=2*Math.PI*r, f=C*n/N;
+  return '<div class="ps-ring" style="--c:'+c+'"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="bg" cx="60" cy="60" r="'+r+'"/><circle class="fg" cx="60" cy="60" r="'+r+'" data-dash="'+f.toFixed(1)+' '+C.toFixed(1)+'"/></svg><div><div class="rn">'+cnt(pct(n),'%')+'</div><div class="rt">'+title+'</div><div class="rs">'+sub+'</div></div></div>';
+}
+function link(items){
+  return '<div class="ps-link rv" style="--d:700"><span class="lt">On today\u2019s agenda <span class="ps-arrow">\u2192</span></span><span class="tx">'+items.map(function(x){
+    return '<span class="tm">'+x[0]+'</span> '+x[1];
+  }).join(' &nbsp; ')+'</span></div>';
+}
+function head(k,h,l){ return '<div><div class="ps-kicker rv">'+k+'</div><h3 class="ps-h rv" style="--d:60">'+h+'</h3>'+(l?'<p class="ps-lede rv" style="--d:140">'+l+'</p>':'')+'</div>'; }
+function quote(q,c){ return '<span class="ps-q"'+(c?' style="--c:'+c+'"':'')+'>'+esc(q)+'</span>'; }
+
+/* ---------- derived numbers ---------- */
+var daily = get(D.freq,'Daily'), weekly = get(D.freq,'Weekly'), dw = daily+weekly;
+var pLow = D.prompt.filter(function(x){return x[0]<=3;}).reduce(function(a,x){return a+x[1];},0);
+var codeAny = get(D.code,'Regularly')+get(D.code,'Occasionally');
+var polAny = get(D.policy,'Read it')+get(D.policy,'Roughly');
+var supYes = get(D.sup,'Yes · supportive')+get(D.sup,'Yes · cautious');
+var m365 = get(D.copilot,'Microsoft 365 Copilot licence'), notSure = get(D.copilot,'Not sure');
+var uc = function(l){return get(D.usecases,l);}, bd = function(l){return get(D.bounds,l);}, oc = function(l){return get(D.outcomes,l);};
+
+/* ---------- slides ---------- */
+var S = [];
+S.push({t:'Intro', note:'Thank you \u2014 '+N+' of you told us where you stand before today. Here is what you told us, and how it shaped this afternoon. Every block on the agenda answers something you said.',
+ html: head('Pre-workshop survey \u00b7 GenAI in Your Research \u00b7 4 Nov 2026','You told us. <em>Here\u2019s what we did with it.</em>','Before today, '+N+' of you shared how you use generative AI in your research, where you draw the line, and what would make this afternoon worth your time.')+
+ '<div class="ps-body"><div class="ps-hero">'+
+  [[cnt(N),'responses before today'],['~'+cnt(D.registered),'postgraduate researchers registered'],[cnt(D.disc.length),'broad discipline clusters in the room'],[cnt(D.usecases.length),'AI use-case clusters coded from your answers']].map(function(k,i){
+   return '<div class="ps-kpi rv" style="--d:'+(250+i*110)+'"><div class="n">'+k[0]+'</div><div class="t">'+k[1]+'</div></div>';}).join('')+
+ '</div><div class="ps-flow rv" style="--d:750"><b style="color:var(--ink)">How the afternoon builds:</b>'+['get to know the room','clear up the burning questions','learn to ask better','choose what matters to you','test it on real research','learn from each other','take one step home'].map(function(x){return '<span>'+x+'</span>';}).join('\u2192')+'</div></div>'+
+ link([['12:50','<b>So, where do we all stand?</b> Your survey insights and how they shaped today']])});
+
+S.push({t:'Adoption', note:'Surprisingly many of you already use GenAI in your research daily or at least weekly \u2014 '+dw+' of '+N+'. So today is not an introduction. It is a lab that starts from where you already are.',
+ html: head('1 \u00b7 How often','AI is <em>already part</em> of your research.')+
+ '<div class="ps-body ps-2col"><div class="rv" style="--d:200"><div class="ps-big">'+cnt(pct(dw),'%')+'</div><div class="ps-bigcap">use generative AI for their research <b>daily or weekly</b></div><div class="ps-sub">'+daily+' daily \u00b7 '+weekly+' weekly \u00b7 out of '+N+' responses</div></div>'+
+ '<div class="ps-card rv" style="--d:250"><h4>Each dot is one of you</h4><div class="ps-waffle">'+(function(){var cs=[COL.accent,'#E06666',COL.ochre,COL.faint,'var(--line)'],o='',k=0;D.freq.forEach(function(f,j){for(var i=0;i<f[1];i++){o+='<i class="ps-dot" style="--c:'+cs[j]+';--i:'+(k++)+'"></i>';}});return o;})()+'</div>'+
+ '<div class="ps-legend">'+D.freq.map(function(f,j){var cs=[COL.accent,'#E06666',COL.ochre,COL.faint,'var(--line)'];return '<span style="--c:'+cs[j]+'"><i></i>'+esc(f[0])+' <b>'+f[1]+'</b></span>';}).join('')+'</div></div></div>'+
+ link([['12:50','<b>A lab, not a lecture.</b> We build on what you already do instead of starting from zero.']])});
+
+var tc = {'Data analysis and visualisation':COL.verify,'Writing and structure':COL.blue,'Literature search and synthesis':COL.accent};
+var stc = {'Literature & research question':COL.accent,'Data analysis':COL.verify,'Writing & publishing':COL.blue,'Data collection':COL.ochre};
+S.push({t:'Focus', note:'Mainly for three things: literature and research, analysis, and writing and publishing. That is exactly the path we follow after the break.',
+ html: head('2 \u00b7 What for','Mainly for <em>literature, analysis and writing</em>.','You picked your three most interesting topics, and told us which research stage takes most of your time right now.')+
+ '<div class="ps-body ps-2col-r"><div class="ps-card rv" style="--d:200"><h4>Topics you most want help with</h4>'+bars(D.topics.map(function(t){return {label:t[0],n:t[1],c:tc[t[0]],dim:!tc[t[0]]};}),{lw:'52%'})+'</div>'+
+ '<div class="ps-card rv" style="--d:320"><h4>Where your time goes right now</h4>'+stack(D.stage.map(function(s){return {label:s[0],n:s[1],c:stc[s[0]]};}))+
+ '<p class="ps-sub" style="margin-top:16px">The same three areas also lead your free-text use cases: data analysis ('+uc('Data analysis, statistics & interpretation')+'), writing ('+uc('Writing, editing & communication')+') and literature ('+uc('Literature discovery, synthesis & gap mapping')+').</p></div></div>'+
+ link([['15:00','<b>Where does AI actually help me?</b> We walk through your research process: literature, analysis, writing.']])});
+
+S.push({t:'Prompting', note:'Interestingly, most of you would like to improve the quality of your own prompting, even the daily users: '+D.dailyLow+' of '+D.daily+' rate themselves 3 or below. That is why we invest 75 minutes in a common prompting baseline before anything else.',
+ html: head('3 \u00b7 Prompting','Frequent use \u2260 <em>confident prompting</em>.','\u201cHow would you rate your ability to write prompts?\u201d 1 = I type in a question \u2026 5 = I work with roles, context, sources and output format.')+
+ '<div class="ps-body ps-2col"><div class="rv" style="--d:200"><div class="ps-big">'+cnt(pct(pLow),'%')+'</div><div class="ps-bigcap">rate their own prompting at <b>3 or below</b></div><div class="ps-callout" style="margin-top:18px">Even among daily users: <b>'+D.dailyLow+' of '+D.daily+'</b> rate themselves 3 or lower.</div></div>'+
+ '<div class="ps-card rv" style="--d:250"><h4>Self-rated prompting skill</h4><div class="ps-hist">'+(function(){var mx=Math.max.apply(null,D.prompt.map(function(p){return p[1];}));return D.prompt.map(function(p,i){return '<div class="ps-col"><span class="cn">'+p[1]+'</span><span class="cb" style="--v:'+(100*p[1]/mx)+';--c:'+(p[0]<=3?COL.accent:COL.verify)+';--d:'+(i*110)+'"></span><span class="cx">'+p[0]+'</span></div>';}).join('');})()+'</div>'+
+ '<div class="ps-bracket">'+pLow+' of '+N+' \u2192 room to grow</div><div class="ps-scale"><span>1 \u00b7 \u201cI type in a question\u201d</span><span>5 \u00b7 roles, context, sources, format</span></div></div></div>'+
+ link([['13:30','<b>Why did it say that?</b> Bad vs good prompt, the GCSE structure, then build, test and refine in groups.']])});
+
+S.push({t:'Code & agents', note:'Some of you already write code with it \u2014 '+codeAny+' of '+N+' code as part of their research. And '+D.agentInterest+' are curious about agents, though only '+get(D.agent,'Built one')+' have built one. Round 2 is where you can go deeper.',
+ html: head('4 \u00b7 Beyond chat','Some of you already <em>write code</em> with it.')+
+ '<div class="ps-body ps-2col-r"><div class="ps-card rv" style="--d:200"><div class="ps-rings">'+
+  ring(codeAny,COL.verify,'write code as part of their research',get(D.code,'Regularly')+' regularly \u00b7 '+get(D.code,'Occasionally')+' occasionally')+
+  ring(D.agentInterest,COL.ochre,'want to explore building agents','only '+get(D.agent,'Built one')+' have built one; '+get(D.agent,'Not sure what that is')+' aren\u2019t sure what an agent is')+
+ '</div></div><div class="ps-card rv" style="--d:350"><h4>In your words</h4>'+quote(D.uq['Coding, debugging & simulation'][1],COL.verify)+quote(D.uq['Ideation, theory & critical challenge'][1],COL.ochre)+'</div></div>'+
+ link([['15:00','<b>Can we push it further?</b> Round 2: go deeper, e.g. a Copilot notebook or your own agent.']])});
+
+S.push({t:'Policy & supervisor', note:'Important: most of you have engaged with the university AI policy and have talked to your supervisor about whether and how you use AI. If you have not done that yet, my urgent advice: do it. It is a perfectly good Monday action.',
+ html: head('5 \u00b7 Rules of the game','Most of you have <em>done your homework</em>.')+
+ '<div class="ps-body ps-2col"><div class="ps-card rv" style="--d:200"><h4>University AI policy</h4><div class="ps-big" style="font-size:clamp(48px,5.5vw,76px)">'+cnt(pct(polAny),'%')+'</div><div class="ps-bigcap">know it <b>at least roughly</b></div><div style="margin-top:16px">'+stack([{label:'Read it',n:get(D.policy,'Read it'),c:COL.verify},{label:'Roughly',n:get(D.policy,'Roughly'),c:'#5E9A94'},{label:'No',n:get(D.policy,'No'),c:COL.faint}])+'</div></div>'+
+ '<div class="ps-card rv" style="--d:320"><h4>Talked to your supervisor about AI?</h4><div class="ps-big" style="font-size:clamp(48px,5.5vw,76px)">'+cnt(pct(supYes),'%')+'</div><div class="ps-bigcap">have <b>already had that conversation</b></div><div style="margin-top:16px">'+stack([{label:'Yes \u00b7 supportive',n:get(D.sup,'Yes · supportive'),c:COL.verify},{label:'Yes \u00b7 cautious',n:get(D.sup,'Yes · cautious'),c:COL.ochre},{label:'Not yet',n:get(D.sup,'Not yet'),c:COL.accent}])+'</div></div>'+
+ '<div class="ps-callout rv" style="--d:600;grid-column:1/-1"><b>Not yet talked to your supervisor? Please do.</b> Whether, where and how you use AI in your research is a conversation to have early, not at your viva.</div></div>'+
+ link([['16:45','<b>So, what changes on Monday?</b> \u201cTalk to my supervisor\u201d is a perfectly good Monday action.']])});
+
+var tl = D.tools.slice(0,5), tail = D.tools.slice(5).map(function(t){return t[0].replace('Subject-specific tools such as ','');});
+S.push({t:'Tools', note:'Good to see which tools are in use. ChatGPT leads, but many of you say you already work with a Microsoft 365 Copilot licence, and '+notSure+' are not sure which Copilot they have. Tom clears that up in 15 minutes.',
+ html: head('6 \u00b7 Your toolbox','Many of you say you already work with <em>enterprise Copilot</em>.')+
+ '<div class="ps-body ps-2col"><div class="ps-card rv" style="--d:200"><h4>Tools you use</h4>'+bars(tl.map(function(t,i){return {label:t[0],n:t[1],c:t[0]==='Copilot Chat'?COL.blue:(i===0?COL.ink:COL.faint)};}),{lw:'30%'})+
+ '<div class="ps-chips" style="margin-top:14px"><span class="ps-chip" style="background:transparent;border:0;padding-inline-start:0">Also mentioned:</span>'+tail.map(function(t){return '<span class="ps-chip">'+esc(t)+'</span>';}).join('')+'</div></div>'+
+ '<div class="ps-card rv" style="--d:320"><h4>Which Copilot do you have?</h4><div class="ps-big" style="font-size:clamp(48px,5.5vw,76px);color:var(--blue)">'+cnt(pct(m365),'%')+'</div><div class="ps-bigcap">say they have a <b>Microsoft 365 Copilot licence</b></div><div style="margin-top:16px">'+stack(D.copilot.map(function(c){return {label:c[0],n:c[1],c:c[0]==='Not sure'?COL.faint:(c[0]==='Free Copilot Chat'?'#7E97BF':COL.blue)};}))+'</div><p class="ps-sub">'+notSure+' of '+N+' aren\u2019t sure which version they have.</p></div></div>'+
+ link([['13:15','<b>Wait, where does my data go?</b> Which Copilot is which, what happens to your data, and how far you can trust it.']])});
+
+var dc = [COL.accent,COL.verify,COL.blue,COL.ochre,COL.plum,'#5E9A94','#7E97BF'];
+S.push({t:'Disciplines', note:'By discipline we are a broad mix today, from history to fluid dynamics. So we deliberately keep the example neutral: one shared practice dataset for the whole research process. You work in groups by discipline and rate every use case from your own discipline\u2019s point of view, so everyone can transfer it to their own project.',
+ html: head('7 \u00b7 Who\u2019s in the room','A broad mix of <em>disciplines</em>.','From history and linguistics to CFD, clinical prediction models and finance.')+
+ '<div class="ps-body"><div class="ps-mosaic rv" style="--d:150">'+D.disc.map(function(d,i){return '<div class="ps-tile'+(d[1]<3?' sm':'')+'" style="--v:'+d[1]+';--c:'+dc[i%dc.length]+';--d:'+(i*110)+'" title="'+esc(d[0])+': '+d[1]+'"><span class="n">'+d[1]+'</span><span class="t">'+esc(d[0])+'</span></div>';}).join('')+'</div>'+
+ '<div class="ps-legend rv" style="--d:500">'+D.disc.map(function(d,i){return [d,i];}).filter(function(x){return x[0][1]<3;}).map(function(x){var d=x[0];return '<span style="--c:'+dc[x[1]%dc.length]+'"><i></i>'+esc(d[0])+' <b>'+d[1]+'</b></span>';}).join('')+'</div>'+
+ '<div class="ps-callout rv" style="--d:650"><b>So we keep the example neutral:</b> one shared practice dataset that walks through the whole research process, while each group works from the point of view of its own discipline.</div></div>'+
+ link([['15:00','<b>Groups by discipline</b> work on one shared practice dataset and rate every use case from their own discipline\u2019s point of view.']])});
+
+var UCT = {'Data analysis, statistics & interpretation':['Analysis','verify'],'Writing, editing & communication':['Writing','blue'],'Literature discovery, synthesis & gap mapping':['Literature','accent'],'Coding, debugging & simulation':['Analysis & code','verify'],'Research design, methods & experimentation':['Design','ochre'],'Workflow, productivity & knowledge organisation':['Across the cycle','plum'],'Validation, verification & quality assurance':['Across the cycle','plum'],'Ideation, theory & critical challenge':['Question & ideas','ochre'],'Translation & multilingual research':['Literature','accent'],'Broad / exploratory AI support':['Across the cycle','plum']};
+S.push({t:'Use cases', interactive:'uc', note:'Here are your use cases, clustered. Click through two or three and read one quote each. These clusters are what your groups will rate after the break.',
+ html: head('8 \u00b7 Your use cases','Where you want AI to help: <em>'+D.usecases.length+' clusters</em>.','\u201cDescribe a situation in your research where you would like AI to help.\u201d One answer can sit in several clusters. Click a cluster to hear your own words.')+
+ '<div class="ps-body ps-2col"><div class="ps-pick rv" style="--d:200" role="group" aria-label="Use-case clusters">'+D.usecases.map(function(u,i){var t=UCT[u[0]]||['',''];return '<button type="button" data-i="'+i+'" aria-pressed="'+(i===0)+'" style="--c:var(--'+t[1]+');--v:'+(100*u[1]/D.usecases[0][1])+';--d:'+(i*70)+'"><span>'+esc(u[0])+'</span><span class="tr"><i class="fl"></i></span><span class="vl">'+u[1]+'</span></button>';}).join('')+'</div>'+
+ '<div class="ps-card ps-panel rv" style="--d:300" aria-live="polite"></div></div>'+
+ link([['15:00','<b>What\u2019s worth your time?</b> These clusters seed the use cases your groups rate: valuable, feasible, or \u201cnot for AI\u201d.']])});
+
+var BQS = [
+ {h:'How do I use it responsibly, without bias?',c:'accent',keys:['Ethics, bias, integrity & responsible use','Human judgement, final interpretation & conclusions'],q:D.bq['Ethics, bias, integrity & responsible use'][0]},
+ {h:'What about sensitive or confidential data?',c:'blue',keys:['Privacy, confidentiality, IP & sensitive data','Qualitative/lived-experience analysis'],q:D.bq['Privacy, confidentiality, IP & sensitive data'][1]},
+ {h:'Can I trust what it tells me?',c:'ochre',keys:['Accuracy, hallucinations, citations & verification'],q:D.bq['Accuracy, hallucinations, citations & verification'][0]},
+ {h:'Where does my own authorship start?',c:'verify',keys:['Original writing, authorship & intellectual ownership','Creative/narrative work & presentation structure'],q:D.bq['Original writing, authorship & intellectual ownership'][0]}
+];
+S.push({t:'Boundaries', interactive:'bd', note:'You also told us where you draw the line, and the questions behind it: how do I use it responsibly and without bias? What can I do with sensitive or confidential data? Can I trust it? Where does my authorship start? We take these seriously: 13:15 is about data and trust, and all afternoon \u201cnot for AI\u201d is a valid answer.',
+ html: head('9 \u00b7 Your boundaries','Where you would <em>not</em> use AI, and why.','\u201cWhere would you deliberately not use AI today?\u201d Behind the answers sit four questions we will not skip. Click one.')+
+ '<div class="ps-body ps-2col"><div class="ps-card rv" style="--d:200"><h4>Boundaries you named</h4>'+bars(D.bounds.filter(function(b){return b[0]!=='No clear boundary stated';}).map(function(b){return {label:b[0],key:b[0],n:b[1],c:COL.ink};}),{lw:'55%'})+'</div>'+
+ '<div class="ps-qs rv" style="--d:350">'+BQS.map(function(q,i){var n=q.keys.reduce(function(a,k){return a+bd(k);},0);return '<button type="button" class="ps-qc" data-i="'+i+'" aria-pressed="false" style="--c:var(--'+q.c+')"><span class="qh">'+esc(q.h)+'</span><span class="qn">'+q.keys.map(function(k){return esc(k.split(',')[0].split(' & ')[0])+' ('+bd(k)+')';}).join(' \u00b7 ')+'</span>'+quote(q.q,'var(--'+q.c+')')+'</button>';}).join('')+'</div></div>'+
+ link([['13:15','<b>Data &amp; trust first.</b>'],['15:00','\u201cNot for AI\u201d is a valid rating, and \u201chow did you check it?\u201d is part of every exchange.']])});
+
+var AG = [
+ {id:'n1',t:'12:50',h:'So, where do we all stand?',s:'lab not lecture \u00b7 best-practice sharing'},
+ {id:'n2',t:'13:15',h:'Wait, where does my data go?',s:'which Copilot \u00b7 your data \u00b7 trust'},
+ {id:'n3',t:'13:30',h:'Why did it say that?',s:'prompting baseline \u00b7 GCSE'},
+ {id:'n4',t:'15:00',h:'What\u2019s worth your time?',s:'rate use cases \u00b7 add your own'},
+ {id:'n5',t:'15:00',h:'Rounds 1 & 2 with Copilot',s:'test it \u00b7 then go deeper'},
+ {id:'n6',t:'15:00',h:'What did the others try?',s:'best prompt \u00b7 surprise \u00b7 how you checked'},
+ {id:'n7',t:'16:45',h:'So, what changes on Monday?',s:'one concrete action \u00b7 open questions'}
+];
+var OG = [
+ {k:'A',h:'Show me how: hands-on',c:'accent',subs:[['Practical workflows & reusable prompts','Practical workflows, hands-on examples & reusable prompts'],['Writing & productivity','Writing, structure & productivity'],['Coding & data analysis','Coding, data analysis & technical research support'],['Literature & research gaps','Literature review, synthesis & research gaps']],to:['n3','n5','n7']},
+ {k:'B',h:'Tell me what\u2019s OK, and how to check',c:'verify',subs:[['Responsible use, ethics & policy','Responsible use, ethics, integrity & policy clarity'],['Verifying outputs','Output verification, reliability & human judgement']],to:['n2','n4','n6']},
+ {k:'C',h:'Show me what\u2019s possible',c:'ochre',subs:[['Use cases & tool choice','Use-case discovery and effective tool selection'],['Agents & research assistants','Agents and research assistants'],['Broader perspective','General learning / broader perspective'],['Translation','Translation & multilingual literature']],to:['n4','n5']},
+ {k:'D',h:'Let me learn from peers',c:'blue',subs:[['Peer exchange & networking','Peer exchange, networking & shared learning']],to:['n1','n6']}
+];
+S.push({t:'Outcomes', interactive:'map', note:'And finally, what you want to take home. '+D.outcomeAnswered+' of you answered, and the answers fall into four wishes: show me how, tell me what is OK, show me what is possible, let me learn from peers. Click each one to see where it lives in today\u2019s agenda.',
+ html: head('10 \u00b7 What would make today worth it','Your four wishes, <em>mapped to the agenda</em>.',D.outcomeAnswered+' of '+N+' told us what has to happen this afternoon. One answer can carry several wishes. Click a wish to trace it.')+
+ '<div class="ps-body"><div class="ps-map rv" style="--d:150"><svg class="ln" aria-hidden="true"></svg><div class="ps-og">'+OG.map(function(g,i){return '<button type="button" class="ps-ob" data-i="'+i+'" aria-pressed="false" style="--c:var(--'+g.c+')"><span class="oh"><span>'+esc(g.h)+'</span></span><span class="os">'+g.subs.map(function(s){return '<span>'+esc(s[0])+' <b>'+oc(s[1])+'</b></span>';}).join('')+'</span>'+D.oq[g.k].map(function(q){return quote(q,'var(--'+g.c+')');}).join('')+'</button>';}).join('')+'</div><div></div>'+
+ '<div class="ps-ag">'+AG.map(function(a){return '<div class="ps-an" data-id="'+a.id+'"><div class="at">'+a.t+'</div><div class="ah">'+esc(a.h)+'</div><div class="ps-sub" style="margin:2px 0 0;font-size:12px">'+a.s+'</div></div>';}).join('')+'</div></div></div>'});
+
+var TL = [
+ {t:'12:45\u201312:50',h:'Welcome and Setting the Scene',w:'Helen & Ernest',c:'faint',b:'Why this afternoon matters for your research.',raw:true},
+ {t:'12:50\u201313:15',h:'So, where do we all stand?',w:'Oliver',c:'accent',b:'<b>'+pct(dw)+'%</b> already use GenAI daily or weekly, so this is a lab, not a lecture.'},
+ {t:'13:15\u201313:30',h:'Wait, where does my data go?',w:'Tom',c:'blue',b:'Privacy (<b>'+bd('Privacy, confidentiality, IP & sensitive data')+'</b>) and ethics &amp; bias (<b>'+bd('Ethics, bias, integrity & responsible use')+'</b>) are named boundaries; <b>'+notSure+'</b> aren\u2019t sure which Copilot they have.'},
+ {t:'13:30\u201314:45',h:'Why did it say that? A common baseline for prompting',w:'Tom',c:'ochre',b:'<b>'+pct(pLow)+'%</b> rate their prompting 3 or below, even '+D.dailyLow+' of '+D.daily+' daily users.'},
+ {t:'14:45\u201315:00',h:'Coffee Break',w:'',c:'faint',b:'',brk:true},
+ {t:'15:00\u201316:45',h:'Where does AI actually help me? Let\u2019s focus on your Research Process',w:'Manuel + Team',c:'verify',b:'Analysis (<b>'+uc('Data analysis, statistics & interpretation')+'</b>), writing (<b>'+uc('Writing, editing & communication')+'</b>) and literature (<b>'+uc('Literature discovery, synthesis & gap mapping')+'</b>) lead your use cases; <b>'+D.disc.length+'</b> discipline clusters, so groups by discipline and one shared practice dataset; hands-on workflows are wish #1 (<b>'+oc('Practical workflows, hands-on examples & reusable prompts')+'</b>).'},
+ {t:'16:45\u201317:00',h:'So, what changes on Monday?',w:'Oliver',c:'accent',b:'<b>'+get(D.sup,'Not yet')+'</b> haven\u2019t talked to their supervisor yet, and you asked for one workflow to use tomorrow.'}
+];
+S.push({t:'Agenda', note:'So that is why the afternoon looks the way it does. Get to know the room, clear up the burning questions, learn to ask better, choose what matters, test it on real research, learn from each other, and take one step home.',
+ html: head('11 \u00b7 So this is why','Today\u2019s agenda, <em>built on your answers</em>.')+
+ '<div class="ps-body"><div class="ps-tl">'+TL.map(function(r,i){return '<div class="ps-tr rv'+(r.brk?' brk':'')+'" style="--c:var(--'+r.c+');--d:'+(150+i*130)+'"><div class="tt">'+r.t+'</div><div><div class="th">'+esc(r.h)+'</div>'+(r.w?'<div class="tw">'+esc(r.w)+'</div>':'')+'</div><div class="tb">'+(r.b?(r.raw?r.b:'Because '+r.b.charAt(0).toLowerCase()+r.b.slice(1)):'')+'</div></div>';}).join('')+'</div></div>'});
+
+/* ---------- engine ---------- */
+function init(root){
+  if(!root || root.__pgr) return; root.__pgr = true;
+  root.innerHTML =
+   '<div class="ps-top"><span class="ps-brand"><b>You told us</b> \u00b7 GenAI in Your Research \u00b7 pre-workshop survey (n='+N+')</span><span class="ps-chapter" aria-live="polite"></span></div>'+
+   '<div class="ps-progress"><i></i></div><div class="ps-stage">'+S.map(function(s,i){return '<section class="ps-slide" data-i="'+i+'" aria-roledescription="slide" aria-label="'+(i+1)+' of '+S.length+': '+esc(s.t)+'">'+s.html+'</section>';}).join('')+'</div>'+
+   '<div class="ps-notes" role="note"><div class="nh">Talk track</div><div class="nt"></div></div>'+
+   '<nav class="ps-nav" aria-label="Story navigation"><button type="button" class="ps-btn" data-act="prev">\u2190 Back</button><div class="ps-dots">'+S.map(function(s,i){return '<button type="button" data-go="'+i+'" aria-label="Go to '+esc(s.t)+'"></button>';}).join('')+'</div>'+
+   '<button type="button" class="ps-btn" data-act="notes" aria-pressed="false" title="Talk track (N)">Notes</button><button type="button" class="ps-btn" data-act="fs" title="Full screen (F)">\u26F6</button><button type="button" class="ps-btn pri" data-act="next">Next \u2192</button></nav>';
+  var slides = root.querySelectorAll('.ps-slide'), dots = root.querySelectorAll('.ps-dots button'), cur = -1, visible = true;
+  function countUp(sl){
+    sl.querySelectorAll('[data-count]').forEach(function(el){
+      var to = +el.getAttribute('data-count'), suf = el.getAttribute('data-suf')||'', t0 = null, dur = 1100;
+      if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches){ el.textContent = to+suf; return; }
+      el.textContent = '0'+suf;
+      function step(ts){ if(!t0) t0 = ts; var p = Math.min(1,(ts-t0)/dur), e = 1-Math.pow(1-p,3); el.textContent = Math.round(to*e)+suf; if(p<1) requestAnimationFrame(step); }
+      setTimeout(function(){ requestAnimationFrame(step); }, 250);
+    });
+    sl.querySelectorAll('circle.fg').forEach(function(c){ c.style.strokeDasharray = '0 400'; setTimeout(function(){ c.style.strokeDasharray = c.getAttribute('data-dash'); }, 60); });
+  }
+  function go(i){
+    i = Math.max(0, Math.min(S.length-1, i)); if(i===cur) return;
+    slides.forEach(function(sl,k){ sl.classList.toggle('is-on',k===i); sl.classList.toggle('is-prev',k<i); sl.setAttribute('aria-hidden', k===i?'false':'true'); if('inert' in sl) sl.inert = k!==i; });
+    dots.forEach(function(d,k){ if(k===i) d.setAttribute('aria-current','step'); else d.removeAttribute('aria-current'); });
+    root.querySelector('.ps-chapter').textContent = (i+1)+' / '+S.length+' \u00b7 '+S[i].t;
+    root.querySelector('.ps-progress i').style.width = (100*(i+1)/S.length)+'%';
+    root.querySelector('[data-act="prev"]').disabled = i===0;
+    root.querySelector('[data-act="next"]').disabled = i===S.length-1;
+    root.querySelector('.ps-notes .nt').textContent = S[i].note || '';
+    cur = i; slides[i].scrollTop = 0; countUp(slides[i]);
+    if(S[i].interactive==='map') setTimeout(function(){ drawMap(slides[i], true); }, 450);
+  }
+  root.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b || !root.contains(b)) return;
+    var a = b.getAttribute('data-act');
+    if(a==='next') go(cur+1); else if(a==='prev') go(cur-1);
+    else if(a==='notes'){ var on = root.classList.toggle('show-notes'); b.setAttribute('aria-pressed', on); }
+    else if(a==='fs'){ if(document.fullscreenElement) document.exitFullscreen(); else if(root.requestFullscreen) root.requestFullscreen(); }
+    else if(b.hasAttribute('data-go')) go(+b.getAttribute('data-go'));
+  });
+  document.addEventListener('keydown', function(e){
+    if(!visible || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
+    var tg = e.target; if(tg && (tg.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName))) return;
+    if(tg && tg !== document.body && !root.contains(tg) && !document.fullscreenElement) return;
+    var k = e.key;
+    if(k==='ArrowRight'||k==='PageDown'){ go(cur+1); e.preventDefault(); }
+    else if(k==='ArrowLeft'||k==='PageUp'){ go(cur-1); e.preventDefault(); }
+    else if(k==='Home'){ go(0); e.preventDefault(); } else if(k==='End'){ go(S.length-1); e.preventDefault(); }
+    else if(k==='n'||k==='N'){ root.querySelector('[data-act="notes"]').click(); }
+    else if(k==='f'||k==='F'){ root.querySelector('[data-act="fs"]').click(); }
+  });
+  if('IntersectionObserver' in window){ new IntersectionObserver(function(en){ visible = en[0].isIntersecting; },{threshold:.4}).observe(root); }
+
+  /* use-case picker */
+  var ucSl = root.querySelector('.ps-slide[data-i="'+S.findIndex(function(s){return s.interactive==='uc';})+'"]');
+  function showUC(i){
+    var u = D.usecases[i], t = UCT[u[0]]||['',''], qs = D.uq[u[0]]||[];
+    ucSl.querySelectorAll('.ps-pick button').forEach(function(b){ b.setAttribute('aria-pressed', +b.getAttribute('data-i')===i); });
+    var p = ucSl.querySelector('.ps-panel');
+    p.innerHTML = '<div class="ps-fade" style="display:flex;flex-direction:column;gap:10px"><span><span class="ps-tag" style="--c:var(--'+t[1]+');--cs:var(--'+t[1]+'-soft)">'+esc(t[0])+'</span></span><div class="pt">'+esc(u[0])+'</div><div class="pm">'+u[1]+' of '+N+' answers ('+pct(u[1])+'%)</div>'+qs.map(function(q){return quote(q,'var(--'+t[1]+')');}).join('')+'</div>';
+  }
+  ucSl.querySelector('.ps-pick').addEventListener('click', function(e){ var b = e.target.closest('button'); if(b) showUC(+b.getAttribute('data-i')); });
+  showUC(0);
+
+  /* boundary questions */
+  var bdSl = root.querySelector('.ps-slide[data-i="'+S.findIndex(function(s){return s.interactive==='bd';})+'"]');
+  bdSl.querySelector('.ps-qs').addEventListener('click', function(e){
+    var b = e.target.closest('.ps-qc'); if(!b) return;
+    var on = b.getAttribute('aria-pressed')!=='true';
+    bdSl.querySelectorAll('.ps-qc').forEach(function(x){ x.setAttribute('aria-pressed', on && x===b); });
+    var keys = on ? BQS[+b.getAttribute('data-i')].keys : null;
+    bdSl.querySelectorAll('.ps-bar').forEach(function(bar){ var k = bar.getAttribute('data-key'), hit = keys && keys.indexOf(k)>-1; bar.classList.toggle('hl', !!hit); bar.classList.toggle('lo', !!keys && !hit); bar.style.setProperty('--c', hit ? 'var(--'+BQS[+b.getAttribute('data-i')].c+')' : 'var(--ink)'); });
+  });
+
+  /* outcome map */
+  var mapSl = root.querySelector('.ps-slide[data-i="'+S.findIndex(function(s){return s.interactive==='map';})+'"]'), sel = -1;
+  function drawMap(sl, animate){
+    var m = sl.querySelector('.ps-map'), svg = m.querySelector('svg.ln'), r0 = m.getBoundingClientRect(); if(!r0.width) return;
+    var out = '', d = 0;
+    OG.forEach(function(g,gi){
+      var a = m.querySelector('.ps-ob[data-i="'+gi+'"]').getBoundingClientRect();
+      g.to.forEach(function(id){
+        var b = m.querySelector('.ps-an[data-id="'+id+'"]').getBoundingClientRect();
+        var x1 = a.right - r0.left, y1 = a.top + a.height/2 - r0.top, x2 = b.left - r0.left - 4, y2 = b.top + b.height/2 - r0.top, cx = (x2-x1)*.5;
+        var on = sel===gi;
+        out += '<path data-g="'+gi+'" class="'+(on?'on ':'')+(animate?'draw':'')+'" style="--c:var(--'+g.c+');--len:'+Math.ceil(Math.hypot(x2-x1,y2-y1)*1.3)+';--d:'+(d++*90)+'" d="M'+x1.toFixed(1)+' '+y1.toFixed(1)+' C'+(x1+cx).toFixed(1)+' '+y1.toFixed(1)+' '+(x2-cx).toFixed(1)+' '+y2.toFixed(1)+' '+x2.toFixed(1)+' '+y2.toFixed(1)+'"/>';
+      });
+    });
+    svg.innerHTML = out;
+  }
+  mapSl.querySelector('.ps-og').addEventListener('click', function(e){
+    var b = e.target.closest('.ps-ob'); if(!b) return;
+    var i = +b.getAttribute('data-i'); sel = sel===i ? -1 : i;
+    var m = mapSl.querySelector('.ps-map'); m.classList.toggle('focus', sel>-1);
+    mapSl.querySelectorAll('.ps-ob').forEach(function(x){ x.setAttribute('aria-pressed', +x.getAttribute('data-i')===sel); });
+    mapSl.querySelectorAll('.ps-an').forEach(function(n){ n.classList.toggle('on', sel>-1 && OG[sel].to.indexOf(n.getAttribute('data-id'))>-1); });
+    setTimeout(function(){ drawMap(mapSl, false); }, 260);
+  });
+  var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ if(mapSl.classList.contains('is-on')) drawMap(mapSl,false); }, 120); });
+  document.addEventListener('fullscreenchange', function(){ setTimeout(function(){ if(mapSl.classList.contains('is-on')) drawMap(mapSl,false); }, 200); });
+
+  go(0);
+}
+window.PgrSurveyStory = { init: init, data: D, slides: S };
+function boot(){ document.querySelectorAll('[data-pgr-story]').forEach(init); }
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
+<!-- ===== end survey story block ===== -->
+
   </section>
 
   <section id="view-cases" aria-labelledby="tab-cases" hidden>
@@ -1055,7 +1526,7 @@ const AGENDA = [
  ['15:00','16:45','Where does AI actually help me? Let\'s focus on your Research Process','Manuel + Team'],
  ['16:45','17:00','So, what changes on Monday?','Oliver']
 ];
-const AGENDA_DAY = '2026-11-04', TOOL_SLOT = 5;
+const AGENDA_DAY = '2026-11-04', TOOL_SLOT = 5, SURVEY_SLOT = 1;
 
 /* Slides of Tom's sessions: assets/slides/tom/sNN.webp, exported from PowerPoint (hidden slides left out) */
 const SLIDES = {title:'Wait, where does my data go? · Why did it say that? A common baseline for prompting', who:'Tom', n:31, dir:'assets/slides/tom/', pdf:'assets/slides/tom/tom-slides.pdf', pdfSize:3006040,
@@ -1745,7 +2216,7 @@ function renderAgenda(){
   const now = londonNow(), mins = t => +t.slice(0, 2) * 60 + +t.slice(3);
   $('#agenda').innerHTML = AGENDA.map(([a, b, title, who], i) => {
     const live = now.day === AGENDA_DAY && now.min >= mins(a) && now.min < mins(b);
-    return `<li class="${who ? '' : 'brk'}${live ? ' live' : ''}"><span class="t">${a}–${b}</span><span><b>${esc(title)}</b>${who ? `<small>${esc(who)}</small>` : ''}${i === TOOL_SLOT ? '<small class="here">This tool · Steps 1 and 2 below</small>' : ''}${SLIDES.start[i] ? `<small><button type="button" class="linkbtn" data-slides="${SLIDES.start[i]}">View slides</button></small>` : ''}</span>${live ? '<span class="now">Now</span>' : ''}</li>`;
+    return `<li class="${who ? '' : 'brk'}${live ? ' live' : ''}"><span class="t">${a}–${b}</span><span><b>${esc(title)}</b>${who ? `<small>${esc(who)}</small>` : ''}${i === TOOL_SLOT ? '<small class="here">This tool · Steps 1 and 2 below</small>' : ''}${i === SURVEY_SLOT ? '<small><button type="button" class="linkbtn" data-view="survey">Survey results: you told us</button></small>' : ''}${SLIDES.start[i] ? `<small><button type="button" class="linkbtn" data-slides="${SLIDES.start[i]}">View slides</button></small>` : ''}</span>${live ? '<span class="now">Now</span>' : ''}</li>`;
   }).join('');
   $('#team').innerHTML = TEAM.map(m => `<div class="member">${m.photo ? `<img src="${esc(m.photo)}" alt="" width="64" height="64">` : `<span class="avatar" aria-hidden="true">${esc(m.n[0])}</span>`}<b>${esc(m.n)}</b></div>`).join('');
   $('#slidesPanel').innerHTML = `<div class="sl-head"><button type="button" class="sl-thumb" data-slides="1" aria-label="Open the slides"><img src="${slideSrc(1)}" alt="" width="320" height="180" loading="lazy"></button>
@@ -1784,7 +2255,7 @@ $('#viewer').addEventListener('touchend', e => { if (touchX === null) return; co
 
 function setView(v, back){
   ui.view = v; ui.back = back || null;
-  ['agenda','cases','data','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
+  ['agenda','survey','cases','data','results','tools'].forEach(k => { $('#view-' + k).hidden = k !== v; $('#tab-' + k).setAttribute('aria-selected', String(k === v)); });
   if (v === 'results') renderResults(); if (v === 'tools') renderTools(); if (v === 'agenda') renderAgenda(); if (v === 'data') renderData();
   $('#dataBack').innerHTML = v === 'data' ? backHtml() : ''; $('#toolsBack').innerHTML = v === 'tools' ? backHtml() : '';
   window.scrollTo({top:0});
