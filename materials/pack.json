@@ -128,7 +128,7 @@
    "licence": "CC BY 4.0",
    "about": "A rapid event-attribution study combined with a vulnerability and impact assessment.",
    "data": [],
-   "size": 2467881
+   "size": 2372486
   },
   {
    "id": "C5",
@@ -391,6 +391,6 @@
  ],
  "zips": {
   "data": 798552,
-  "all": 37005614
+  "all": 36903797
  }
 }
