@@ -125,6 +125,9 @@ function renderLens(){
   $('#lensHint').textContent = ui.lens === 1
     ? 'Rate the value for your research, the kind of gain and whether you could start on Monday.'
     : `Pick one to three of your highest-rated use cases and try them live with Copilot · ${n} of ${MAXTEST} selected.`;
+  $('#levels').hidden = ui.lens !== 2;
+  $('#levels').innerHTML = `<h2>Four levels of working with Copilot</h2><p class="sub">Start at level 1. In round 2, go further – the guide in each use case shows how to take it to the next level.</p>
+    <ol class="lv-grid">${LEVELS.map(([t, d, r], i) => `<li><span class="lv-n">Level ${i + 1} · ${r}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>`;
 }
 function renderPhases(){
   $('#phases').innerHTML = PHASES.map((p, i) => {
@@ -187,6 +190,19 @@ function packFiles(id){
   const d = PACK.data.find(x => x.id === id);
   return d ? `<li><b>${id}</b> ${esc(d.title)}: ${d.files.map(f => `<a href="${fileUrl(f.f)}" download>${esc(f.f.split('/').pop())} · ${mb(f.size)}</a>`).join(', ')}</li>` : '';
 }
+function levelsOf(u){
+  const x = (typeof DETAILS !== 'undefined' && DETAILS[u.id]) || {tech:{routes:[], data:[], connect:[], repos:[]}}, t = x.tech;
+  const con = (u.ix || []).concat((t.connect || []).filter(n => !(u.ix || []).includes(n)));
+  return {two: t.routes.includes('files') || t.data.length > 1, con, repos: (t.repos || []).filter(k => REPOS[k])};
+}
+function furtherHtml(u){
+  const L = levelsOf(u), pr = practiceOf(u.id), files = pr ? pr.data.map(id => id === 'papers' ? 'the practice papers' : id).join(', ') : 'your files';
+  const items = [];
+  if (L.two) items.push(`<li><b>Level 2 · Project</b> Create a Copilot notebook (or a Cowork project), add ${esc(files)} as references and paste the starter prompt as the notebook's instructions. Ask follow-up questions across all files – the notebook keeps the context.</li>`);
+  items.push(`<li><b>Level 3 · Agent</b> In Copilot Chat choose New agent (Agent Builder): turn the starter prompt into standing instructions${L.two ? ', add the files as knowledge' : ''}${L.repos.length ? `, and add a matching skill (${L.repos.map(k => esc(REPOS[k][0])).join(', ')})` : ''}. Test it, then reuse it for every new ${u.phase === 'analyse' || u.phase === 'erhebung' ? 'dataset' : u.phase === 'publikation' ? 'draft' : 'paper or question'}.</li>`);
+  if (L.con.length) items.push(`<li><b>Level 4 · Copilot Studio</b> Connect ${L.con.map(esc).join(', ')} so the agent can search or use them directly – via MCP or a connector, which an agent alone cannot hold. Needs your IT team; <button type="button" class="linkbtn" data-view="tools" data-mcpinfo>how it works →</button></li>`);
+  return `<div class="further"><h4>Take it further</h4><ol>${items.join('')}</ol></div>`;
+}
 function guideHtml(u, open){
   const g = (typeof GUIDES !== 'undefined' && GUIDES[u.id]) || GENERIC, pr = practiceOf(u.id), pm = pr && ui.gmode === 'practice';
   const seg = pr ? `<div class="seg gseg" role="group" aria-label="Material for the test"><button type="button" data-gmode="practice" aria-pressed="${pm}">With the practice data</button><button type="button" data-gmode="own" aria-pressed="${!pm}">With your own material</button></div>` : '';
@@ -195,12 +211,14 @@ function guideHtml(u, open){
     <p><b>Download and attach:</b></p><ul class="pfiles">${pr.data.map(id => packFiles(id)).join('')}</ul>
     <div class="prompt"><div class="ptools"><b>Starter prompt · practice data</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-opencopilot title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(pr.prompt)}</pre></div>
     <p><b>Check:</b> ${esc(pr.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}
+    ${furtherHtml(u)}
     <p class="sub">All files and test ideas: <button type="button" class="linkbtn" data-view="data">Practice data →</button></p></details>`;
   return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot · about 10 minutes</summary>${seg}
     <p><b>Bring:</b> ${esc(g.bring)}</p>
     <ol class="howto">${g.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
     <div class="prompt"><div class="ptools"><b>Starter prompt</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-opencopilot title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(g.prompt)}</pre></div>
     <p><b>Check:</b> ${esc(g.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}
+    ${furtherHtml(u)}
     <p class="sub">No suitable material at hand? <button type="button" class="linkbtn" data-view="data">Use the practice data →</button></p></details>`;
 }
 function testHtml(u){
@@ -409,6 +427,7 @@ function detailHtml(u){
   const tech = `<div class="ux-tech"><h4>How it works technically</h4>
     ${t.routes.length ? `<div class="ux-routes">${t.routes.map((r, i) => `<span class="route${i ? '' : ' main'}" title="${esc(ROUTES[r][1])}">${esc(ROUTES[r][0])}</span>`).join('')}</div>` : ''}
     ${t.text ? `<p>${esc(t.text)}</p>` : ''}
+    ${row('Levels', (() => { const L = levelsOf(u); return LEVELS.map(([n, d], i) => { const on = i === 0 || i === 2 || (i === 1 && L.two) || (i === 3 && L.con.length); return `<span class="lvl${on ? ' on' : ''}" title="${esc(d)}">${i + 1} ${esc(n)}</span>`; }).join(''); })())}
     ${row('Practice data', t.data.map(id => `<button type="button" class="pk" data-pack="${id}" title="${esc(packLabel(id))}">${id === 'papers' ? '' : `<b>${id}</b> `}${esc(packLabel(id))}</button>`).join(''))}
     ${row('Academic tools', t.tools.map(n => toolUrl(n) ? `<a class="tk" href="${toolUrl(n)}" target="_blank" rel="noopener">${esc(n)}</a>` : `<span class="tk">${esc(n)}</span>`).join(''))}
     ${row('Connect to Copilot', con.length ? `<ul class="ux-con">${connectHtml(con)}</ul><button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How to connect a tool to Copilot →</button>` : '')}
