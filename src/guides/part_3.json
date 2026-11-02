@@ -7,7 +7,7 @@
       "Paste one journal's author guidelines and ask for a formatting checklist.",
       "Tick the checklist against your manuscript, including citation style and, if you write in LaTeX, the BibTeX entries."
     ],
-    "prompt": "I am a PhD researcher in [discipline] preparing a manuscript. My abstract is: [paste abstract]. Suggest five peer-reviewed journals whose published aims and scope fit this work, including [journal I am considering]. Give a table with: journal, publisher, why it fits, article type and word limit, reference style, open-access options, and a link to the author guidelines page. Use only information from the journals' own websites and cite the link. If I paste a few references or BibTeX entries, convert them to the journal's citation style and flag missing fields. If you are not sure about a detail, say so; do not invent journals or requirements.",
+    "prompt": "I am a postgraduate researcher in [discipline] preparing a manuscript. My abstract is: [paste abstract]. Suggest five peer-reviewed journals whose published aims and scope fit this work, including [journal I am considering]. Give a table with: journal, publisher, why it fits, article type and word limit, reference style, open-access options, and a link to the author guidelines page. Use only information from the journals' own websites and cite the link. If I paste a few references or BibTeX entries, convert them to the journal's citation style and flag missing fields. If you are not sure about a detail, say so; do not invent journals or requirements.",
     "check": "Open the author guidelines of two suggested journals and confirm that the scope, word limit and reference style match what Copilot stated."
   },
   "publikation-4": {
@@ -18,7 +18,7 @@
       "Ask Copilot to quote the passage behind each major comment and name missing reporting items.",
       "Ask for a revision roadmap and draft how you would address the two most useful comments."
     ],
-    "prompt": "I am a PhD researcher in [discipline] and plan to submit this [article type] to [journal]. Attached is [section of my draft]. Act as a panel of three critical but fair peer reviewers: a methods expert, a theory expert and a devil's advocate who challenges the central claim. Each reviewer gives a two-sentence assessment and up to four major comments; for each comment, quote the passage it refers to and suggest a concrete fix. Then name any items the reporting guideline for my design would expect that are missing (for example CONSORT, STROBE, COREQ or SRQR – say which one applies). Finish with a revision roadmap: the changes in order of priority, with effort (small, medium, large). Comment only on what is in the text; if something may be covered elsewhere in the paper, say so.",
+    "prompt": "I am a postgraduate researcher in [discipline] and plan to submit this [article type] to [journal]. Attached is [section of my draft]. Act as a panel of three critical but fair peer reviewers: a methods expert, a theory expert and a devil's advocate who challenges the central claim. Each reviewer gives a two-sentence assessment and up to four major comments; for each comment, quote the passage it refers to and suggest a concrete fix. Then name any items the reporting guideline for my design would expect that are missing (for example CONSORT, STROBE, COREQ or SRQR – say which one applies). Finish with a revision roadmap: the changes in order of priority, with effort (small, medium, large). Comment only on what is in the text; if something may be covered elsewhere in the paper, say so.",
     "check": "Each comment points to a passage you can find in your text, and at least one names a weakness that you or a supervisor had already noticed."
   },
   "publikation-5": {
@@ -40,7 +40,7 @@
       "Ask Copilot to flag gaps, overlaps and repetition, quoting your summaries.",
       "Check two flagged issues against your actual chapters."
     ],
-    "prompt": "I am a PhD researcher in [discipline] checking the golden thread of my thesis. My research questions are: [paste RQs]. Below are short summaries of each chapter: [paste summaries]. Create a table with one row per research question showing where it is introduced, addressed with methods, answered with findings, and discussed in the conclusion. Then list any gaps (a question not answered), overlaps between chapters and likely repetition. For each point, quote the sentence from my summaries it is based on. If the summaries do not give enough information to judge, say so.",
+    "prompt": "I am a postgraduate researcher in [discipline] checking the golden thread of my thesis. My research questions are: [paste RQs]. Below are short summaries of each chapter: [paste summaries]. Create a table with one row per research question showing where it is introduced, addressed with methods, answered with findings, and discussed in the conclusion. Then list any gaps (a question not answered), overlaps between chapters and likely repetition. For each point, quote the sentence from my summaries it is based on. If the summaries do not give enough information to judge, say so.",
     "check": "Pick two flagged gaps or overlaps and confirm them in your full chapters; the mapping should match where you know each question is answered.",
     "limit": "Copilot may skip parts of long files, so this tests the golden thread on your outline and summaries, not on the full thesis text."
   },
@@ -120,7 +120,7 @@
       "After a meeting, paste your own notes and ask for an action list.",
       "Check the action list against your notes line by line."
     ],
-    "prompt": "I am a PhD researcher in [discipline] preparing for a [45-minute] supervision meeting. My notes on progress and open issues are: [paste notes]. Draft an agenda with time slots, the three decisions I need from my supervisors, and specific questions for each agenda item. After the meeting I will paste my notes; then summarise them as a table: action, owner, deadline, and add any open questions. Use only what is in my notes and do not add actions or agreements that are not there.",
+    "prompt": "I am a postgraduate researcher in [discipline] preparing for a [45-minute] supervision meeting. My notes on progress and open issues are: [paste notes]. Draft an agenda with time slots, the three decisions I need from my supervisors, and specific questions for each agenda item. After the meeting I will paste my notes; then summarise them as a table: action, owner, deadline, and add any open questions. Use only what is in my notes and do not add actions or agreements that are not there.",
     "check": "Every action in the summary appears in your notes, and nothing you agreed in the meeting is missing.",
     "limit": "Copilot Chat does not join or record the meeting; it works only from the notes you write and paste."
   },
@@ -132,7 +132,7 @@
       "Ask for a risk table with likelihood, impact and mitigation.",
       "Check every achievement and date against your notes and records."
     ],
-    "prompt": "I am a PhD researcher in [discipline] preparing my [annual / transfer / confirmation] review. The report needs these sections: [paste headings]. My notes are: [paste notes]. Draft the report under these headings in a factual, concise style of about [word count] words. Include progress against last year's objectives, outputs, training, a plan for the next 12 months, and a table of risks with likelihood, impact and mitigation. Use only what is in my notes; mark missing information with [TO ADD] and do not invent achievements, dates or results.",
+    "prompt": "I am a postgraduate researcher in [discipline] preparing my [annual / transfer / confirmation] review. The report needs these sections: [paste headings]. My notes are: [paste notes]. Draft the report under these headings in a factual, concise style of about [word count] words. Include progress against last year's objectives, outputs, training, a plan for the next 12 months, and a table of risks with likelihood, impact and mitigation. Use only what is in my notes; mark missing information with [TO ADD] and do not invent achievements, dates or results.",
     "check": "Every achievement, output and date in the draft matches your notes, and each risk is one you recognise as real."
   },
   "querschnitt-2": {
@@ -143,20 +143,20 @@
       "Ask for a realistic plan for next week.",
       "Describe a setback and ask Copilot to re-plan."
     ],
-    "prompt": "I am a PhD researcher in year [year] of [full-time / part-time] study in [discipline]. My submission date is [date]. Fixed milestones: [list]. Regular commitments: [teaching, work, caring, hours per week]. Plan backwards from submission: a table of quarterly milestones with deliverables and a buffer of at least [x] weeks. Then plan my next week in half-day blocks with one main goal per day. Finally, show how the plan changes if [setback, e.g. data collection is delayed by six weeks]. Keep it realistic for the hours I have and point out where the plan is too tight.",
+    "prompt": "I am a postgraduate researcher in year [year] of [full-time / part-time] study in [discipline]. My submission date is [date]. Fixed milestones: [list]. Regular commitments: [teaching, work, caring, hours per week]. Plan backwards from submission: a table of quarterly milestones with deliverables and a buffer of at least [x] weeks. Then plan my next week in half-day blocks with one main goal per day. Finally, show how the plan changes if [setback, e.g. data collection is delayed by six weeks]. Keep it realistic for the hours I have and point out where the plan is too tight.",
     "check": "The dates add up to your submission date, the fixed milestones fall on the right dates, and the weekly plan fits your actual available hours."
   },
   "querschnitt-3": {
     "bring": "Three to five of your own reading notes, highlights or annotations, or abstracts of open-access papers, as one Word file or pasted text.",
     "steps": [
-      "Attach or paste the notes and ask for a summary table.",
-      "Ask for links between sources: agree, contradict, build on.",
-      "Ask for a tagging scheme for your notes tool.",
+      "Attach or paste the notes and ask for atomic notes: one idea each, with an ID and source.",
+      "Ask for a controlled vocabulary of 10 to 15 tags with definitions and the synonyms each replaces.",
+      "Ask for typed links between notes: supports, contradicts, extends, uses data or method of.",
       "Check two suggested links against the original notes."
     ],
-    "prompt": "I am a PhD researcher in [discipline] organising my reading. Attached are my notes on [number] sources. Create a table: source, key claim, method, main concepts, three suggested tags. Then list up to five links between sources, saying whether they agree, contradict or build on each other, and name the note each link is based on. Finally, suggest a simple tagging scheme of 10 to 15 tags I could use in [Zotero / OneNote / Obsidian]. Use only what is in my notes; if a link is uncertain, say so.",
-    "check": "Pick two suggested links and confirm that both notes really say what Copilot claims they say.",
-    "limit": "Copilot Chat does not keep a searchable library of your files; for a lasting knowledge base, connect your notes or reference tool (for example Zotero, Notion or Obsidian) via MCP or use a Copilot notebook."
+    "prompt": "I am a postgraduate researcher in [discipline] building a note system in [Zotero / OneNote / Obsidian / Notion]. Attached are my notes on [number] sources. 1) Rewrite them as atomic notes: one idea per note, in plain words, each with a short ID, the source and the page if my note gives one. 2) Suggest a controlled vocabulary of 10 to 15 tags, each with a one-line definition and the synonyms it replaces, and apply two or three tags to each note. 3) Suggest up to five links between notes, each typed as supports, contradicts, extends, uses data of or uses method of, and name the sentence in my notes that each link rests on. Use only what is in my notes; leave out links that rest only on a shared topic, and say when a link is uncertain.",
+    "check": "Pick two suggested links and confirm that both notes really say what Copilot claims; each atomic note holds one idea and names its source.",
+    "limit": "Copilot Chat does not keep a searchable library of your files; for a lasting knowledge base, use a Copilot notebook or your notes tool's own search. Notion can be connected through your IT team; the Zotero and Obsidian MCP servers run only locally."
   },
   "querschnitt-4": {
     "bring": "A small public or dummy dataset as CSV or Excel, for example from data.gov.uk or the UK Data Service open data.",
@@ -177,7 +177,7 @@
       "Save the table as a Copilot Page or copy it into Word or Excel.",
       "Ask for a short draft AI declaration based only on the log."
     ],
-    "prompt": "I am a PhD researcher and want to keep a log of my AI use as the basis for the AI declaration in my thesis. Create a log table with columns: date, tool, task, prompt (full or summary), where the output is saved, how I checked it, what I used in my work, which research decision it informed. Fill in the first row from this description: [describe today's task]. Then draft a declaration of about 100 words, in a neutral tone, that describes only the uses in the log. Do not add uses I have not listed. [Paste university guidance if available.]",
+    "prompt": "I am a postgraduate researcher and want to keep a log of my AI use as the basis for the AI declaration in my thesis. Create a log table with columns: date, tool, task, prompt (full or summary), where the output is saved, how I checked it, what I used in my work, which research decision it informed. Fill in the first row from this description: [describe today's task]. Then draft a declaration of about 100 words, in a neutral tone, that describes only the uses in the log. Do not add uses I have not listed. [Paste university guidance if available.]",
     "check": "Someone else could retrace your step from the log row (tool, date, prompt, saved output), and the declaration mentions nothing that is not in the log; check it against your university's policy."
   },
   "querschnitt-6": {
@@ -188,7 +188,7 @@
       "Ask for feedback on your answer before seeing the solution.",
       "Finish with a five-question quiz and note what to look up."
     ],
-    "prompt": "I am a PhD researcher in [discipline] and want to learn [method / package / language] for [purpose in my project]. Act as a patient tutor. First ask me three short questions to judge my level. Then teach step by step in short chunks: explain one idea, show a small example, and give me one exercise. Wait for my answer and give feedback before showing the solution. Use [dataset or a simple made-up example]. Point me to the official documentation for each step, and if you are not sure about a function or option, say so.",
+    "prompt": "I am a postgraduate researcher in [discipline] and want to learn [method / package / language] for [purpose in my project]. Act as a patient tutor. First ask me three short questions to judge my level. Then teach step by step in short chunks: explain one idea, show a small example, and give me one exercise. Wait for my answer and give feedback before showing the solution. Use [dataset or a simple made-up example]. Point me to the official documentation for each step, and if you are not sure about a function or option, say so.",
     "check": "Run one example in your own software or compare it with the official documentation, and confirm that it works or matches."
   },
   "querschnitt-7": {
@@ -199,7 +199,7 @@
       "Ask one normal question and check that the agent follows your rules.",
       "Run stage 1 only, check every source, then approve extraction and the report."
     ],
-    "prompt": "You are the research assistant of a [discipline] PhD researcher. Always follow these standing rules: use [citation style]; use these terms consistently: [key terms with definitions]; never invent sources, quotes or numbers – say when you are unsure; [further rules]. When I ask for a scoping task on [research question], work in three stages and stop after each one for my approval. Stage 1, search: list up to eight sources from [websites] or the web, with title, year, link and one line on relevance. Stage 2, extraction: for the sources I approve, fill a table with aim, method, sample and main finding. Stage 3, report: write a 300-word summary that cites only approved sources.",
+    "prompt": "You are the research assistant of a postgraduate researcher in [discipline]. Always follow these standing rules: use [citation style]; use these terms consistently: [key terms with definitions]; never invent sources, quotes or numbers – say when you are unsure; [further rules]. When I ask for a scoping task on [research question], work in three stages and stop after each one for my approval. Stage 1, search: list up to eight sources from [websites] or the web, with title, year, link and one line on relevance. Stage 2, extraction: for the sources I approve, fill a table with aim, method, sample and main finding. Stage 3, report: write a 300-word summary that cites only approved sources.",
     "check": "Before approving each stage, open every link and confirm the source exists and says what the table claims; treat the final report as an unverified draft that still needs your own reading.",
     "limit": "Copilot runs short web-based steps that you approve one by one; it cannot search library databases or run the pipeline on its own, so this tests the checkpoint workflow, not full automation."
   }

@@ -9,7 +9,7 @@
     ],
     "prompt": "I am a postgraduate researcher in [discipline]. Using only the studies I provide, identify the research gaps they leave. Sort them by type: empirical (missing populations, settings, countries or periods), methodological (similar designs, missing methods or data sources), theoretical (phenomenon not yet explained or compared with certain theories), practical (missing evidence on implementation or use), and contradictory findings. Show a table: gap type, the gap in one sentence, studies that show it, and the passage that supports it. Then say which gap my draft research question addresses and how convincingly it does so. My question: [question]. Do not add studies I have not given you.\n\n[paste abstracts or attach files]",
     "check": "Every supporting passage appears in the study it is attributed to, and each gap follows from what the studies say rather than from what they simply do not mention.",
-    "limit": "Copilot only sees the studies you give it; a gap in five abstracts is not yet a gap in the field – confirm it with a database search."
+    "limit": "Copilot only sees the studies you give it; a gap in a handful of studies is not yet a gap in the field – confirm it with a database search."
   },
   "analyse-7": {
     "bring": "Your research question, four to six categories with a one-line description each, and a short passage from an open-access paper or an invented text – never participants' data.",
@@ -126,7 +126,7 @@
       "Ask how the must-reads relate to your work.",
       "Open the must-reads and decide yourself what to read."
     ],
-    "prompt": "I am a PhD researcher in [discipline]. My research question is: [question]. Below are new publications from this week's alerts. Sort them into must-read, maybe and skip, with one line on why, based only on the title and abstract given. For the must-reads, say in one sentence whether each supports, challenges or extends my work, or offers a method I could use. Finish with a short list of search terms worth adding to my alerts. Do not add papers that are not in the list.\n\n[paste titles and abstracts]",
+    "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. Below are new publications from this week's alerts. Sort them into must-read, maybe and skip, with one line on why, based only on the title and abstract given. For the must-reads, say in one sentence whether each supports, challenges or extends my work, or offers a method I could use. Finish with a short list of search terms worth adding to my alerts. Do not add papers that are not in the list.\n\n[paste titles and abstracts]",
     "check": "For two papers you rated differently from Copilot, read the abstract again and decide who was right; nothing in the output is a paper you did not paste.",
     "limit": "Copilot rates on title and abstract only; set up the alerts themselves in the databases you use – or connect a source such as OpenAlex via MCP to search for new work directly."
   },
@@ -143,10 +143,10 @@
     "limit": "Copilot Chat returns code that you import into draw.io; drawing directly on the canvas needs the draw.io or Figma connection, which your IT has to enable. The theory behind each arrow remains your argument."
   },
   "erhebung-7": {
-    "bring": "A clear, glare-free photo of a whiteboard, flipchart or card sort you made yourself – no faces or names – or, for the practice version, a photo of the 12 practice paper titles you sorted on sticky notes.",
+    "bring": "A clear, glare-free photo of a whiteboard, flipchart or card sort you made yourself – no faces or names. For the practice version: sticky notes, a flipchart and a phone to photograph the 12 practice paper titles you sorted.",
     "steps": [
       "Photograph the board straight on, in good light, in one or two shots.",
-      "Upload the photo and ask Copilot to transcribe every card before interpreting anything.",
+      "Upload the photo – from the Copilot mobile app or via OneDrive – and ask Copilot to transcribe every card before interpreting anything.",
       "Ask for the clusters or the card-to-category mapping as a table, with uncertain readings flagged.",
       "Compare the transcription and mapping with the board itself."
     ],
@@ -162,12 +162,12 @@
       "Ask for the survey flow: consent, random assignment, stimulus, measures, debrief – with variable names.",
       "Compare the conditions side by side: only the manipulated element may differ."
     ],
-    "prompt": "I am planning a between-subjects experiment in [discipline]. Hypothesis: [e.g. personalised ads in a social media feed increase perceived intrusiveness compared with non-personalised ads]. Manipulated factor: [factor] with the levels [level A] and [level B]. Outcome measures: [measures]. 1) Create the stimulus for each condition: [e.g. a mock social media feed of six posts, two of them ads, as a single self-contained HTML page with fictional accounts and brands]. Keep everything identical except the manipulated element and list every difference between the conditions. 2) Write one manipulation-check question. 3) Draft the full study flow for a survey tool – consent, random assignment, stimulus, measures, manipulation check, demographics, debrief – as a table with variable names and coding, so the export can be analysed directly. Use no real brands, people or logos.",
+    "prompt": "I am planning a between-subjects experiment in [discipline]. Hypothesis: [e.g. a message framed as a loss changes intentions more than the same message framed as a gain]. Manipulated factor: [factor] with the levels [level A] and [level B]. Outcome measures: [measures]. 1) Create the stimulus for each condition: [e.g. a short case vignette, a public information message or a mock web page, as a single self-contained HTML page]. Keep everything identical except the manipulated element and list every difference between the conditions. 2) Write one manipulation-check question. 3) Draft the full study flow for a survey tool – consent, random assignment, stimulus, measures, manipulation check, demographics, debrief – as a table with variable names and coding, so the export can be analysed directly. Use no real organisations, brands, people or logos.",
     "check": "Put the conditions side by side: apart from the manipulated element, texts, images, layout and length must be identical; the variable names in the flow must match what your analysis plan expects.",
-    "limit": "Stimuli need ethics approval, a debrief when they mislead, and labelling of AI-generated images; check copyright and platform terms, use fictional brands, and pilot the realism with real people before the main study."
+    "limit": "Stimuli need ethics approval, a debrief when they mislead, and labelling of AI-generated images; check copyright and platform terms, use fictional names and organisations, and pilot the realism with real people before the main study."
   },
   "erhebung-8": {
-    "bring": "A question about what language models say or how they respond – not a question about real people – or, for the practice version, the UK heat attribution paper B2.",
+    "bring": "A question about what language models say or how they respond – not a question about real people – or, for the practice version, the UK heat attribution paper B2 to check the answers against (do not attach it).",
     "steps": [
       "Formulate a research question about the model, not about people.",
       "Fix the prompt, then collect several answers in fresh chats and note date and model.",

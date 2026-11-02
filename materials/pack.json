@@ -123,7 +123,7 @@
    "id": "C4",
    "group": "Extremes and attribution",
    "file": "papers/C_extremes-attribution/2023_Zachariah_India-Pakistan-heatwave_ERC.pdf",
-   "cite": "Zachariah, M., et al. (2023). Attribution of 2022 early-spring heatwave in India and Pakistan to climate change: lessons in assessing vulnerability and preparedness in reducing impacts. Environmental Research: Climate, 2(4).",
+   "cite": "Zachariah, M., et al. (2023). Attribution of 2022 early-spring heatwave in India and Pakistan to climate change: lessons in assessing vulnerability and preparedness in reducing impacts. Environmental Research: Climate, 2(4), 045005.",
    "doi": "10.1088/2752-5295/acf4b6",
    "licence": "CC BY 4.0",
    "about": "A rapid event-attribution study combined with a vulnerability and impact assessment.",
@@ -148,7 +148,7 @@
    "cite": "Shi, X., Beaulieu, C., Killick, R., & Lund, R. (2021). Changepoint Detection: An Analysis of the Central England Temperature Series. arXiv:2106.12180 (preprint).",
    "doi": "10.48550/arXiv.2106.12180",
    "licence": "CC BY 4.0",
-   "version": "Preprint – not peer reviewed in this version",
+   "version": "arXiv preprint (v2, June 2022); the peer-reviewed version appeared in Journal of Climate (2022), 35(19), 6329–6342, https://doi.org/10.1175/JCLI-D-21-0489.1",
    "about": "Applies changepoint methods to the Central England Temperature series.",
    "data": [
     "D2"
@@ -275,7 +275,7 @@
    "licence": "Open Government Licence v3",
    "source": "https://www.metoffice.gov.uk/research/climate/maps-and-data/historic-station-data",
    "cite": "Met Office historic station data.",
-   "notes": "Codes to clean: --- missing, * estimated, # sensor type, “Provisional” rows. The best file for a data-cleaning test.",
+   "notes": "Codes to clean: --- missing, * estimated, “Provisional” in an extra column for recent rows. The header also defines # for sunshine from an automatic sensor, but no value in this snapshot carries it. The best file for a data-cleaning test.",
    "files": [
     {
      "f": "data/D07_metoffice-stations/durhamdata_2026-10-29.txt",
@@ -297,7 +297,7 @@
    "licence": "Open Government Licence v3",
    "source": "https://www.metoffice.gov.uk/research/climate/maps-and-data/uk-and-regional-series",
    "cite": "Met Office HadUK-Grid.",
-   "notes": "Areal average for the UK; --- marks missing seasonal values.",
+   "notes": "Areal average for the UK. The first winter value (1836) is ---; in the incomplete current year the missing months and the autumn and annual totals are blank, not ---, so whitespace splitting shifts the columns – parse by fixed width.",
    "files": [
     {
      "f": "data/D08_metoffice-uk-series/UK_Rainfall_2026-10-29.txt",
@@ -315,7 +315,7 @@
    "licence": "Copernicus licence (free, with attribution)",
    "source": "https://pulse.climate.copernicus.eu/",
    "cite": "C3S/ECMWF, ERA5 via Climate Pulse.",
-   "notes": "Anomalies relative to 1991–2020; the last weeks are preliminary (ERA5T).",
+   "notes": "Anomalies relative to 1991–2020. A status column marks each day as FINAL or PRELIMINARY; preliminary values may still change slightly (in this snapshot only the last day).",
    "files": [
     {
      "f": "data/D09_copernicus-climatepulse/era5_daily_series_2t_global_2026-10-29.csv",
@@ -328,69 +328,88 @@
   [
    "B1",
    "D1 · D2",
-   "Ask Copilot to explain the file layout and write code that reshapes the monthly series to long format; check the 2022 values by hand."
+   "Ask Copilot to explain the file layout and write code that reshapes the monthly series to long format; check the 2022 values by hand.",
+   "analyse-1"
   ],
   [
    "C6",
    "D2",
-   "Ask Copilot to look for changepoints in the Central England series and compare its method and the years it finds with the paper."
+   "Ask Copilot to look for changepoints in the Central England series and compare its method and the years it finds with the paper.",
+   "querschnitt-6"
   ],
   [
    "A1 · A2",
    "D3 · D4 · D9",
-   "Compare the global records on a common baseline; check Copilot’s explanation of the differences against the paper."
+   "Compare the global records on a common baseline; check Copilot’s explanation of the differences against the papers. D3 is the HadCRUT5 data described in A1; A2 describes Berkeley Earth, whose data is not in the pack.",
+   "analyse-4"
   ],
   [
    "A3",
    "D3 · D5",
-   "Regress global temperature on CO₂, let Copilot propose testable hypotheses, then critique them against the paper’s indicators."
+   "Regress global temperature on CO₂, let Copilot propose testable hypotheses, then critique them against the paper’s indicators.",
+   "idee-6"
   ],
   [
    "B2 · B3",
    "D1",
-   "Count hot days in the Central England maximum series and compare Copilot’s reading of “return period” with the paper."
+   "Count hot days in the Central England maximum series and compare Copilot’s reading of “return time” with B2. The papers use other data (HadUK-Grid, models), and CET is a regional series, not the UK-wide record.",
+   "transfer-2"
   ],
   [
    "C1",
    "D1",
-   "Let Copilot apply a heatwave definition from the paper to the maximum series; check whether it used that definition or invented its own."
+   "Let Copilot apply the paper’s heatwave definition to the maximum series; check whether it used that definition or invented its own. The paper itself uses Berkeley Earth data, not CET.",
+   "idee-2"
   ],
   [
    "C2",
    "D7 · D8",
-   "Clean the two station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study."
+   "Clean the two station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study.",
+   "analyse-1"
   ],
   [
    "–",
    "D6",
-   "Ask Copilot to turn the irregular early sea-ice record into monthly means and explain how it handles the 1987–88 gap."
+   "Ask Copilot to turn the irregular early sea-ice record into monthly means and explain how it handles the 1987–88 gap.",
+   "analyse-6"
   ],
   [
    "B2 · C3 · C4 · C5",
    "–",
-   "Ask Copilot for a comparison table of the attribution studies, then check every cell against the PDFs."
+   "Ask Copilot for a comparison table of the attribution studies, then check every cell against the PDFs.",
+   "erhebung-1"
   ]
  ],
  "excluded": [
   [
    "EM-DAT disaster database (CRED/UCLouvain)",
-   "Requires registration and does not allow redistribution – download it yourself at https://public.emdat.be after accepting the terms."
+   "Requires registration and does not allow redistribution – download it yourself after accepting the terms: https://public.emdat.be"
   ],
   [
    "Berkeley Earth temperature data",
-   "Licensed for non-commercial use only (CC BY-NC 4.0) – not included. The paper A2 describing it is in the pack; the data is available at https://berkeleyearth.org/data/."
+   "Licensed for non-commercial use only (CC BY-NC 4.0) – not included. Paper A2, which describes it, is in the pack; the data is at https://berkeleyearth.org/data/"
   ],
   [
    "State of the UK Climate in 2024 (Kendon et al., 2025)",
-   "Licensed for non-commercial use only (CC BY-NC 4.0) – not included; open access at https://doi.org/10.1002/joc.70010."
+   "Licensed for non-commercial use only (CC BY-NC 4.0) – not included; open access at https://doi.org/10.1002/joc.70010"
   ],
   [
    "Meteostat daily station data",
    "Licence statements conflict (CC BY vs CC BY-NC) – not included."
   ]
  ],
+ "extras": [
+  {
+   "id": "AB",
+   "title": "Abstracts of the 12 papers",
+   "file": "papers/abstracts_12_papers.txt",
+   "licence": "CC BY 4.0",
+   "about": "ID, citation, DOI, title and abstract of every paper in one text file – for tasks that need only titles and abstracts, not the full PDFs.",
+   "size": 21838
+  }
+ ],
  "zips": {
-  "data": 798552,
-  "all": 36903797
+  "data": 799076,
+  "all": 36912338
  }
 }

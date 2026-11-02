@@ -44,21 +44,23 @@
   },
   "practice": {
    "data": [
-    "papers"
+    "AB"
    ],
-   "task": "Paste the reference list of the 12 practice papers and let Copilot group them into themes per year. You learn whether it counts correctly and how readily it reports 'trends' from a sample far too small to show any.",
-   "prompt": "Below this prompt are the references of 12 open-access papers on weather and climate change, copied from the practice pack list. Group them into four to six themes based on their titles only. Show a table: theme, papers in that theme (first author and year), number of papers per publication year. Then list two or three combinations of themes that rarely appear together in one paper and could be under-researched. Say clearly what a list of 12 papers can and cannot show about trends in this field. Do not add papers that are not in the list.",
-   "check": "Count the years yourself: 2019 – 1, 2020 – 3, 2021 – 2, 2023 – 3, 2024 – 1, 2025 – 2. Every paper appears in the table, and Copilot states that 12 titles cannot show a trend."
+   "ref": [],
+   "task": "Attach the abstracts file of the 12 practice papers and let Copilot group them into themes and count them per year. You learn whether it counts correctly and how readily it reports 'trends' from a sample far too small to show any.",
+   "prompt": "The attached text file lists 12 open-access papers on weather and climate change, each with ID, citation, title and abstract. Group the papers into four to six themes based on their titles and abstracts. Show a table: theme, papers in that theme (ID, first author and year), number of papers per publication year. Then list two or three combinations of themes that rarely appear together in one paper and could be under-researched. Say clearly what a list of 12 papers can and cannot show about trends in this field. Do not add papers that are not in the file.",
+   "check": "Count the years yourself: 2019 – 1, 2020 – 3, 2021 – 2, 2023 – 3, 2024 – 1, 2025 – 2 (the file lists Shi et al. as the 2021 preprint). Every paper appears in the table, and Copilot states that 12 papers cannot show a trend."
   },
   "tech": {
    "routes": [
     "chat",
+    "files",
     "connected",
     "external"
    ],
-   "text": "Paste titles and years into Copilot Chat for a first grouping. With OpenAlex connected (the IT has to enable it), Copilot can count publications per topic and year across the database; Litmaps adds citation maps.",
+   "text": "Paste titles and years into Copilot Chat, or attach them as a file, for a first grouping. With OpenAlex connected (the IT has to enable it), Copilot can count publications per topic and year across the database; Litmaps adds citation maps. For practice, attach the abstracts file of the 12 papers.",
    "data": [
-    "papers"
+    "AB"
    ],
    "tools": [
     "Litmaps",
@@ -117,7 +119,8 @@
    ]
   },
   "practice": {
-   "data": [
+   "data": [],
+   "ref": [
     "C6",
     "B1"
    ],
@@ -166,7 +169,7 @@
     ],
     [
      "SPIDER",
-     "Sample, Phenomenon of Interest, Design, Evaluation, Research type – for qualitative and mixed-methods questions about experiences and views. More specific than PICO, so searches built on it can miss relevant studies (Cooke et al., 2012)."
+     "Sample, Phenomenon of Interest, Design, Evaluation, Research type – for qualitative and mixed-methods questions about experiences and views (Cooke et al., 2012). More specific than PICO, so searches built on it can miss relevant studies (Methley et al., 2014)."
     ],
     [
      "FINER criteria",
@@ -189,27 +192,34 @@
     {
      "cite": "Hulley, S. B., Cummings, S. R., Browner, W. S., Grady, D. G., & Newman, T. B. (2013). Designing clinical research (4th ed.). Lippincott Williams & Wilkins.",
      "doi": ""
+    },
+    {
+     "cite": "Methley, A. M., Campbell, S., Chew-Graham, C., McNally, R., & Cheraghi-Sohi, S. (2014). PICO, PICOS and SPIDER: A comparison study of specificity and sensitivity in three search tools for qualitative systematic reviews. BMC Health Services Research, 14, 579.",
+     "doi": "10.1186/s12913-014-0579-0"
     }
    ]
   },
   "practice": {
    "data": [
-    "B2",
     "D1"
+   ],
+   "ref": [
+    "B2"
    ],
    "task": "Operationalise a practice question on UK heat, then compare Copilot's framework elements with how Christidis et al. (2020) defined exposure, comparison and outcome – and test whether its definition of a hot day can be counted in the daily CET file.",
    "prompt": "I am a postgraduate researcher. My draft research question is: 'How has human-caused climate change affected the chance of very hot days in the UK?' Suggest the most suitable framework for structuring it (PICO, PICOC, PEO or SPIDER) and explain in two sentences why it fits better than the others. Then show a table: framework element, the part of my question it covers, what is still missing or unclear, and three search terms or synonyms. Mark any element you had to assume. Propose three sub-questions, each linked to one element. Rate the question against FINER with one reason per criterion. Finally, define 'very hot day' operationally in two ways and say whether each could be counted in the attached HadCET daily maximum file.",
-   "check": "Compare with Christidis et al. (2020): outcome as exceeding 30, 35 and 40 °C, comparison as a world without human influence, HadUK-Grid observations and CMIP5 models. The CET file holds actual daily maxima, so thresholds can be counted."
+   "check": "Compare with Christidis et al. (2020): outcome as exceeding 30, 35 and 40 °C somewhere in the UK, comparison as a world without human influence, HadUK-Grid observations and CMIP5 models. Validity gap: the CET file is a regional average for a triangle of central England, not the UK maximum. 40 °C never occurs in it (highest value 37.3 °C on 19 July 2022). Did Copilot notice that a threshold counted in this file measures something different from the paper's outcome?"
   },
   "tech": {
    "routes": [
     "chat",
+    "files",
     "external"
    ],
-   "text": "Copilot Chat with the starter prompt is enough; ask for the output as a table you can copy into Word. The deep-research skill runs a comparable FINER-based question brief in GitHub Copilot.",
+   "text": "Copilot Chat with the starter prompt is enough; ask for the output as a table you can copy into Word. For practice, attach the HadCET daily maximum file (D1). The deep-research skill runs a comparable FINER-based question brief in GitHub Copilot.",
    "data": [
-    "B2",
-    "D1"
+    "D1",
+    "B2"
    ],
    "tools": [
     "Scholar GPT"
@@ -269,7 +279,8 @@
    ]
   },
   "practice": {
-   "data": [
+   "data": [],
+   "ref": [
     "C3",
     "B2"
    ],
@@ -347,8 +358,10 @@
   },
   "practice": {
    "data": [
-    "C6",
     "D2"
+   ],
+   "ref": [
+    "C6"
    ],
    "task": "Pose a climate question and ask which methods from statistics, econometrics or engineering could answer it. Then check whether Copilot's suggestions match the methods and literatures the changepoint preprint actually draws on.",
    "prompt": "I am a postgraduate researcher in climate science working on: 'When did the rate of warming in the Central England Temperature series change, and was the change abrupt or gradual?' The data are monthly and annual mean temperatures from 1659 (attached HadCET monthly file). Suggest four concepts or methods from neighbouring disciplines – for example statistics, econometrics, engineering or ecology – that could help answer it. Show a table: discipline, concept or method, how it would transfer to my question, what would need adapting (for example autocorrelation or the early, less precise values), risk of mismatch. Add one key reference per row only if you are confident it exists, with a link where possible. Do not invent sources.",
@@ -357,12 +370,13 @@
   "tech": {
    "routes": [
     "chat",
+    "files",
     "external"
    ],
    "text": "Copilot Chat with the starter prompt; treat any reference as a lead only. To confirm a suggested concept, search it in Semantic Scholar or Open Knowledge Maps, which show where the term is actually used. For practice, attach the HadCET monthly file.",
    "data": [
-    "C6",
-    "D2"
+    "D2",
+    "C6"
    ],
    "tools": [
     "Semantic Scholar",
@@ -415,16 +429,12 @@
   },
   "practice": {
    "data": [
-    "B2",
-    "B3",
-    "C1",
-    "C3",
-    "C4",
-    "C5"
+    "AB"
    ],
-   "task": "Map the gaps left by six heat and drought studies against a practice question. You learn whether Copilot ties each gap to a real passage or invents gaps from what the papers simply do not mention.",
-   "prompt": "Using only the six attached PDFs (Christidis et al. 2020 and 2023, Vautard et al. 2023, Perkins-Kirkpatrick and Lewis 2020, Zachariah et al. 2023, Schumacher et al. 2024), identify the research gaps they leave. Sort them by type: empirical, methodological, theoretical, practical and contradictory findings. Show a table: gap type, the gap in one sentence, studies that show it, the supporting passage with page, and whether the authors state the gap themselves or you infer it. Then judge how convincingly this draft question addresses one gap: 'Do climate models underestimate the observed trend in UK summer heat extremes, and how does that affect attribution estimates for UK hot days?' Do not add studies I have not given you.",
-   "check": "Vautard et al. (2023) should support a methodological or contradictory gap: models underestimate the observed Western European heat trend (abstract). Find two quoted passages with Ctrl+F; no inferred gap may be presented as stated by the authors."
+   "ref": [],
+   "task": "Map the gaps that six heat and drought abstracts leave against a practice question. You learn whether Copilot ties each gap to a real passage or invents gaps from what the abstracts simply do not mention.",
+   "prompt": "The attached text file holds the abstracts of 12 papers. Use only these six records: B2, B3, C1, C3, C4 and C5 (Christidis et al. 2020 and 2023, Vautard et al. 2023, Perkins-Kirkpatrick and Lewis 2020, Zachariah et al. 2023, Schumacher et al. 2024). Identify the research gaps they leave. Sort them by type: empirical, methodological, theoretical, practical and contradictory findings. Show a table: gap type, the gap in one sentence, records that show it, the supporting passage quoted word for word, and whether the authors state the gap themselves or you infer it. Then judge how convincingly this draft question addresses one gap: 'Do climate models underestimate the observed trend in UK summer heat extremes, and how does that affect attribution estimates for UK hot days?' Do not add studies I have not given you.",
+   "check": "Vautard et al. (2023) should support a methodological or contradictory gap: models underestimate the observed Western European heat trend, and the authors call this mismatch 'not well understood'. Find two quoted passages in the file with Ctrl+F; no inferred gap may be presented as stated by the authors."
   },
   "tech": {
    "routes": [
@@ -432,14 +442,9 @@
     "chat",
     "external"
    ],
-   "text": "Upload the open-access PDFs to Copilot Chat (or paste abstracts) and ask for a table limited to those files. For larger sets, the literature-review skill for GitHub Copilot structures the same work systematically.",
+   "text": "Upload the open-access PDFs to Copilot Chat (or paste abstracts) and ask for a table limited to those files. For practice, attach the abstracts file of the 12 papers. For larger sets, the literature-review skill for GitHub Copilot structures the same work systematically.",
    "data": [
-    "B2",
-    "B3",
-    "C1",
-    "C3",
-    "C4",
-    "C5"
+    "AB"
    ],
    "tools": [
     "Elicit",
@@ -496,6 +501,10 @@
     {
      "cite": "Baron, R. M., & Kenny, D. A. (1986). The moderator–mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations. Journal of Personality and Social Psychology, 51(6), 1173–1182.",
      "doi": "10.1037/0022-3514.51.6.1173"
+    },
+    {
+     "cite": "Popper, K. (2002). The logic of scientific discovery. Routledge. (Original work published 1959)",
+     "doi": ""
     }
    ]
   },
@@ -576,7 +585,8 @@
    ]
   },
   "practice": {
-   "data": [
+   "data": [],
+   "ref": [
     "B2",
     "B3",
     "C1"
@@ -648,23 +658,26 @@
   },
   "practice": {
    "data": [
-    "B2",
-    "C3"
+    "A2"
    ],
-   "task": "Use Christidis et al. (2020) as the key paper and let Copilot find related and citing work. You learn whether its web search finds a known citing paper – the 2023 Mediterranean study by the same group – and how many links are real.",
-   "prompt": "I am a postgraduate researcher. A key paper for my work is Christidis, N., McCarthy, M., & Stott, P. A. (2020). The increasing likelihood of temperatures above 30 to 40 °C in the United Kingdom. Nature Communications, 11, 3093. https://doi.org/10.1038/s41467-020-16834-0 (PDF attached). First, describe its core problem and idea in three plain sentences without its own jargon. Then search for up to six papers that address the same problem, including ones that use different terminology, and up to three that cite this paper. For each, give authors, year, title, a working link and one sentence on the connection. Finish with a 150-word overview citing each paper. If you are not sure, say so; do not invent sources.",
-   "check": "Christidis, Mitchell and Stott (2023) cites the key paper (its reference 15) and should appear among the citing papers. Open every link, then compare with the Google Scholar 'Cited by' list for the 2020 paper."
+   "ref": [
+    "A1"
+   ],
+   "task": "Use Rohde and Hausfather (2020), the Berkeley Earth paper, as the key paper and let Copilot find related and citing work. You learn whether its web search finds a known citing paper – the HadCRUT5 paper by Morice et al. (2021) – and how many links are real.",
+   "prompt": "I am a postgraduate researcher. A key paper for my work is Rohde, R. A., & Hausfather, Z. (2020). The Berkeley Earth Land/Ocean Temperature Record. Earth System Science Data, 12(4), 3469–3479. https://doi.org/10.5194/essd-12-3469-2020 (PDF attached). First, describe its core problem and idea in three plain sentences without its own jargon. Then search for up to six papers that address the same problem, including ones that use different terminology, and up to three that cite this paper. For each, give authors, year, title, a working link, one sentence on the connection, and whether you took it from the attached paper's reference list or found it by search. Finish with a 150-word overview citing each paper. If you are not sure, say so; do not invent sources.",
+   "check": "Morice et al. (2021), the HadCRUT5 paper, cites the key paper (Ctrl+F 'Rohde & Hausfather' in A1) and should appear among the citing papers. Related papers taken from the reference list are backward citations, not a search by meaning. Open every link, then compare with the Google Scholar 'Cited by' list."
   },
   "tech": {
    "routes": [
     "chat",
+    "files",
     "connected",
     "external"
    ],
-   "text": "Copilot Chat uses web search, so treat links as leads. Once the IT enables them, Semantic Scholar, OpenAlex or Paper Search MCP give Copilot indexed citation data; Litmaps or Connected Papers draw the network visually.",
+   "text": "Copilot Chat uses web search, so treat links as leads; attach the key paper so it can also read the reference list. Once the IT enables them, Semantic Scholar or OpenAlex give Copilot indexed citation data; Paper Search MCP runs locally, for example with GitHub Copilot in VS Code. Litmaps or Connected Papers draw the network visually.",
    "data": [
-    "B2",
-    "C3"
+    "A2",
+    "A1"
    ],
    "tools": [
     "Connected Papers",
@@ -725,34 +738,22 @@
   },
   "practice": {
    "data": [
-    "A1",
-    "A3",
-    "B2",
-    "B3",
-    "C1",
-    "C2",
-    "C4",
-    "C6"
+    "AB"
    ],
-   "task": "Screen eight practice papers on title and abstract against given criteria – first yourself, then with Copilot – and compute kappa. You learn where Copilot is strict or lenient on borderline records and whether its quotes are really in the abstracts.",
-   "prompt": "I am screening records for a review on the attribution of extreme weather to human influence. Inclusion: peer-reviewed primary studies that estimate how human influence changed the likelihood or intensity of a type of extreme event. Exclusion: dataset descriptions; assessment or indicator updates; trend studies without attribution; preprints. The eight attached PDFs are the records. Judge each only from its title and abstract. For each, give a table row: file name, decision (include, exclude or unsure), the criterion that decides it, and a short quote from the abstract that supports the decision. Use 'unsure' when the abstract does not give enough information; do not guess. I will make the final decision.",
-   "check": "Likely: exclude Morice et al. (dataset), Forster et al. (indicator update), Shi et al. (preprint); include Christidis et al. and Zachariah et al. Vautard et al. and Myhre et al. are borderline – compare reasoning, not only labels."
+   "ref": [],
+   "task": "Screen eight practice records on title and abstract against given criteria – first yourself, then with Copilot – and compute kappa. You learn where Copilot is strict or lenient on borderline records and whether its quotes are really in the abstracts.",
+   "prompt": "I am screening records for a review on the attribution of extreme weather to human influence. Inclusion: peer-reviewed primary studies that estimate how human influence changed the likelihood or intensity of a type of extreme event. Exclusion: dataset descriptions; assessment or indicator updates; trend studies without attribution; preprints. The attached text file holds the citation, title and abstract of 12 papers. Screen only these eight records: A1, A3, B2, B3, C1, C2, C4 and C6. Judge each only from its citation, title and abstract. For each, give a table row: record ID, decision (include, exclude or unsure), the criterion that decides it, and a short quote from the abstract that supports the decision. Use 'unsure' when the abstract does not give enough information; do not guess. I will make the final decision.",
+   "check": "Likely: exclude Morice et al. (dataset), Forster et al. (indicator update), Perkins-Kirkpatrick and Lewis (trend study without attribution) and Shi et al. (preprint); include Christidis et al. (2020) and Zachariah et al. Vautard et al. and Myhre et al. are borderline – compare reasoning, not only labels. Find each quote in the file with Ctrl+F."
   },
   "tech": {
    "routes": [
+    "files",
     "chat",
     "external"
    ],
-   "text": "Paste criteria and numbered abstracts into Copilot Chat for a pilot. For a full review, use ASReview, Rayyan or Covidence, which log decisions; the sr-screener skill runs criterion-based screening in GitHub Copilot.",
+   "text": "Attach or paste criteria and numbered abstracts in Copilot Chat for a pilot; for practice, attach the abstracts file. For a full review, use ASReview, Rayyan or Covidence, which log decisions; the sr-screener skill runs criterion-based screening in GitHub Copilot.",
    "data": [
-    "A1",
-    "A3",
-    "B2",
-    "B3",
-    "C1",
-    "C2",
-    "C4",
-    "C6"
+    "AB"
    ],
    "tools": [
     "ASReview",
@@ -823,9 +824,7 @@
    "text": "Upload the PDFs to Copilot Chat with your column list; ask for exact copying, no calculation. Elicit, connected once the IT enables it or used directly, extracts the same columns across many papers at once.",
    "data": [
     "B2",
-    "C3",
-    "C4",
-    "C5"
+    "C3"
    ],
    "tools": [
     "Elicit",
@@ -905,7 +904,7 @@
     "A3"
    ],
    "tools": [
-    "NotebookLM",
+    "Gemini Notebook (formerly NotebookLM)",
     "Humata AI"
    ],
    "connect": [
@@ -934,7 +933,7 @@
     ],
     [
      "Narrative synthesis (Popay et al.)",
-     "Structured textual synthesis when meta-analysis is not possible: develop a preliminary synthesis, explore relationships within and between studies, and assess the robustness of the synthesis – more than summarising paper by paper."
+     "Structured textual synthesis when meta-analysis is not possible, in four elements: develop a theory of how, why and for whom the intervention or phenomenon works, develop a preliminary synthesis, explore relationships within and between studies, and assess the robustness of the synthesis – more than summarising paper by paper."
     ],
     [
      "SWiM reporting guideline",
@@ -1063,9 +1062,7 @@
    ],
    "text": "Upload the PDF to Copilot Chat and name the section, or paste the passage; Copilot can also run a small Python example with made-up numbers. For practice, ask it to explain the changepoint methods in C6.",
    "data": [
-    "C6",
-    "B2",
-    "A1"
+    "C6"
    ],
    "tools": [
     "Humata AI"
@@ -1100,7 +1097,7 @@
     ],
     [
      "PRISMA-P",
-     "A 17-item checklist for systematic review protocols: rationale, eligibility criteria, sources, search strategy, selection and extraction, risk of bias, synthesis. Registering on PROSPERO (health-related outcomes) or OSF (any field) fixes the plan in advance."
+     "A 17-item checklist for reporting systematic review protocols: rationale, eligibility criteria, sources, search strategy, selection and extraction, risk of bias, synthesis. Registering the protocol on PROSPERO (health-related outcomes) or OSF (any field) fixes the plan in advance."
     ],
     [
      "Rapid review",
@@ -1119,33 +1116,35 @@
     {
      "cite": "Moher, D., Shamseer, L., Clarke, M., Ghersi, D., Liberati, A., Petticrew, M., Shekelle, P., Stewart, L. A., & PRISMA-P Group. (2015). Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-P) 2015 statement. Systematic Reviews, 4, 1.",
      "doi": "10.1186/2046-4053-4-1"
+    },
+    {
+     "cite": "Arksey, H., & O'Malley, L. (2005). Scoping studies: Towards a methodological framework. International Journal of Social Research Methodology, 8(1), 19–32.",
+     "doi": "10.1080/1364557032000119616"
+    },
+    {
+     "cite": "Tricco, A. C., Lillie, E., Zarin, W., O'Brien, K. K., Colquhoun, H., Levac, D., Moher, D., Peters, M. D. J., Horsley, T., Weeks, L., Hempel, S., Akl, E. A., Chang, C., McGowan, J., Stewart, L., Hartling, L., Aldcroft, A., Wilson, M. G., Garritty, C., … Straus, S. E. (2018). PRISMA extension for scoping reviews (PRISMA-ScR): Checklist and explanation. Annals of Internal Medicine, 169(7), 467–473.",
+     "doi": "10.7326/M18-0850"
     }
    ]
   },
   "practice": {
    "data": [
-    "B2",
-    "B3",
-    "C1",
-    "C3",
-    "C5"
+    "AB"
    ],
-   "task": "Choose a review type for a practice question on European heat and drought, draft eligibility criteria, then pilot them on five practice papers. You learn whether Copilot's criteria can be judged from an abstract or leave many records 'unsure'.",
-   "prompt": "I am a postgraduate researcher planning a literature review. My research question: 'What does the published evidence say about how human influence has changed the likelihood of heat and drought extremes in Europe?' Expected amount of literature: moderate. Time available: three months. Compare a systematic, scoping, narrative and rapid review for my case in a table: purpose, what my question would need, effort, risks. Recommend one type and name the conditions under which you would recommend another. Then draft inclusion and exclusion criteria derived from my question only, in a table: criterion, include or exclude, stage judged (title and abstract or full text), example of a borderline case. Finally, apply the criteria to the five attached PDFs, using title and abstract only, and say which criteria were hard to judge.",
+   "ref": [],
+   "task": "Choose a review type for a practice question on European heat and drought, draft eligibility criteria, then pilot them on five practice abstracts. You learn whether Copilot's criteria can be judged from an abstract or leave many records 'unsure'.",
+   "prompt": "I am a postgraduate researcher planning a literature review. My research question: 'What does the published evidence say about how human influence has changed the likelihood of heat and drought extremes in Europe?' Expected amount of literature: moderate. Time available: three months. Compare a systematic, scoping, narrative and rapid review for my case in a table: purpose, what my question would need, effort, risks. Recommend one type and name the conditions under which you would recommend another. Then draft inclusion and exclusion criteria derived from my question only, in a table: criterion, include or exclude, stage judged (title and abstract or full text), example of a borderline case. Finally, apply the criteria to records B2, B3, C1, C3 and C5 in the attached abstracts file, using title and abstract only, and say which criteria were hard to judge.",
    "check": "Read the five abstracts yourself: Christidis et al. (2023) covers the Middle East as well as the Mediterranean, and Perkins-Kirkpatrick and Lewis (2020) reports trends without attribution – both should trigger a criterion. Compare the outline with PRISMA-P."
   },
   "tech": {
    "routes": [
+    "files",
     "chat",
     "external"
    ],
-   "text": "Copilot Chat with the starter prompt; ask for the protocol as an outline you can paste into Word. The deep-research and literature-review skills for GitHub Copilot offer structured modes for systematic and scoping reviews.",
+   "text": "Copilot Chat with the starter prompt; ask for the protocol as an outline you can paste into Word. For practice, attach the abstracts file. The deep-research and literature-review skills for GitHub Copilot offer structured modes for systematic and scoping reviews.",
    "data": [
-    "B2",
-    "B3",
-    "C1",
-    "C3",
-    "C5"
+    "AB"
    ],
    "tools": [],
    "connect": [],
@@ -1169,7 +1168,7 @@
    "concepts": [
     [
      "PRISMA 2020",
-     "Preferred Reporting Items for Systematic reviews and Meta-Analyses: a 27-item checklist and a flow diagram for reporting why a review was done, how, and what it found. Developed in health research, now used across disciplines."
+     "Preferred Reporting Items for Systematic reviews and Meta-Analyses: a reporting guideline, not a method – a 27-item checklist and a flow diagram for reporting why a review was done, how, and what it found. Reproducible decisions come from a pre-specified protocol (PRISMA-P) and its registration, for example on PROSPERO or OSF. Developed in health research, now used across disciplines."
     ],
     [
      "PRISMA flow diagram",
@@ -1200,16 +1199,10 @@
    ]
   },
   "practice": {
-   "data": [
-    "B2",
-    "B3",
-    "C1",
-    "C3",
-    "C4",
-    "C5"
-   ],
+   "data": [],
+   "ref": [],
    "task": "Use a practice search log whose six included studies are papers from the pack; it contains one deliberate error. You learn whether Copilot flags the inconsistency or silently corrects it, and whether its methods paragraph adds facts not in the log.",
-   "prompt": "I am documenting the search and selection for a practice review on the attribution of heat and drought extremes. Search log: Scopus, searched 15 October 2026, 412 records; Web of Science Core Collection, same date, 356 records. Duplicates removed: 198. Records screened: 570. Excluded at title and abstract: 489. Reports sought: 81. Not retrieved: 3. Reports assessed in full text: 78. Excluded: 72 (no attribution 40, not an extreme event 25, preprint 5). Included: 6 (Christidis et al. 2020 and 2023, Vautard et al. 2023, Perkins-Kirkpatrick and Lewis 2020, Zachariah et al. 2023, Schumacher et al. 2024). Arrange the numbers for a PRISMA 2020 flow diagram in a table and check that they add up; flag every inconsistency instead of correcting it. Then draft a methods paragraph using only facts in this log, and list the PRISMA 2020 items it does not yet cover.",
+   "prompt": "I am documenting the search and selection for a practice review on trends in, and the attribution of, heat and drought extremes. Search log: Scopus, searched 15 October 2026, 412 records; Web of Science Core Collection, same date, 356 records. Duplicates removed: 198. Records screened: 570. Excluded at title and abstract: 489. Reports sought: 81. Not retrieved: 3. Reports assessed in full text: 78. Excluded: 72 (no quantitative trend or attribution result 40, not an extreme event 25, preprint 5). Included: 6 (Christidis et al. 2020 and 2023, Vautard et al. 2023, Perkins-Kirkpatrick and Lewis 2020, Zachariah et al. 2023, Schumacher et al. 2024). Arrange the numbers for a PRISMA 2020 flow diagram in a table and check that they add up; flag every inconsistency instead of correcting it. Then draft a methods paragraph using only facts in this log, and list the PRISMA 2020 items it does not yet cover.",
    "check": "Recount: each stage follows correctly (768 − 198 = 570, down to 78 − 72 = 6), but the exclusion reasons sum to 70, not 72. Copilot must flag this, and the paragraph must not invent search strings."
   },
   "tech": {
@@ -1219,14 +1212,7 @@
     "external"
    ],
    "text": "Paste the log into Copilot Chat; upload a CSV export of records if you want duplicates marked by DOI or title. Draw the final diagram with the PRISMA2020 R package or Shiny app. For practice, use the search log in the starter prompt.",
-   "data": [
-    "B2",
-    "B3",
-    "C1",
-    "C3",
-    "C4",
-    "C5"
-   ],
+   "data": [],
    "tools": [
     "Covidence"
    ],
@@ -1355,13 +1341,15 @@
   },
   "practice": {
    "data": [
-    "A3",
     "D3",
     "D5"
    ],
-   "task": "You propose a deliberately simple design – regressing annual global temperature on CO₂ – and ask Copilot for alternatives and validity threats. You learn whether it spots spurious correlation between trending series and omitted forcings, or returns a generic textbook list.",
-   "prompt": "I am testing a research design on climate data. Research question: how much of the global warming since 1959 is associated with rising atmospheric CO₂? Planned design: an ordinary least squares regression of annual mean global temperature anomaly (the attached HadCRUT5 monthly CSV) on annual mean CO₂ concentration (the attached NOAA Mauna Loa CO₂ CSV), 1959–2024. Compare this design with two realistic alternatives in a table: design, what it can answer, main strengths, main weaknesses, data needed. Then list the main threats to validity of my planned design, sorted into statistical conclusion, internal, construct and external validity, each with a concrete mitigation. Refer to features of the attached files where relevant, such as baselines, measurement sites and missing-value codes. Be specific to this study rather than generic, and keep it under 450 words.",
-   "check": "The section 'Human contribution to surface temperature change' in the Forster et al. (2025) PDF combines three attribution methods using all forcings, not CO₂ alone. Did Copilot name omitted forcings such as aerosols, autocorrelation and the Maunakea site change?"
+   "task": "You propose a deliberately simple design – regressing annual global temperature on CO₂ – and ask Copilot for alternatives and validity threats, without running the regression. You learn whether it spots spurious correlation between trending series and omitted forcings, or returns a generic textbook list.",
+   "prompt": "I am testing a research design on climate data. Research question: how much of the global warming since 1959 is associated with rising atmospheric CO₂? Planned design: an ordinary least squares regression of annual mean global temperature anomaly (the attached HadCRUT5 monthly CSV) on annual mean CO₂ concentration (the attached NOAA Mauna Loa CO₂ CSV), 1959–2024. Compare this design with two realistic alternatives in a table: design, what it can answer, main strengths, main weaknesses, data needed. Then list the main threats to validity of my planned design, sorted into statistical conclusion, internal, construct and external validity, each with a concrete mitigation. Refer to features of the attached files where relevant, such as baselines, measurement sites and missing-value codes. Do not run the regression; I want a critique of the design, not results. Be specific to this study rather than generic, and keep it under 450 words.",
+   "check": "Keep Forster et al. (2025) open, but do not attach it: its Section 8, 'Human contribution to surface temperature change', combines three attribution methods using all forcings, not CO₂ alone. Did Copilot name omitted forcings such as aerosols, the risk of spurious correlation between two trending series, autocorrelation, and the Maunakea measurements in the CO₂ file (December 2022 to July 2023)?",
+   "ref": [
+    "A3"
+   ]
   },
   "tech": {
    "routes": [
@@ -1370,9 +1358,9 @@
    ],
    "text": "Paste your question and design into Copilot Chat; no data are needed. Alternatively upload a non-sensitive draft of your methods section. In the practice exercise, attach the HadCRUT5 and Mauna Loa CO₂ files so Copilot can refer to their properties.",
    "data": [
-    "A3",
     "D3",
-    "D5"
+    "D5",
+    "A3"
    ],
    "tools": [
     "Statistik GPT"
@@ -1411,7 +1399,7 @@
     ],
     [
      "Content validity index (CVI)",
-     "Experts rate each item's relevance on a four-point scale; the item-level CVI is the share rating 3 or 4. A common convention, going back to Lynn (1986), is at least 0.78 when six or more experts rate."
+     "Experts rate each item's relevance on a four-point scale; the item-level CVI (I-CVI) is the share rating 3 or 4. Lynn (1986) set the minimum agreement by panel size; Polit, Beck and Owen (2007) recommend an I-CVI of at least 0.78."
     ]
    ],
    "refs": [
@@ -1426,6 +1414,14 @@
     {
      "cite": "Polit, D. F., & Beck, C. T. (2006). The content validity index: Are you sure you know what's being reported? Critique and recommendations. Research in Nursing & Health, 29(5), 489–497.",
      "doi": "10.1002/nur.20147"
+    },
+    {
+     "cite": "Lynn, M. R. (1986). Determination and quantification of content validity. Nursing Research, 35(6), 382–386.",
+     "doi": "10.1097/00006199-198611000-00017"
+    },
+    {
+     "cite": "Polit, D. F., Beck, C. T., & Owen, S. V. (2007). Is the CVI an acceptable indicator of content validity? Appraisal and recommendations. Research in Nursing & Health, 30(4), 459–467.",
+     "doi": "10.1002/nur.20199"
     }
    ]
   },
@@ -1757,12 +1753,12 @@
   }
  },
  "erhebung-1": {
-  "problem": "Key figures and statements sit scattered across long PDFs and reports; copying them into a spreadsheet by hand is slow and invites transcription errors and inconsistent definitions.",
-  "result": "A table built on a predefined extraction form, each value with page number and verbatim quote as provenance, 'not reported' where absent, and an error rate from your own verification sample.",
+  "problem": "Key figures, statements and metadata sit scattered across long reports, web pages, archival records and data documentation; copying them into a spreadsheet by hand is slow and invites transcription errors and inconsistent definitions.",
+  "result": "A table built on a predefined extraction form, each value with its page or line and a verbatim quote as provenance, 'not stated' where absent, and an error rate from your own verification sample.",
   "steps": [
    "Define the unit of analysis and each field's operational definition",
    "Pilot the form on one document and refine definitions",
-   "Ask for page numbers, quotes and 'not reported' markers",
+   "Ask for page or line numbers, quotes and 'not stated' markers",
    "Verify a random sample and record the error rate"
   ],
   "method": {
@@ -1776,8 +1772,8 @@
      "Two people extract independently and resolve discrepancies, or one extracts and a second verifies. With AI as first extractor, verify every value you will analyse, or at least a random sample with a recorded error rate."
     ],
     [
-     "Provenance: page and verbatim quote",
-     "Recording where each value comes from makes extraction auditable and exposes invented values quickly. Distinguish 'not reported' from 'zero' and from 'unclear', and never let the extractor estimate a missing value."
+     "Provenance: location and verbatim quote",
+     "Recording where each value comes from – page in a PDF, line in a text file, URL and access date for a web page – makes extraction auditable and exposes invented values quickly. Distinguish 'not stated' from 'zero' and from 'unclear', and never let the extractor fill a gap from general knowledge."
     ],
     [
      "Document analysis (Bowen)",
@@ -1797,27 +1793,23 @@
   },
   "practice": {
    "data": [
-    "B2",
-    "C3",
-    "C4",
-    "C5"
+    "D7",
+    "D8"
    ],
-   "task": "You extract the same fields from four attribution studies into one table. You learn how often Copilot quotes correctly, cites the right page and reports likelihood changes and return periods accurately – or mixes them up across papers.",
-   "prompt": "Attached are four attribution studies: Christidis et al. (2020) on UK 40 °C, Christidis et al. (2023) on 50 °C in the Mediterranean and Middle East, Zachariah et al. (2023) on the India–Pakistan heatwave and Schumacher et al. (2024) on the 2022 European drought. Extract into one table, one row per paper: event or extreme; region; variable and threshold; observational data used; climate models used; counterfactual (for example pre-industrial or natural-only world); headline result for likelihood or return period; headline result for intensity. For every value give the page number and a short verbatim quote. Write 'not reported' if a paper does not state a field; do not estimate, and do not use sources outside the PDFs. Then offer the table as a CSV file.",
-   "check": "Check each cell on the cited page. Abstract anchors: UK 40 °C summers – return time 100–300 years now; India–Pakistan – about 30 times more likely, 1 °C hotter; drought – once in 20 years, formerly about once a century."
+   "task": "You extract metadata from the header lines of three UK weather data files – documents, not papers – into one table. You learn whether Copilot cites the right line, writes 'not stated' where a file is silent, or fills gaps with what it knows about the Met Office.",
+   "prompt": "Attached are three plain-text files of UK weather records: the Oxford and Durham station files and the UK rainfall series. Treat the header lines and layout of each file as the document. Extract into one table, one row per file: name of station or series; provider or source; location (latitude, longitude, height) or area covered; variables with their units; first year and month of data; last year and month of data; date of last update; how missing values are marked; how estimated values are marked; how provisional values are marked; notes on instruments or methods; licence or terms of use. For every value give the line number and the verbatim text from the file as evidence. Write 'not stated' if a file does not give a field; do not use your own knowledge or the web. Then offer the table as a CSV file.",
+   "check": "Check each cell on the cited line. Oxford: Lat 51.761 Lon -1.262, 63 metres amsl, January 1853 to September 2026. Durham: Lat 54.768 Lon -1.585, 102 metres amsl, January 1880 to September 2026. Both mark estimates with *, missing months with --- and the 2026 rows as 'Provisional', and state no provider, update date or licence; the # sunshine-sensor flag is defined, but no value carries it. The rainfall file names 'Met Office National Climate Information Centre', 'Last updated 01-Oct-2026' and 'starting in 1836', but states no units or licence. Any provider, unit or licence Copilot adds from its own knowledge is an extraction error.",
+   "ref": []
   },
   "tech": {
    "routes": [
     "files",
     "external"
    ],
-   "text": "Upload the PDF or selected pages to Copilot Chat and ask for a table with page numbers and quotes; Copilot can save it as CSV or Excel. For many papers, Elicit extracts the same fields at scale – verify either way.",
+   "text": "Upload the document – a PDF, selected pages, a saved web page or a text file – to Copilot Chat and ask for a table with page or line numbers and quotes; Copilot can save it as CSV or Excel. For extraction from research papers at scale, Elicit does the same – verify either way.",
    "data": [
-    "A3",
-    "B2",
-    "C3",
-    "C4",
-    "C5"
+    "D7",
+    "D8"
    ],
    "tools": [
     "Elicit"
@@ -1872,11 +1864,12 @@
   },
   "practice": {
    "data": [
-    "papers"
+    "AB"
    ],
-   "task": "You code the 12 practice abstracts by study type, then let Copilot code them with the same scheme and compute kappa. You learn how codebook clarity drives agreement, and how unstable kappa is with only 12 texts.",
-   "prompt": "I am testing whether a language model can pre-annotate texts. Attached are the 12 practice papers on climate change; read only each paper's abstract. Coding scheme, one code per paper: DATASET – describes how an observational data record is built or updated; ATTRIBUTION – quantifies the human contribution to warming or to a specific extreme; TREND – quantifies observed or projected changes without formal attribution; METHOD – mainly demonstrates a statistical technique on existing data. Use 'unclear' if no code fits; do not create new codes. Return a table: first author and year, code, confidence (high, medium or low), and a one-sentence reason quoting the abstract. Next I will paste my own codes: then compute Cohen's kappa in Python, show a confusion matrix and list every disagreement.",
-   "check": "Recompute kappa by hand from the confusion matrix. Expect disagreement on borderline papers such as Forster et al. (2025) and Vautard et al. (2023), and confirm that each quoted reason appears verbatim in the abstract."
+   "task": "Before you open Copilot, code the 12 abstracts in the abstracts file yourself (about three minutes – title and first sentences are usually enough). Then let Copilot code them with the same scheme and compute kappa. You learn how codebook clarity drives agreement, and how unstable kappa is with only 12 texts.",
+   "prompt": "I am testing whether a language model can pre-annotate texts. Attached is a text file with the titles and abstracts of 12 papers on climate change, each with an ID from A1 to C6. Coding scheme, one code per paper: DATASET – describes how an observational data record is built or updated; ATTRIBUTION – quantifies the human contribution to warming or to a specific extreme; TREND – quantifies observed or projected changes without formal attribution; METHOD – mainly demonstrates a statistical technique on existing data. Use 'unclear' if no code fits; do not create new codes. Return a table: ID, first author and year, code, confidence (high, medium or low), and a one-sentence reason quoting the abstract. Next I will paste my own codes: then compute Cohen's kappa in Python, show a confusion matrix and list every disagreement.",
+   "check": "Recompute kappa by hand from the confusion matrix. Expect disagreement on borderline papers such as Forster et al. (2025) and Vautard et al. (2023), and confirm that each quoted reason appears verbatim in the abstracts file. With 12 texts kappa is only illustrative; before coding at scale, aim for about 0.7–0.8 on a larger set of texts not used to refine the codebook.",
+   "ref": []
   },
   "tech": {
    "routes": [
@@ -1884,9 +1877,9 @@
     "chat",
     "external"
    ],
-   "text": "Upload the texts as a CSV with your codebook to Copilot Chat; Copilot codes them and computes Cohen's kappa in Python against your codes. Coding at scale needs a scripted pipeline in an approved tool. Practise on the 12 practice abstracts.",
+   "text": "Upload the texts as a CSV or text file with your codebook to Copilot Chat; Copilot codes them and computes Cohen's kappa in Python against your codes. Coding at scale needs a scripted pipeline in an approved tool. Practise on the abstracts file of the 12 practice papers.",
    "data": [
-    "papers"
+    "AB"
    ],
    "tools": [
     "MAXQDA",
@@ -1998,16 +1991,17 @@
   },
   "practice": {
    "data": [
-    "A2",
+    "D9"
+   ],
+   "task": "You ask Copilot to find open global and Central England temperature datasets, then compare its list with the practice pack, which you keep open but do not attach. You learn whether it finds the main records and states their baselines and licences correctly or invents them.",
+   "prompt": "I am a postgraduate researcher. Research question: how have global and Central England annual temperatures changed since the late 19th century, and how much do the main global records differ? I need open monthly or daily data, global and for central England, from 1880 or earlier. Search the web for suitable datasets. Give up to six options as a table: name, provider, link, period covered, temporal resolution, baseline period of the anomalies, licence, fit and what is missing. If you are not sure of a baseline or licence, say so; do not invent datasets. Then read the header of the attached ERA5 daily CSV and say whether it confirms the baseline you stated for ERA5.",
+   "check": "Compare with the practice-pack descriptions in the Practice data tab: HadCRUT5 (D3) anomalies relative to 1961–1990, GISTEMP (D4) 1951–1980, ERA5 (D9) 1991–2020 – the only one of these baselines stated in a file header; HadCET (D1 daily from 1878, D2 monthly from 1659) gives actual temperatures, not anomalies, under the Open Government Licence v3; Berkeley Earth data are CC BY-NC (see 'Not included'). Open every link Copilot lists.",
+   "ref": [
     "D1",
     "D2",
     "D3",
-    "D4",
-    "D9"
-   ],
-   "task": "You ask Copilot to find open global and Central England temperature datasets, then compare its list with the practice pack. You learn whether it finds the main records and states their baselines and licences correctly or invents them.",
-   "prompt": "I am a postgraduate researcher. Research question: how have global and Central England annual temperatures changed since the late 19th century, and how much do the main global records differ? I need open monthly or daily data, global and for central England, from 1880 or earlier. Search the web for suitable datasets. Give up to six options as a table: name, provider, link, period covered, temporal resolution, baseline period of the anomalies, licence, fit and what is missing. If you are not sure of a baseline or licence, say so; do not invent datasets. Then read the header of the attached ERA5 daily CSV and say whether it confirms the baseline you stated for ERA5.",
-   "check": "Compare with the practice-pack descriptions: HadCRUT5 anomalies use 1961–1990, GISTEMP 1951–1980 and ERA5 1991–2020 (also in its file header); Berkeley Earth data are CC BY-NC. Open every link Copilot lists."
+    "D4"
+   ]
   },
   "tech": {
    "routes": [
@@ -2017,12 +2011,11 @@
    ],
    "text": "Copilot Chat searches the web and lists candidate datasets; you open every link and read the documentation. Practise on temperature records: does it find HadCRUT5, GISTEMP, ERA5 and Central England Temperature? Searching OpenAlex dataset records needs IT to enable the connector.",
    "data": [
+    "D9",
     "D1",
     "D2",
     "D3",
-    "D4",
-    "D9",
-    "A2"
+    "D4"
    ],
    "tools": [
     "Perplexity"
@@ -2051,7 +2044,7 @@
     ],
     [
      "Direct and indirect identifiers",
-     "Direct identifiers name a person (name, email, address). Indirect or quasi-identifiers – job title, employer, rare event, age, place – identify in combination. Sweeney (2002) formalised protection as k-anonymity: every combination should match at least k people."
+     "Direct identifiers name a person (name, e-mail, address). Indirect or quasi-identifiers – job title, employer, rare event, age, place – identify in combination. Sweeney (2002) formalised protection as k-anonymity: every combination should match at least k people."
     ],
     [
      "Recall and precision of de-identification",
@@ -2131,7 +2124,7 @@
     "external",
     "connected"
    ],
-   "text": "Upload a single page image to Copilot Chat for transcription and a draft translation. For whole collections or difficult hands, Transkribus trains HTR models; connecting it to Copilot needs IT to enable it.",
+   "text": "Upload a single page image to Copilot Chat for transcription and a draft translation. For whole collections or difficult hands, Transkribus trains HTR models; its community MCP server runs locally, so it works from GitHub Copilot in VS Code or a desktop assistant, not from Copilot Chat.",
    "data": [],
    "tools": [
     "Transkribus"
@@ -2155,7 +2148,7 @@
    "concepts": [
     [
      "Ordinary least squares (OLS) assumptions",
-     "Linear regression gives unbiased, efficient estimates if the model is linear in its parameters and errors have mean zero, constant variance (homoscedasticity) and no autocorrelation; normal residuals matter for small-sample inference. Check each with residual plots and tests."
+     "Linear regression gives unbiased estimates if the model is linear in its parameters, no predictor is a perfect linear combination of others and the errors have mean zero given the predictors (exogeneity: no omitted variable or reverse causation drives both sides). Estimates are also efficient if errors have constant variance (homoscedasticity) and no autocorrelation; normal residuals matter for small-sample inference. Check each with residual plots, tests and subject knowledge."
     ],
     [
      "Heteroscedasticity-consistent (robust) standard errors",
@@ -2164,6 +2157,10 @@
     [
      "Newey–West (HAC) standard errors",
      "Heteroscedasticity- and autocorrelation-consistent standard errors for time series, where successive residuals are correlated (Newey & West, 1987). You choose a lag length; report it as part of the method."
+    ],
+    [
+     "Spurious regression",
+     "Regressing one trending time series on another – temperature on CO₂, sales on population – can give a high R² and 'significant' coefficients even when the series are unrelated (Granger & Newbold, 1974). A warning sign is an R² higher than the Durbin–Watson statistic. Model the trend, difference the series or test for cointegration before you read a coefficient as an effect."
     ],
     [
      "Reproducible analysis script",
@@ -2180,6 +2177,10 @@
      "doi": "10.2307/1913610"
     },
     {
+     "cite": "Granger, C. W. J., & Newbold, P. (1974). Spurious regressions in econometrics. Journal of Econometrics, 2(2), 111–120.",
+     "doi": "10.1016/0304-4076(74)90034-7"
+    },
+    {
      "cite": "Sandve, G. K., Nekrutenko, A., Taylor, J., & Hovig, E. (2013). Ten simple rules for reproducible computational research. PLoS Computational Biology, 9(10), e1003285.",
      "doi": "10.1371/journal.pcbi.1003285"
     }
@@ -2187,13 +2188,12 @@
   },
   "practice": {
    "data": [
-    "A3",
-    "D3",
-    "D5"
+    "D7"
    ],
-   "task": "Merge two monthly files into annual means and regress global temperature on CO₂ with ordinary and Newey–West standard errors. You learn whether Copilot handles comment headers, incomplete years and time-series assumptions without being told.",
-   "prompt": "I am a postgraduate researcher learning Python for statistics. Attached are the HadCRUT5 monthly CSV (global temperature anomalies in the column 'Anomaly (deg C)') and the NOAA Mauna Loa CO₂ monthly CSV (lines starting with # are comments; use the column 'average'). Write and run commented Python code that: 1) reads both files, 2) computes annual means and keeps only complete calendar years present in both files, 3) prints the number of years and the first and last year, 4) regresses the annual temperature anomaly on annual mean CO₂ with OLS, then again with Newey–West standard errors (state the lag you choose and why), 5) plots the residuals against time. Explain each block in plain language, list the assumptions of this regression and say which ones the residual plot puts in doubt. Then give equivalent R code without running it.",
-   "check": "The model should use 67 complete years (1959–2025). Recompute the 2024 annual means by hand: about 1.17 °C (HadCRUT5) and 424.6 ppm (CO₂). Coefficients must be identical in both runs; only standard errors change."
+   "ref": [],
+   "task": "Compute annual means from a station file with codes for missing, estimated and provisional values, then fit a linear trend with ordinary and Newey–West standard errors. You learn whether Copilot handles the codes, drops incomplete years and states time-series assumptions without being told.",
+   "prompt": "I am a postgraduate researcher learning Python for statistics. Attached is the Met Office Durham station file (from D7): a few header lines, then one row per month with yyyy, mm, tmax and tmin (°C), af, rain and sun. '---' marks a missing value, * an estimated value and 'Provisional' a row that is not yet final. Write and run commented Python code that: 1) reads the file, keeps estimated values but drops provisional rows, 2) computes the annual mean of tmax for complete calendar years only (all 12 months present), 3) prints the number of years, the first and last year and every year left out, 4) regresses annual mean tmax on year with OLS, then again with Newey–West standard errors (state the lag you choose and why), and reports the trend per decade, 5) plots the residuals against time. Explain each block in plain language, list the assumptions of this regression and say which ones the residual plot puts in doubt. Then give equivalent R code without running it.",
+   "check": "The model should use 145 complete years (1880–2025): 1883 drops out because December is missing, 2026 because it is incomplete and provisional. The OLS trend is about 0.11 °C per decade (R² about 0.32); the coefficient is identical in both runs, only the standard error changes. Recompute the 2025 mean in Excel: 14.45 °C. The residuals run below zero in 1960–1989 and above it after 2010, so Copilot should question a straight line."
   },
   "tech": {
    "routes": [
@@ -2201,11 +2201,9 @@
     "external",
     "connected"
    ],
-   "text": "Upload the CSV to Copilot Chat; Copilot runs Python on it directly, while R, Stata or SPSS code runs in your own software. For structural equation models or meta-analysis, paste the relevant lavaan or metafor documentation into the chat.",
+   "text": "Upload the data file (CSV or text) to Copilot Chat; Copilot runs Python on it directly, while R, Stata or SPSS code runs in your own software. For structural equation models or meta-analysis, paste the relevant lavaan or metafor documentation into the chat.",
    "data": [
-    "A3",
-    "D3",
-    "D5"
+    "D7"
    ],
    "tools": [
     "Jamovi",
@@ -2215,7 +2213,7 @@
    "connect": [
     "JASP",
     "Jamovi",
-    "GitHub Copilot"
+    "GitHub (repositories)"
    ],
    "repos": [
     "kd-stats",
@@ -2281,8 +2279,7 @@
    ],
    "text": "Upload the CSV or text file to Copilot Chat; Copilot runs Python on it and returns the code, which you keep and rerun in your own environment. Keep the raw file unchanged and save the cleaned data under a new name.",
    "data": [
-    "D7",
-    "D8"
+    "D7"
    ],
    "tools": [
     "Jamovi"
@@ -2306,7 +2303,7 @@
    "concepts": [
     [
      "Braun & Clarke reflexive thematic analysis",
-     "Six phases: familiarisation, coding, generating themes, reviewing, defining and naming, writing up. Themes are patterns of shared meaning the researcher constructs, not topic summaries; as subjectivity is treated as a resource, AI output can only prompt your reflection."
+     "Six phases: familiarisation, coding, generating themes, reviewing, defining and naming, writing up (Braun & Clarke, 2006), named reflexive thematic analysis in 2019. Themes are patterns of shared meaning the researcher constructs, not topic summaries; as subjectivity is treated as a resource, AI output can only prompt your reflection."
     ],
     [
      "Grounded theory coding",
@@ -2318,13 +2315,29 @@
     ],
     [
      "Saturation",
-     "The point at which new data add no new codes. Guest et al. (2006) found most codes in their interview study within the first twelve interviews – an empirical result for a fairly homogeneous sample, not a universal sample-size rule."
+     "Code saturation – the point at which new data add no new codes – belongs to codebook and grounded-theory approaches. Guest et al. (2006) found most codes within the first twelve interviews of a fairly homogeneous sample, not a universal rule; grounded theory speaks of theoretical saturation of categories. Braun and Clarke (2021) reject saturation for reflexive thematic analysis, where meaning is generated by the researcher, not found in the data."
     ]
    ],
    "refs": [
     {
      "cite": "Braun, V., & Clarke, V. (2006). Using thematic analysis in psychology. Qualitative Research in Psychology, 3(2), 77–101.",
      "doi": "10.1191/1478088706qp063oa"
+    },
+    {
+     "cite": "Braun, V., & Clarke, V. (2019). Reflecting on reflexive thematic analysis. Qualitative Research in Sport, Exercise and Health, 11(4), 589–597.",
+     "doi": "10.1080/2159676X.2019.1628806"
+    },
+    {
+     "cite": "Braun, V., & Clarke, V. (2021). To saturate or not to saturate? Questioning data saturation as a useful concept for thematic analysis and sample-size rationales. Qualitative Research in Sport, Exercise and Health, 13(2), 201–216.",
+     "doi": "10.1080/2159676X.2019.1704846"
+    },
+    {
+     "cite": "Glaser, B. G., & Strauss, A. L. (1967). The discovery of grounded theory: Strategies for qualitative research. Aldine.",
+     "doi": ""
+    },
+    {
+     "cite": "Charmaz, K. (2014). Constructing grounded theory (2nd ed.). SAGE.",
+     "doi": ""
     },
     {
      "cite": "Guest, G., Bunce, A., & Johnson, L. (2006). How many interviews are enough? An experiment with data saturation and variability. Field Methods, 18(1), 59–82.",
@@ -2343,9 +2356,10 @@
     "C4",
     "C5"
    ],
+   "ref": [],
    "task": "Treat four attribution studies as documents and code how they communicate uncertainty and limitations. You learn whether Copilot quotes verbatim with correct pages, stays within the text and keeps its codes distinct.",
-   "prompt": "I am practising qualitative document analysis. Research question: how do climate attribution studies communicate uncertainty and limitations to their readers? Attached are four PDFs: Christidis et al. (2020), Christidis et al. (2023), Zachariah et al. (2023) and Schumacher et al. (2024). Use only each paper's abstract and its discussion or conclusions section. Propose a coding frame of 5–7 codes, each with a one-line definition and one example quote. Then code each paper, giving the exact passage and page number for every code applied. Suggest how the codes might group into 2–3 candidate themes, and say whether the fourth paper still produced new codes. Point out passages that could be read in more than one way. Quote word for word and do not go beyond what the texts say.",
-   "check": "Search every quote in the PDFs with Ctrl+F; it must appear word for word on the stated page. Note at least one code you would define differently and one passage you would code differently."
+   "prompt": "I am practising qualitative document analysis. Research question: how do climate attribution studies communicate uncertainty and limitations to their readers? Attached are four PDFs: Christidis et al. (2020), Christidis et al. (2023), Zachariah et al. (2023) and Schumacher et al. (2024). Use only each paper's abstract and its discussion or conclusions section. Propose a coding frame of 5–7 codes, each with a one-line definition and one example quote. Then code each paper, giving the exact passage and page number for every code applied. Suggest how the codes might group into 2–3 candidate themes. As a code-saturation check of the kind used in codebook approaches, say whether the fourth paper still produced new codes. Point out passages that could be read in more than one way. Quote word for word and do not go beyond what the texts say.",
+   "check": "Search every quote in the PDFs with Ctrl+F; it must appear word for word on the stated page. Note at least one code you would define differently and one passage you would code differently. The saturation question fits codebook approaches only; in reflexive thematic analysis, read the themes as prompts for your own thinking."
   },
   "tech": {
    "routes": [
@@ -2414,22 +2428,12 @@
   },
   "practice": {
    "data": [
-    "A1",
-    "A2",
-    "A3",
-    "B1",
-    "B2",
-    "B3",
-    "C1",
-    "C2",
-    "C3",
-    "C4",
-    "C5",
-    "C6"
+    "A3"
    ],
-   "task": "Label the twelve abstracts by study type and try a topic model on them. You learn whether Copilot extracts abstracts verbatim, applies your definitions consistently and admits that twelve short texts are far too few for a stable topic model.",
-   "prompt": "I am testing text-as-data methods. Attached are the twelve PDFs of the practice pack (attach them in batches if needed). 1) Extract each paper's abstract verbatim into a table with the columns id (first author and year), title and abstract. 2) Label each abstract with exactly one category and give a one-line reason. Categories: dataset description (documents how a data record is built); trend analysis (measures observed change over time); attribution (estimates how human influence changes the likelihood or intensity of extremes); statistical method (mainly demonstrates an analysis technique). 3) Using Python, run an LDA topic model on the abstracts with 3 and then 4 topics, show the top ten words per topic and the code, and say honestly whether this corpus is large enough for a topic model.",
-   "check": "Compare each extracted abstract's first sentence with the PDF. Label all twelve yourself first; for example, Christidis et al. (2020) and Zachariah et al. (2023) are attribution studies, Morice et al. (2021) a dataset description. Count agreements out of twelve."
+   "ref": [],
+   "task": "Run a topic model on the full text of the Forster et al. (2025) report, split into chunks, and compare the topics with its section headings. You learn whether Copilot states its preprocessing and settings, tests stability across runs and admits vague topics instead of naming them confidently.",
+   "prompt": "I am testing topic modelling as a text-as-data method. Attached is the Forster et al. (2025) PDF, Indicators of Global Climate Change 2024, a 40-page report with numbered sections on different indicators. Using Python: 1) extract the text up to the reference list, split it into chunks of about 150 words and report the number of chunks. 2) Run an LDA topic model with 6 topics; state the preprocessing (stop words, minimum word length, minimum document frequency) and the random seed, and show the top ten words per topic. 3) For each topic, name the section heading of the report it matches best, or say that it matches none. 4) Rerun with a different seed and with 10 topics and say which topics stay stable. Show the code. If Python cannot read the PDF, say so instead of reconstructing the text.",
+   "check": "List the section headings yourself (Sections 2–12 run from 'Greenhouse gas emissions' to 'Global mean sea-level rise') and count how many topics match one clearly. Expect only some to do so and generic words such as 'global', 'warming' or 'change' to crowd the top lists; Copilot should say so and suggest extra stop words rather than give every topic a confident name. Topics should shift between seeds."
   },
   "tech": {
    "routes": [
@@ -2438,18 +2442,7 @@
    ],
    "text": "Upload a CSV or PDFs to Copilot Chat; Copilot labels the texts itself and runs a topic model in Python (for example LDA with scikit-learn). For larger corpora, run the returned code in your own Python or R environment.",
    "data": [
-    "A1",
-    "A2",
-    "A3",
-    "B1",
-    "B2",
-    "B3",
-    "C1",
-    "C2",
-    "C3",
-    "C4",
-    "C5",
-    "C6"
+    "A3"
    ],
    "tools": [
     "MAXQDA",
@@ -2573,6 +2566,10 @@
      "doi": "10.1080/01621459.1984.10478080"
     },
     {
+     "cite": "Tufte, E. R. (2001). The visual display of quantitative information (2nd ed.). Graphics Press.",
+     "doi": ""
+    },
+    {
      "cite": "Rougier, N. P., Droettboom, M., & Bourne, P. E. (2014). Ten simple rules for better figures. PLoS Computational Biology, 10(9), e1003833.",
      "doi": "10.1371/journal.pcbi.1003833"
     },
@@ -2586,9 +2583,10 @@
    "data": [
     "D3"
    ],
+   "ref": [],
    "task": "Draw HadCRUT5 annual anomalies with their 95 % confidence band as a journal figure. You learn whether Copilot computes annual values correctly, uses the uncertainty columns, excludes the incomplete year and meets size and palette rules.",
-   "prompt": "I need a publication-quality figure for a thesis chapter. Attached is the HadCRUT5 monthly CSV with the columns Time, Anomaly (deg C) and the lower and upper 95 % confidence limits. The figure should show how global temperature has changed since 1850 and how uncertain the early values are. Suggest two or three suitable chart types with one line on each. Then create the best one in Python (matplotlib): annual means of complete years only, the anomaly as a line and the confidence limits as a shaded band, axis labels with units and the 1961–1990 baseline, a colour-blind-safe palette, no unnecessary decoration, 17 cm wide at 300 dpi. Say whether averaging monthly confidence limits gives a valid annual interval. Show the full code and a draft caption.",
-   "check": "The last year plotted is 2025, not the incomplete 2026; 2024 is about 1.17 °C (check in Excel). Copilot should call averaged monthly limits an approximation. Print the figure in greyscale to test readability."
+   "prompt": "I need a publication-quality figure for a thesis chapter. Attached is the HadCRUT5 monthly CSV with the columns Time, Anomaly (deg C) and the lower and upper 95 % confidence limits. The figure should show how global temperature has changed since 1850 and how uncertain the early values are. Suggest two or three suitable chart types with one line on each. Then create the best one in Python (matplotlib): annual means of complete years only, the anomaly as a line and the confidence limits as a shaded band, axis labels with units and the 1961–1990 baseline, a colour-blind-safe palette, no unnecessary decoration, 17 cm wide at 300 dpi. Say whether averaging monthly confidence limits gives a valid annual interval and what you would use instead. Show the full code and a draft caption.",
+   "check": "The last year plotted is 2025, not the incomplete 2026; 2024 is about 1.17 °C (check in Excel). Averaged monthly limits are only an approximation and wider than the Met Office's official annual series (for 1850 about −0.70 to −0.15 °C against −0.60 to −0.25 °C); Copilot should point you to that annual series for a published figure. Print the figure in greyscale to test readability."
   },
   "tech": {
    "routes": [
@@ -2597,9 +2595,7 @@
    ],
    "text": "Upload the data to Copilot Chat; Copilot draws the figure in Python with matplotlib and returns the image and the code. If you work in R, ask for ggplot2 code and run it yourself.",
    "data": [
-    "D2",
-    "D3",
-    "D5"
+    "D3"
    ],
    "tools": [
     "GitHub Copilot"
@@ -2624,7 +2620,7 @@
    "concepts": [
     [
      "Unit and regression tests",
-     "Unit tests check that a small function returns the expected output for given inputs, including edge cases such as empty, missing or extreme values; regression tests check that results do not change after refactoring. Tools: pytest, testthat."
+     "Unit tests check that a small function returns the expected output for given inputs, including edge cases such as empty, missing or extreme values; regression tests check that results do not change after refactoring. Tools: pytest, testthat; where no framework is available, plain assert statements do the same job for a few checks."
     ],
     [
      "Good enough practices in scientific computing",
@@ -2658,26 +2654,27 @@
    "data": [
     "D6"
    ],
+   "ref": [],
    "task": "Have Copilot write and test a function that turns the irregular daily sea-ice record into monthly means. You learn whether its tests cover real edge cases – alternate-day sampling, the 1987–88 gap, the units row – or only the easy path.",
-   "prompt": "I am writing Python code for a research data pipeline. Attached is the NSIDC daily Arctic sea-ice extent CSV: the second line is a units row, values were recorded every other day until mid-1987, and there is a gap around December 1987 and January 1988. 1) Write a documented function monthly_extent(df, min_days) that returns, for each month, the mean extent, the number of daily values used and a flag when there are fewer than min_days values, in which case the mean is missing. 2) Write pytest unit tests covering a normal month, a month with alternate-day data, a month inside the gap, an empty input and a floating-point comparison with a tolerance. 3) Run the tests, then run the function on the file with min_days = 10 and show the results for 1987 and 1988. If the intended behaviour is unclear, ask rather than assume.",
-   "check": "December 1987 has only 2 daily values and January 1988 has 19, so December must be flagged and its mean missing. Months before August 1987 should show about 15 values. Recompute one monthly mean in Excel."
+   "prompt": "I am writing Python code for a research data pipeline. Attached is the NSIDC daily Arctic sea-ice extent CSV: the second line is a units row, values were recorded every other day until mid-1987, and there is a gap around December 1987 and January 1988. 1) Write a documented function monthly_extent(df, min_days) that returns, for each month, the mean extent, the number of daily values used and a flag when there are fewer than min_days values, in which case the mean is missing. 2) Write pytest unit tests covering a normal month, a month with alternate-day data, a month inside the gap, an empty input and a floating-point comparison with a tolerance. 3) Run the tests; if pytest is not available, run the same checks as plain assert statements and say so. Then run the function on the file with min_days = 10 and show the results for 1987 and 1988. If the intended behaviour is unclear, ask rather than assume.",
+   "check": "December 1987 has only 2 daily values and January 1988 has 19, so December must be flagged and its mean missing. Months before August 1987 should show about 15 values. Recompute one monthly mean in Excel. Plain asserts instead of pytest are fine, as long as a wrong result would make a test fail."
   },
   "tech": {
    "routes": [
     "chat",
+    "files",
     "external",
     "connected"
    ],
    "text": "Paste code into Copilot Chat, which can run Python tests itself. For whole projects, use GitHub Copilot in VS Code, which reads your repository. Never paste keys, passwords or confidential data.",
    "data": [
-    "D2",
     "D6"
    ],
    "tools": [
     "GitHub Copilot"
    ],
    "connect": [
-    "GitHub Copilot"
+    "GitHub (repositories)"
    ],
    "repos": [
     "awesome-copilot"
@@ -2702,7 +2699,7 @@
     ],
     [
      "Codebook entry",
-     "For each category: name, definition, inclusion criteria, exclusion criteria (often pointing to a neighbouring category), a rule for borderline cases and an anchor example – a typical passage quoted verbatim from your own material."
+     "For each category: name, definition, inclusion criteria, exclusion criteria (often pointing to a neighbouring category), a rule for borderline cases and an anchor example – a typical passage quoted verbatim from your own material. A residual category ('none of these') keeps units from being forced into a category."
     ],
     [
      "Cohen's kappa",
@@ -2723,6 +2720,14 @@
      "doi": "10.2307/2529310"
     },
     {
+     "cite": "Krippendorff, K. (2019). Content analysis: An introduction to its methodology (4th ed.). SAGE.",
+     "doi": "10.4135/9781071878781"
+    },
+    {
+     "cite": "Mayring, P. (2014). Qualitative content analysis: Theoretical foundation, basic procedures and software solution. Klagenfurt.",
+     "doi": ""
+    },
+    {
      "cite": "Kuckartz, U., & Rädiker, S. (2023). Qualitative content analysis: Methods, practice and software (2nd ed.). SAGE.",
      "doi": ""
     }
@@ -2734,13 +2739,15 @@
     "C3",
     "C4"
    ],
+   "ref": [],
    "task": "Build a codebook on how attribution studies express human influence on extremes, with anchor examples quoted from two papers, then code a third abstract with a neighbour. You learn whether Copilot invents anchors and how well two people agree using its rules.",
-   "prompt": "I am doing a qualitative content analysis. Research question: how do climate attribution studies express human influence on extreme events? Categories: probability change (more or less likely, risk ratios); return period (how often an event recurs); intensity change (how much hotter or drier); future projection (change under further warming); uncertainty or limitation (stated caveats). Build a codebook: for each category give the name, a definition, an inclusion rule, an exclusion rule, a borderline rule and one anchor example quoted verbatim, with page number, from the attached Christidis et al. (2020) or Christidis et al. (2023) PDF. Then code the abstract of the attached Zachariah et al. (2023) PDF sentence by sentence: category, exact quote, and whether the decision was clear, unclear or problematic. Use only direct quotes.",
-   "check": "Find every anchor and quote in the PDFs. A neighbour codes the Zachariah abstract independently with the codebook; ask Copilot to compute Cohen's kappa from both codings and check the percentage agreement by hand."
+   "prompt": "I am doing a qualitative content analysis. Research question: how do climate attribution studies express human influence on extreme events? Categories: probability change (more or less likely, risk ratios); return period (how often an event recurs); intensity change (how much hotter or drier); future projection (change under further warming); uncertainty or limitation (stated caveats); none of these (for sentences that fit no category). Build a codebook: for each category except 'none of these' give the name, a definition, an inclusion rule, an exclusion rule, a borderline rule and one anchor example quoted verbatim, with page number, from the attached Christidis et al. (2020) or Christidis et al. (2023) PDF. Then code the abstract of the attached Zachariah et al. (2023) PDF sentence by sentence: category, exact quote, and whether the decision was clear, unclear or problematic. Use only direct quotes.",
+   "check": "Find every anchor and quote in the PDFs. A neighbour codes the Zachariah abstract independently with the codebook, including 'none of these'; ask Copilot to compute Cohen's kappa from both codings and check the percentage agreement by hand. With only eleven sentences, kappa is illustrative – discuss where you disagree rather than the value."
   },
   "tech": {
    "routes": [
     "chat",
+    "files",
     "external"
    ],
    "text": "Paste categories and a sample passage into Copilot Chat and keep the codebook in Word. Anchor examples come from your own material, which you code in QDA software such as MAXQDA or NVivo; both tools can report intercoder agreement.",
@@ -2778,6 +2785,10 @@
      "The American Statistical Association statement (Wasserstein & Lazar, 2016): a p-value measures neither the probability that a hypothesis is true nor the size of an effect, and p < .05 alone should not drive conclusions."
     ],
     [
+     "Correlation, agreement and trending series",
+     "Two series that share a trend can show a high R² and a 'significant' slope even when unrelated (spurious regression; Granger & Newbold, 1974) – a warning sign is an R² above the Durbin–Watson statistic. And a high correlation between two measures of the same quantity does not show that they agree: judge agreement from the differences, with their mean and limits of agreement (Bland & Altman, 1986)."
+    ],
+    [
      "Model-fit cut-offs for structural equation models",
      "Hu and Bentler's (1999) conventions: comparative fit index (CFI) ≥ 0.95, root mean square error of approximation (RMSEA) ≤ 0.06, standardised root mean square residual (SRMR) ≤ 0.08. Derived from simulations, they are guidelines, not pass–fail rules."
     ],
@@ -2802,18 +2813,34 @@
     {
      "cite": "Hu, L., & Bentler, P. M. (1999). Cutoff criteria for fit indexes in covariance structure analysis: Conventional criteria versus new alternatives. Structural Equation Modeling, 6(1), 1–55.",
      "doi": "10.1080/10705519909540118"
+    },
+    {
+     "cite": "Granger, C. W. J., & Newbold, P. (1974). Spurious regressions in econometrics. Journal of Econometrics, 2(2), 111–120.",
+     "doi": "10.1016/0304-4076(74)90034-7"
+    },
+    {
+     "cite": "Bland, J. M., & Altman, D. G. (1986). Statistical methods for assessing agreement between two methods of clinical measurement. The Lancet, 327(8476), 307–310.",
+     "doi": "10.1016/S0140-6736(86)90837-8"
+    },
+    {
+     "cite": "Henseler, J., Ringle, C. M., & Sarstedt, M. (2015). A new criterion for assessing discriminant validity in variance-based structural equation modeling. Journal of the Academy of Marketing Science, 43(1), 115–135.",
+     "doi": "10.1007/s11747-014-0403-8"
+    },
+    {
+     "cite": "McNeish, D. (2018). Thanks coefficient alpha, we'll take it from here. Psychological Methods, 23(3), 412–433.",
+     "doi": "10.1037/met0000144"
     }
    ]
   },
   "practice": {
    "data": [
-    "A3",
     "D3",
-    "D5"
+    "D4"
    ],
-   "task": "Run a simple regression of annual temperature on CO₂, then paste only its output into a new chat for interpretation. You learn whether Copilot uses only numbers from the output, checks time-series assumptions and avoids causal claims the design cannot support.",
-   "prompt": "Chat 1 – attach the HadCRUT5 monthly CSV and the NOAA Mauna Loa CO₂ monthly CSV (lines starting with # are comments) and ask: 'Using Python statsmodels, compute annual means for years complete in both files, regress the annual temperature anomaly on annual mean CO₂ with OLS and print only the full model summary.' Chat 2 – attach the Forster et al. (2025) PDF, paste the summary and ask: 'This is OLS output: annual global temperature anomaly (HadCRUT5, °C relative to 1961–1990) regressed on annual mean CO₂ (ppm). 1) Explain each part in plain language. 2) List the assumptions, say which the output lets me check, including the Durbin–Watson statistic, and name the source of each threshold. 3) Draft an APA 7 results paragraph using only numbers in the output, without recomputing or rounding differently. 4) Using the PDF, say what this regression cannot show about the causes of warming.'",
-   "check": "Every number in the paragraph appears in the summary (n = 67 years, R² about 0.93). Forster et al. estimate human-induced warming with methods following IPCC AR6, not one bivariate regression; Copilot's answer to point 4 should reflect this."
+   "ref": [],
+   "task": "Regress one global temperature record on another, then paste only the output into a new chat for interpretation. You learn whether Copilot uses only numbers from the output, spots autocorrelation and the baseline offset, and avoids reading a high R² as agreement.",
+   "prompt": "Chat 1 – attach the HadCRUT5 monthly CSV and the GISTEMP CSV (the first line is a title, *** marks missing values, J-D is the annual mean) and ask: 'Using Python statsmodels, compute HadCRUT5 annual means for complete years only, take the GISTEMP J-D annual means, keep the years present in both, regress the HadCRUT5 annual anomaly on the GISTEMP annual anomaly with OLS and print only the full model summary.' Chat 2 – paste the summary into a new chat and ask: 'This is OLS output: annual global temperature anomaly from HadCRUT5 (°C relative to 1961–1990) regressed on the same quantity from NASA GISTEMP (°C relative to 1951–1980), one row per year. 1) Explain each part in plain language. 2) List the assumptions, say which the output lets me check, including the Durbin–Watson statistic, and name the source of each threshold. 3) Draft an APA 7 results paragraph using only numbers in the output, without recomputing or rounding differently. 4) Does the high R² show that the two records agree? Say what this regression cannot show and which analysis would.'",
+   "check": "Every number in the paragraph appears in the summary (n = 146 years, R² = 0.987, Durbin–Watson about 0.39). Copilot should say that the low Durbin–Watson signals autocorrelated residuals, so standard errors are too small; that the intercept of about −0.09 °C mainly reflects the different baselines; and that the shared warming trend inflates R². Agreement is judged from the yearly differences (Bland–Altman), not from R²."
   },
   "tech": {
    "routes": [
@@ -2822,9 +2849,8 @@
    ],
    "text": "Paste the output as text into Copilot Chat, or upload the output file. Check every threshold Copilot names against the methods source it cites before you rely on it.",
    "data": [
-    "A3",
     "D3",
-    "D5"
+    "D4"
    ],
    "tools": [
     "JASP",
@@ -3004,23 +3030,23 @@
  },
  "querschnitt-3": {
   "problem": "Notes, highlights and annotations sit in different tools; you remember reading something relevant but cannot find it, and connections between sources stay in your head.",
-  "result": "An overview of sources by concept, with key claims, methods, tags and typed links – supports, contradicts, extends – that structures your notes tool for later search and synthesis.",
+  "result": "Atomic notes with IDs and sources, a small controlled tag vocabulary and typed links – supports, contradicts, extends, uses data or method of – that structure your notes tool for later search and synthesis.",
   "steps": [
    "Upload a handful of reading notes or abstracts",
-   "Ask for a concept matrix of claims and methods",
-   "Ask for typed links between sources, with evidence",
+   "Ask for atomic notes, each with an ID and source",
    "Agree a small controlled tag vocabulary",
+   "Ask for typed links between notes, with evidence",
    "Check two suggested links against the originals"
   ],
   "method": {
    "concepts": [
     [
-     "Webster & Watson concept matrix",
-     "A table with sources as rows and concepts as columns that turns a review from author-centric to concept-centric (Webster & Watson, 2002). It shows which concepts are well covered and where gaps lie."
-    ],
-    [
      "Zettelkasten (slip-box)",
      "Luhmann's note system: atomic notes with one idea each, written in your own words, with a unique ID and explicit links to other notes. Links rather than folders create structure, so new connections become visible over time."
+    ],
+    [
+     "Literature notes and permanent notes",
+     "Ahrens (2017), building on Luhmann: a literature note records briefly what a source says, with the page; a permanent note states one idea in your own words and links it to other notes. AI can draft literature notes; the permanent notes and their links are your own thinking."
     ],
     [
      "Controlled vocabulary",
@@ -3028,12 +3054,16 @@
     ],
     [
      "Typed citation relations",
-     "Labelling why one source relates to another – supports, disputes, extends, uses method of – as formalised in the Citation Typing Ontology (CiTO; Peroni & Shotton, 2012). Typed links speed up synthesis more than plain 'related' tags."
+     "Labelling why one source relates to another – supports, disputes, extends, uses data from, uses method of – as formalised in the Citation Typing Ontology (CiTO; Peroni & Shotton, 2012). Typed links speed up later synthesis more than plain 'related' tags."
     ]
    ],
    "refs": [
     {
-     "cite": "Webster, J., & Watson, R. T. (2002). Analyzing the past to prepare for the future: Writing a literature review. MIS Quarterly, 26(2), xiii–xxiii.",
+     "cite": "Luhmann, N. (1981). Kommunikation mit Zettelkästen: Ein Erfahrungsbericht. In H. Baier, H. M. Kepplinger, & K. Reumann (Eds.), Öffentliche Meinung und sozialer Wandel (pp. 222–228). Westdeutscher Verlag.",
+     "doi": "10.1007/978-3-322-87749-9_19"
+    },
+    {
+     "cite": "Ahrens, S. (2017). How to take smart notes: One simple technique to boost writing, learning and thinking. CreateSpace.",
      "doi": ""
     },
     {
@@ -3044,14 +3074,14 @@
   },
   "practice": {
    "data": [
-    "A1",
-    "A2",
-    "B2",
-    "C3"
+    "AB"
    ],
-   "task": "Build a concept matrix and typed links for four papers. You learn whether Copilot's links between sources are supported by quotable evidence or merely plausible because the papers share a topic.",
-   "prompt": "I am a PhD researcher organising my reading. Attached are four PDFs: Morice et al. (2021), Rohde & Hausfather (2020), Christidis et al. (2020) and Christidis et al. (2023). 1) Create a concept matrix with one row per paper and columns for research aim, data, method, main finding and three suggested tags. 2) List up to five links between the papers, each typed as supports, contradicts, extends or uses the method of, with a verbatim quote and page number from each paper as evidence. 3) Suggest a controlled vocabulary of 10–15 tags, each with a one-line definition, suitable for Zotero. Use only what is in the PDFs; if a link is uncertain, say so.",
-   "check": "Both Christidis papers apply a risk-based attribution methodology, and both global-record papers discuss Arctic coverage; these links should appear. Find every quote at the stated page and reject links that rest only on a shared topic."
+   "ref": [
+    "C1"
+   ],
+   "task": "Turn six abstracts into atomic notes with a controlled tag vocabulary and typed links. You learn whether Copilot's links rest on sentences you can find in the abstracts or are merely plausible because the papers share a topic.",
+   "prompt": "I am a postgraduate researcher setting up a note system. The attached text file holds the abstracts of twelve papers; use only these six: A2, B1, B2, C1, C3 and C6. 1) Write one atomic note per paper: a short ID (e.g. B2-1), the main claim in one or two plain sentences, and the citation. 2) Suggest a controlled vocabulary of 8 to 12 tags, each with a one-line definition and any synonyms it replaces, and give each note two or three tags. 3) List up to five links between the notes, each typed as supports, contradicts, extends, uses data of or uses method of, and quote the sentence from each abstract that the link rests on. Leave out links that rest only on a shared topic, and say when a link is uncertain.",
+   "check": "Ctrl+F every quote in the file. C3 uses the method of B2 (both name a 'risk-based attribution methodology'); C6 analyses the series B1 documents, but a 2021 paper cannot use v2.1 from 2025. 'C1 uses data of A2' looks right but is too strong: C1's Methods use daily land maxima, not A2's land/ocean record. Reject links resting only on a shared topic."
   },
   "tech": {
    "routes": [
@@ -3059,17 +3089,15 @@
     "connected",
     "external"
    ],
-   "text": "Upload your notes or PDFs to Copilot Chat. Connecting Zotero, Notion or Obsidian lets Copilot search your library directly – this needs your IT team to enable it; otherwise apply the tags by hand.",
+   "text": "Upload your notes or an abstracts file to Copilot Chat and copy the notes, tags and links into your notes tool. Notion can be connected as a remote server through Copilot Studio if your IT team enables it; the Zotero and Obsidian MCP servers run locally – with GitHub Copilot in VS Code or a desktop assistant, not in Copilot Chat.",
    "data": [
-    "A1",
-    "A2",
-    "B2",
-    "C3"
+    "AB",
+    "C1"
    ],
    "tools": [
     "Zotero",
     "Obsidian",
-    "NotebookLM"
+    "Gemini Notebook (formerly NotebookLM)"
    ],
    "connect": [
     "Zotero",
@@ -3123,6 +3151,7 @@
    "data": [
     "D7"
    ],
+   "ref": [],
    "task": "Write a codebook, README and metadata record for the Oxford station file as if depositing a cleaned version. You learn whether Copilot computes ranges and missing counts from the file and marks guessed meanings instead of inventing them.",
    "prompt": "I am preparing a cleaned version of the attached Met Office Oxford station text file for deposit in a data repository. Read the header lines first. Use Python to inspect the file, then create a codebook table: variable name, description, type, unit, observed range, number of missing values, missing-value code, and flags used (*, # or 'Provisional'). Then draft a README with title, creators (leave as a placeholder), description, source and how the data were produced, file list, variables, licence (leave as a placeholder), how to cite the original Met Office data, and contact. Mark any meaning you have guessed with [CHECK]. List the DataCite mandatory metadata fields with suggested values. Finally, give a replication checklist covering data, code, software versions, run order and expected outputs.",
    "check": "Compare with the file: tmax ranges from −0.2 to 28.2 °C, sun is missing ('---') in 912 months and rain in none. Any meaning not defined in the header, such as 'af', must carry [CHECK]."
@@ -3135,15 +3164,13 @@
    ],
    "text": "Upload the CSV or text file to Copilot Chat; Copilot computes ranges and missing values in Python and drafts the README. For the replication package, GitHub Copilot in VS Code helps you script and test the run order.",
    "data": [
-    "D4",
-    "D5",
     "D7"
    ],
    "tools": [
     "GitHub Copilot"
    ],
    "connect": [
-    "GitHub Copilot"
+    "GitHub (repositories)"
    ],
    "repos": []
   }
@@ -3193,23 +3220,18 @@
    ]
   },
   "practice": {
-   "data": [
-    "D3",
-    "D5"
-   ],
-   "task": "Log a practice exercise as the first row of an AI-use log and draft a declaration from it. You learn whether Copilot keeps to the logged facts or embellishes the declaration with uses and benefits you did not record.",
-   "prompt": "I am a PhD researcher starting a log of my AI use as the basis for the AI declaration in my thesis. Create a table with the columns: date, tool, task, prompt (summary), files used, where the output is saved, how I checked it, what I used, research decision informed. Fill row one from this description: today I attached the HadCRUT5 monthly CSV and the NOAA Mauna Loa CO₂ monthly CSV to Copilot Chat and asked it to compute annual means and regress temperature on CO₂ in Python; I checked the number of years and the 2024 annual means by hand; the first version included the incomplete year 2026, which I had removed; I decided to report the result only as a descriptive association. Then draft a declaration of about 80 words in a neutral tone describing only this logged use. Do not add uses, tools or benefits I have not listed.",
-   "check": "The declaration names only Copilot Chat, these two files and this task, and adds no benefits; a colleague could retrace the step from the log row. Compare the wording with your university's AI policy."
+   "data": [],
+   "ref": [],
+   "task": "Log one AI task as the first row of an AI-use log and draft a declaration from it. You learn whether Copilot keeps to the logged facts or embellishes the declaration with uses and benefits you did not record.",
+   "prompt": "I am a postgraduate researcher starting a log of my AI use as the basis for the AI declaration in my thesis. Create a table with the columns: date, tool, task, prompt (summary), files used, where the output is saved, how I checked it, what I used, research decision informed. Fill row one from this description: today I attached the Met Office Oxford station file to Copilot Chat and asked it to draft a codebook and README for a data deposit; I checked the tmax range and the number of missing sunshine values against the file; the first draft explained the column 'af' without marking the meaning as a guess, so I asked it to add a [CHECK] mark and looked the meaning up in the Met Office documentation; I decided to keep the provisional rows in the deposit and flag them rather than delete them. Then draft a declaration of about 80 words in a neutral tone describing only this logged use. Do not add uses, tools or benefits I have not listed.",
+   "check": "The declaration names only Copilot Chat, the Oxford station file and the codebook task, and claims no benefits such as saved time. The description does not say where the output is saved, so that cell must stay empty or be marked, not invented. Compare the wording with your university's AI policy."
   },
   "tech": {
    "routes": [
     "chat"
    ],
    "text": "Describe the task in Copilot Chat and save the log as a Copilot Page or in Word or Excel; add a row after each AI task. Paste your university's guidance so the declaration follows it.",
-   "data": [
-    "D3",
-    "D5"
-   ],
+   "data": [],
    "tools": [
     "Notion"
    ],
@@ -3263,23 +3285,24 @@
   },
   "practice": {
    "data": [
-    "C6",
     "D2"
    ],
-   "task": "Learn changepoint detection step by step on the Central England monthly series, with the Shi et al. preprint as reference. You learn whether Copilot teaches the method as the paper describes it and whether its results match the paper's.",
-   "prompt": "I am a PhD researcher and want to learn changepoint detection in Python. Act as a patient tutor. First ask me three short questions to judge my level. Then teach step by step in short chunks: explain one idea, show a small worked example, and give me one exercise; wait for my answer and give feedback before showing the solution. Use the attached HadCET monthly text file: help me read it, keep only complete years and use the Annual column (-99.9 marks missing values). Cover mean-shift versus trend-shift models and penalties such as BIC and MDL. Use the attached Shi et al. (2021) preprint as the reference and tell me which section each step relates to. Point me to the documentation of any package you use, and say when you are unsure.",
-   "check": "Shi et al. report that BIC and MDL trend-shift models flag changepoints in 1700, 1739 and 1988 (Table 2, Figure 2). The paper used an earlier CET version, so small differences are possible; large ones need an explanation."
+   "ref": [
+    "C6"
+   ],
+   "task": "Learn changepoint detection step by step on the Central England monthly series. You learn whether Copilot teaches the method correctly and whether the changepoints it finds match those in the Shi et al. preprint, which you keep open for checking.",
+   "prompt": "I am a postgraduate researcher and want to learn changepoint detection in Python. Act as a patient tutor. First ask me three short questions to judge my level. Then teach step by step in short chunks: explain one idea, show a small worked example, and give me one exercise; wait for my answer and give feedback before showing the solution. Use the attached HadCET monthly text file: help me read it, keep only complete years and use the Annual column (-99.9 marks missing values). Cover mean-shift versus trend-shift models and penalties such as BIC and MDL. In the last step, fit a trend-shift model with a BIC penalty to the annual series and list the changepoint years. Point me to the documentation of any package you use, and say when you are unsure.",
+   "check": "Compare with Shi et al. (Table 2, Figure 2): BIC and MDL trend-shift models flag changepoints in 1700, 1739 and 1988, and the fixed-slope mean-shift model flags 1988. The paper used an earlier CET version, so small differences are possible; large ones need an explanation."
   },
   "tech": {
    "routes": [
     "chat",
     "files"
    ],
-   "text": "Run the tutor in Copilot Chat; upload a small dataset and a methods paper so exercises use real material, and Copilot can run Python examples itself. Run R, Stata or SPSS exercises in your own software.",
+   "text": "Run the tutor in Copilot Chat; upload a small dataset so exercises use real material, and Copilot can run Python examples itself. Keep a methods paper open to check what the tutor teaches. Run R, Stata or SPSS exercises in your own software.",
    "data": [
-    "C6",
     "D2",
-    "D3"
+    "C6"
    ],
    "tools": [
     "Jamovi",
@@ -3340,13 +3363,15 @@
     "C4",
     "C5"
    ],
+   "ref": [],
    "task": "Create an agent with four attribution PDFs as knowledge and run an extraction stage with a checkpoint. You learn how often extracted numbers, return periods and likelihood changes are wrong or unsupported, and why each stage needs your approval.",
-   "prompt": "You are the research assistant of a PhD researcher. Standing rules: cite in APA 7; 'return period' means the average time between events of a given size; 'probability ratio' means how many times more likely an event is with human influence; never invent sources, quotes or numbers, and say when you are unsure; use only the four attached PDFs (Christidis et al., 2020; Christidis et al., 2023; Zachariah et al., 2023; Schumacher et al., 2024). Work in two stages and stop after each for my approval. Stage 1, extraction: a table with one row per paper – event and region, variable, method, change in likelihood, change in intensity, future projection – each cell with a verbatim quote and page number. Stage 2, after my approval: a 200-word comparison citing only approved cells, ending with a list of claims I should still verify.",
-   "check": "Check every cell against the PDFs, e.g. Zachariah et al.: about 30 times more likely, about 1 °C hotter; Christidis et al. (2020): 100–300-year return time for 40 °C summers. Only then approve stage 2 and log the AI use."
+   "prompt": "You are the research assistant of a postgraduate researcher. Standing rules: cite in APA 7; treat 'return time' and 'return period' as the same concept – the average time between events of a given size – and write 'return period'; 'probability ratio' means how many times more likely an event is with human influence; never invent sources, quotes or numbers, and say when you are unsure; use only the four attached PDFs (Christidis et al., 2020; Christidis et al., 2023; Zachariah et al., 2023; Schumacher et al., 2024). Work in two stages and stop after each for my approval. Stage 1, extraction: a table with one row per paper – event and region, variable, method, change in likelihood, change in intensity, future projection – each cell with a verbatim quote and page number. Stage 2, after my approval: a 200-word comparison citing only approved cells, ending with a list of claims I should still verify.",
+   "check": "Check every cell against the PDFs, e.g. Zachariah et al.: 30 times more likely and about 1 °C hotter (Ctrl+F '30 times more likely'); Christidis et al. (2020): '100-300 years' for 40 °C summers, which the table should call a return period. Only then approve stage 2 and log the AI use."
   },
   "tech": {
    "routes": [
     "chat",
+    "files",
     "connected",
     "external"
    ],
@@ -3412,42 +3437,22 @@
   },
   "practice": {
    "data": [
-    "A1",
-    "A2",
-    "A3",
-    "B1",
-    "B2",
-    "B3",
-    "C1",
-    "C2",
-    "C3",
-    "C4",
-    "C5",
-    "C6"
+    "AB"
    ],
-   "task": "Treat the twelve practice papers as this week's alert and triage them against a narrow question. You learn whether Copilot applies your criteria consistently, reasons only from titles and abstracts, and adds no papers that were not attached.",
-   "prompt": "I am a PhD researcher. My research question is: how has human influence changed the likelihood of extreme heat in the UK and Western Europe? Relevance criteria: must-read if a paper estimates changes in hot extremes for the UK or Western Europe; maybe if it provides data or methods I could apply there; skip otherwise. Attached are twelve PDFs (in batches if needed); treat them as this week's alert. Using only each paper's title and abstract, sort them into must-read, maybe and skip, with one line on why, naming the criterion used. For the must-reads, say whether each supports, challenges or extends my question. Finish with five search terms worth adding to my alerts. Do not add papers that are not attached.",
-   "check": "Rate the twelve yourself from the abstracts first. Christidis et al. (2020) and Vautard et al. (2023) meet the must-read criterion; discuss two disagreements and confirm the output lists exactly the twelve attached papers."
+   "ref": [],
+   "task": "Treat the twelve practice abstracts as this week's alert and triage them against a narrow question. You learn whether Copilot applies your criteria consistently, reasons only from titles and abstracts, and adds no papers that are not in the file.",
+   "prompt": "I am a postgraduate researcher. My research question is: how has human influence changed the likelihood of extreme heat in the UK and Western Europe? Relevance criteria: must-read if a paper estimates changes in hot extremes for the UK or Western Europe; maybe if it provides data or methods I could apply there; skip otherwise. The attached text file holds the titles and abstracts of twelve papers; treat them as this week's alert. Using only each title and abstract, sort the papers into must-read, maybe and skip, with one line on why, naming the criterion used. For the must-reads, say whether each supports, challenges or extends my question. Finish with five search terms worth adding to my alerts. Do not add papers that are not in the file.",
+   "check": "Rate the twelve yourself from the abstracts first. Christidis et al. (2020) and Vautard et al. (2023) meet the must-read criterion. Perkins-Kirkpatrick & Lewis (2020) and Christidis et al. (2023) are borderline, as their abstracts do not name the UK or Western Europe – discuss them. The output must list exactly the twelve papers in the file."
   },
   "tech": {
    "routes": [
     "chat",
+    "files",
     "connected"
    ],
-   "text": "Paste titles and abstracts into Copilot Chat or attach the PDFs. With OpenAlex or Semantic Scholar connected, which needs your IT team to enable it, Copilot can fetch new papers itself; Litmaps tracks new work from seed papers.",
+   "text": "Paste titles and abstracts into Copilot Chat or attach them as one text file. With OpenAlex or Semantic Scholar connected, which needs your IT team to enable it, Copilot can fetch new papers itself; Litmaps tracks new work from seed papers.",
    "data": [
-    "A1",
-    "A2",
-    "A3",
-    "B1",
-    "B2",
-    "B3",
-    "C1",
-    "C2",
-    "C3",
-    "C4",
-    "C5",
-    "C6"
+    "AB"
    ],
    "tools": [
     "Litmaps",
@@ -3518,7 +3523,6 @@
    ],
    "text": "Paste the abstract and outline into Copilot Chat, or upload the draft as Word or PDF; for a fuller outline-and-evidence workflow, the academic-paper skill runs in GitHub Copilot in VS Code.",
    "data": [
-    "B2",
     "B3"
    ],
    "tools": [],
@@ -3580,6 +3584,7 @@
   "tech": {
    "routes": [
     "chat",
+    "files",
     "connected",
     "external"
    ],
@@ -3655,8 +3660,6 @@
    ],
    "text": "Upload the Word or PDF file to Copilot Chat; for long documents, check whether Copilot says it read every part and work section by section if not, and match citations to references in your reference manager as well.",
    "data": [
-    "A2",
-    "B1",
     "A3"
    ],
    "tools": [
@@ -3717,19 +3720,20 @@
    "data": [
     "C2"
    ],
+   "ref": [],
    "task": "Use the abstract of the Myhre et al. (2019) paper to ask for candidate journals, then convert five of its references to BibTeX. You learn whether Copilot's journal facts match the publishers' pages and whether it picks the right BibTeX entry type.",
    "prompt": "Attached is the Myhre et al. (2019) PDF. Treat its abstract as the abstract of my manuscript in climate science. 1) Suggest five peer-reviewed journals whose published aims and scope fit this work, including Scientific Reports. Give a table: journal, publisher, why it fits, article type and word limit, reference style, open-access options, link to the author guidelines page. Use only the journals' own websites and cite the link; if you are unsure of a detail, say so. 2) Convert references 1 to 5 of the PDF into BibTeX, choosing the correct entry type for each, and flag missing fields. Do not invent DOIs or page numbers.",
-   "check": "Open two guideline pages and confirm word limit and reference style. In the BibTeX, reference 2 (an IPCC report chapter) should be @incollection without a DOI; the other four DOIs must match those printed in the reference list."
+   "check": "Open two guideline pages and confirm word limit and reference style. In the BibTeX, reference 2 (an IPCC report chapter) should be @incollection; the reference list prints no DOI, so Copilot must not invent one. If it adds 10.1017/CBO9781107415324.016 ('Clouds and Aerosols'), that DOI is real – verify it rather than accept it. The other four DOIs must match those printed in the reference list."
   },
   "tech": {
    "routes": [
     "chat",
+    "files",
     "connected",
     "external"
    ],
    "text": "Copilot Chat searches the web for journals and guideline pages; with Zotero, OpenAlex or Overleaf connected through an MCP server the IT enables, it can read your library, publication venues or LaTeX project directly.",
    "data": [
-    "B2",
     "C2"
    ],
    "tools": [
@@ -3773,7 +3777,7 @@
     ],
     [
      "TOP Guidelines",
-     "Transparency and Openness Promotion: eight standards journals adopt at different levels – citation, data, code and materials transparency, design and analysis reporting, preregistration of studies and of analysis plans, and replication. Use them to anticipate data and code requests."
+     "Transparency and Openness Promotion: introduced in 2015 with eight standards and revised as TOP 2025. Seven research practices (study registration, study protocol, analysis plan, materials, data, analytic code and reporting transparency) can be disclosed, shared and cited, or certified; verification practices and studies cover results transparency, computational reproducibility, replications and Registered Reports. Use them to anticipate data and code requests."
     ]
    ],
    "refs": [
@@ -3784,6 +3788,10 @@
     {
      "cite": "Nosek, B. A., Alter, G., Banks, G. C., Borsboom, D., Bowman, S. D., Breckler, S. J., Buck, S., Chambers, C. D., Chin, G., Christensen, G., Contestabile, M., Dafoe, A., Eich, E., Freese, J., Glennerster, R., Goroff, D., Green, D. P., Hesse, B., Humphreys, M., … Yarkoni, T. (2015). Promoting an open research culture. Science, 348(6242), 1422–1425.",
      "doi": "10.1126/science.aab2374"
+    },
+    {
+     "cite": "Grant, S., Corker, K. S., Mellor, D., Stewart, S. L. K., Mayo-Wilson, E., Cashin, A. G., Lagisz, M., Moher, D., Umpierre, D., Barbour, V., Buck, S., Collins, G. S., Hazlett, H. F., Hrynaszkiewicz, I., Lee, C. J., Parker, T. H., Rethlefsen, M. L., Toomey, E., Nosek, B. A., & the TOP Advisory Board. (2026). TOP 2025: An update to the Transparency and Openness Promotion Guidelines. Research Integrity and Peer Review, 11, 40.",
+     "doi": "10.1186/s41073-026-00223-0"
     }
    ]
   },
@@ -3791,9 +3799,10 @@
    "data": [
     "C6"
    ],
-   "task": "Run a three-reviewer panel on the Shi et al. (2021) changepoint preprint, a text not yet peer reviewed. You learn whether Copilot ties each comment to a real passage and whether it forces an unsuitable reporting guideline onto a statistical analysis.",
-   "prompt": "Attached is the Shi et al. (2021) arXiv preprint on changepoints in the Central England Temperature series. Assume the authors plan to submit it as a research article to a statistics or climate journal. Act as a panel of three critical but fair peer reviewers: a time-series methods expert, a climate scientist and a devil's advocate who challenges the central claim of a late-1980s changepoint. Each reviewer gives a two-sentence assessment and up to four major comments; for each, quote the passage it refers to and suggest a concrete fix. Then say whether any EQUATOR reporting guideline applies; if none fits, say so. Finish with a revision roadmap ordered by priority, with effort (small, medium, large). Comment only on what is in the text.",
-   "check": "Search the PDF for each quoted passage. Comments on model choice should engage with the log-likelihood, BIC and MDL comparisons in Tables 2–3. No clinical guideline such as CONSORT should be imposed on this design."
+   "ref": [],
+   "task": "Run a three-reviewer panel on the preprint version of the Shi et al. changepoint paper, treating it as if it were still under review. You learn whether Copilot ties each comment to a real passage and whether it forces an unsuitable reporting guideline onto a statistical analysis.",
+   "prompt": "Attached is the arXiv preprint version (v2, June 2022) of Shi et al. on changepoints in the Central England Temperature series. The paper was later published in the Journal of Climate; for this exercise, treat this preprint version as if it were a manuscript under review at a statistics or climate journal. Act as a panel of three critical but fair peer reviewers: a time-series methods expert, a climate scientist and a devil's advocate who challenges the central claim of a late-1980s changepoint. Each reviewer gives a two-sentence assessment and up to four major comments; for each, quote the passage it refers to and suggest a concrete fix. Then say whether any EQUATOR reporting guideline applies; if none fits, say so. Finish with a revision roadmap ordered by priority, with effort (small, medium, large). Comment only on what is in the text.",
+   "check": "Search the PDF for each quoted passage. Comments on model choice should engage with the log-likelihood, BIC and MDL comparisons in Tables 2–3. No clinical guideline such as CONSORT should be imposed on this design. If Copilot mentions the published version (Journal of Climate, 2022, doi 10.1175/JCLI-D-21-0489.1), that is correct."
   },
   "tech": {
    "routes": [
@@ -3803,8 +3812,7 @@
    ],
    "text": "Upload the draft section to Copilot Chat for the reviewer panel and tick missing items against the guideline's own checklist on the EQUATOR Network website; open-source reviewer skills in GitHub Copilot in VS Code give a fuller review.",
    "data": [
-    "C6",
-    "B3"
+    "C6"
    ],
    "tools": [
     "Paperpal"
@@ -3852,7 +3860,7 @@
     },
     {
      "cite": "Ross-Hellauer, T. (2017). What is open peer review? A systematic review. F1000Research, 6, 588.",
-     "doi": ""
+     "doi": "10.12688/f1000research.11369.2"
     }
    ]
   },
@@ -3860,9 +3868,10 @@
    "data": [
     "C5"
    ],
+   "ref": [],
    "task": "Find the public referee comments on the discussion paper behind Schumacher et al. (2024) and draft a response, using the published PDF as the revised version. You learn whether Copilot retrieves real comments or invents them, and whether it claims unverifiable changes.",
-   "prompt": "Attached is the Schumacher et al. (2024) PDF from Earth System Dynamics, the final version of a paper that went through open public discussion. 1) Search the web for the referee comments (RC1, RC2 and any others) on its discussion paper in Earth System Dynamics Discussions and give the link. If you cannot open them, say so and stop – do not reconstruct them. 2) List every referee comment in a table: number, referee, major or minor, what is requested. 3) Treat the attached PDF as the revised manuscript and draft a point-by-point response that quotes each comment first. Where you cannot see in the PDF whether a request was addressed, write [ADD RESPONSE]. Do not claim any change you cannot point to in the PDF.",
-   "check": "Open the discussion page yourself: every comment in the table must exist there and none may be missing. Compare Copilot's draft with the authors' own published replies (AC) on the same page."
+   "prompt": "Attached is the Schumacher et al. (2024) PDF from Earth System Dynamics, the final version of a paper that went through open public discussion. 1) Find the public referee comments (RC1, RC2) on its discussion paper: it was discussed as preprint egusphere-2023-717 on EGUsphere, and the article page links to the discussion under 'Peer review'. Give the link. If you cannot open the comments, say so and stop – do not reconstruct them; I will paste them in. 2) List every referee comment in a table: number, referee, major or minor, what is requested. 3) Treat the attached PDF as the revised manuscript and draft a point-by-point response that quotes each comment first. Where you cannot see in the PDF whether a request was addressed, write [ADD RESPONSE]. Do not claim any change you cannot point to in the PDF.",
+   "check": "Open https://egusphere.copernicus.org/preprints/2023/egusphere-2023-717/ yourself: every comment in the table must exist in RC1 or RC2 and none may be missing. If Copilot could not open the page, paste RC1 and RC2 into the chat and continue. Compare the draft with the authors' replies AC1 and AC2 (attached there as PDFs). A second review round (Nov–Dec 2023) is listed on the article's 'Peer review' tab."
   },
   "tech": {
    "routes": [
@@ -3912,11 +3921,11 @@
    "refs": [
     {
      "cite": "Trafford, V., & Leshem, S. (2009). Doctorateness as a threshold concept. Innovations in Education and Teaching International, 46(3), 305–316.",
-     "doi": ""
+     "doi": "10.1080/14703290903069027"
     },
     {
      "cite": "Mullins, G., & Kiley, M. (2002). 'It's a PhD, not a Nobel Prize': How experienced examiners assess research theses. Studies in Higher Education, 27(4), 369–386.",
-     "doi": ""
+     "doi": "10.1080/0307507022000011507"
     }
    ]
   },
@@ -3925,9 +3934,10 @@
     "B2",
     "C3"
    ],
+   "ref": [],
    "task": "Treat the Christidis et al. (2020) and Christidis et al. (2023) papers as two chapters of a thesis by publication and test three given research questions against them. You learn whether Copilot detects a question that only one chapter answers.",
    "prompt": "Attached are two PDFs by Christidis and colleagues: the UK 30 to 40 °C paper (2020) and the Mediterranean 50 °C paper (2023). Treat them as chapters 2 and 3 of a thesis by publication. The research questions are: RQ1 How has human influence changed the likelihood of extreme daily maximum temperatures at specific locations? RQ2 How will that likelihood change by 2100 under different emission pathways? RQ3 What do these changes imply for heat-related mortality? First summarise each chapter in five sentences. Then create a table, one row per research question, showing where each chapter introduces, addresses with methods, and answers it. List gaps, overlaps and repetition, quoting the sentence each point rests on. If the papers do not give enough information, say so.",
-   "check": "Compare with the two abstracts: both address RQ1 and RQ2, but only the 2023 abstract reports a mortality-related result (additional months with excess thermal deaths). RQ3 should be flagged as answered in one chapter only."
+   "check": "Both chapters address RQ1. RQ2 is fully addressed only in 2020, which compares two pathways (RCP 4.5 and RCP 8.5); 2023 uses one medium scenario (SSP2-4.5), so Copilot should rate it partial. Only the 2023 abstract reports a mortality-related result (1–2 additional months with excess thermal deaths by 2100), so RQ3 is answered in one chapter only."
   },
   "tech": {
    "routes": [
@@ -3964,7 +3974,7 @@
     ],
     [
      "FHEQ level 8 descriptors",
-     "The QAA's descriptors for doctorates: new knowledge created through original research of a quality to satisfy peer review, systematic command of a substantial body of knowledge, and the ability to conceive, design and carry out a research project."
+     "The QAA's descriptors for doctorates (second edition of the frameworks, 2024; the level descriptors are unchanged): new knowledge created through original research of a quality to satisfy peer review, systematic command of a substantial body of knowledge, and the ability to conceive, design and carry out a research project."
     ],
     [
      "Originality, significance, rigour",
@@ -3977,7 +3987,7 @@
    ],
    "refs": [
     {
-     "cite": "Quality Assurance Agency for Higher Education. (2014). The frameworks for higher education qualifications of UK degree-awarding bodies. QAA.",
+     "cite": "Quality Assurance Agency for Higher Education. (2024). The frameworks for higher education qualifications of UK degree-awarding bodies (2nd ed.). QAA.",
      "doi": ""
     },
     {
@@ -4004,7 +4014,7 @@
     "B2"
    ],
    "tools": [
-    "NotebookLM"
+    "Gemini Notebook (formerly NotebookLM)"
    ],
    "connect": [],
    "repos": []
@@ -4065,6 +4075,7 @@
   "tech": {
    "routes": [
     "chat",
+    "files",
     "connected",
     "external"
    ],
@@ -4129,15 +4140,13 @@
    ]
   },
   "practice": {
-   "data": [
-    "B2",
-    "C3",
-    "C4",
-    "C5"
+   "data": [],
+   "ref": [
+    "AB"
    ],
    "task": "Turn five given notes on four attribution papers – one deliberately without a source – into an evidence map and a short draft. You learn whether Copilot adds claims or sources of its own and whether it marks the unsupported note.",
-   "prompt": "I am drafting a literature review section on attributing recent heat and drought extremes. My notes (sources attached):\n- UK summers with days above 40 °C: return time 100–300 years now, possibly 3.5 years by 2100 without emission cuts (Christidis et al., 2020).\n- 50 °C days at 12 Mediterranean and Middle East locations: extremely rare or impossible pre-industrially, now rising rapidly (Christidis et al., 2023).\n- India–Pakistan heat, March–April 2022: about 1 °C hotter and 30 times more likely due to human-caused climate change (Zachariah et al., 2023).\n- 2022 western–central European summer soil drought: about once in 20 years now, about once per century pre-industrially (Schumacher et al., 2024).\n- Attribution results are increasingly used in adaptation planning.\nFirst build an evidence map: points in order, each with its source, gaps marked. Then draft 200 words in APA style using only these notes, marking [GAP] wherever a sentence lacks a source. Add nothing of your own.",
-   "check": "Trace every sentence to a note and check its numbers against that paper's abstract. The unsourced adaptation note must carry [GAP]. Practice only: in real work you rewrite the text yourself and declare the AI use."
+   "prompt": "I am drafting a literature review section on attributing recent heat and drought extremes. My notes, with the source of each in brackets:\n- UK summers with days above 40 °C: return time 100–300 years now, possibly 3.5 years by 2100 without emission cuts (Christidis et al., 2020).\n- 50 °C days at 12 Mediterranean and Middle East locations: extremely rare or impossible pre-industrially, now rising rapidly (Christidis et al., 2023).\n- India–Pakistan heat, March–April 2022: about 1 °C hotter and 30 times more likely due to human-caused climate change (Zachariah et al., 2023).\n- 2022 western–central European summer soil drought: about once in 20 years now, about once per century pre-industrially (Schumacher et al., 2024).\n- Attribution results are increasingly used in adaptation planning.\nFirst build an evidence map: points in order, each with its source, gaps marked. Then draft 200 words in APA style using only these notes, marking [GAP] wherever a sentence lacks a source. Add nothing of your own.",
+   "check": "Trace every sentence to a note and check its numbers against that paper's abstract in the abstracts file (AB). The unsourced adaptation note must carry [GAP]. Practice only: in real work you rewrite the text yourself and declare the AI use."
   },
   "tech": {
    "routes": [
@@ -4147,10 +4156,7 @@
    ],
    "text": "Paste your notes or upload them with the source PDFs to Copilot Chat; the academic-paper skill in GitHub Copilot in VS Code follows the same outline, evidence map and draft sequence.",
    "data": [
-    "B2",
-    "C3",
-    "C4",
-    "C5"
+    "AB"
    ],
    "tools": [
     "Zotero"
@@ -4205,6 +4211,7 @@
    "data": [
     "B2"
    ],
+   "ref": [],
    "task": "Produce a lay summary, policy brief outline and social post from the Christidis et al. (2020) paper for council officers. You learn whether Copilot keeps conditions such as 'without mitigation' and the meaning of a return time when it simplifies.",
    "prompt": "Attached is the Christidis et al. (2020) PDF on temperatures above 30 to 40 °C in the United Kingdom. Write for local council officers responsible for heat adaptation: 1) a lay summary of about 150 words in plain UK English, explaining 'return time' in one sentence; 2) an outline for a one-page policy brief with the problem, key findings and three practical recommendations; 3) a social media post of up to 60 words. Use only findings stated in the paper, keep numbers and their conditions exact (for example emission scenarios), keep uncertainty words such as 'likely', and do not make results sound stronger or more general than the paper does. List every point where you simplified.",
    "check": "Compare with the abstract: summers with 40 °C days have a return time of 100–300 years at present, falling to 3.5 years by 2100 only without mitigating emissions. Wording such as 'every few years from now on' is spin."
@@ -4214,13 +4221,12 @@
     "files",
     "external"
    ],
-   "text": "Upload the open-access PDF to Copilot Chat and ask for all three formats in one go; NotebookLM can add an audio overview from the same paper.",
+   "text": "Upload the open-access PDF to Copilot Chat and ask for all three formats in one go; Gemini Notebook (formerly NotebookLM) can add an audio overview from the same paper.",
    "data": [
-    "B2",
-    "A3"
+    "B2"
    ],
    "tools": [
-    "NotebookLM",
+    "Gemini Notebook (formerly NotebookLM)",
     "Napkin AI"
    ],
    "connect": [],
@@ -4241,7 +4247,7 @@
    "concepts": [
     [
      "Assertion–evidence slide structure",
-     "Each slide headline is a full-sentence claim, and the body is visual evidence for it (chart, image, diagram) rather than a bullet list. Alley and colleagues report better audience comprehension than with topic-and-bullet slides."
+     "Each slide headline is a full-sentence claim, and the body is visual evidence for it (chart, image, diagram) rather than a bullet list. Garner, Alley and colleagues (2011) found better comprehension and recall of complex concepts than with topic-and-bullet slides."
     ],
     [
      "Data-ink ratio",
@@ -4258,6 +4264,10 @@
    ],
    "refs": [
     {
+     "cite": "Garner, J., Alley, M., Wolfe, K., Zappe, S., & Sawarynski, L. (2011). Assertion-evidence slides appear to lead to better comprehension and recall of more complex concepts. In 2011 ASEE Annual Conference & Exposition Proceedings. ASEE.",
+     "doi": "10.18260/1-2--17510"
+    },
+    {
      "cite": "Crameri, F., Shephard, G. E., & Heron, P. J. (2020). The misuse of colour in science communication. Nature Communications, 11, 5444.",
      "doi": "10.1038/s41467-020-19160-7"
     },
@@ -4273,13 +4283,12 @@
   },
   "practice": {
    "data": [
-    "D3",
-    "D5",
-    "A3"
+    "D8"
    ],
-   "task": "Chart annual global temperature anomalies from HadCRUT5 with annual Mauna Loa CO₂ and outline a short talk. You learn whether Copilot aggregates monthly data correctly, handles placeholder values and keeps different temperature baselines apart.",
-   "prompt": "Attached are the HadCRUT5 monthly CSV, the NOAA Mauna Loa CO₂ monthly CSV and the Forster et al. (2025) PDF. 1) Compute annual means for 1959–2024 from both files. The CO₂ file uses negative numbers as placeholders in some columns – say which columns and how you handled them. 2) Create one clear chart of the annual temperature anomaly (°C, relative to 1961–1990) and annual CO₂ (ppm), with labelled axes, units, a colour-vision-safe palette and a short title. Show the Python code. 3) Draft a six-slide outline for a 10-minute talk to postgraduate researchers: each title a full-sentence claim, up to three bullets, and the visual to use. Use only numbers from the files and the PDF, and state the baseline whenever you give a temperature.",
-   "check": "From the monthly rows, 2024 annual means are about 1.17 °C (HadCRUT5, relative to 1961–1990) and 424.6 ppm CO₂; the average column needs no exclusions. The 1.52 °C in Forster et al. is relative to 1850–1900."
+   "ref": [],
+   "task": "Chart UK winter and summer rainfall from the Met Office national series and outline a short talk. You learn whether Copilot parses a wide file with an incomplete last row, knows which months each season covers and keeps its slide claims within what the data show.",
+   "prompt": "Attached is the Met Office UK rainfall text file (HadUK-Grid areal series: monthly, seasonal and annual totals in mm). 1) Read it with Python. The last row is an incomplete year, and some cells are blank or '---': say how you handled them and which months each season covers. 2) Create one clear chart of winter (win) and summer (sum) rainfall per year, each with a 10-year rolling mean, with labelled axes, units, a colour-vision-safe palette and a short title. Show the Python code. 3) Give mean winter and summer rainfall for 1961–1990 and 1991–2020. 4) Draft a six-slide outline for a 10-minute talk to postgraduate researchers: each title a full-sentence claim, up to three bullets, and the visual to use. Use only numbers from the file, and do not claim causes the data cannot show.",
+   "check": "Mean winter rainfall is 302.8 mm (1961–1990) and 343.6 mm (1991–2020); summer is 232.0 and 253.4 mm. Winter includes the previous December; the wettest is 2014 (539.9 mm). The 2026 row has winter 399.6 mm but no annual total – if 399.6 appears as October, Copilot split the row on spaces. A title naming a cause goes beyond the data."
   },
   "tech": {
    "routes": [
@@ -4289,9 +4298,7 @@
    ],
    "text": "Upload the CSV or Excel file to Copilot Chat, which runs Python and returns the chart and code; Napkin AI, connected if the IT enables it, turns text into diagrams.",
    "data": [
-    "D3",
-    "D5",
-    "A3"
+    "D8"
    ],
    "tools": [
     "Napkin AI"
@@ -4353,6 +4360,7 @@
     "B2",
     "D1"
    ],
+   "ref": [],
    "task": "Build a seminar case on the Christidis et al. (2020) paper with a data exercise on the Central England daily maximum series. You learn whether Copilot keeps the paper's facts straight and computes the exercise's worked answer correctly.",
    "prompt": "I teach a second-year undergraduate module on environmental data. The learning outcome is: 'Students interpret observed temperature extremes in the light of attribution research.' Attached are the Christidis et al. (2020) PDF and the HadCET daily maximum text file. 1) Write a case study of about 400 words based on the paper, for a 20-minute seminar activity. 2) Add three discussion questions at the apply, analyse or evaluate level of Bloom's revised taxonomy, not recall. 3) Design one exercise using the data file: count the days at or above 30 °C per decade since 1900 and find the hottest day of 2022. Give a worked answer with Python code. List every simplification you made.",
    "check": "Rerun the code: the file shows 37.3 °C on 19 July 2022 and seven days at or above 30 °C in 2022. Case facts must match the paper, and the case should note that CET is a regional series."
@@ -4365,11 +4373,10 @@
    "text": "Upload the open-access PDF to Copilot Chat; for a data exercise, add a practice file and let Copilot draft the task and a worked answer in Python, which you rerun before using it in class.",
    "data": [
     "B2",
-    "C4",
     "D1"
    ],
    "tools": [
-    "NotebookLM"
+    "Gemini Notebook (formerly NotebookLM)"
    ],
    "connect": [],
    "repos": []
@@ -4416,12 +4423,13 @@
    ]
   },
   "practice": {
-   "data": [
+   "data": [],
+   "ref": [
     "B2"
    ],
    "task": "Search for policy, media and practice mentions of the Christidis et al. (2020) UK heat paper, which drew attention after the 40.3 °C record of July 2022. You learn how many of Copilot's links exist and actually name the paper.",
    "prompt": "I am gathering evidence of the reach of this paper: Christidis, N., McCarthy, M., & Stott, P. A. (2020). The increasing likelihood of temperatures above 30 to 40 °C in the United Kingdom. Nature Communications, 11, 3093. https://doi.org/10.1038/s41467-020-16834-0. Search the web for mentions since 2020 in policy documents, government or NGO reports, news media and practitioner websites. Give a table: source, type (policy, media, practice), date, link, what it says about the research, and stage (awareness, use in decision-making, change in policy or practice). Include only items whose page names the paper, its DOI or its authors. If you are not sure an item refers to this paper, say so; do not invent sources.",
-   "check": "Open every link and keep only pages that exist and name the paper, its DOI or its authors. Count how many items survive, and note that most mentions show reach, not yet impact."
+   "check": "Open every link and keep only pages that exist and name the paper, its DOI or its authors. Where a page summarises the findings, compare it with the paper: 40 °C summers have a 100–300-year return time now and could reach 3.5 years by 2100 only without mitigating emissions. Count the items that survive; most show reach, not yet impact."
   },
   "tech": {
    "routes": [
@@ -4430,8 +4438,7 @@
    ],
    "text": "Copilot Chat searches the web and returns linked sources; check Google Scholar's \"cited by\" list for academic uptake, as Copilot may miss or misattribute mentions.",
    "data": [
-    "B2",
-    "A3"
+    "B2"
    ],
    "tools": [
     "Google Scholar"
@@ -4458,7 +4465,7 @@
     ],
     [
      "TRAPD team translation",
-     "Translation, Review, Adjudication, Pretesting and Documentation: parallel translations discussed by a team, a decision on each disputed term, a test with target readers and a record of choices. The standard in cross-cultural survey research; stronger than back-translation alone."
+     "Translation, Review, Adjudication, Pretesting and Documentation: parallel translations discussed by a team, a decision on each disputed term, a test with target readers and a record of choices (Harkness et al., 2004). The standard in cross-cultural survey research; stronger than back-translation alone."
     ],
     [
      "Localisation",
@@ -4473,6 +4480,10 @@
     {
      "cite": "Brislin, R. W. (1970). Back-translation for cross-cultural research. Journal of Cross-Cultural Psychology, 1(3), 185–216.",
      "doi": "10.1177/135910457000100301"
+    },
+    {
+     "cite": "Harkness, J., Pennell, B.-E., & Schoua-Glusberg, A. (2004). Survey questionnaire translation and assessment. In S. Presser et al. (Eds.), Methods for testing and evaluating survey questionnaires (pp. 453–473). Wiley.",
+     "doi": "10.1002/0471654728.ch22"
     }
    ]
   },
@@ -4480,6 +4491,7 @@
    "data": [
     "B2"
    ],
+   "ref": [],
    "task": "Translate the abstract of the Christidis et al. (2020) paper for a non-specialist audience, then back-translate it in a new chat. You learn whether Copilot keeps terms such as 'return time' consistent and whether back-translation reveals shifts in meaning.",
    "prompt": "Attached is the Christidis et al. (2020) PDF. Take its abstract and translate it into German for interested members of the public in Germany (replace German and Germany with a language someone in your group reads and a matching country). Use a clear, natural style. Keep technical terms consistent and give a short glossary with the translated term for each key concept, such as return time, human influence, attribution and greenhouse gas emissions. Adapt anything that would not make sense locally and list every adaptation. Keep all numbers and units exact, using local number formats. Mark any term where you are unsure of the usual translation in climate science.",
    "check": "Back-translate in a new chat and compare with the original abstract: 38.7 °C, 100–300 years and 3.5 years by 2100 must survive, together with the condition 'without mitigating greenhouse gas emissions'."
@@ -4487,9 +4499,10 @@
   "tech": {
    "routes": [
     "chat",
+    "files",
     "external"
    ],
-   "text": "Paste the text into Copilot Chat for translation; run the back-translation in a fresh chat so Copilot does not reuse its own wording, and polish target-language text in DeepL Write.",
+   "text": "Paste or attach the text in Copilot Chat for translation; run the back-translation in a fresh chat so Copilot does not reuse its own wording, and polish target-language text in DeepL Write.",
    "data": [
     "B2"
    ],
@@ -4545,6 +4558,10 @@
     {
      "cite": "Kline, R. B. (2016). Principles and practice of structural equation modeling (4th ed.). Guilford Press.",
      "doi": ""
+    },
+    {
+     "cite": "Elliott, J. H., Turner, T., Clavisi, O., Thomas, J., Higgins, J. P. T., Mavergames, C., & Gruen, R. L. (2014). Living systematic reviews: An emerging opportunity to narrow the evidence-practice gap. PLoS Medicine, 11(2), e1001603.",
+     "doi": "10.1371/journal.pmed.1001603"
     }
    ]
   },
@@ -4556,11 +4573,13 @@
    ],
    "task": "Build the causal chain behind the annual climate indicators from Forster et al. (2025) as a diagram and map the two practice data files to the constructs they measure. You see whether Copilot keeps to the paper's chain or adds arrows of its own.",
    "prompt": "Attached is Forster et al. (2025), 'Indicators of Global Climate Change 2024', plus the HadCRUT5 monthly CSV and the NOAA Mauna Loa CO₂ CSV. 1) From the paper only, draw the chain of indicators it reports – from emissions through concentrations and effective radiative forcing to observed and human-induced warming – as Mermaid flowchart code (left to right), each arrow labelled with the section of the paper it comes from. 2) Add a measurement layer: which column of each attached data file measures which construct, and with what unit and baseline. 3) List any arrow or construct you added that is not in the paper.",
-   "check": "Compare the chain with the paper's sections and figures; aerosol and other non-CO₂ forcings must appear if Copilot claims completeness. In the files: HadCRUT5 'Anomaly (deg C)' relative to 1961–1990, CO₂ 'average' in ppm. Paste the Mermaid code into draw.io to see it."
+   "check": "Compare the chain with Figure 1 of the paper (the flow chart from emissions to human-induced warming) and its sections; aerosol and other non-CO₂ forcings must appear if Copilot claims completeness. Neither data file states its unit or baseline: HadCRUT5 'Anomaly (deg C)' is relative to 1961–1990 and the CO₂ column 'average' is in ppm, so Copilot should say where it took them from. Paste the Mermaid code into draw.io to see it.",
+   "ref": []
   },
   "tech": {
    "routes": [
     "chat",
+    "files",
     "connected",
     "external"
    ],
@@ -4626,20 +4645,21 @@
    ]
   },
   "practice": {
-   "data": [
-    "papers"
-   ],
-   "task": "As a group, write the short titles of the 12 practice papers on sticky notes, sort them into groups on a flipchart, photograph it and let Copilot read and map the board. You see how reliably it reads handwriting and keeps observation apart from interpretation.",
+   "data": [],
+   "task": "Your group needs sticky notes, a flipchart or large sheet and a phone. Split the 12 paper titles from the abstracts file among you (keep it open, do not attach it), write one short title per note, sort the notes into clusters on the flipchart and photograph it straight on. Take the photo in the Microsoft 365 Copilot app and run the prompt there, or save it to OneDrive and attach it on the laptop. You see how reliably Copilot reads handwriting and keeps observation apart from interpretation.",
    "prompt": "The attached photo shows a card sort: 12 sticky notes with short titles of research papers on weather and climate change, sorted by our group into clusters on a flipchart. 1) Transcribe every note exactly, numbered, with the cluster it sits in; write [illegible] for anything you cannot read. 2) Give a table: note number, text, cluster. 3) Compare our clusters with these three groups: 'Global temperature records', 'UK and Europe', 'Extremes and attribution' – for each note, say whether our placement matches and where it differs. 4) Only then suggest a label for each of our clusters.",
-   "check": "Exactly 12 notes in the table; compare the transcription with the board. The pack's grouping (Practice data tab: A, B and C papers) is the reference – check two notes where Copilot says your placement differs."
+   "check": "Exactly 12 notes in the table; compare the transcription with the board. The reference grouping is the paper ID in the abstracts file (A = global temperature records, B = UK and Europe, C = extremes and attribution) – check two notes where Copilot says your placement differs.",
+   "ref": [
+    "AB"
+   ]
   },
   "tech": {
    "routes": [
     "files"
    ],
-   "text": "Upload the photo (JPEG or PNG) to Copilot Chat, which reads images. Export the table to Excel to count placements; for larger studies keep the photos and transcripts in your research data storage.",
+   "text": "Upload the photo (JPEG or PNG) to Copilot Chat, which reads images – from the Microsoft 365 Copilot mobile app or via OneDrive. Export the table to Excel to count placements; for larger studies keep the photos and transcripts in your research data storage.",
    "data": [
-    "papers"
+    "AB"
    ],
    "tools": [],
    "connect": [],
@@ -4647,13 +4667,13 @@
   }
  },
  "design-7": {
-  "problem": "Building realistic stimuli for each condition – a mock feed, vignettes, product pages – and wiring them into a survey with randomisation takes weeks, and small unintended differences between conditions confound the results.",
-  "result": "Matched stimuli for every condition, a manipulation check and a complete study flow with variable names – faster to build, easier to keep conditions equivalent, and data that go straight into your analysis.",
+  "problem": "Building realistic stimuli for each condition – vignettes, framed messages, mock web pages or feeds – and wiring them into a survey with randomisation takes weeks, and small unintended differences between conditions confound the results.",
+  "result": "Matched stimuli for every condition, a manipulation check and a study flow with variable names that you set up in your survey tool – faster to build, easier to keep conditions equivalent, and an export that goes straight into your analysis.",
   "steps": [
    "Define the manipulated factor, its levels and everything held constant",
    "Generate stimuli per condition and list every difference between them",
-   "Add a manipulation check and the full survey flow with variable names",
-   "Pilot realism and the manipulation with real people",
+   "Draft a manipulation check and the study flow with variable names",
+   "Build the study in your survey tool and pilot realism and manipulation with real people",
    "Obtain ethics approval and prepare a debrief"
   ],
   "method": {
@@ -4701,11 +4721,13 @@
    ],
    "task": "Build the two conditions of a framing experiment: a mock news feed on a heatwave with and without an attribution statement taken from the papers. You see whether Copilot keeps the conditions equivalent and the attribution claim faithful to the source.",
    "prompt": "Attached are Christidis et al. (2020) on UK hot days and Zachariah et al. (2023) on the 2022 heatwave in India and Pakistan. I want to test whether an attribution statement changes how worried readers are about heatwaves. Create two versions of a mock social media news feed as one self-contained HTML page each: six posts from fictional accounts, one of them a post about a heatwave. Condition A: the heatwave post includes one attribution sentence taken faithfully from one of the papers, with its source. Condition B: the same post without that sentence, otherwise word for word identical. List every difference between A and B, quote the source passage for the attribution sentence, and add one manipulation-check question and a three-item worry measure with variable names.",
-   "check": "Open both HTML files side by side: only the attribution sentence may differ. Find the quoted passage in the PDF – e.g. Zachariah et al.'s 'about 30 times more likely' – and check that the post does not overstate it."
+   "check": "Open both HTML files side by side: only the attribution sentence may differ. Then find the quoted passage in the PDF – for Zachariah et al. search for '30 times more likely', for Christidis et al. for 'return time of 100-300 years' – and check that the post does not overstate it.",
+   "ref": []
   },
   "tech": {
    "routes": [
     "chat",
+    "files",
     "external"
    ],
    "text": "Copilot Chat writes stimulus texts and self-contained HTML mock-ups and drafts the survey flow; you build the study in your survey tool (e.g. Qualtrics or Microsoft Forms). For realistic interactive feeds, research platforms such as Truman or the Mock Social Media Website Tool log participants' behaviour.",
@@ -4715,7 +4737,7 @@
    ],
    "tools": [],
    "connect": [
-    "GitHub Copilot",
+    "GitHub (repositories)",
     "Figma"
    ],
    "repos": [
@@ -4769,12 +4791,13 @@
    ]
   },
   "practice": {
-   "data": [
-    "B2"
-   ],
-   "task": "Run a mini audit: ask Copilot the same question about UK heat attribution in five fresh chats and code the answers against Christidis et al. (2020). You see how consistent and accurate model answers are – and why they are data about the model, not about people.",
+   "data": [],
+   "task": "Run a mini audit: ask Copilot the same question about UK heat attribution in five fresh chats and code the answers against Christidis et al. (2020), which you keep open but do not attach. You see how consistent and accurate model answers are – and why they are data about the model, not about people.",
    "prompt": "In about 120 words, and with sources: how has human-caused climate change changed the likelihood of days above 40 °C in the UK, according to research published before the July 2022 record? [Run this exact prompt in five new chats and save every answer with the time.]",
-   "check": "Compare each answer with Christidis et al. (2020): the return time of 40 °C days in the current climate (the paper's abstract gives 100–300 years) and its change under higher warming. Count correct, partly correct and wrong answers and invented sources."
+   "check": "Compare each answer with Christidis et al. (2020): summers with at least one day above 40 °C somewhere in the UK have a return time of 100–300 years in the present climate (search for 'return time of 100-300 years'), against 100 to 1000s of years in a natural climate, falling by 2100 to about 15 years under RCP4.5 and 3.5 years under RCP8.5. Count correct, partly correct and wrong answers and invented sources.",
+   "ref": [
+    "B2"
+   ]
   },
   "tech": {
    "routes": [

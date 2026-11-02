@@ -29,22 +29,23 @@ def rel(p): return os.path.relpath(p, MAT).replace(os.sep, '/')
 def files_in(d): return sorted(rel(os.path.join(MAT, d, f)) for f in os.listdir(os.path.join(MAT, d)) if not f.startswith('.'))
 size = lambda r: os.path.getsize(os.path.join(MAT, r))
 
-for p in m['papers']: p['size'] = size(p['file'])
+for p in m['papers'] + m.get('extras', []): p['size'] = size(p['file'])
 for d in m['data']: d['files'] = [{'f': f, 'size': size(f)} for f in files_in(d['dir'])]
 
 L = [f"# Practice data – {m['topic']}", '',
      f"Open papers and raw datasets for testing AI use cases in the workshop *Generative AI in Your Research*. Snapshot downloaded on {m['snapshot']}; the providers keep updating most series, so values may differ from today’s files.", '',
      'All files may be redistributed under the licence named for each item. Cite the sources as given.', '',
-     '## Papers', '']
+     '## Papers', '', 'The PDFs are in the full pack (ai-research-practice-pack.zip) and can be downloaded one by one on the Practice data page; the data-only zip contains this README and the raw data.', '']
 grp = None
 for p in m['papers']:
     if p['group'] != grp: L += ([''] if grp else []) + [f'### {p["group"]}', '']; grp = p['group']
     L.append(f"- **{p['id']}** {p['cite']} https://doi.org/{p['doi']} – *{p['licence']}*" + (f" – {p['version']}" if p.get('version') else '') + f"  \n  File: `{p['file']}`. {p['about']}")
+L += [''] + [f"- **{x['id']}** {x['title']} – *{x['licence']}*  \n  File: `{x['file']}`. {x['about']}" for x in m.get('extras', [])]
 L += ['', '## Raw data', '']
 for d in m['data']:
     L.append(f"- **{d['id']} {d['title']}** – {d['provider']}. {d['span']}. Format: {d['format']}. *{d['licence']}*. Source: {d['source']}. Cite: {d['cite']}  \n  {d['notes']}  \n  Files: " + ', '.join(f"`{x['f']}`" for x in d['files']))
 L += ['', '## Not included', ''] + [f'- **{a}** – {b}' for a, b in m['excluded']]
-L += ['', '## Ideas for pairing papers and data', '', '| Paper | Data | Test idea |', '|---|---|---|'] + [f'| {a} | {b} | {c} |' for a, b, c in m['pairs']]
+L += ['', '## Ideas for pairing papers and data', '', '| Paper | Data | Test idea |', '|---|---|---|'] + [f'| {p[0]} | {p[1]} | {p[2]} |' for p in m['pairs']]
 L += ['', '---', 'Compiled for the workshop by Prof. Dr. Manuel Kern · delivered by Hitachi Solutions. The pack contains third-party material; all rights remain with the authors and providers.', '']
 open(os.path.join(MAT, 'README.md'), 'w', encoding='utf-8').write('\n'.join(L))
 

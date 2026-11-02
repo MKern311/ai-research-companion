@@ -31,7 +31,7 @@
       "Ask for a FINER check and which constructs are vague."
     ],
     "prompt": "I am a postgraduate researcher in [discipline]. My draft research question is: [question]. Suggest the most suitable framework for structuring it (for example PICO, PICOC, PEO or SPIDER) and explain in two sentences why it fits better than the others. Then show a table: framework element, the part of my question it covers, what is still missing or unclear, and three English search terms or synonyms. Mark any element you had to assume rather than take from my question. Next, propose three to five sub-questions, each linked to one element. Rate the question briefly against FINER (feasible, interesting, novel, ethical, relevant), giving one reason per criterion. Finally, list the key constructs, say which are vague, and propose a working definition and one possible way to measure or observe each.",
-    "check": "Every element in the table maps to words actually in your question, assumed elements are marked, and the FINER reasons refer to your project rather than to research in general."
+    "check": "Every element in the table maps to words actually in your question, assumed elements are marked, the FINER reasons refer to your project rather than to research in general, and each working definition can be measured with data you can actually get."
   },
   "idee-3": {
     "bring": "A short summary (about 150 words) of your planned project or your draft research question.",
@@ -77,7 +77,7 @@
     ],
     "prompt": "I am a postgraduate researcher in [discipline]. A key paper for my work is [title, authors, year, DOI]. First, describe its core problem and idea in three plain sentences without its own jargon. Then search for up to six papers that address the same problem, including ones that use different terminology, and up to three that cite this paper. For each, give authors, year, title, a working link and one sentence on the connection. Finish with a 150-word overview of how these papers relate, citing each one. If you are not sure, say so; do not invent sources.",
     "check": "Every link opens a real paper, and at least one relevant result is not already in your reference list or easy to find with your usual keywords.",
-    "limit": "Copilot searches the open web, not citation databases; check the citation trail by hand in Google Scholar – or connect a scholarly database (for example OpenAlex or Semantic Scholar) to Copilot via MCP."
+    "limit": "Copilot searches the open web, not citation databases; check the citation trail by hand in Google Scholar – or have your IT connect a scholarly database (for example OpenAlex or Semantic Scholar) to Copilot via MCP."
   },
   "literatur-2": {
     "bring": "Your inclusion and exclusion criteria and 10 titles with abstracts from a public search, which you screen yourself first.",
