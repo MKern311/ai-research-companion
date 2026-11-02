@@ -273,12 +273,31 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 
 /* PDF export of the results view (browser print → Save as PDF) */
 #mcpBox{scroll-margin-top:150px}
-.uix{border-radius:var(--radius-s);background:var(--surface);padding:12px 14px}
-.uix h3{font-size:14px}
-.uix ul{list-style:none;margin:8px 0 8px;padding:0;display:flex;flex-direction:column;gap:6px}
-.uix li{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:14px}
-.uix li b{margin-right:2px}
-.uix .linkbtn{font-size:14px}
+/* use-case details */
+.ux{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);padding:14px 0}
+.ux h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--red);margin:0 0 4px}
+.ux p,.ux li{font-size:14.5px;color:var(--ink-2)}
+.ux-pr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){.ux-pr{grid-template-columns:1fr}}
+.ux-steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:3px}
+.ux-tech{background:var(--surface);border-radius:var(--radius-s);padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.ux-routes{display:flex;flex-wrap:wrap;gap:6px}
+.route{font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px;background:#fff;color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line)}
+.route.main{background:var(--ink);color:#fff;box-shadow:none}
+.ux-row{display:grid;grid-template-columns:118px minmax(0,1fr);gap:8px;align-items:start;font-size:14px}
+@media (max-width:560px){.ux-row{grid-template-columns:minmax(0,1fr);gap:4px}}
+.ux-l{font-weight:700;color:var(--ink);font-size:13px;padding-top:3px}
+.ux-row > div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pk,.tk{display:inline-flex;gap:5px;align-items:center;font-size:13px;border-radius:6px;padding:3px 8px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);text-decoration:none;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pk b{color:var(--red)}
+.pk:hover,.tk:hover{box-shadow:inset 0 0 0 1.5px var(--ink-2)}
+.tk.repo{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+.ux-con{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;width:100%}
+.ux-con li{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.ux-row .linkbtn{font-size:13.5px}
+.dl-item.flash{animation:flash 1.8s ease-out}
+@keyframes flash{0%{background:var(--red-tint-2)}100%{background:transparent}}
+@media (prefers-reduced-motion:reduce){.dl-item.flash{animation:none;outline:2px solid var(--red)}}
 
 /* ---------- slides ---------- */
 .slides-panel h3{font-size:15px;margin:18px 0 4px}

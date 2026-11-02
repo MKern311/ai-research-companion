@@ -1,0 +1,1751 @@
+{
+ "idee-0": {
+  "problem": "Keeping track of where your field is moving means scanning hundreds of titles; growing clusters and neglected intersections are easy to miss or to judge by gut feeling.",
+  "result": "A theme table with yearly counts and a list of rarely combined themes – a prompt for discussion, not proof of a trend until checked at scale.",
+  "steps": [
+   "Export 15–20 recent titles with years from a database",
+   "Ask Copilot to cluster them into themes per year",
+   "Look for theme pairs that rarely meet",
+   "Test one promising gap with a larger OpenAlex query"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "connected",
+    "external"
+   ],
+   "text": "Paste titles and years into Copilot Chat for a first grouping. With OpenAlex connected (the IT has to enable it), Copilot can count publications per topic and year across the database; Litmaps adds citation maps.",
+   "data": [
+    "papers"
+   ],
+   "tools": [
+    "Litmaps",
+    "Open Knowledge Maps",
+    "Research Rabbit"
+   ],
+   "connect": [
+    "OpenAlex",
+    "Litmaps"
+   ],
+   "repos": []
+  }
+ },
+ "idee-1": {
+  "problem": "Early ideas are usually tested only against your own view or a busy supervisor's; blind spots, untested assumptions and obvious objections surface late, sometimes at the viva.",
+  "result": "Several framings of your question side by side, its hidden assumptions and the strongest objections – so you choose a direction deliberately and arrive at supervision better prepared.",
+  "steps": [
+   "Describe your idea in two or three sentences",
+   "Ask Copilot to argue as a critical supervisor",
+   "Request narrower, broader and different-angle questions",
+   "Draft your own answer to the strongest objection"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Copilot Chat only: paste your idea with a role prompt, then continue the dialogue. The deep-research agent skill offers a Socratic mode for GitHub Copilot in VS Code that questions you step by step.",
+   "data": [],
+   "tools": [
+    "Scholar GPT"
+   ],
+   "connect": [],
+   "repos": [
+    "ars-deep-research"
+   ]
+  }
+ },
+ "idee-2": {
+  "problem": "A question that sounds clear in conversation often breaks down when you try to search or measure it: elements are missing, constructs vague, scope unrealistic.",
+  "result": "Your question broken into framework elements, with sub-questions, search terms, working definitions and a FINER rating – a direct bridge to your search strategy and study design.",
+  "steps": [
+   "Paste your draft question and name your discipline",
+   "Let Copilot justify a framework, then break the question down",
+   "Check which elements it assumed rather than took from you",
+   "Rewrite vague constructs using its working definitions"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Copilot Chat with the starter prompt is enough; ask for the output as a table you can copy into Word. The deep-research skill runs a comparable FINER-based question brief in GitHub Copilot.",
+   "data": [],
+   "tools": [
+    "Scholar GPT"
+   ],
+   "connect": [],
+   "repos": [
+    "ars-deep-research"
+   ]
+  }
+ },
+ "idee-3": {
+  "problem": "You may discover months in that someone has already done your study – keyword searches miss closely related work that uses different terms or comes from another field.",
+  "result": "A short, verified list of the closest studies with how each overlaps, plus a first positioning statement – early reassurance or an early pivot, never proof of novelty.",
+  "steps": [
+   "Summarise your planned study in about 150 words",
+   "Ask Copilot for the closest studies with working links",
+   "Open every link and discard anything that does not exist",
+   "Repeat the search in Google Scholar and compare"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "connected",
+    "external"
+   ],
+   "text": "Copilot Chat searches the web, so links must be checked. With Semantic Scholar or OpenAlex connected (the IT has to enable it), Copilot searches scholarly records directly; Consensus and Elicit add answers drawn from peer-reviewed studies.",
+   "data": [
+    "B2",
+    "C3"
+   ],
+   "tools": [
+    "Semantic Scholar",
+    "Epsilon",
+    "Google Scholar"
+   ],
+   "connect": [
+    "Semantic Scholar",
+    "OpenAlex",
+    "Consensus",
+    "Elicit"
+   ],
+   "repos": []
+  }
+ },
+ "idee-4": {
+  "problem": "Useful concepts and methods often already exist in a neighbouring discipline, but you rarely read its journals and do not know the vocabulary to search for them.",
+  "result": "A short table of transferable concepts or methods, what needs adapting for each and where it could fail – plus the terms to read further in that field.",
+  "steps": [
+   "Give Copilot your question and home discipline",
+   "Ask for four concepts or methods from neighbouring fields",
+   "Ask what must change and where the transfer breaks",
+   "Verify one concept in that field's own literature"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Copilot Chat with the starter prompt; treat any reference as a lead only. To confirm a suggested concept, search it in Semantic Scholar or Open Knowledge Maps, which show where the term is actually used.",
+   "data": [
+    "C6"
+   ],
+   "tools": [
+    "Semantic Scholar",
+    "Open Knowledge Maps",
+    "Perplexity"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "idee-5": {
+  "problem": "Every paper's 'future research' section claims a gap, but turning a pile of studies into a defensible gap that justifies your project is hard; stated gaps often stay vague.",
+  "result": "A table of gaps by type, each tied to the studies and passages that show it, and how well your question fills one – material for your introduction.",
+  "steps": [
+   "Attach five to eight studies and your draft question",
+   "Ask for gaps sorted by type with supporting passages",
+   "Ask how convincingly your question addresses one gap",
+   "Check two cited passages against the original papers"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "chat",
+    "external"
+   ],
+   "text": "Upload the open-access PDFs to Copilot Chat (or paste abstracts) and ask for a table limited to those files. For larger sets, the literature-review skill for GitHub Copilot structures the same work systematically.",
+   "data": [
+    "B2",
+    "B3",
+    "C1",
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "tools": [
+    "Elicit",
+    "scite"
+   ],
+   "connect": [],
+   "repos": [
+    "kd-literature-review"
+   ]
+  }
+ },
+ "idee-6": {
+  "problem": "Choosing between theories and deriving hypotheses is often done implicitly; reviewers then find leaps in reasoning, hypotheses without a theoretical basis or a model that misses the question.",
+  "result": "A side-by-side comparison of candidate theories, hypotheses or propositions with explicit reasoning, and a written conceptual model – a draft you can defend once you have checked each step.",
+  "steps": [
+   "Name your question, two or three theories, three key abstracts",
+   "Ask for a comparison table across the theories",
+   "Derive hypotheses or propositions, each with its reasoning",
+   "Trace every reasoning step back to the original theory"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files",
+    "external"
+   ],
+   "text": "Paste abstracts or upload PDFs to Copilot Chat. For practice, upload the HadCRUT5 (D3) and CO₂ (D5) files, regress temperature on CO₂ and critique Copilot's hypotheses against the indicators paper (A3).",
+   "data": [
+    "A3",
+    "D3",
+    "D5"
+   ],
+   "tools": [
+    "Consensus",
+    "Scholar GPT"
+   ],
+   "connect": [],
+   "repos": [
+    "kd-hypothesis"
+   ]
+  }
+ },
+ "literatur-0": {
+  "problem": "Boolean strings built by trial and error miss synonyms and spelling variants, or return thousands of hits – and few researchers have their strategy peer-reviewed before running it.",
+  "result": "A documented string in database syntax, with concept blocks, synonyms and a PRESS-style self-check – a better starting point to refine with a librarian, and reportable in your methods.",
+  "steps": [
+   "Give your question and the target database",
+   "Ask for concept blocks with synonyms and truncation",
+   "Have Copilot review its string against PRESS",
+   "Run it and check that known key papers appear"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Copilot Chat drafts and checks the string; you run it in the database yourself, as Copilot has no direct access to subscription databases such as Scopus or Web of Science. Check field codes in the database's help pages.",
+   "data": [
+    "B2",
+    "B3",
+    "C1"
+   ],
+   "tools": [],
+   "connect": [],
+   "repos": [
+    "kd-literature-review"
+   ]
+  }
+ },
+ "literatur-1": {
+  "problem": "Keyword searches only find papers that use your terms; work from other fields or newer papers citing your key source stay invisible, and chasing citations by hand is slow.",
+  "result": "Related papers found by meaning and by citation, each linked to your key paper, plus a short cited overview – a wider net than keywords, verified against Google Scholar.",
+  "steps": [
+   "Start from one open-access key paper and its DOI",
+   "Ask for its core idea in plain words",
+   "Search for papers on the same problem and citing papers",
+   "Compare results with the 'Cited by' list in Google Scholar"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "connected",
+    "external"
+   ],
+   "text": "Copilot Chat uses web search, so treat links as leads. Once the IT enables them, Semantic Scholar, OpenAlex or Paper Search MCP give Copilot indexed citation data; Litmaps or Connected Papers draw the network visually.",
+   "data": [
+    "B2",
+    "C3"
+   ],
+   "tools": [
+    "Connected Papers",
+    "Research Rabbit",
+    "Semantic Scholar"
+   ],
+   "connect": [
+    "Semantic Scholar",
+    "OpenAlex",
+    "Consensus",
+    "Litmaps",
+    "Paper Search MCP"
+   ],
+   "repos": [
+    "ars-deep-research"
+   ]
+  }
+ },
+ "literatur-2": {
+  "problem": "Screening hundreds of titles and abstracts is tedious, and a second human screener is hard to find – yet a single tired reader drifts from the criteria and misses records.",
+  "result": "An AI second opinion per record with the deciding criterion and quote, plus an agreement figure that tells you how far to trust it – the final decision stays yours.",
+  "steps": [
+   "Screen ten abstracts yourself before asking Copilot",
+   "Give it your criteria and the numbered abstracts",
+   "Require a decision, deciding criterion and quote each",
+   "Compute agreement and resolve every disagreement yourself"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Paste criteria and numbered abstracts into Copilot Chat for a pilot. For a full review, use ASReview, Rayyan or Covidence, which log decisions; the sr-screener skill runs criterion-based screening in GitHub Copilot.",
+   "data": [
+    "papers"
+   ],
+   "tools": [
+    "ASReview",
+    "Rayyan",
+    "Covidence"
+   ],
+   "connect": [],
+   "repos": [
+    "ars-screener"
+   ]
+  }
+ },
+ "literatur-3": {
+  "problem": "Copying sample sizes, methods and effects from dozens of full texts into a table is slow and error-prone, and numbers are easily mistyped or taken from the wrong table.",
+  "result": "A first-draft evidence table with page references for every value and gaps marked 'not reported' – usually quicker to verify than to type, but usable only after your independent check.",
+  "steps": [
+   "Define your extraction fields before opening the papers",
+   "Attach the PDFs and request one row per study",
+   "Insist on page references and 'not reported' gaps",
+   "Verify sample size, main effect and one more value"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "connected",
+    "external"
+   ],
+   "text": "Upload the PDFs to Copilot Chat with your column list; ask for exact copying, no calculation. Elicit, connected once the IT enables it or used directly, extracts the same columns across many papers at once.",
+   "data": [
+    "B2",
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "tools": [
+    "Elicit",
+    "Covidence"
+   ],
+   "connect": [
+    "Elicit"
+   ],
+   "repos": [
+    "kd-literature-review"
+   ]
+  }
+ },
+ "literatur-4": {
+  "problem": "You remember that a paper said something, but not which one or where; rereading or keyword-searching a folder of PDFs is slow and misses paraphrases.",
+  "result": "Answers based on your own papers, each with file, page and exact quote you can check quickly – and a clear 'not in these sources' when they are silent.",
+  "steps": [
+   "Attach three related PDFs to one chat or notebook",
+   "Ask a question with quotes, file and page required",
+   "Ask one question the papers cannot answer",
+   "Search each quote in the PDF to confirm it"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "connected",
+    "external"
+   ],
+   "text": "Attach PDFs in Copilot Chat or collect them in a Copilot notebook for repeated questions. With Zotero, EndNote or Mendeley connected (the IT has to enable it), Copilot can search your library directly.",
+   "data": [
+    "A1",
+    "A2",
+    "A3"
+   ],
+   "tools": [
+    "NotebookLM",
+    "Humata AI"
+   ],
+   "connect": [
+    "Zotero",
+    "EndNote",
+    "Mendeley"
+   ],
+   "repos": []
+  }
+ },
+ "literatur-5": {
+  "problem": "After reading twenty papers you know them one by one, but not how they relate – where they agree, contradict each other and why.",
+  "result": "A concept matrix that shows which study covers which concept, with evidence, and a first map of agreements and contradictions to build your synthesis on.",
+  "steps": [
+   "Choose four to six concepts from your research question",
+   "Give Copilot the studies, one row per study",
+   "Ask for agreements, contradictions and possible reasons",
+   "Check two rows fully against the papers"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external"
+   ],
+   "text": "Upload the open-access PDFs to Copilot Chat and ask for the matrix as a table; for a larger set, extract first with a specialist tool and synthesise in Copilot.",
+   "data": [
+    "B2",
+    "B3",
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "tools": [
+    "Elicit"
+   ],
+   "connect": [
+    "Consensus"
+   ],
+   "repos": [
+    "kd-literature-review"
+   ]
+  }
+ },
+ "literatur-6": {
+  "problem": "A formula, unfamiliar notation or a key paper in another language can stall your reading for hours – or tempt you to cite it without really understanding it.",
+  "result": "A step-by-step explanation with defined symbols and a worked example, or a screening translation with a relevance summary – enough to decide and ask better questions, not to quote unchecked.",
+  "steps": [
+   "Attach the paper or paste the hard passage",
+   "Ask for definitions, a worked example and assumptions",
+   "Follow up on whatever is still unclear",
+   "Check against the original before quoting anything"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "chat",
+    "external"
+   ],
+   "text": "Upload the PDF to Copilot Chat and name the section, or paste the passage; Copilot can also run a small Python example with made-up numbers. For practice, ask it to explain the changepoint methods in C6.",
+   "data": [
+    "C6",
+    "B2",
+    "A1"
+   ],
+   "tools": [
+    "Humata AI"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "literatur-7": {
+  "problem": "It is tempting to call a review 'systematic' without the time or literature to support it; vague inclusion criteria then fail halfway through screening.",
+  "result": "A reasoned choice of review type for your question and deadline, and a protocol outline with testable criteria and borderline cases – ready to discuss with your supervisor.",
+  "steps": [
+   "State your question, likely literature volume and deadline",
+   "Ask Copilot to compare four review types for you",
+   "Draft the protocol with criteria and borderline examples",
+   "Pilot the criteria on five abstracts you know"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Copilot Chat with the starter prompt; ask for the protocol as an outline you can paste into Word. The deep-research and literature-review skills for GitHub Copilot offer structured modes for systematic and scoping reviews.",
+   "data": [],
+   "tools": [],
+   "connect": [],
+   "repos": [
+    "ars-deep-research",
+    "kd-literature-review"
+   ]
+  }
+ },
+ "literatur-8": {
+  "problem": "At the end of a review, your counts per stage often fail to add up, exclusion reasons are scattered across files, and the PRISMA checklist feels like an afterthought.",
+  "result": "Checked PRISMA 2020 flow numbers with every inconsistency flagged, a draft methods paragraph built only from your log, and a list of checklist items still missing.",
+  "steps": [
+   "Paste your search log with counts per stage",
+   "Ask for the flow table and an arithmetic check",
+   "Fix flagged inconsistencies yourself, then draft the methods text",
+   "List checklist items your report still lacks"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files",
+    "external"
+   ],
+   "text": "Paste the log into Copilot Chat; upload a CSV export of records if you want duplicates marked by DOI or title. Draw the final diagram with the PRISMA2020 R package or Shiny app.",
+   "data": [],
+   "tools": [
+    "Covidence"
+   ],
+   "connect": [],
+   "repos": [
+    "prisma2020",
+    "slr-prisma"
+   ]
+  }
+ },
+ "literatur-9": {
+  "problem": "Appraising studies against a checklist item by item is slow, and judgements drift between papers or rest on a general impression rather than what the paper reports.",
+  "result": "A filled checklist with a rating and supporting passage per item, which makes your own judgement faster to document and easier to defend – the final rating stays yours.",
+  "steps": [
+   "Choose the checklist that matches the study design",
+   "Rate two or three items yourself first",
+   "Attach the PDF and ask for item-by-item ratings",
+   "Look up every quoted passage and settle differences"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external"
+   ],
+   "text": "Upload the PDF to Copilot Chat and name the checklist; paste its items if the checklist is less common. Covidence offers appraisal forms that a whole review team can share.",
+   "data": [
+    "C1"
+   ],
+   "tools": [
+    "Covidence"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "design-0": {
+  "problem": "Your design often follows the first idea or your field's habit; alternatives and threats to validity surface late – in a viva or a reviewer's report.",
+  "result": "A comparison of three designs and a list of validity threats with mitigations specific to your study – a better-justified methods chapter and fewer surprises later.",
+  "steps": [
+   "State your question and planned design in three sentences",
+   "Ask for two realistic alternatives in a comparison table",
+   "Ask for threats to validity with concrete mitigations",
+   "Check the threats against your methods textbook or supervisor"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files"
+   ],
+   "text": "Paste your research question and design into Copilot Chat; no data are needed. Alternatively, upload a non-sensitive draft of your proposal or methods section and ask for the same comparison.",
+   "data": [],
+   "tools": [
+    "Statistik GPT"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "design-1": {
+  "problem": "Draft items often hide double-barrelled, leading or ambiguous wording, and some research questions end up with no item measuring them – usually noticed only after data collection.",
+  "result": "Revised items with each problem named, a map from items to research questions that exposes gaps, and a scale proposal you then check against validated instruments.",
+  "steps": [
+   "Describe the construct, target group and research questions",
+   "Paste your draft items and ask for a problem table",
+   "Ask for revised wording and an item-to-question map",
+   "Confirm each revision still measures the intended construct"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files"
+   ],
+   "text": "Paste the items into Copilot Chat, or upload your draft questionnaire or interview guide as a Word file; Copilot returns the review as a table you can copy into Word or Excel.",
+   "data": [],
+   "tools": [],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "design-2": {
+  "problem": "Cognitive pre-tests with real respondents are slow to arrange, so obvious comprehension problems often reach the pilot and use up scarce participants.",
+  "result": "A list of likely misreadings by item that sharpens your real cognitive pre-test. Simulated answers are not data – real respondents must still confirm every issue.",
+  "steps": [
+   "Describe your target population and how it varies",
+   "Ask for four simulated respondents thinking aloud per item",
+   "Summarise comprehension problems in a table by item",
+   "Take the issues into a real cognitive pre-test"
+  ],
+  "tech": {
+   "routes": [
+    "chat"
+   ],
+   "text": "Paste the items into Copilot Chat and ask it to role-play varied respondents; treat the output as hypotheses about comprehension, never as data, and do not report it as a pre-test.",
+   "data": [],
+   "tools": [],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "design-3": {
+  "problem": "Sample sizes are often calculated once in a web calculator with the assumptions unrecorded – hard to justify to an ethics committee or examiner later.",
+  "result": "Rerunnable code, a sample-size curve across plausible effect sizes and an explicit list of assumptions – a justification you can defend and update when estimates change.",
+  "steps": [
+   "Name the test, expected effect size, alpha and power",
+   "Ask Copilot to write and run the calculation in Python",
+   "Request a curve of sample size across effect sizes",
+   "Cross-check one value in G*Power or a power table"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Describe the test and parameters in Copilot Chat; Copilot writes and runs Python (statsmodels) and returns code, result and chart. Keep the code, rerun it yourself and cross-check in G*Power or Jamovi.",
+   "data": [],
+   "tools": [
+    "Jamovi"
+   ],
+   "connect": [],
+   "repos": [
+    "kd-power"
+   ]
+  }
+ },
+ "design-4": {
+  "problem": "Ethics forms and data management plans are long and unfamiliar; you lose time working out what each section expects before you can think about your own study.",
+  "result": "A skeleton under every heading with reviewers' expectations and the questions you must answer – so your time goes into the reasoning on consent, risk and anonymisation, which stays yours.",
+  "steps": [
+   "Paste the template headings and a short study summary",
+   "Ask for expectations and guiding questions per heading",
+   "Write consent, risk and anonymisation reasoning yourself",
+   "Check each section against the official guidance"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files"
+   ],
+   "text": "Paste the template headings into Copilot Chat, or upload the blank institutional form or a public DMPonline template as a Word or PDF file; never upload real participant information.",
+   "data": [],
+   "tools": [],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "design-5": {
+  "problem": "Broken skip logic, overlapping answer options and inconsistent scales slip through when you have read your own questionnaire twenty times – and surface only in the data.",
+  "result": "A walk-through of three respondent paths, a fix list for logic and answer options, a language check and a completion-time estimate – fewer unusable responses after launch.",
+  "steps": [
+   "Export the questionnaire with its routing visible",
+   "Ask Copilot to follow three contrasting answer paths",
+   "Request a problem table, then a language check",
+   "Test every flagged route in the survey preview"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "chat"
+   ],
+   "text": "Export the questionnaire with routing from your survey tool (for example Qualtrics or Microsoft Forms) as Word or PDF and upload it to Copilot Chat; test flagged problems afterwards in the tool's preview.",
+   "data": [],
+   "tools": [],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "erhebung-0": {
+  "problem": "Transcribing an hour of interview by hand takes several hours, and translating it for analysis or a co-author adds more – time missing from analysis.",
+  "result": "A speaker-labelled draft transcript and translation that you correct rather than type – faster, but only with approved tools and a full listen-through against the audio.",
+  "steps": [
+   "Generate an invented excerpt instead of using real interviews",
+   "Ask for speaker labels, unclear marks and a translation",
+   "Compare the output line by line with the original",
+   "List changed wording, merged speakers and lost hesitations"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external",
+    "connected"
+   ],
+   "text": "In the exercise you paste invented text into Copilot Chat. For real audio, run Whisper locally so recordings stay on your machine, or use an approved service; Otter.ai can be connected if IT enables it.",
+   "data": [],
+   "tools": [
+    "TurboScribe",
+    "MAXQDA"
+   ],
+   "connect": [
+    "Otter.ai",
+    "Whisper (OpenAI)"
+   ],
+   "repos": []
+  }
+ },
+ "erhebung-1": {
+  "problem": "Key figures and statements sit scattered across long PDFs and reports; copying them into a spreadsheet by hand is slow and invites transcription errors.",
+  "result": "A table of the fields you need, each value with page number and quote as evidence – quick to verify, ready for Excel, and open about gaps.",
+  "steps": [
+   "Define the fields and the unit for each row",
+   "Upload the PDF or only the relevant pages",
+   "Ask for page numbers, quotes and 'not found' markers",
+   "Spot-check five values against the source"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external"
+   ],
+   "text": "Upload the PDF or selected pages to Copilot Chat and ask for a table with page numbers and quotes; Copilot can save it as CSV or Excel. For many papers, Elicit extracts the same fields at scale.",
+   "data": [
+    "A3",
+    "B2",
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "tools": [
+    "Elicit"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "erhebung-2": {
+  "problem": "Coding hundreds of texts by hand takes weeks, and a second coder for reliability is often unavailable – so large text collections stay unused or are sampled thinly.",
+  "result": "A pre-coded table with reasons and confidence, plus Cohen's kappa against your own codes – you learn where the scheme is unclear before trusting the model at scale.",
+  "steps": [
+   "Code ten texts yourself before asking Copilot",
+   "Upload the texts with your scheme and definitions",
+   "Ask for codes, reasons and Cohen's kappa against yours",
+   "Review every disagreement and refine the scheme"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "chat",
+    "external"
+   ],
+   "text": "Upload the texts as a CSV with your coding scheme to Copilot Chat; Copilot codes them and calculates Cohen's kappa in Python against your codes. To practise, code the practice papers' abstracts by study type.",
+   "data": [
+    "papers"
+   ],
+   "tools": [
+    "MAXQDA",
+    "NVivo"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "erhebung-3": {
+  "problem": "Fixed questionnaires cannot follow up on vague or surprising answers, while live interviews do not scale – so you trade depth against reach.",
+  "result": "A piloted interview flow with every follow-up and its reason logged, so you can judge where the AI leads, pushes or drifts before real respondents see it.",
+  "steps": [
+   "Set core questions and rules for follow-ups",
+   "Answer as an invented respondent, including vague replies",
+   "Review the logged follow-ups and their reasons",
+   "Flag leading, pressing or off-topic questions"
+  ],
+  "tech": {
+   "routes": [
+    "chat"
+   ],
+   "text": "Run the pilot in Copilot Chat with Copilot as interviewer and you as an invented respondent; a real deployment needs an approved platform, ethics approval and informed consent, not Copilot Chat.",
+   "data": [],
+   "tools": [],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "erhebung-4": {
+  "problem": "Good secondary data often exist, but they sit across statistics offices, archives and repositories you do not know – and you find them after collecting your own.",
+  "result": "A shortlist of verified open datasets with coverage, access conditions and gaps against your variables – a quicker route to data, or a clear case for collecting your own.",
+  "steps": [
+   "Specify region, period, unit of analysis and key variables",
+   "Ask Copilot for candidate datasets in a table",
+   "Open each link and confirm variables and access",
+   "Drop unverifiable entries and rank the rest by fit"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "connected"
+   ],
+   "text": "Copilot Chat searches the web and lists candidate datasets; you open every link. Practise on weather: does it find HadCRUT5 (D3) or Central England Temperature (D1, D2)? Searching OpenAlex dataset records needs IT to enable the connector.",
+   "data": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D9"
+   ],
+   "tools": [
+    "Perplexity"
+   ],
+   "connect": [
+    "OpenAlex"
+   ],
+   "repos": []
+  }
+ },
+ "erhebung-5": {
+  "problem": "Pseudonymising transcripts by hand is tedious, and indirect identifiers – a rare job title, a local event – are easy to miss, putting participants' confidentiality at risk.",
+  "result": "A pseudonymised draft and a replacement log, plus a count of planted identifiers it missed – evidence of what still needs your manual check before analysis.",
+  "steps": [
+   "Write an invented excerpt with planted identifiers",
+   "List every identifier, including indirect ones",
+   "Ask for replacements, flags and a replacement table",
+   "Mark every miss and keep the manual check"
+  ],
+  "tech": {
+   "routes": [
+    "chat"
+   ],
+   "text": "Paste invented text into Copilot Chat to test detection; real transcripts go only into an environment your institution has approved for personal data, and every output is checked by hand.",
+   "data": [],
+   "tools": [],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "erhebung-6": {
+  "problem": "Old print and handwriting slow you down: deciphering one page in an unfamiliar hand can take an hour, before translation even begins.",
+  "result": "A line-by-line draft transcription with uncertain readings marked, and a literal translation of confirmed lines – a faster start to close reading that you still verify against the image.",
+  "steps": [
+   "Upload one page and state language and period",
+   "Ask for a line-by-line transcription with uncertainty marks",
+   "Verify five lines against an archive transcription",
+   "Translate only the lines you have confirmed"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external",
+    "connected"
+   ],
+   "text": "Upload a single page image to Copilot Chat for transcription and a draft translation. For whole collections or difficult hands, Transkribus trains HTR models; connecting it to Copilot needs IT to enable it.",
+   "data": [],
+   "tools": [
+    "Transkribus"
+   ],
+   "connect": [
+    "Transkribus"
+   ],
+   "repos": []
+  }
+ },
+ "analyse-0": {
+  "problem": "You know which analysis you need but lose hours on syntax, cryptic error messages and package options – and code copied from forums rarely fits your data.",
+  "result": "Commented, runnable code you understand line by line, plus a list of assumptions to check – faster debugging and a script you can explain to examiners.",
+  "steps": [
+   "Describe the analysis, your software and the key variables",
+   "Ask for commented code and a plain explanation",
+   "Run it and paste any error message back",
+   "Check one result against a second tool or textbook"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external",
+    "connected"
+   ],
+   "text": "Upload the CSV to Copilot Chat; Copilot runs Python on it directly, while R, Stata or SPSS code runs in your own software. For SEM or meta-analysis, paste the lavaan or metafor documentation into the chat.",
+   "data": [
+    "A3",
+    "D3",
+    "D5"
+   ],
+   "tools": [
+    "Jamovi",
+    "JASP",
+    "GitHub Copilot"
+   ],
+   "connect": [
+    "JASP",
+    "Jamovi",
+    "GitHub Copilot"
+   ],
+   "repos": [
+    "kd-stats",
+    "lavaan"
+   ]
+  }
+ },
+ "analyse-1": {
+  "problem": "Raw data arrive with missing-value codes, odd units and duplicates; cleaning by hand is slow and hard to reproduce later.",
+  "result": "A documented cleaning script you can rerun, plus a log of every decision – faster cleaning and a traceable dataset.",
+  "steps": [
+   "Upload the raw file and describe its source",
+   "Ask Copilot to list problems before changing anything",
+   "Let it write the cleaning steps as code",
+   "Compare row counts and two values before and after"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external"
+   ],
+   "text": "Upload the CSV or text file to Copilot Chat; Copilot runs Python on it and returns the code, which you keep and rerun in your own environment.",
+   "data": [
+    "D7",
+    "D8"
+   ],
+   "tools": [
+    "Jamovi"
+   ],
+   "connect": [],
+   "repos": [
+    "kd-eda"
+   ]
+  }
+ },
+ "analyse-2": {
+  "problem": "First-pass coding of interviews takes weeks, and on your own it is hard to tell whether codes are applied consistently or new data still adds anything.",
+  "result": "A draft coding frame with definitions and quoted evidence that you test against your own reading – a sparring partner for coding, not a replacement for your interpretation.",
+  "steps": [
+   "Practise on invented or published excerpts, never participant data",
+   "Ask for codes with definitions and exact quotes",
+   "Check that every quote exists and fits its code",
+   "Note where your reading differs and why"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files",
+    "external"
+   ],
+   "text": "Paste the excerpts into Copilot Chat or upload them as a Word file. For your real project, code in dedicated QDA software and use AI only as your ethics approval and data management plan allow.",
+   "data": [],
+   "tools": [
+    "NVivo",
+    "MAXQDA",
+    "Taguette"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "analyse-3": {
+  "problem": "Hundreds of open-text responses, abstracts or documents are too many to read closely, and labelling them by hand is slow and hard to keep consistent.",
+  "result": "First labels and topics with the code behind them, so you can judge whether automated text analysis suits your material before building a full pipeline.",
+  "steps": [
+   "Define your categories with short definitions first",
+   "Upload the texts with an ID column",
+   "Hand-check a sample of labels and topics",
+   "Rerun with other settings and compare stability"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external"
+   ],
+   "text": "Upload a CSV to Copilot Chat; Copilot labels the texts itself and runs a topic model in Python (for example LDA with scikit-learn). For larger corpora, run the returned code in your own Python or R environment.",
+   "data": [],
+   "tools": [
+    "MAXQDA",
+    "GitHub Copilot"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "analyse-4": {
+  "problem": "Before formal analysis you want to know what a dataset contains, but writing code for every quick question slows you down and breaks your train of thought.",
+  "result": "A fast, documented first look at structure, distributions and patterns, with the code behind every number – a basis for questions, not confirmed findings.",
+  "steps": [
+   "Upload the file and describe source, unit and period",
+   "Ask plain-language questions one at a time",
+   "Request the code behind every reported number",
+   "Verify one result in your own software"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external"
+   ],
+   "text": "Upload the CSV or Excel file to Copilot Chat; Copilot runs Python (pandas, matplotlib) on it and returns tables, charts and code. Rerun the code or check figures in Excel, Jamovi or JASP.",
+   "data": [
+    "A1",
+    "A2",
+    "D3",
+    "D4",
+    "D9"
+   ],
+   "tools": [
+    "Jamovi",
+    "JASP"
+   ],
+   "connect": [],
+   "repos": [
+    "kd-eda"
+   ]
+  }
+ },
+ "analyse-5": {
+  "problem": "Default charts rarely meet journal guidelines, and adjusting fonts, colours, size and resolution by hand for every revision costs hours and cannot be repeated exactly.",
+  "result": "A publication-ready figure produced by code you keep, so a revision or a new data version means rerunning a script rather than redrawing by hand.",
+  "steps": [
+   "State the figure's message and audience",
+   "Pick one of the suggested chart types",
+   "Adjust labels, palette and size to journal rules",
+   "Save the code next to your data"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external"
+   ],
+   "text": "Upload the data to Copilot Chat; Copilot draws the figure in Python with matplotlib and returns the image and the code. If you work in R, ask for ggplot2 code and run it yourself.",
+   "data": [
+    "D2",
+    "D3",
+    "D5"
+   ],
+   "tools": [
+    "GitHub Copilot"
+   ],
+   "connect": [],
+   "repos": [
+    "kd-viz"
+   ]
+  }
+ },
+ "analyse-6": {
+  "problem": "Research code grows without tests or documentation; months later you cannot tell whether a change broke a result, and others cannot reuse your code.",
+  "result": "Explained, refactored code with docstrings and unit tests that pin down its behaviour – fewer silent errors and code you can share or deposit.",
+  "steps": [
+   "Paste a short code section and state its purpose",
+   "Check the explanation matches your intent",
+   "Ask for unit tests, including edge cases",
+   "Run the tests before accepting any refactoring"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external",
+    "connected"
+   ],
+   "text": "Paste code into Copilot Chat, which can run Python tests itself. For whole projects, use GitHub Copilot in VS Code, which reads your repository. Never paste keys, passwords or confidential data.",
+   "data": [
+    "D2",
+    "D6"
+   ],
+   "tools": [
+    "GitHub Copilot"
+   ],
+   "connect": [
+    "GitHub Copilot"
+   ],
+   "repos": [
+    "awesome-copilot"
+   ]
+  }
+ },
+ "analyse-7": {
+  "problem": "Categories that seem clear in your head turn vague in use: coders disagree on borderline passages, and the rules end up scattered across memos.",
+  "result": "A structured codebook with inclusion, exclusion and borderline rules, tested on a passage and with a second coder – more consistent coding you can report transparently.",
+  "steps": [
+   "Give your research question and four to six categories",
+   "Ask for definitions, inclusion, exclusion and borderline rules",
+   "Code a sample passage and inspect unclear decisions",
+   "Compare with a second coder and tighten the rules"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Paste categories and a sample passage into Copilot Chat and keep the codebook in Word. Anchor examples come from your own material, which you code in QDA software such as MAXQDA or NVivo.",
+   "data": [],
+   "tools": [
+    "MAXQDA",
+    "NVivo",
+    "Taguette"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "analyse-8": {
+  "problem": "Statistical output is full of figures whose meaning and thresholds you half remember, and turning it into a correct APA paragraph takes repeated checking.",
+  "result": "A plain explanation of your output, a checklist of assumptions with sourced thresholds and a draft results paragraph – a faster write-up, provided you verify every number.",
+  "steps": [
+   "Paste the output and name the analysis and software",
+   "Ask for each figure and threshold to be explained",
+   "Request an APA paragraph using only output numbers",
+   "Check every number against the original output"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files"
+   ],
+   "text": "Paste the output as text into Copilot Chat, or upload the output file. Check every threshold Copilot names against the methods source it cites before you rely on it.",
+   "data": [
+    "A3",
+    "D3",
+    "D5"
+   ],
+   "tools": [
+    "JASP",
+    "Jamovi",
+    "Statistic & Data Analyst"
+   ],
+   "connect": [],
+   "repos": [
+    "kd-stats"
+   ]
+  }
+ },
+ "querschnitt-0": {
+  "problem": "Supervision time is short: without a clear agenda key decisions slip, and afterwards agreed actions sit in scattered notes that nobody writes up.",
+  "result": "A timed agenda with the decisions you need and a checked action list with owners and deadlines – better-used meetings and a written record to share.",
+  "steps": [
+   "Paste your progress notes and open questions",
+   "Ask for a timed agenda and three decisions",
+   "After the meeting, turn your notes into actions",
+   "Check each action against your notes"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "connected"
+   ],
+   "text": "Paste your own notes into Copilot Chat. A transcription tool such as Otter.ai can be connected only if the IT enables it, and recording needs every participant's consent.",
+   "data": [],
+   "tools": [
+    "Otter.ai",
+    "Sally AI"
+   ],
+   "connect": [
+    "Otter.ai"
+   ],
+   "repos": []
+  }
+ },
+ "querschnitt-1": {
+  "problem": "Annual and transfer reviews arrive at busy times; gathering a year of progress from scattered notes and fitting it to the form takes days.",
+  "result": "A structured draft under your form's headings, with gaps marked and a risk table – you start from a draft instead of a blank page and spend time on substance.",
+  "steps": [
+   "Paste the section headings of your review form",
+   "Add your bullet notes and last year's report",
+   "Ask for a risk table with mitigations",
+   "Check every achievement and date against your records"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files"
+   ],
+   "text": "Paste headings and notes into Copilot Chat, or upload last year's report as a Word file for continuity. Leave out health and personal circumstances; gaps appear as [TO ADD], not invented content.",
+   "data": [],
+   "tools": [],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "querschnitt-2": {
+  "problem": "A doctorate is hard to plan backwards; weeks fill up with teaching and admin, and after a setback the whole plan feels obsolete.",
+  "result": "A backward plan with quarterly milestones and buffers, a realistic week plan and a quick re-plan after setbacks – an honest view of whether your timeline holds.",
+  "steps": [
+   "Give submission date, milestones and weekly commitments",
+   "Ask for quarterly milestones with buffers",
+   "Plan next week in half-day blocks",
+   "Describe a setback and compare the re-plan"
+  ],
+  "tech": {
+   "routes": [
+    "chat"
+   ],
+   "text": "Everything happens in Copilot Chat with pasted dates and commitments; ask for the plan as a table to copy into Excel, Planner or your calendar, and discuss it with your supervisor.",
+   "data": [],
+   "tools": [
+    "Notion"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "querschnitt-3": {
+  "problem": "Notes, highlights and annotations sit in different tools; you remember reading something relevant but cannot find it or see how sources connect.",
+  "result": "An overview of your sources with key claims, tags and suggested links – a structure for your notes tool that makes later searching and synthesis easier.",
+  "steps": [
+   "Upload a handful of reading notes or abstracts",
+   "Ask for a table of claims, methods and tags",
+   "Ask which sources agree, contradict or build on others",
+   "Check two suggested links against the original notes"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "connected",
+    "external"
+   ],
+   "text": "Upload your notes as a Word file to Copilot Chat. Connecting Zotero, Notion or Obsidian lets Copilot search your library directly – this needs the IT to enable it; otherwise apply the tags by hand.",
+   "data": [
+    "A1",
+    "A2",
+    "B2",
+    "C3"
+   ],
+   "tools": [
+    "Zotero",
+    "Obsidian",
+    "NotebookLM"
+   ],
+   "connect": [
+    "Zotero",
+    "Notion",
+    "Obsidian"
+   ],
+   "repos": []
+  }
+ },
+ "querschnitt-4": {
+  "problem": "Data deposit and replication packages come at the end, when details are forgotten; codebooks and READMEs get rushed and numbers in the paper may not reproduce.",
+  "result": "A codebook with computed ranges and missing counts, a README draft and a replication checklist – data others can reuse and results you can show are reproducible.",
+  "steps": [
+   "Upload the dataset and describe how it was collected",
+   "Ask for a codebook computed from the file",
+   "Draft a README and repository metadata fields",
+   "Check two columns and every [CHECK] mark yourself"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external",
+    "connected"
+   ],
+   "text": "Upload the CSV to Copilot Chat; Copilot computes ranges and missing values in Python and drafts the README. For the replication package, GitHub Copilot in VS Code helps you script and test the run order.",
+   "data": [
+    "D4",
+    "D5",
+    "D7"
+   ],
+   "tools": [
+    "GitHub Copilot"
+   ],
+   "connect": [
+    "GitHub Copilot"
+   ],
+   "repos": []
+  }
+ },
+ "querschnitt-5": {
+  "problem": "At submission you must declare your AI use, but months later you cannot reconstruct which tool, prompt or output shaped which part of the thesis.",
+  "result": "A running log of AI use and the decisions it informed, plus a declaration draft based only on that log – transparency for examiners and less stress at submission.",
+  "steps": [
+   "Describe one AI task, including how you checked it",
+   "Ask for a log template with that task as row one",
+   "Keep the log as a Copilot Page or in Excel",
+   "Check the declaration against your university's guidance"
+  ],
+  "tech": {
+   "routes": [
+    "chat"
+   ],
+   "text": "Describe the task in Copilot Chat and save the table as a Copilot Page or in Word or Excel; add a row after each AI task. Paste your university's guidance so the declaration follows it.",
+   "data": [],
+   "tools": [
+    "Notion"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "querschnitt-6": {
+  "problem": "Courses rarely match your method or timing, and documentation assumes knowledge you lack – learning a new package on your own is slow and frustrating.",
+  "result": "A paced, interactive tutorial on your own example, with exercises and feedback – faster progress, as long as you check functions against the official documentation.",
+  "steps": [
+   "Name the skill and let Copilot test your level",
+   "Work through one small chunk and exercise at a time",
+   "Answer before you ask for the solution",
+   "End with a quiz and list topics to look up"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files"
+   ],
+   "text": "Run the tutor in Copilot Chat; upload a small dataset so exercises use real data, and Copilot can run Python examples itself. Run R, Stata or SPSS exercises in your own software.",
+   "data": [
+    "D2",
+    "D3"
+   ],
+   "tools": [
+    "Jamovi",
+    "GitHub Copilot"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "querschnitt-7": {
+  "problem": "You repeat the same rules in every chat, and multi-step tasks such as a scoping search drift off course or mix unchecked sources into the output.",
+  "result": "A reusable assistant that applies your citation style and terms, and a staged workflow that only moves on after you have checked each stage – time saved without giving up control.",
+  "steps": [
+   "Write your standing rules and a narrow question",
+   "Create an agent with rules and trusted websites",
+   "Test it with one routine question first",
+   "Approve each stage only after checking every source"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "connected",
+    "external"
+   ],
+   "text": "Create an agent in Copilot Chat with your rules as instructions and public websites or practice PDFs as knowledge. Adding search tools such as OpenAlex through Copilot Studio needs the IT to enable it.",
+   "data": [
+    "B2",
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "tools": [
+    "Elicit",
+    "STORM"
+   ],
+   "connect": [
+    "OpenAlex"
+   ],
+   "repos": [
+    "ars-deep-research",
+    "awesome-copilot"
+   ]
+  }
+ },
+ "querschnitt-8": {
+  "problem": "Alerts and tables of contents bring dozens of new titles each week; skimming them all takes hours, and relevant papers get lost in the noise.",
+  "result": "A weekly triage into must-read, maybe and skip, with reasons tied to your research question – less time sorting and a clear reading list.",
+  "steps": [
+   "Collect the week's titles and abstracts from alerts",
+   "Paste them with your research question",
+   "Ask for a rating and reason per paper",
+   "Open the must-reads and make the final call"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "connected"
+   ],
+   "text": "Paste titles and abstracts into Copilot Chat. With OpenAlex or Semantic Scholar connected, which needs the IT to enable it, Copilot can fetch new papers itself; Litmaps tracks new work from seed papers.",
+   "data": [],
+   "tools": [
+    "Litmaps",
+    "Semantic Scholar",
+    "Google Scholar"
+   ],
+   "connect": [
+    "OpenAlex",
+    "Semantic Scholar",
+    "Litmaps"
+   ],
+   "repos": []
+  }
+ },
+ "publikation-0": {
+  "problem": "You know your argument too well to see it from outside – a missing step or a section in the wrong place often only shows up in review.",
+  "result": "A three-sentence summary to test against your intent, a step-by-step map of the argument with weak links marked, and a structure matched to the journal.",
+  "steps": [
+   "Write a one- to two-page outline with your headings",
+   "Ask Copilot to restate your argument and map each step",
+   "Fix the weakest step before touching the wording",
+   "Check proposed structure against the journal's author guidelines"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files",
+    "external"
+   ],
+   "text": "Paste the abstract and outline into Copilot Chat, or upload the draft as Word or PDF; for a fuller outline-and-evidence workflow, the academic-paper skill runs in GitHub Copilot in VS Code.",
+   "data": [
+    "B2",
+    "B3"
+   ],
+   "tools": [],
+   "connect": [],
+   "repos": [
+    "ars-paper",
+    "kd-writing"
+   ]
+  }
+ },
+ "publikation-1": {
+  "problem": "Writing in a second language takes longer, and generic editing tools smooth your text into phrasing that no longer sounds like you or means quite what you meant.",
+  "result": "A clearer paragraph and a change table you decide on line by line, with AI-sounding phrases flagged – so the text stays yours and you learn from each edit.",
+  "steps": [
+   "Paste one paragraph and name your discipline and readers",
+   "Accept or reject each change in the table",
+   "Rewrite flagged phrases in your own voice",
+   "Check your university's proofreading rules before using it on a thesis"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "connected",
+    "external"
+   ],
+   "text": "Paste the paragraph into Copilot Chat and ask for a change table; DeepL Write can be connected if the IT enables it, or used on its own website as a second opinion.",
+   "data": [],
+   "tools": [
+    "DeepL Write",
+    "Paperpal",
+    "QuillBot"
+   ],
+   "connect": [
+    "DeepL Write"
+   ],
+   "repos": [
+    "kd-writing"
+   ]
+  }
+ },
+ "publikation-2": {
+  "problem": "After many rounds of revision, numbers in the abstract no longer match the tables, terms drift, and citations go missing from the reference list – reviewers notice.",
+  "result": "A table of mismatches with locations that you verify before changing anything, plus a quick test of how reliably Copilot catches a planted error.",
+  "steps": [
+   "Upload the full draft including tables and references",
+   "Ask for a table of mismatches with locations",
+   "Verify each flagged item in the document yourself",
+   "Plant one wrong number and rerun to test reliability"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external"
+   ],
+   "text": "Upload the Word or PDF file to Copilot Chat; for long documents, check whether Copilot says it read every part, and match citations to references in your reference manager as well.",
+   "data": [
+    "A2",
+    "B1"
+   ],
+   "tools": [
+    "Paperpal",
+    "Zotero"
+   ],
+   "connect": [],
+   "repos": [
+    "kd-citation"
+   ]
+  }
+ },
+ "publikation-3": {
+  "problem": "Finding a journal whose scope fits, then reformatting references and layout to its guidelines, takes hours – and a desk rejection for poor fit costs weeks.",
+  "result": "A shortlist of journals with links to their own guidelines, a formatting checklist for your choice, and references converted to its style with missing fields flagged.",
+  "steps": [
+   "Paste your abstract and ask for candidate journals with links",
+   "Open the guideline pages and confirm scope and limits",
+   "Turn one journal's guidelines into a checklist",
+   "Convert references or BibTeX entries and fill missing fields"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "connected",
+    "external"
+   ],
+   "text": "Copilot Chat searches the web for journals and guideline pages; with Zotero, OpenAlex or Overleaf connected through an MCP server the IT enables, it can read your library, publication venues or LaTeX project directly.",
+   "data": [
+    "B2",
+    "C2"
+   ],
+   "tools": [
+    "Zotero",
+    "Overleaf",
+    "EndNote"
+   ],
+   "connect": [
+    "Zotero",
+    "Overleaf",
+    "OpenAlex"
+   ],
+   "repos": [
+    "kd-citation"
+   ]
+  }
+ },
+ "publikation-4": {
+  "problem": "You get critical feedback only after submission, months later – and supervisors rarely have time to review every draft as a sceptical outsider would.",
+  "result": "Three reviews from different angles, each tied to a quoted passage, missing reporting items named, and a prioritised revision roadmap – you decide which comments are valid.",
+  "steps": [
+   "Upload the section and name the journal and article type",
+   "Ask for methods, theory and devil's advocate reviews",
+   "Require a quoted passage behind every major comment",
+   "Turn the useful comments into a prioritised roadmap"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "chat",
+    "external"
+   ],
+   "text": "Upload the draft section to Copilot Chat and ask for the reviewer panel; for a fuller review, open-source reviewer skills run in GitHub Copilot in VS Code.",
+   "data": [
+    "C6",
+    "B3"
+   ],
+   "tools": [
+    "Paperpal"
+   ],
+   "connect": [],
+   "repos": [
+    "ars-reviewer",
+    "peer-review-panel"
+   ]
+  }
+ },
+ "publikation-5": {
+  "problem": "Reviewer reports mix major and minor points across several reviewers; drafting a polite, complete response letter is slow, and one overlooked comment can delay acceptance.",
+  "result": "A numbered table of every comment with your planned action, and a draft letter with gaps marked for you to fill – nothing claimed that you did not change.",
+  "steps": [
+   "Paste all reviewer comments and ask for a numbered table",
+   "Add your own notes on changes and disagreements",
+   "Ask for the response letter and summary of changes",
+   "Check every table row appears in the letter"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files"
+   ],
+   "text": "Paste the comments into Copilot Chat or upload the decision letter; the [ADD RESPONSE] placeholders show where your own answer is still missing.",
+   "data": [],
+   "tools": [],
+   "connect": [],
+   "repos": [
+    "ars-paper"
+   ]
+  }
+ },
+ "publikation-6": {
+  "problem": "Chapters written over several years drift apart – a research question goes unanswered, findings repeat, and the golden thread examiners look for gets lost.",
+  "result": "A table tracing each research question through the chapters, with gaps, overlaps and repetition marked – a basis you check against the full chapters and discuss with your supervisor.",
+  "steps": [
+   "Summarise each chapter in three to five sentences",
+   "Ask for a question-by-chapter table",
+   "Let Copilot flag gaps and overlaps, quoting your summaries",
+   "Check flagged issues against the full chapters yourself"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files"
+   ],
+   "text": "Paste the research questions and chapter summaries into Copilot Chat, or upload a summary document; summaries keep the full thesis out of the chat and make the check quick to repeat.",
+   "data": [],
+   "tools": [],
+   "connect": [],
+   "repos": [
+    "ars-paper"
+   ]
+  }
+ },
+ "publikation-7": {
+  "problem": "You rarely get to practise answering hard questions about your own thesis aloud before the viva, and mock vivas depend on busy colleagues' time.",
+  "result": "A bank of likely examiner questions linked to your own claims and practice answers with feedback – extra rehearsal alongside, not instead of, your supervisors.",
+  "steps": [
+   "Paste your abstract and one chapter summary",
+   "Ask for examiner questions grouped by theme",
+   "Answer one question at a time and ask for follow-ups",
+   "Take the hardest questions to your supervisor"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files"
+   ],
+   "text": "Paste the abstract and summary into Copilot Chat and run the questions as a dialogue, asking for feedback after each answer before the next question.",
+   "data": [],
+   "tools": [
+    "NotebookLM"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "publikation-8": {
+  "problem": "Wrong reference details and citations that do not say what you claim slip in easily – especially with AI-suggested sources – and damage credibility.",
+  "result": "A per-reference check with links or DOIs and a support rating for each citing sentence, with quoted evidence – you open every flagged source and decide yourself.",
+  "steps": [
+   "Paste the paragraph with its reference list",
+   "Ask for a DOI or link for each reference",
+   "Ask whether each source supports its sentence, quoting it",
+   "Open every flagged source and judge yourself"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "connected",
+    "external"
+   ],
+   "text": "Copilot Chat checks references by web search; with OpenAlex, scite or Zotero connected through an MCP server the IT enables, it matches metadata and citation statements directly.",
+   "data": [
+    "B2",
+    "C3"
+   ],
+   "tools": [
+    "scite",
+    "Zotero",
+    "Google Scholar"
+   ],
+   "connect": [
+    "OpenAlex",
+    "scite",
+    "Zotero"
+   ],
+   "repos": [
+    "kd-citation"
+   ]
+  }
+ },
+ "publikation-9": {
+  "problem": "Turning a pile of notes into a first draft is slow, and a blank page makes it easy to lose track of which source supports which point.",
+  "result": "An evidence map and a rough draft built only from your notes, with gaps marked – a starting point you rewrite in your own words and declare.",
+  "steps": [
+   "Check your university's rules on AI-assisted drafting",
+   "Ask for an evidence map before any draft",
+   "Verify every claim against your notes and sources",
+   "Rewrite in your own words and log the AI use"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "files",
+    "external"
+   ],
+   "text": "Paste your notes or upload them with the source PDFs to Copilot Chat; the academic-paper skill in GitHub Copilot in VS Code follows the same outline, evidence map and draft sequence.",
+   "data": [
+    "B2",
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "tools": [
+    "Zotero"
+   ],
+   "connect": [],
+   "repos": [
+    "ars-paper",
+    "kd-writing"
+   ]
+  }
+ },
+ "transfer-0": {
+  "problem": "Writing a lay summary, policy brief and social post for each paper takes time you rarely have, and simplifying risks overstating the findings.",
+  "result": "Three first drafts for different audiences, with numbers kept exact and simplifications listed – quicker outreach that you check claim by claim.",
+  "steps": [
+   "Upload the paper and name one audience",
+   "Ask for a lay summary and policy brief outline",
+   "Derive a short social post from the summary",
+   "Check every number and claim against the paper"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "external"
+   ],
+   "text": "Upload the open-access PDF to Copilot Chat and ask for all three formats in one go; NotebookLM can add an audio overview from the same paper.",
+   "data": [
+    "B2",
+    "A3"
+   ],
+   "tools": [
+    "NotebookLM",
+    "Napkin AI"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "transfer-1": {
+  "problem": "Turning results into a clear chart and a talk takes many iterations, and slides often list findings instead of making a point.",
+  "result": "A labelled chart with the Python code behind it, so you can reproduce it, and a six-slide outline built around message titles.",
+  "steps": [
+   "Upload the results table and ask for one chart",
+   "Ask for the code and rerun it yourself",
+   "Draft a six-slide outline with message titles",
+   "Check two plotted values against the table"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "connected",
+    "external"
+   ],
+   "text": "Upload the CSV or Excel file to Copilot Chat, which runs Python and returns the chart and code; Napkin AI, connected if the IT enables it, turns text into diagrams.",
+   "data": [
+    "D3",
+    "D5",
+    "A3"
+   ],
+   "tools": [
+    "Napkin AI"
+   ],
+   "connect": [
+    "Napkin AI"
+   ],
+   "repos": [
+    "kd-viz"
+   ]
+  }
+ },
+ "transfer-2": {
+  "problem": "Bringing current research into seminars means building cases and questions from scratch, and recall questions are quicker to write than ones that make students apply findings.",
+  "result": "A seminar-ready case, discussion questions and an applied exercise drawn from a real paper, with simplifications listed so you can check them.",
+  "steps": [
+   "Upload the paper with module, level and learning outcome",
+   "Ask for a 400-word case study",
+   "Add questions and an exercise that require application",
+   "Check case facts against the paper"
+  ],
+  "tech": {
+   "routes": [
+    "files",
+    "chat"
+   ],
+   "text": "Upload the open-access PDF to Copilot Chat; for a data exercise, add a practice file and let Copilot draft the task and a worked answer in Python.",
+   "data": [
+    "B2",
+    "C4",
+    "D1"
+   ],
+   "tools": [
+    "NotebookLM"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "transfer-3": {
+  "problem": "Evidence that research reached policy, media or practice is scattered across the web and hard to find later when you need to show impact.",
+  "result": "A table of mentions with links and impact type, of which you keep only what you have verified, plus a short draft impact narrative.",
+  "steps": [
+   "Give title, DOI and authors of one paper",
+   "Ask for mentions in policy, media and practice",
+   "Open each link and keep only confirmed items",
+   "Ask for a short narrative from confirmed items"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Copilot Chat searches the web and returns linked sources; check Google Scholar's \"cited by\" list for academic uptake, as Copilot may miss or misattribute mentions.",
+   "data": [
+    "B2",
+    "A3"
+   ],
+   "tools": [
+    "Google Scholar"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "transfer-4": {
+  "problem": "Reaching audiences in other countries needs more than literal translation – technical terms, units and examples have to fit locally.",
+  "result": "A translated text with a term glossary and listed adaptations, checked by back-translation – best reviewed by someone who reads the language.",
+  "steps": [
+   "Paste the summary and name language, country and audience",
+   "Ask for the translation, glossary and adaptations",
+   "Back-translate in a new chat",
+   "Compare meaning and ask a fluent reader to check"
+  ],
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Paste the text into Copilot Chat for translation; run the back-translation in a fresh chat so Copilot does not reuse its own wording, and polish target-language text in DeepL Write.",
+   "data": [],
+   "tools": [
+    "DeepL Write"
+   ],
+   "connect": [],
+   "repos": []
+  }
+ }
+}

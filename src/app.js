@@ -217,7 +217,7 @@ function openDrawer(id){
         ${u.d ? `<p class="desc">${esc(u.d)}</p>` : ''}
         <div class="meta">${u.custom ? `<span>${u.by === 'Survey' ? 'From the pre-event survey' : 'Added in the workshop'} · ${SHORT[u.phase]}</span>` :
           `<span><b>${u.mode}:</b> ${MODE_DEF[u.mode]}</span><span><b>${RISK[u.risk]}:</b> ${RISK_DEF[u.risk]}</span>`}</div>
-        ${ixHtml(u)}
+        ${detailHtml(u)}
         <div class="block">
           <h3>Step 1 · Research value${session ? ' · ' + esc(myTable()) : ''}</h3>
           ${ro ? '<p class="later">View only – this code cannot rate.</p>' : `
@@ -378,12 +378,32 @@ function reportMarkdown(){
   return L.join('\n');
 }
 /* ---------- tools view ---------- */
-function ixHtml(u){
-  if (!u.ix || !u.ix.length) return '';
-  return `<div class="uix"><h3>Tools that connect to Copilot</h3><ul>${u.ix.map(n => {
+const packLabel = id => { if (id === 'papers') return `All ${PACK.papers.length} papers`; const p = PACK.papers.find(x => x.id === id); if (p) return `${p.cite.split(',')[0]} ${(p.cite.match(/\((\d{4})\)/) || [])[1] || ''}`.trim(); const d = PACK.data.find(x => x.id === id); return d ? d.title : id; };
+const toolUrl = n => { const t = TOOLS.find(x => x.n === n); return t ? 'https://' + t.url.replace(/^https?:\/\//, '') : null; };
+function connectHtml(names){
+  return names.map(n => {
     const m = MCP[n], c = (M365[n] || []).find(x => x[0] === 'copilot');
     return `<li><b>${esc(n)}</b>${c ? `<a class="msb cp" href="${c[1]}" target="_blank" rel="noopener">Copilot connector</a>` : ''}${m ? `<a class="mcpb ${m[0]}" href="${m[2]}" target="_blank" rel="noopener" title="${m[0] === 'o' ? 'Official MCP server' : 'Community MCP server'} – open the documentation">MCP · ${m[0] === 'o' ? 'official' : 'community'}</a>` : ''}</li>`;
-  }).join('')}</ul><button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How to connect a tool to Copilot →</button></div>`;
+  }).join('');
+}
+function detailHtml(u){
+  const x = (typeof DETAILS !== 'undefined' && DETAILS[u.id]) || null, t = x ? x.tech : {routes:[], data:[], tools:[], connect:[], repos:[]};
+  const con = (u.ix || []).concat((t.connect || []).filter(n => !(u.ix || []).includes(n)));
+  if (!x && !con.length) return '';
+  const row = (label, html) => html ? `<div class="ux-row"><span class="ux-l">${label}</span><div>${html}</div></div>` : '';
+  const tech = `<div class="ux-tech"><h4>How it works technically</h4>
+    ${t.routes.length ? `<div class="ux-routes">${t.routes.map((r, i) => `<span class="route${i ? '' : ' main'}" title="${esc(ROUTES[r][1])}">${esc(ROUTES[r][0])}</span>`).join('')}</div>` : ''}
+    ${t.text ? `<p>${esc(t.text)}</p>` : ''}
+    ${row('Practice data', t.data.map(id => `<button type="button" class="pk" data-pack="${id}" title="${esc(packLabel(id))}">${id === 'papers' ? '' : `<b>${id}</b> `}${esc(packLabel(id))}</button>`).join(''))}
+    ${row('Academic tools', t.tools.map(n => toolUrl(n) ? `<a class="tk" href="${toolUrl(n)}" target="_blank" rel="noopener">${esc(n)}</a>` : `<span class="tk">${esc(n)}</span>`).join(''))}
+    ${row('Connect to Copilot', con.length ? `<ul class="ux-con">${connectHtml(con)}</ul><button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How to connect a tool to Copilot →</button>` : '')}
+    ${row('Open source', t.repos.filter(k => REPOS[k]).map(k => `<a class="tk repo" href="${REPOS[k][1]}" target="_blank" rel="noopener" title="${esc(REPOS[k][2])}">${esc(REPOS[k][0])}</a>`).join(''))}
+  </div>`;
+  if (!x) return `<div class="ux">${tech}</div>`;
+  return `<div class="ux">
+    <div class="ux-pr"><div><h4>The problem</h4><p>${esc(x.problem)}</p></div><div><h4>Result and value</h4><p>${esc(x.result)}</p></div></div>
+    <div><h4>How you go about it</h4><ol class="ux-steps">${x.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>
+    ${tech}</div>`;
 }
 function mcpHtml(t){
   const m = MCP[t.n], ms = M365[t.n];
@@ -451,10 +471,10 @@ function renderData(){
   let grp = '';
   $('#dlPapers').innerHTML = `<h2>Papers</h2><p class="sub">Open access. A1 is the accepted manuscript, C6 a preprint.</p>` + PACK.papers.map(p => {
     const h = p.group !== grp ? `<h3 class="dl-grp">${esc(grp = p.group)}</h3>` : '';
-    return h + `<div class="dl-item"><span class="dl-id">${p.id}</span><div><p class="dl-cite">${esc(p.cite)}</p><p class="dl-about">${esc(p.about)}${p.version ? ` <i>${esc(p.version)}.</i>` : ''}</p>
+    return h + `<div class="dl-item" id="pk-${p.id}"><span class="dl-id">${p.id}</span><div><p class="dl-cite">${esc(p.cite)}</p><p class="dl-about">${esc(p.about)}${p.version ? ` <i>${esc(p.version)}.</i>` : ''}</p>
       <p class="dl-meta">${licChip(p.licence)}<a href="${fileUrl(p.file)}" target="_blank" rel="noopener">PDF · ${mb(p.size)}</a><a href="https://doi.org/${p.doi}" target="_blank" rel="noopener">doi.org/${esc(p.doi)}</a>${p.data.length ? `<span>Data: ${p.data.join(' · ')}</span>` : ''}</p></div></div>`;
   }).join('');
-  $('#dlData').innerHTML = `<h2>Raw data</h2><p class="sub">Original provider files, unchanged. Format quirks are part of the exercise.</p>` + PACK.data.map(d => `<div class="dl-item"><span class="dl-id">${d.id}</span><div>
+  $('#dlData').innerHTML = `<h2>Raw data</h2><p class="sub">Original provider files, unchanged. Format quirks are part of the exercise.</p>` + PACK.data.map(d => `<div class="dl-item" id="pk-${d.id}"><span class="dl-id">${d.id}</span><div>
       <p class="dl-cite"><b>${esc(d.title)}</b> · ${esc(d.provider)}</p><p class="dl-about">${esc(d.span)} · ${esc(d.format)}. ${esc(d.notes)}</p>
       <p class="dl-meta">${licChip(d.licence)}${d.files.map(x => `<a href="${fileUrl(x.f)}" download>${esc(x.f.split('/').pop())} · ${mb(x.size)}</a>`).join('')}<a href="${d.source}" target="_blank" rel="noopener">Source</a></p>
       <p class="dl-about"><small>Cite: ${esc(d.cite)}</small></p></div></div>`).join('') +
@@ -523,6 +543,7 @@ function renderAll(){ renderAgenda(); renderIdent(); renderLens(); renderPhases(
 /* ---------- events ---------- */
 document.addEventListener('click', e => {
   const t = e.target;
+  const pk = t.closest('[data-pack]'); if (pk) { if (!$('#drawer').hidden) closeDrawer(); setView('data'); const el = pk.dataset.pack === 'papers' ? $('#dlPapers') : document.getElementById('pk-' + pk.dataset.pack); if (el) { el.scrollIntoView({block:'center'}); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1800); } return; }
   const tab = t.closest('[data-view]'); if (tab) { if (!$('#drawer').hidden) closeDrawer(); setView(tab.dataset.view); if (tab.hasAttribute('data-mcpinfo')) { const b = $('#mcpBox'); b.open = true; b.scrollIntoView(); } return; }
   const ln = t.closest('[data-lens]'); if (ln) { ui.lens = +ln.dataset.lens; renderLens(); renderCards(); if (ui.open && !$('#drawer').hidden) openDrawer(ui.open); return; }
   const ph = t.closest('[data-phase]'); if (ph) { ui.phase = +ph.dataset.phase; renderPhases(); renderIntro(); renderCards(); return; }

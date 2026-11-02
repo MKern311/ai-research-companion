@@ -226,6 +226,33 @@ const MCP = {
  'Overleaf':['c',0,'https://github.com/mjyoo2/OverleafMCP','Via Overleaf’s Git integration (paid plans).']
 };
 
+// Open-source agent skills and packages named in the use-case details: key -> [label, url, what it is]
+const KD = 'https://github.com/K-Dense-AI/scientific-agent-skills/tree/main/skills/';
+const REPOS = {
+ 'ars-deep-research':['academic-research-skills · deep-research','https://github.com/Imbad0202/academic-research-skills/tree/main/deep-research','Agent skill'],
+ 'ars-paper':['academic-research-skills · academic-paper','https://github.com/Imbad0202/academic-research-skills/tree/main/academic-paper','Agent skill'],
+ 'ars-reviewer':['academic-research-skills · paper reviewer','https://github.com/Imbad0202/academic-research-skills/tree/main/academic-paper-reviewer','Agent skill'],
+ 'ars-screener':['academic-research-skills · sr-screener','https://github.com/Imbad0202/academic-research-skills/tree/main/sr-screener','Agent skill'],
+ 'kd-literature-review':['scientific-agent-skills · literature-review',KD+'literature-review','Agent skill'],
+ 'kd-peer-review':['scientific-agent-skills · peer-review',KD+'peer-review','Agent skill'],
+ 'kd-writing':['scientific-agent-skills · scientific-writing',KD+'scientific-writing','Agent skill'],
+ 'kd-stats':['scientific-agent-skills · statistical-analysis',KD+'statistical-analysis','Agent skill'],
+ 'kd-power':['scientific-agent-skills · statistical-power',KD+'statistical-power','Agent skill'],
+ 'kd-hypothesis':['scientific-agent-skills · hypothesis-generation',KD+'hypothesis-generation','Agent skill'],
+ 'kd-citation':['scientific-agent-skills · citation-management',KD+'citation-management','Agent skill'],
+ 'kd-viz':['scientific-agent-skills · scientific-visualization',KD+'scientific-visualization','Agent skill'],
+ 'kd-eda':['scientific-agent-skills · exploratory-data-analysis',KD+'exploratory-data-analysis','Agent skill'],
+ 'slr-prisma':['slr-prisma','https://github.com/keemanxp/slr-prisma','Agent skill'],
+ 'prisma2020':['PRISMA2020 flow diagram','https://github.com/prisma-flowdiagram/PRISMA2020','R package and web app'],
+ 'peer-review-panel':['ai-peer-review-skill','https://github.com/AlexWortega/ai-peer-review-skill','Agent skill'],
+ 'seminr':['SEMinR','https://github.com/sem-in-r/seminr','R package'],
+ 'lavaan':['lavaan','https://github.com/yrosseel/lavaan','R package'],
+ 'metafor':['metafor','https://github.com/wviechtb/metafor','R package'],
+ 'awesome-copilot':['awesome-copilot','https://github.com/github/awesome-copilot','Collection for GitHub Copilot']
+};
+const ROUTES = {chat:['Copilot Chat','A prompt and text you paste'], files:['Copilot + files','Upload your own or the practice files'],
+ connected:['Copilot + connected tool','MCP server or Copilot connector – enabled by your IT'], external:['Specialist tool or open source','Academic tool, R/Python package or agent skill']};
+
 // Microsoft 365 integrations per tool (checked 28 October 2026): [type, source]
 // copilot = Copilot connector or agent (needs a Microsoft 365 Copilot licence and IT approval)
 const M365 = {
@@ -293,4 +320,4 @@ const SOURCES = [
  ['Microsoft Learn – Federated Copilot connectors','https://learn.microsoft.com/en-us/microsoftsearch/federated-connectors-overview'],
  ['Microsoft Learn – Purchase and manage agents in Copilot Chat','https://learn.microsoft.com/en-us/copilot/manage-agents-copilot-chat']
 ];
-const VERSION = 'v5 · 1 November 2026';
+const VERSION = 'v5 · 2 November 2026';
