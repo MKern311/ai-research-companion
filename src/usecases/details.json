@@ -665,7 +665,7 @@
    ],
    "task": "Use Rohde and Hausfather (2020), the Berkeley Earth paper, as the key paper and let Copilot find related and citing work. You learn whether its web search finds a known citing paper – the HadCRUT5 paper by Morice et al. (2021) – and how many links are real.",
    "prompt": "I am a postgraduate researcher. A key paper for my work is Rohde, R. A., & Hausfather, Z. (2020). The Berkeley Earth Land/Ocean Temperature Record. Earth System Science Data, 12(4), 3469–3479. https://doi.org/10.5194/essd-12-3469-2020 (PDF attached). First, describe its core problem and idea in three plain sentences without its own jargon. Then search for up to six papers that address the same problem, including ones that use different terminology, and up to three that cite this paper. For each, give authors, year, title, a working link, one sentence on the connection, and whether you took it from the attached paper's reference list or found it by search. Finish with a 150-word overview citing each paper. If you are not sure, say so; do not invent sources.",
-   "check": "Morice et al. (2021), the HadCRUT5 paper, cites the key paper (Ctrl+F 'Rohde & Hausfather' in A1) and should appear among the citing papers. Related papers taken from the reference list are backward citations, not a search by meaning. Open every link, then compare with the Google Scholar 'Cited by' list."
+   "check": "Morice et al. (2021), the HadCRUT5 paper, cites the key paper (Ctrl+F 'Rohde & Hausfather' in A1) and should appear among the citing papers. Related papers taken from the reference list are backward citations, not a search by meaning. Open every link, then compare with the Google Scholar 'Cited by' list. Note: A2 already lists the HadCRUT5 manuscript (Morice et al., submitted 2020) in its references. If Copilot names Morice et al., ask whether it took them from that list or found them by search – a real forward-citation hit is a citing paper that is not in A2."
   },
   "tech": {
    "routes": [
@@ -897,7 +897,7 @@
     "connected",
     "external"
    ],
-   "text": "Attach PDFs in Copilot Chat or collect them in a Copilot notebook for repeated questions. With Zotero, EndNote or Mendeley connected (the IT has to enable it), Copilot can search your library directly.",
+   "text": "Attach PDFs in Copilot Chat or collect them in a Copilot notebook for repeated questions. The MCP servers for Zotero, EndNote and Mendeley run locally – with GitHub Copilot in VS Code or a desktop assistant, not in Copilot Chat; in Word the reference managers cite through their own add-ins.",
    "data": [
     "A1",
     "A2",
@@ -1857,8 +1857,8 @@
      "doi": "10.2307/2529310"
     },
     {
-     "cite": "Krippendorff, K. (2018). Content analysis: An introduction to its methodology (4th ed.). Sage.",
-     "doi": ""
+     "cite": "Krippendorff, K. (2019). Content analysis: An introduction to its methodology (4th ed.). SAGE.",
+     "doi": "10.4135/9781071878781"
     }
    ]
   },
@@ -1993,15 +1993,10 @@
    "data": [
     "D9"
    ],
-   "task": "You ask Copilot to find open global and Central England temperature datasets, then compare its list with the practice pack, which you keep open but do not attach. You learn whether it finds the main records and states their baselines and licences correctly or invents them.",
+   "task": "You ask Copilot to find open global and Central England temperature datasets, then compare its list with the descriptions of D1–D4 and D9 in the Practice data tab, which you keep open but do not attach. You learn whether it finds the main records and states their baselines and licences correctly or invents them.",
    "prompt": "I am a postgraduate researcher. Research question: how have global and Central England annual temperatures changed since the late 19th century, and how much do the main global records differ? I need open monthly or daily data, global and for central England, from 1880 or earlier. Search the web for suitable datasets. Give up to six options as a table: name, provider, link, period covered, temporal resolution, baseline period of the anomalies, licence, fit and what is missing. If you are not sure of a baseline or licence, say so; do not invent datasets. Then read the header of the attached ERA5 daily CSV and say whether it confirms the baseline you stated for ERA5.",
    "check": "Compare with the practice-pack descriptions in the Practice data tab: HadCRUT5 (D3) anomalies relative to 1961–1990, GISTEMP (D4) 1951–1980, ERA5 (D9) 1991–2020 – the only one of these baselines stated in a file header; HadCET (D1 daily from 1878, D2 monthly from 1659) gives actual temperatures, not anomalies, under the Open Government Licence v3; Berkeley Earth data are CC BY-NC (see 'Not included'). Open every link Copilot lists.",
-   "ref": [
-    "D1",
-    "D2",
-    "D3",
-    "D4"
-   ]
+   "ref": []
   },
   "tech": {
    "routes": [
@@ -2191,7 +2186,7 @@
     "D7"
    ],
    "ref": [],
-   "task": "Compute annual means from a station file with codes for missing, estimated and provisional values, then fit a linear trend with ordinary and Newey–West standard errors. You learn whether Copilot handles the codes, drops incomplete years and states time-series assumptions without being told.",
+   "task": "Compute annual means from a station file with codes for missing, estimated and provisional values, then fit a linear trend with ordinary and Newey–West standard errors. You learn whether Copilot applies the codes correctly, reports which years it left out (1883, 2026) and raises time-series assumptions such as autocorrelation without being told.",
    "prompt": "I am a postgraduate researcher learning Python for statistics. Attached is the Met Office Durham station file (from D7): a few header lines, then one row per month with yyyy, mm, tmax and tmin (°C), af, rain and sun. '---' marks a missing value, * an estimated value and 'Provisional' a row that is not yet final. Write and run commented Python code that: 1) reads the file, keeps estimated values but drops provisional rows, 2) computes the annual mean of tmax for complete calendar years only (all 12 months present), 3) prints the number of years, the first and last year and every year left out, 4) regresses annual mean tmax on year with OLS, then again with Newey–West standard errors (state the lag you choose and why), and reports the trend per decade, 5) plots the residuals against time. Explain each block in plain language, list the assumptions of this regression and say which ones the residual plot puts in doubt. Then give equivalent R code without running it.",
    "check": "The model should use 145 complete years (1880–2025): 1883 drops out because December is missing, 2026 because it is incomplete and provisional. The OLS trend is about 0.11 °C per decade (R² about 0.32); the coefficient is identical in both runs, only the standard error changes. Recompute the 2025 mean in Excel: 14.45 °C. The residuals run below zero in 1960–1989 and above it after 2010, so Copilot should question a straight line."
   },
@@ -3732,7 +3727,7 @@
     "connected",
     "external"
    ],
-   "text": "Copilot Chat searches the web for journals and guideline pages; with Zotero, OpenAlex or Overleaf connected through an MCP server the IT enables, it can read your library, publication venues or LaTeX project directly.",
+   "text": "Copilot Chat searches the web for journals and guideline pages; with OpenAlex connected through Copilot Studio (your IT enables it) it can check publication venues directly. The Zotero and Overleaf MCP servers run locally – with GitHub Copilot in VS Code or a desktop assistant, not in Copilot Chat.",
    "data": [
     "C2"
    ],
@@ -3871,7 +3866,7 @@
    "ref": [],
    "task": "Find the public referee comments on the discussion paper behind Schumacher et al. (2024) and draft a response, using the published PDF as the revised version. You learn whether Copilot retrieves real comments or invents them, and whether it claims unverifiable changes.",
    "prompt": "Attached is the Schumacher et al. (2024) PDF from Earth System Dynamics, the final version of a paper that went through open public discussion. 1) Find the public referee comments (RC1, RC2) on its discussion paper: it was discussed as preprint egusphere-2023-717 on EGUsphere, and the article page links to the discussion under 'Peer review'. Give the link. If you cannot open the comments, say so and stop – do not reconstruct them; I will paste them in. 2) List every referee comment in a table: number, referee, major or minor, what is requested. 3) Treat the attached PDF as the revised manuscript and draft a point-by-point response that quotes each comment first. Where you cannot see in the PDF whether a request was addressed, write [ADD RESPONSE]. Do not claim any change you cannot point to in the PDF.",
-   "check": "Open https://egusphere.copernicus.org/preprints/2023/egusphere-2023-717/ yourself: every comment in the table must exist in RC1 or RC2 and none may be missing. If Copilot could not open the page, paste RC1 and RC2 into the chat and continue. Compare the draft with the authors' replies AC1 and AC2 (attached there as PDFs). A second review round (Nov–Dec 2023) is listed on the article's 'Peer review' tab."
+   "check": "Open https://egusphere.copernicus.org/preprints/2023/egusphere-2023-717/ yourself and check three comments from RC1: each must appear in Copilot's table with the right request, and no comment may be invented. If Copilot could not open the page, paste RC1 into the chat and continue. If time allows, compare one reply with the authors' answer in AC1 (attached there as a PDF)."
   },
   "tech": {
    "routes": [
@@ -4079,7 +4074,7 @@
     "connected",
     "external"
    ],
-   "text": "Copilot Chat checks references by web search; with OpenAlex, scite or Zotero connected through an MCP server the IT enables, it matches metadata and citation statements directly.",
+   "text": "Copilot Chat checks references by web search; with OpenAlex or scite connected through Copilot Studio (your IT enables it) it matches metadata and citation statements directly. The Zotero MCP server runs locally – with GitHub Copilot in VS Code or a desktop assistant, not in Copilot Chat.",
    "data": [
     "B2",
     "C3"
@@ -4573,7 +4568,7 @@
    ],
    "task": "Build the causal chain behind the annual climate indicators from Forster et al. (2025) as a diagram and map the two practice data files to the constructs they measure. You see whether Copilot keeps to the paper's chain or adds arrows of its own.",
    "prompt": "Attached is Forster et al. (2025), 'Indicators of Global Climate Change 2024', plus the HadCRUT5 monthly CSV and the NOAA Mauna Loa CO₂ CSV. 1) From the paper only, draw the chain of indicators it reports – from emissions through concentrations and effective radiative forcing to observed and human-induced warming – as Mermaid flowchart code (left to right), each arrow labelled with the section of the paper it comes from. 2) Add a measurement layer: which column of each attached data file measures which construct, and with what unit and baseline. 3) List any arrow or construct you added that is not in the paper.",
-   "check": "Compare the chain with Figure 1 of the paper (the flow chart from emissions to human-induced warming) and its sections; aerosol and other non-CO₂ forcings must appear if Copilot claims completeness. Neither data file states its unit or baseline: HadCRUT5 'Anomaly (deg C)' is relative to 1961–1990 and the CO₂ column 'average' is in ppm, so Copilot should say where it took them from. Paste the Mermaid code into draw.io to see it.",
+   "check": "Compare the chain with Figure 1 of the paper (the flow chart from emissions to human-induced warming) and its sections; aerosol and other non-CO₂ forcings must appear if Copilot claims completeness. Neither file states its baseline, and the CO₂ file does not state its unit: HadCRUT5 'Anomaly (deg C)' is relative to 1961–1990 (not in the file), and the CO₂ column 'average' is in ppm (not in the file), so Copilot should say where it took them from. Paste the Mermaid code into draw.io to see it.",
    "ref": []
   },
   "tech": {
@@ -4646,6 +4641,7 @@
   },
   "practice": {
    "data": [],
+   "attach_note": "Your photo of the flipchart – taken in the Copilot app, or saved to OneDrive and attached on the laptop.",
    "task": "Your group needs sticky notes, a flipchart or large sheet and a phone. Split the 12 paper titles from the abstracts file among you (keep it open, do not attach it), write one short title per note, sort the notes into clusters on the flipchart and photograph it straight on. Take the photo in the Microsoft 365 Copilot app and run the prompt there, or save it to OneDrive and attach it on the laptop. You see how reliably Copilot reads handwriting and keeps observation apart from interpretation.",
    "prompt": "The attached photo shows a card sort: 12 sticky notes with short titles of research papers on weather and climate change, sorted by our group into clusters on a flipchart. 1) Transcribe every note exactly, numbered, with the cluster it sits in; write [illegible] for anything you cannot read. 2) Give a table: note number, text, cluster. 3) Compare our clusters with these three groups: 'Global temperature records', 'UK and Europe', 'Extremes and attribution' – for each note, say whether our placement matches and where it differs. 4) Only then suggest a label for each of our clusters.",
    "check": "Exactly 12 notes in the table; compare the transcription with the board. The reference grouping is the paper ID in the abstracts file (A = global temperature records, B = UK and Europe, C = extremes and attribution) – check two notes where Copilot says your placement differs.",

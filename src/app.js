@@ -61,9 +61,9 @@ async function signIn(code, ask){
   try { localStorage.setItem(SKEY, session.code); } catch(e) {}
   await pull(true);
   // ratings made in explore mode before signing in: offer to carry them over instead of dropping them
-  if (ask && localN && session.role === 'table' && window.confirm(`Transfer the ${localN} ${localN === 1 ? 'rating' : 'ratings'} you made in explore mode into ${session.table}? Ratings ${session.table} already has are kept.`)) {
+  if (ask && localN && session.role === 'table' && window.confirm(`Transfer the ${localN} ${localN === 1 ? 'use case' : 'use cases'} you rated or tested in explore mode into ${session.table}? What ${session.table} already has is kept.`)) {
     const T = tbl(myTable());
-    Object.entries(local.r).forEach(([id, r]) => { if (findUc(id) && !T.r[id]) T.r[id] = r; });
+    Object.entries(local.r).forEach(([id, r]) => { if (!findUc(id) || T.r[id]) return; const c = Object.assign({}, r); if (c.tt && myTests().length >= MAXTEST) { delete c.tt; delete c.o; delete c.note; } T.r[id] = c; });
     if (!T.disc && local.disc) T.disc = local.disc;
     push(); softRender();
   }
@@ -137,7 +137,7 @@ function renderIdent(){
     : session ? `<span class="sync ok">${sync.dirty ? 'Saving…' : sync.last ? 'Saved · updated ' + sync.last.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) : 'Connected'}</span>`
     : `<span class="sync">This browser only</span>`;
   const who = session
-    ? `<span class="who">${esc(session.role === 'viewer' ? 'Viewing results' : groupLabel(session.table))}</span><button class="btn btn-quiet btn-sm" type="button" id="signOut">Sign out</button>`
+    ? `<span class="who" title="${esc(session.role === 'viewer' ? 'Viewing results' : groupLabel(session.table))}">${esc(session.role === 'viewer' ? 'Viewing results' : groupLabel(session.table))}</span><button class="btn btn-quiet btn-sm" type="button" id="signOut">Sign out</button>`
     : `<span class="who">${state.off ? 'Offline · ' + esc(groupLabel(state.a)) : 'Explore mode'}</span>${REMOTE_OK ? '<button class="btn btn-ghost btn-sm" type="button" id="signIn">Sign in</button>' : ''}`;
   const gear = (!session || session.role === 'facilitator') ? `<button class="icon-btn" type="button" id="menuBtn" aria-label="Facilitator menu" title="Facilitator menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>` : '';
   el.innerHTML = st + who + gear;
@@ -263,7 +263,7 @@ function guideHtml(u, open){
   const seg = pr ? `<div class="seg gseg" role="group" aria-label="Material for the test"><button type="button" data-gmode="practice" aria-pressed="${pm}">With the practice data</button><button type="button" data-gmode="own" aria-pressed="${!pm}">With your own material</button></div>` : '';
   if (pm) return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot · about 10 minutes</summary>${seg}
     <p>${esc(pr.task)}</p>
-    ${pr.data.length ? `<p><b>Attach to Copilot:</b></p><ul class="pfiles">${pr.data.map(id => packFiles(id)).join('')}</ul>` : '<p><b>Nothing to attach</b> – the prompt contains all Copilot needs.</p>'}
+    ${pr.data.length || pr.attach_note ? `<p><b>Attach to Copilot:</b></p><ul class="pfiles">${pr.data.map(id => packFiles(id)).join('')}${pr.attach_note ? `<li>${esc(pr.attach_note)}</li>` : ''}</ul>` : '<p><b>Nothing to attach</b> – the prompt contains all Copilot needs.</p>'}
     ${(pr.ref || []).length ? `<p><b>Keep open for checking – do not attach:</b></p><ul class="pfiles ref">${pr.ref.map(id => packFiles(id)).join('')}</ul>` : ''}
     <div class="prompt"><div class="ptools"><b>Starter prompt · practice data</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-opencopilot title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(pr.prompt)}</pre></div>
     <p><b>Check:</b> ${esc(pr.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}
@@ -373,7 +373,7 @@ const rOf = (k, id) => (state.t[k] && state.t[k].r[id]) || {};
 // disciplines entered by the groups: spelling variants ("marketing", "Marketing ") count as one
 function disciplines(){
   const m = new Map();
-  Object.keys(state.t).filter(k => discOf(k) && hasData(k)).sort(groupOrder).forEach(k => { const key = discKey(discOf(k)); if (!m.has(key)) m.set(key, {key, label:discOf(k), groups:[]}); m.get(key).groups.push(k); });
+  Object.keys(state.t).filter(k => discOf(k) && Object.keys(state.t[k].r).length).sort(groupOrder).forEach(k => { const key = discKey(discOf(k)); if (!m.has(key)) m.set(key, {key, label:discOf(k), groups:[]}); m.get(key).groups.push(k); });
   return [...m.values()].sort((a, b) => a.label.localeCompare(b.label));
 }
 const discLabel = key => (disciplines().find(d => d.key === key) || {label:key}).label;
@@ -452,8 +452,9 @@ function renderResults(){
   $('#resSub').textContent = (ui.resPhase ? SHORT[ui.resPhase] : 'All phases') + ' · ' + (room1 ? `${ui.resDisc ? discLabel(ui.resDisc) + ' · ' : ''}averages over ${tabs.length} ${tabs.length === 1 ? 'group' : 'groups'} · ${list.length} rated use cases.` : `${groupLabel(mine)} · ${list.length} rated use cases.`);
   renderMatrix(list);
   $('#rankSub').textContent = room1 ? 'Ranked by value × feasibility; use cases rated by more groups count more. The numbers match the matrix.' : 'Ranked by value × feasibility. The numbers match the matrix.';
-  $('#rank').innerHTML = list.length ? list.map((e, i) => `<li data-open="${esc(e.u.id)}" tabindex="0" role="button"><span class="n" style="background:#CC0000">${i+1}</span><span><b>${esc(e.u.t)}</b><small>${SHORT[e.u.phase]}${room1 ? ` · ${e.k} ${e.k === 1 ? 'group' : 'groups'}` : ''}${e.chk ? ' · check rules first' : ''}${e.t ? ' · tested with Copilot' : ''}</small></span><span class="sc">V ${e.n.toFixed(1)} · F ${e.m.toFixed(1)}</span></li>`).join('')
+  $('#rank').innerHTML = list.length ? list.map((e, i) => `<li data-open="${esc(e.u.id)}" tabindex="0" role="button"${i >= 20 ? ' class="pmore"' : ''}><span class="n" style="background:#CC0000">${i+1}</span><span><b>${esc(e.u.t)}</b><small>${SHORT[e.u.phase]}${room1 ? ` · ${e.k} ${e.k === 1 ? 'group' : 'groups'}` : ''}${e.chk ? ' · check rules first' : ''}${e.t ? ' · tested with Copilot' : ''}</small></span><span class="sc">V ${e.n.toFixed(1)} · F ${e.m.toFixed(1)}</span></li>`).join('')
     : '<li class="empty" style="display:block;cursor:default">No use cases rated yet.</li>';
+  if (list.length > 20) $('#rank').insertAdjacentHTML('beforeend', `<li class="pnote">Top 20 of ${list.length} – the full list is in the results export (.csv).</li>`);
   const scope = id => room1 ? room(id, ui.resDisc) : (r => ({x:r.x ? [mine] : [], chk:chkOf(r) ? [mine] : []}))(rOf(mine, id));
   const all = allUcs().filter(inPhase).map(u => ({u, s:scope(u.id)}));
   const notai = all.filter(e => e.s.x.length), chk = all.filter(e => e.s.chk.length);
@@ -481,8 +482,8 @@ function renderFindingsForm(){
 }
 function fdTables(){ return Object.keys(state.t).sort(groupOrder).filter(k => Object.values(state.t[k].fd || {}).some(Boolean)); }
 function renderFindingsAll(){
-  const rows = fdTables();
-  $('#fdAll').innerHTML = `<h2>Findings from the room</h2><p class="sub">${rows.length} ${rows.length === 1 ? 'group' : 'groups'} with findings.</p>` +
+  const rows = fdTables().filter(k => ui.scope !== 'room' || inDisc(k, ui.resDisc));
+  $('#fdAll').innerHTML = `<h2>Findings from the room</h2><p class="sub">${rows.length} ${rows.length === 1 ? 'group' : 'groups'} with findings${ui.scope === 'room' && ui.resDisc ? ' · ' + esc(discLabel(ui.resDisc)) : ''}.</p>` +
     (rows.length ? rows.map(k => `<div class="fdt"><h3>${esc(groupLabel(k))}</h3>${fdList(state.t[k].fd)}</div>`).join('') : '<p class="empty">No findings yet.</p>');
 }
 
@@ -527,7 +528,7 @@ function reportMarkdown(){
   return L.join('\n');
 }
 /* ---------- tools view ---------- */
-const packLabel = id => { if (id === 'papers') return `All ${PACK.papers.length} papers`; const p = PACK.papers.find(x => x.id === id); if (p) return `${p.cite.split(',')[0]} ${(p.cite.match(/\((\d{4})\)/) || [])[1] || ''}`.trim(); const d = PACK.data.find(x => x.id === id); return d ? d.title : id; };
+const packLabel = id => { if (id === 'papers') return `All ${PACK.papers.length} papers`; const x = (PACK.extras || []).find(e => e.id === id); if (x) return x.title; const p = PACK.papers.find(x => x.id === id); if (p) return `${p.cite.split(',')[0]} ${(p.cite.match(/\((\d{4})\)/) || [])[1] || ''}`.trim(); const d = PACK.data.find(x => x.id === id); return d ? d.title : id; };
 const toolUrl = n => { const t = TOOLS.find(x => x.n === n); return t && t.url ? 'https://' + t.url.replace(/^https?:\/\//, '') : null; };
 function connectHtml(names){
   return names.map(n => {
@@ -600,7 +601,7 @@ function showLogin(msg){
   $('#login').innerHTML = `<div class="box" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
     <h2 id="loginTitle">Sign in with your group code</h2>
     <p>Your facilitator gives you the code, e.g. “group 3”. Ratings are saved for your group and appear in the results for the whole room.</p>
-    <p class="sub"><b>One laptop per group signs in.</b> Everyone else in the group explores without a code or uses the viewer code – two laptops with the same group code overwrite each other.</p>
+    <p class="sub"><b>One laptop per group signs in.</b> Everyone else in the group explores without a code – two laptops with the same group code overwrite each other.</p>
     <form id="loginForm" autocomplete="off"><label class="sr" for="codeIn">Group code</label><input id="codeIn" placeholder="group 3" required>
     <p class="err" id="loginErr">${msg ? esc(msg) : ''}</p>
     <div class="acts"><button class="btn btn-primary" type="submit">Sign in</button><button class="link" type="button" id="explore">Explore without a code (this browser only)</button></div></form></div>`;
@@ -706,11 +707,15 @@ function renderAll(){ renderAgenda(); renderIdent(); renderDisc(); renderLens();
 document.addEventListener('click', e => {
   const t = e.target;
   if (!t.closest('[data-pack]')) mark(null);
-  const from = () => { const id = !$('#drawer').hidden && ui.open && ui.open !== '__new' ? ui.open : null; if (!$('#drawer').hidden) closeDrawer(); return id; };
+  const from = () => { const d = $('#drawer'), id = !d.hidden && ui.open && ui.open !== '__new' ? ui.open : null;
+    if (id) { const sc = d.querySelector('.scroll'), g = d.querySelector('details.guide'), bg = d.querySelector('details.bg'); ui.backState = {top:sc ? sc.scrollTop : 0, g:g ? g.open : null, bg:bg ? bg.open : null, gmode:ui.gmode}; }
+    if (!d.hidden) closeDrawer(); return id; };
   const pk = t.closest('[data-pack]'); if (pk) { setView('data', from()); const papers = pk.dataset.pack === 'papers', el = papers ? $('#dlPapers') : document.getElementById('pk-' + pk.dataset.pack); if (el) { el.scrollIntoView({block:papers ? 'start' : 'center'}); mark(el); } return; }
-  if (t.closest('[data-back]')) { const id = ui.back; setView('cases'); const u = findUc(id); if (u) { ui.phase = PHASES.findIndex(p => p.id === u.phase); renderPhases(); renderIntro(); openDrawer(id); } return; }
+  if (t.closest('[data-back]')) { const id = ui.back, bs = ui.backState; setView('cases'); const u = findUc(id); if (u) { ui.phase = PHASES.findIndex(p => p.id === u.phase); renderPhases(); renderIntro(); openDrawer(id);
+    if (bs) { ui.gmode = bs.gmode; drawerHtml = ''; openDrawer(id); const d = $('#drawer'), g = d.querySelector('details.guide'), bg = d.querySelector('details.bg'); if (g && bs.g !== null) g.open = bs.g; if (bg && bs.bg !== null) bg.open = bs.bg; const sc = d.querySelector('.scroll'); if (sc) sc.scrollTop = bs.top; } } return; }
   const tab = t.closest('[data-view]'); if (tab) { const id = tab.closest('#drawer') ? from() : (from(), null); setView(tab.dataset.view, id); if (tab.hasAttribute('data-mcpinfo')) { const b = $('#mcpBox'); b.open = true; b.scrollIntoView(); } return; }
-  const ln = t.closest('[data-lens]'); if (ln) { ui.lens = +ln.dataset.lens; saveUi(); renderLens(); renderCards(); if (ui.open && !$('#drawer').hidden) openDrawer(ui.open); return; }
+  const ln = t.closest('[data-lens]'); if (ln) { const inD = !!ln.closest('#drawer'); ui.lens = +ln.dataset.lens; saveUi(); renderLens(); renderCards();
+    if (ui.open && !$('#drawer').hidden) { openDrawer(ui.open); if (inD) { const sc = $('#drawer .scroll'); if (sc) sc.scrollTop = 0; const tb = $('#drawer [data-test]') || $('#drawer h2'); if (tb) tb.focus({preventScroll:true}); } } return; }
   const rdc = t.closest('[data-rdisc]'); if (rdc) { ui.resDisc = rdc.dataset.rdisc; renderResults(); return; }
   if (t.closest('[data-copyrefs]')) { copyText(refList(), 'References', `All ${PACK.papers.length} references copied`); return; }
   const ph = t.closest('[data-phase]'); if (ph) { ui.phase = +ph.dataset.phase; renderPhases(); renderIntro(); renderCards(); return; }
@@ -740,7 +745,7 @@ document.addEventListener('click', e => {
   if (t.closest('#mJson')) { download(`${stamp()}_ai-research-process_data.json`, JSON.stringify({version:5, exported:new Date().toISOString(), t:state.t, c:state.c}, null, 2), 'application/json'); return; }
   if (t.closest('#mTsv')) { copyText(tsv(), 'Results'); return; }
   if (t.closest('#mgCopy')) { copyText(JSON.stringify({version:5, t:{[myTable()]:tbl(myTable())}, c:state.c.filter(c => c.by === myTable())}), 'Group data'); return; }
-  if (t.closest('#mgGo')) { try { const n = merge(parseBlocks($('#mgText').value)); toast(`Merged ${n} ${n === 1 ? 'group' : 'groups'}`); $('#mgText').value = ''; } catch(err) { toast('Could not read the pasted text'); } return; }
+  if (t.closest('#mgGo')) { try { const n = merge(parseBlocks($('#mgText').value)); toast(`Merged ${n} ${n === 1 ? 'group' : 'groups'}${merge.skipped ? ` · ${merge.skipped} unknown ${merge.skipped === 1 ? 'name' : 'names'} skipped` : ''}`); $('#mgText').value = ''; } catch(err) { toast('Could not read the pasted text'); } return; }
   if (t.closest('#svGo')) { importSurvey(); return; }
   if (t.closest('#mReset')) { resetArmed(t.closest('#mReset')); return; }
 
@@ -763,7 +768,7 @@ document.addEventListener('click', e => {
 document.addEventListener('change', e => {
   if (e.target.id === 'tableSel') { state.off = !!e.target.value; state.a = e.target.value || 'Group 1'; save(); renderAll(); toast(state.off ? 'Rating as ' + state.a : 'Explore mode'); }
   if (e.target.id === 'scopePick') { ui.resTable = e.target.value; renderResults(); }
-  if (e.target.id === 'mgFile') { Promise.all([...e.target.files].map(f => f.text().then(JSON.parse))).then(list => { const n = merge(list); toast(`Merged ${n} ${n === 1 ? 'table' : 'tables'}`); }).catch(() => toast('Could not read the file')); e.target.value = ''; }
+  if (e.target.id === 'mgFile') { Promise.all([...e.target.files].map(f => f.text().then(JSON.parse))).then(list => { const n = merge(list); toast(`Merged ${n} ${n === 1 ? 'group' : 'groups'}${merge.skipped ? ` · ${merge.skipped} unknown ${merge.skipped === 1 ? 'name' : 'names'} skipped` : ''}`); }).catch(() => toast('Could not read the file')); e.target.value = ''; }
 });
 document.addEventListener('input', e => {
   const k = e.target.dataset && e.target.dataset.fd;
@@ -801,7 +806,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Tab') {
     const box = ['#login', '#modal', '#drawer'].map(q => $(q)).find(x => !x.hidden);
     if (!box) return;
-    const f = [...box.querySelectorAll('a[href],button:not([disabled]),input,select,textarea,summary,[tabindex="0"]')].filter(x => x.offsetParent !== null);
+    const f = [...box.querySelectorAll('a[href],button:not([disabled]),input,select,textarea,summary,[tabindex="0"]')].filter(x => x.offsetParent !== null && !(x.tagName !== 'SUMMARY' && x.closest('details:not([open])')));
     if (!f.length) return;
     const i = f.indexOf(document.activeElement);
     if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && (i === f.length - 1 || i < 0)) { e.preventDefault(); f[0].focus(); }
@@ -827,9 +832,9 @@ function csv(){
 }
 function tsv(){
   const c = v => String(v ?? '').replace(/[\t\r\n]+/g, ' ');
-  const head = ['Use case','Phase','Groups rated','Value (avg)','Feasibility (avg)','Score','Stars','Kind of gain','Not an AI task','Check rules first','Copilot tests'];
+  const head = ['Use case','Phase','Groups rated','Value (avg)','Feasibility (avg)','Value × feasibility (raw)','Ranking score (weighted by groups)','Stars','Kind of gain','Not an AI task','Check rules first','Copilot tests'];
   const rows = allUcs().map(u => ({u, rm:room(u.id)})).filter(e => e.rm.k || e.rm.x.length || e.rm.chk.length || e.rm.stars || e.rm.tests.length).sort((a, b) => byRoom(a.rm, b.rm))
-    .map(({u, rm}) => [u.t, SHORT[u.phase], rm.k, rm.k ? rm.n.toFixed(1) : '', rm.k ? rm.u.toFixed(1) : '', rm.k ? (rm.n*rm.u).toFixed(1) : '', rm.stars, GAINS.filter(([g]) => rm.gain[g]).map(([g, l]) => `${l} ×${rm.gain[g]}`).join(', '), rm.x.map(groupLabel).join(' / '), rm.chk.map(groupLabel).join(' / '), rm.tests.map(x => `${groupLabel(x.table)}: ${x.o ? OUTCOME[x.o][0] : 'selected'}`).join(' / ')].map(c).join('\t'));
+    .map(({u, rm}) => [u.t, SHORT[u.phase], rm.k, rm.k ? rm.n.toFixed(1) : '', rm.k ? rm.u.toFixed(1) : '', rm.k ? (rm.n*rm.u).toFixed(1) : '', rm.k ? roomScore(rm).toFixed(1) : '', rm.stars, GAINS.filter(([g]) => rm.gain[g]).map(([g, l]) => `${l} ×${rm.gain[g]}`).join(', '), rm.x.map(groupLabel).join(' / '), rm.chk.map(groupLabel).join(' / '), rm.tests.map(x => `${groupLabel(x.table)}: ${x.o ? OUTCOME[x.o][0] : 'selected'}`).join(' / ')].map(c).join('\t'));
   const fds = fdTables().flatMap(k => ['f1','f2','f3','q'].filter(x => state.t[k].fd[x]).map(x => [k, c(discOf(k)), x === 'q' ? 'Open question' : 'Finding', c(state.t[k].fd[x])].join('\t')));
   return [head.join('\t'), ...rows, '', 'Group\tDiscipline\tType\tText', ...fds].join('\n');
 }
@@ -847,17 +852,19 @@ function merge(list){
   list.forEach(s => { if (!s || !s.t) throw new Error('bad');
     Object.entries(s.t).forEach(([k0, T]) => { const k = groupName(k0); if (!k) { skipped++; return; } if (T && (Object.keys(T.r || {}).length || Object.values(T.fd || {}).some(Boolean))) { state.t[k] = tblFrom(T); n++; } });
     (s.c || []).forEach(c => { const i = state.c.findIndex(x => x.id === c.id); if (i >= 0) state.c[i] = c; else state.c.push(c); }); });
-  if (skipped) toast(`${skipped} unknown group ${skipped === 1 ? 'name' : 'names'} skipped`);
+  merge.skipped = skipped;
   save(); renderAll(); return n;
 }
 // order matters: the first pattern that matches a survey stage wins
-const STAGE = [[/lit/i,'literatur'],[/idea|ideation|gap|question/i,'idee'],[/design|method/i,'design'],[/collect|fieldwork/i,'erhebung'],[/analy/i,'analyse'],[/writ|publish/i,'publikation'],[/impact|exchange|dissem|transfer|engage/i,'transfer'],[/plan|admin|toolkit|across|general/i,'querschnitt']];
+const STAGE = [[/\blit(erature)?\b|\breview|\bsearch/i,'literatur'],[/\bidea|ideation|\bgap|question/i,'idee'],[/analy|statist|qualitative|quantitative|coding/i,'analyse'],[/design|method/i,'design'],[/collect|fieldwork|survey|interview/i,'erhebung'],[/writ|publish/i,'publikation'],[/impact|exchange|dissem|transfer|engage/i,'transfer'],[/plan|admin|toolkit|across|general/i,'querschnitt']];
 const RISKY = [/[\w.+-]+@[\w-]+\.[\w.]+/, /https?:\/\//i, /(?:\+|\b0)\d[\d\s()-]{8,}\d/, /\b(Dr|Prof|Professor|Mr|Mrs|Ms)\.?\s+[A-Z][a-z]+/];
 // one CSV line: commas inside quotes stay, doubled quotes become one
 const csvCells = l => { const out = []; let cur = '', q = false; for (let i = 0; i < l.length; i++) { const ch = l[i]; if (q) { if (ch === '"' && l[i + 1] === '"') { cur += '"'; i++; } else if (ch === '"') q = false; else cur += ch; } else if (ch === '"') q = true; else if (ch === ',' || ch === ';') { out.push(cur); cur = ''; } else cur += ch; } out.push(cur); return out; };
 function parseSurvey(text){
   const phaseFor = s => { s = String(s || '').trim(); const low = s.toLowerCase(); const p = PHASES.find(p => p.id === s || p.short.toLowerCase() === low || p.name.toLowerCase() === low); if (p) return p.id; const m = STAGE.find(([re]) => re.test(s)); return m ? m[1] : null; };
-  return text.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(l => (l.includes('\t') ? l.split('\t') : csvCells(l)).map(x => (x = x.trim(), /^".*"$/.test(x) ? x.slice(1, -1).replace(/""/g, '"') : x)))
+  // without tabs or quotes a comma may belong to the text: keep everything after the first separator as the use case
+  const cells = l => l.includes('\t') ? l.split('\t') : l.includes('"') ? csvCells(l) : (m => m ? [m[1], m[2]] : [l])(l.match(/^([^,;]*)[,;](.*)$/));
+  return text.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(l => cells(l).map(x => (x = x.trim(), /^".*"$/.test(x) ? x.slice(1, -1).replace(/""/g, '"') : x)))
     .filter(r => r.length >= 2 && r[1] && !/^(stage|phase|cluster)$/i.test(r[0]) && !/^example\b/i.test(r[0]) && !/^example\b/i.test(r[1]))
     .map(r => { const d = r.length > 3 && !r[2] ? r.slice(1).join(', ') : r[1], words = d.split(/\s+/);
       return {phase:phaseFor(r[0]), d, t:(r[2] || words.slice(0, 7).join(' ') + (words.length > 7 ? ' …' : '')).slice(0, 80), risky:RISKY.some(re => re.test(r.join(' ')))}; });

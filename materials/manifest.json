@@ -259,7 +259,7 @@
    "B1",
    "D1 · D2",
    "Ask Copilot to explain the file layout and write code that reshapes the monthly series to long format; check the 2022 values by hand.",
-   "analyse-1"
+   ""
   ],
   [
    "C6",
@@ -280,7 +280,7 @@
    "idee-6"
   ],
   [
-   "B2 · B3",
+   "B2",
    "D1",
    "Count hot days in the Central England maximum series and compare Copilot’s reading of “return time” with B2. The papers use other data (HadUK-Grid, models), and CET is a regional series, not the UK-wide record.",
    "transfer-2"
@@ -289,13 +289,13 @@
    "C1",
    "D1",
    "Let Copilot apply the paper’s heatwave definition to the maximum series; check whether it used that definition or invented its own. The paper itself uses Berkeley Earth data, not CET.",
-   "idee-2"
+   ""
   ],
   [
    "C2",
    "D7 · D8",
    "Clean the two station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study.",
-   "analyse-1"
+   ""
   ],
   [
    "–",
@@ -307,7 +307,7 @@
    "B2 · C3 · C4 · C5",
    "–",
    "Ask Copilot for a comparison table of the attribution studies, then check every cell against the PDFs.",
-   "erhebung-1"
+   "querschnitt-7"
   ]
  ],
  "excluded": [

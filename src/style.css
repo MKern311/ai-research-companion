@@ -50,7 +50,7 @@ a{color:var(--red)}
 .tabs button[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
 .ident{display:flex;align-items:center;gap:8px}
 .ident select,.selectbox{min-height:36px;border:1px solid var(--line);border-radius:999px;padding:0 30px 0 12px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23454545' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--ink);font-weight:600;font-size:14px}
-.who{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;background:var(--surface);border-radius:999px;padding:6px 12px}
+.who{display:inline-block;max-width:min(60vw,360px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px;font-weight:600;background:var(--surface);border-radius:999px;padding:6px 12px}
 .sync{font-size:12.5px;color:var(--muted);white-space:nowrap}
 .sync.ok::before,.sync.err::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px;background:var(--green)}
 .sync.err{color:#9A2B00}
@@ -357,7 +357,15 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   main{padding-block:10px 0}
   .panel{padding:10px 0;border-radius:0;break-inside:avoid}
   .res-grid{display:block !important}
-  .res-grid > .panel:first-child{break-inside:avoid}
+  .res-grid > .panel:first-child{break-inside:auto}
+  #matrix{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  .gtable{overflow:visible}
+  .gtable table{table-layout:fixed;font-size:9pt}
+  #groups td,#groups th{white-space:normal !important;min-width:0 !important}
+  .report .ptools .sub,#reportBody > .sub{display:none !important}
+  .rank li.pmore{display:none}
+  .rank li.pnote{display:block !important}
   #matrix svg{max-width:170mm;margin-inline:auto}
   .res-grid > .panel:last-child,.lists > .panel,.tests{break-inside:auto}
   #groups .sub,#rankSub,#tests .sub,.lists .sub,#resDisc,.backbar,.topstrip{display:none !important}
@@ -405,7 +413,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 .gtable thead th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)}
 .gtable tbody tr{cursor:pointer}
 .gtable tbody tr:hover,.gtable tbody tr:focus-visible{background:var(--surface);outline:none}
-.gtable tbody th,.gtable td:nth-child(2),.gtable td:nth-child(4),.gtable td:nth-child(5){white-space:nowrap}
+.gtable tbody th,#groups td:nth-child(3),#groups td:nth-child(5),#groups td:nth-child(6),#dlPairs td:nth-child(1),#dlPairs td:nth-child(2){white-space:nowrap}
+#dlPairs td:nth-child(3){min-width:220px}
+#groups td:nth-child(4){min-width:200px}
 
 /* Academic tools · MCP */
 .mcp{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);margin-top:4px}
@@ -513,7 +523,8 @@ details.bg[open] > summary{margin-bottom:8px}
 @media (max-width:640px){.mx-scroll svg{min-width:560px}}
 #matrix g.pt:focus{outline:none}
 #matrix g.pt:focus circle:last-of-type{stroke:#1A5FB4;stroke-width:4}
-.rank b,.tests b,.card h3,.lists li,.gtable td{overflow-wrap:anywhere}
+.rank b,.tests b,.card h3,.lists li{overflow-wrap:anywhere}
+.gtable td{overflow-wrap:break-word}
 @media (max-width:1000px){.res-grid{grid-template-columns:minmax(0,1fr)}}
 li[role=button]:focus-visible,tr[data-group]:focus-within,.linkbtn:focus-visible{outline:3px solid #1A5FB4;outline-offset:2px}
 .lists li,.tests li{padding-block:6px}
@@ -522,3 +533,4 @@ li[role=button]:focus-visible,tr[data-group]:focus-within,.linkbtn:focus-visible
 @media (pointer:coarse){.btn-sm,.chips button,.tchips button,.tabs button{min-height:40px}.msb,.mcpb,.pk,.tk{min-height:32px;display:inline-flex;align-items:center}.linkbtn{padding-block:8px}}
 .gtable th .linkbtn{color:var(--ink)}
 .tchips .tlab{align-self:center;font-size:13px;font-weight:700;color:var(--ink-2);margin-right:4px}
+.rank li.pnote{display:none;cursor:default;color:var(--muted);font-size:13px}

@@ -89,7 +89,7 @@ The PDFs are in the full pack (ai-research-practice-pack.zip) and can be downloa
 | C6 | D2 | Ask Copilot to look for changepoints in the Central England series and compare its method and the years it finds with the paper. |
 | A1 · A2 | D3 · D4 · D9 | Compare the global records on a common baseline; check Copilot’s explanation of the differences against the papers. D3 is the HadCRUT5 data described in A1; A2 describes Berkeley Earth, whose data is not in the pack. |
 | A3 | D3 · D5 | Regress global temperature on CO₂, let Copilot propose testable hypotheses, then critique them against the paper’s indicators. |
-| B2 · B3 | D1 | Count hot days in the Central England maximum series and compare Copilot’s reading of “return time” with B2. The papers use other data (HadUK-Grid, models), and CET is a regional series, not the UK-wide record. |
+| B2 | D1 | Count hot days in the Central England maximum series and compare Copilot’s reading of “return time” with B2. The papers use other data (HadUK-Grid, models), and CET is a regional series, not the UK-wide record. |
 | C1 | D1 | Let Copilot apply the paper’s heatwave definition to the maximum series; check whether it used that definition or invented its own. The paper itself uses Berkeley Earth data, not CET. |
 | C2 | D7 · D8 | Clean the two station files, compare rainfall in an early and a recent period, and ask Copilot why monthly data cannot replicate a daily-extremes study. |
 | – | D6 | Ask Copilot to turn the irregular early sea-ice record into monthly means and explain how it handles the 1987–88 gap. |

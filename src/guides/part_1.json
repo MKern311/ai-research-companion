@@ -112,7 +112,7 @@
     ],
     "prompt": "I am a postgraduate researcher in [discipline]. Answer my question using only the attached PDFs. My question is: [question]. Give a short answer (up to 200 words), then a list of supporting passages: file name, page, exact quote of one to three sentences. Only quote text that appears word for word in the files. If the files do not answer the question, or only partly, say so clearly instead of using outside knowledge.",
     "check": "Each quote is found word for word in the PDF (Ctrl+F) and supports the claim, and Copilot says 'not in the files' for the question you know is not answered.",
-    "limit": "Copilot Chat answers over a few attached PDFs; for a larger set, use a Copilot notebook or connect your reference manager (for example Zotero) via MCP."
+    "limit": "Copilot Chat answers over a few attached PDFs; for a larger set, use a Copilot notebook. The MCP servers for reference managers such as Zotero run only locally, not in Copilot Chat."
   },
   "literatur-5": {
     "bring": "Abstracts or short summaries of five or six studies you already know well, or their open-access PDFs.",

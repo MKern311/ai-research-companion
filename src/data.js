@@ -1,6 +1,6 @@
 /* AI in the Research Process – content data (phases, use cases, tools, technology assessment) */
 const RISK = {1:'Low risk',2:'Medium risk',3:'High risk'};
-const RISK_DEF = {1:'Public or your own non-sensitive material; errors are easy to spot.',2:'Unpublished work, third-party content or errors that propagate into results.',3:'Personal or sensitive data, or integrity-critical decisions.'};
+const RISK_DEF = {1:'Public or your own non-sensitive material; errors are easy to spot.',2:'Your own unpublished drafts, reviews or third-party content.',3:'Personal or sensitive data, or decisions that feed directly into your results.'};
 const MODE_DEF = {'Assist':'You lead; AI provides suggestions on request.','Co-create':'You and AI develop the result iteratively together.','Delegate':'AI carries out a sub-task; you check the result at defined points.'};
 
 const U = (t,d,cap,pot,risk,mode,ix=[])=>({t,d,cap,pot,risk,mode,ix});   // ix: tools in MCP/M365 that connect to Copilot
@@ -14,7 +14,7 @@ const PHASES = [
    U('Sparring partner for research questions','Turn rough ideas into alternative research questions, surface assumptions, and generate counter-positions and objections.',['generierung'],3,1,'Co-create'),
    U('Structured operationalisation','Structure questions with established frameworks (e.g. PICO, PICOC, SPIDER, PEO), derive sub-questions and search terms per element, sharpen the constructs and test the question against FINER.',['generierung','synthese'],2,1,'Co-create'),
    U('Novelty check','Semantic search for closely related work to spot duplication early and sharpen your positioning.',['recherche'],3,2,'Assist',['Semantic Scholar','OpenAlex','Consensus','Elicit']),
-   U('Interdisciplinary bridges','Suggest concepts and methods from neighbouring disciplines that transfer to your research question.',['generierung','recherche'],2,2,'Co-create'),
+   U('Interdisciplinary bridges','Suggest concepts and methods from neighbouring disciplines that transfer to your research question.',['generierung','recherche'],2,1,'Co-create'),
    U('Research gap mapping','Sort the gaps a body of literature leaves into types – empirical, methodological, theoretical, practical or contradictory findings – and back each one with the studies that show it.',['synthese','analyse'],3,2,'Co-create'),
    U('Theoretical framework & hypotheses','Compare candidate theories for your question, derive hypotheses or propositions with their reasoning, and describe the conceptual model in words.',['generierung','synthese'],3,2,'Co-create')
   ],
@@ -48,7 +48,7 @@ const PHASES = [
    U('Pre-testing with synthetic personas','Test instruments with simulated respondents for comprehension issues – as a supplement to real pre-tests, never a replacement.',['generierung','analyse'],2,2,'Assist'),
    U('Sample size & power analysis','Generate calculations as traceable code (e.g. R or Python) and make assumptions explicit.',['analyse'],2,2,'Assist'),
    U('Ethics application & data management plan','Structure drafts along your institution’s templates – the study-specific reasoning on consent, risks and anonymisation must be your own.',['generierung'],3,2,'Co-create'),
-   U('Final survey check','Let Copilot walk through the finished questionnaire along different answer paths to find broken routing, missing or overlapping answer options and inconsistent scales – and proofread it as a whole.',['analyse','generierung'],3,1,'Assist'),
+   U('Final survey check','Let Copilot walk through the finished questionnaire along different answer paths to find broken routing, missing or overlapping answer options and inconsistent scales – and proofread it as a whole.',['analyse','generierung'],3,2,'Assist'),
    U('Conceptual & measurement model diagrams','Turn your theory into a conceptual or measurement model diagram – constructs, paths and, where needed, survey items – as editable draw.io or Figma content you update with the literature instead of redrawing it.',['generierung','synthese'],3,1,'Co-create',['draw.io','Figma']),
    U('Experimental stimuli & instruments','Generate matched materials for each condition of an experiment – e.g. case vignettes, a message in two framings, a mock web page or news feed – and draft the study flow with randomisation and variable names for your survey tool.',['generierung','agentisch'],3,2,'Co-create')
   ],
@@ -60,7 +60,7 @@ const PHASES = [
   tasks:['Field access and recruitment','Fieldwork (interviews, surveys, experiments, archives)','Transcription','Capturing unstructured sources','Documentation'],
   uc:[
    U('Transcription & translation','Transcribe interviews and focus groups, separate speakers and translate where needed – only with approved tools.',['analyse'],3,3,'Delegate',['Otter.ai','Whisper (OpenAI)']),
-   U('Extraction from documents','Obtain structured data from reports, web pages, archival records or data documentation (e.g. key figures, statements, metadata).',['analyse','agentisch'],3,2,'Delegate'),
+   U('Extraction from documents','Obtain structured data from reports, web pages, archival records or data documentation (e.g. key figures, statements, metadata).',['analyse','agentisch'],3,3,'Delegate'),
    U('LLM as annotator','Pre-annotate large volumes of text against a coding scheme; humans check samples using an agreement measure.',['analyse'],3,3,'Delegate'),
    U('Adaptive surveying','Conversational interviews or surveys that ask follow-up questions dynamically – with clear ethical guardrails.',['generierung','agentisch'],2,3,'Delegate'),
    U('Dataset discovery','Find open secondary data and repositories for the research question and assess their suitability.',['recherche'],2,1,'Assist'),
@@ -100,9 +100,9 @@ const PHASES = [
    U('Pre-submission review','Have the text assessed by a panel of critical reviewers – methods, theory, devil’s advocate – including missing reporting items for your design, and turn it into a revision roadmap.',['analyse'],3,2,'Assist'),
    U('Responding to reviewers','Structure reviewer comments and draft the response letter and summary of changes.',['synthese','generierung'],2,2,'Co-create'),
    U('Thesis structure across chapters','Check the golden thread from research questions to conclusions across chapters; spot gaps, overlaps and repetition.',['synthese','analyse'],3,2,'Co-create'),
-   U('Mock viva preparation','Generate likely examiner questions from your thesis and practise your answers – a complement to, not a substitute for, your supervisors.',['generierung','analyse'],3,1,'Co-create'),
+   U('Mock viva preparation','Generate likely examiner questions from your thesis and practise your answers – a complement to, not a substitute for, your supervisors.',['generierung','analyse'],3,2,'Co-create'),
    U('Reference & claim check','Check that every reference exists and its details are correct – and that each cited source really supports the sentence it is cited for.',['recherche','analyse'],3,2,'Assist',['OpenAlex','scite','Zotero']),
-   U('Section draft from your own notes','Turn your own notes and evidence map into a first draft of a section, every claim linked to its source. Rework it in your own words and declare the AI use – check your university’s rules first.',['generierung','synthese'],2,3,'Co-create')
+   U('Section draft from your own notes','Turn your own notes and evidence map into a first draft of a section, every claim linked to its source. Rework it in your own words and declare the AI use – check your university’s rules first.',['generierung','synthese'],2,2,'Co-create')
   ],
   limits:['AI-drafted text must be reworked and declared – many universities restrict it in the thesis, so check the rules before drafting with AI.','AI cannot be an author; responsibility lies with you (COPE). In a thesis, you must be able to explain and defend every passage.','Declare AI use as your university and publisher require.','Co-authored or third parties’ unpublished manuscripts only with their consent – never upload peer-review manuscripts.'],
   disc:['How would you declare AI use in your thesis or paper?','Where does language polishing end and substantive contribution begin?']},
