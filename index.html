@@ -1271,12 +1271,16 @@ function testHtml(u){
     <div class="field"><label for="testNote">What did you notice?</label><textarea id="testNote" data-note maxlength="400" placeholder="e.g. good first draft, but two invented references">${esc(r.note || '')}</textarea></div>`;
   return h;
 }
+let drawerHtml = '';
 function openDrawer(id){
+  const d = $('#drawer'), again = !d.hidden && ui.open === id;   // re-render of the open use case (poll, rating, lens)
+  const sc = again && d.querySelector('.scroll'), top = sc ? sc.scrollTop : 0;
+  const gd = again && d.querySelector('details.guide'), gOpen = gd ? gd.open : null;
   ui.open = id;
   const u = id === '__new' ? null : findUc(id);
-  const d = $('#drawer');
+  let h;
   if (!u) {
-    d.innerHTML = `<header><h2 id="drawerTitle">Add a use case · ${PHASES[ui.phase].short}</h2><button class="icon-btn" type="button" data-close aria-label="Close">✕</button></header>
+    h = `<header><h2 id="drawerTitle">Add a use case · ${PHASES[ui.phase].short}</h2><button class="icon-btn" type="button" data-close aria-label="Close">✕</button></header>
       <form class="scroll" id="addForm" autocomplete="off">
         <div class="field"><label for="fTitle">Title</label><input id="fTitle" required maxlength="80" placeholder="e.g. Summarise conference talks"></div>
         <div class="field"><label for="fDesc">What should AI do – and what do you check?</label><textarea id="fDesc" maxlength="300"></textarea></div>
@@ -1284,7 +1288,7 @@ function openDrawer(id){
       </form>`;
   } else {
     const r = myR(u.id), rm = room(u.id), ro = readOnly();
-    d.innerHTML = `<header><h2 id="drawerTitle">${esc(u.t)}</h2><button class="icon-btn" type="button" data-close aria-label="Close">✕</button></header>
+    h = `<header><h2 id="drawerTitle">${esc(u.t)}</h2><button class="icon-btn" type="button" data-close aria-label="Close">✕</button></header>
       <div class="scroll">
         ${u.ex ? '<p class="exnote"><b>Excursus.</b> Research on language models, not a method for every discipline: model outputs are not valid data about real people.</p>' : ''}
         ${u.d ? `<p class="desc">${esc(u.d)}</p>` : ''}
@@ -1312,9 +1316,15 @@ function openDrawer(id){
         ${u.custom && !ro && (!session || u.by === myTable() || session.role === 'facilitator') ? '<div><button class="btn btn-quiet btn-sm" type="button" data-del>Remove this use case</button></div>' : ''}
       </div>`;
   }
+  if (again && h === drawerHtml) return;                          // nothing changed – leave the DOM and scroll position alone
+  drawerHtml = h; d.innerHTML = h;
+  if (again) {
+    const g = d.querySelector('details.guide'); if (g && gOpen !== null) g.open = gOpen;
+    const s2 = d.querySelector('.scroll'); if (s2) s2.scrollTop = top;
+  }
   d.hidden = false; $('#scrim').hidden = false;
   renderCards();
-  setTimeout(() => (d.querySelector('#fTitle') || d.querySelector('h2')).focus({preventScroll:true}), 30);
+  if (!again) setTimeout(() => (d.querySelector('#fTitle') || d.querySelector('h2')).focus({preventScroll:true}), 30);
   if (d.querySelector('h2')) d.querySelector('h2').tabIndex = -1;
 }
 function closeDrawer(){
