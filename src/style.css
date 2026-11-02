@@ -320,6 +320,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 .further h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--red);margin:0 0 6px}
 .further ol{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-2)}
 .further li b{color:var(--ink);margin-right:4px}
+.pill.ex{background:var(--amber-bg);color:var(--amber)}
+.exnote{background:var(--amber-bg);color:var(--amber);border-radius:var(--radius-s);padding:8px 12px;font-size:14px}
 .dl-item.flash{animation:flash 1.8s ease-out}
 @keyframes flash{0%{background:var(--red-tint-2)}100%{background:transparent}}
 @media (prefers-reduced-motion:reduce){.dl-item.flash{animation:none;outline:2px solid var(--red)}}

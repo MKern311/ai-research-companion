@@ -4499,5 +4499,295 @@
    "connect": [],
    "repos": []
   }
+ },
+ "design-6": {
+  "problem": "Conceptual and measurement models are redrawn by hand in slide or drawing tools; each new paper or changed construct means rework, and the diagram drifts away from the text and the item list.",
+  "result": "An editable model kept as code (Mermaid or draw.io XML) next to a construct–indicator table – updated in minutes when the literature changes, and consistent across thesis, slides and survey.",
+  "steps": [
+   "Write each construct with a one-line definition and its expected paths",
+   "Generate the diagram as Mermaid or draw.io XML and a construct–indicator table",
+   "Decide reflective or formative measurement for every construct",
+   "Store the code with your project and regenerate it when the evidence changes",
+   "Check every arrow against your theory and every item against its source"
+  ],
+  "method": {
+   "concepts": [
+    [
+     "Conceptual model",
+     "Shows constructs and the hypothesised relationships between them (direct paths, mediators, moderators). Each arrow should correspond to a stated hypothesis or proposition and its theoretical argument."
+    ],
+    [
+     "Measurement model",
+     "Links each latent construct to its observed indicators (e.g. survey items). Path-diagram convention: latent constructs as ovals, indicators as rectangles, arrows for assumed directions (Kline, 2016)."
+    ],
+    [
+     "Reflective vs formative measurement",
+     "Reflective: the construct causes its indicators, which should correlate and are interchangeable. Formative: indicators jointly form the construct and are not interchangeable. Misspecification biases estimates (Jarvis et al., 2003)."
+    ],
+    [
+     "Construct–indicator mapping",
+     "A table linking each construct definition to its items and their source; the basis for content validity and the later CFA or PLS-SEM (MacKenzie et al., 2011)."
+    ],
+    [
+     "Model as code and living updates",
+     "Keeping the diagram as text (Mermaid, draw.io XML) makes it versionable and quick to regenerate, in the spirit of living reviews that are updated as new evidence appears (Elliott et al., 2014)."
+    ]
+   ],
+   "refs": [
+    {
+     "cite": "Jarvis, C. B., MacKenzie, S. B., & Podsakoff, P. M. (2003). A critical review of construct indicators and measurement model misspecification in marketing and consumer research. Journal of Consumer Research, 30(2), 199–218.",
+     "doi": "10.1086/376806"
+    },
+    {
+     "cite": "MacKenzie, S. B., Podsakoff, P. M., & Podsakoff, N. P. (2011). Construct measurement and validation procedures in MIS and behavioral research: Integrating new and existing techniques. MIS Quarterly, 35(2), 293–334.",
+     "doi": "10.2307/23044045"
+    },
+    {
+     "cite": "Kline, R. B. (2016). Principles and practice of structural equation modeling (4th ed.). Guilford Press.",
+     "doi": ""
+    }
+   ]
+  },
+  "practice": {
+   "data": [
+    "A3",
+    "D3",
+    "D5"
+   ],
+   "task": "Build the causal chain behind the annual climate indicators from Forster et al. (2025) as a diagram and map the two practice data files to the constructs they measure. You see whether Copilot keeps to the paper's chain or adds arrows of its own.",
+   "prompt": "Attached is Forster et al. (2025), 'Indicators of Global Climate Change 2024', plus the HadCRUT5 monthly CSV and the NOAA Mauna Loa CO₂ CSV. 1) From the paper only, draw the chain of indicators it reports – from emissions through concentrations and effective radiative forcing to observed and human-induced warming – as Mermaid flowchart code (left to right), each arrow labelled with the section of the paper it comes from. 2) Add a measurement layer: which column of each attached data file measures which construct, and with what unit and baseline. 3) List any arrow or construct you added that is not in the paper.",
+   "check": "Compare the chain with the paper's sections and figures; aerosol and other non-CO₂ forcings must appear if Copilot claims completeness. In the files: HadCRUT5 'Anomaly (deg C)' relative to 1961–1990, CO₂ 'average' in ppm. Paste the Mermaid code into draw.io to see it."
+  },
+  "tech": {
+   "routes": [
+    "chat",
+    "connected",
+    "external"
+   ],
+   "text": "Copilot Chat writes Mermaid or draw.io XML, which you import into draw.io (Arrange › Insert › Advanced). With the draw.io or Figma MCP server connected – your IT team has to enable it – Copilot can create and update the diagram directly.",
+   "data": [
+    "A3",
+    "D3",
+    "D5"
+   ],
+   "tools": [],
+   "connect": [
+    "draw.io",
+    "Figma"
+   ],
+   "repos": [
+    "seminr",
+    "lavaan"
+   ]
+  }
+ },
+ "erhebung-7": {
+  "problem": "Card sorts, item-sorting tasks and workshop boards produce rich data on paper; typing them up and counting placements by hand takes hours and introduces transcription errors.",
+  "result": "A transcribed, structured table of every card and its placement, with counts per category and flagged uncertain readings – analysis can start the same day, and the photo remains the audit trail.",
+  "steps": [
+   "Plan the board so categories and cards are clearly separated",
+   "Photograph it straight on and remove identifying details",
+   "Let Copilot transcribe first, then map cards to categories",
+   "Count placements per item, e.g. for substantive validity",
+   "Verify card count and five transcriptions against the photo"
+  ],
+  "method": {
+   "concepts": [
+    [
+     "Card sorting (open and closed)",
+     "Participants group cards into categories they create (open) or into predefined ones (closed). Used to explore mental models or to test whether categories work; analysed via placement frequencies and clusters (Spencer, 2009)."
+    ],
+    [
+     "Item-sorting task",
+     "Respondents assign each survey item to the construct definition it fits. The proportion of substantive agreement (psa) and the substantive-validity coefficient (csv) flag items that are misread before a full pre-test (Anderson & Gerbing, 1991)."
+    ],
+    [
+     "Visual and photo data",
+     "Photos of boards are research data: they need a capture protocol (angle, light, labelling), consent where people or handwriting can be identified, and secure storage (Pain, 2012)."
+    ],
+    [
+     "Transcription before interpretation",
+     "Separate the literal record (what is on each card, where) from coding and clustering. This keeps the step checkable and makes AI misreadings visible."
+    ]
+   ],
+   "refs": [
+    {
+     "cite": "Anderson, J. C., & Gerbing, D. W. (1991). Predicting the performance of measures in a confirmatory factor analysis with a pretest assessment of their substantive validities. Journal of Applied Psychology, 76(5), 732–740.",
+     "doi": "10.1037/0021-9010.76.5.732"
+    },
+    {
+     "cite": "Pain, H. (2012). A literature review to evaluate the choice and use of visual methods. International Journal of Qualitative Methods, 11(4), 303–319.",
+     "doi": "10.1177/160940691201100401"
+    },
+    {
+     "cite": "Spencer, D. (2009). Card sorting: Designing usable categories. Rosenfeld Media.",
+     "doi": ""
+    }
+   ]
+  },
+  "practice": {
+   "data": [
+    "papers"
+   ],
+   "task": "As a group, write the short titles of the 12 practice papers on sticky notes, sort them into groups on a flipchart, photograph it and let Copilot read and map the board. You see how reliably it reads handwriting and keeps observation apart from interpretation.",
+   "prompt": "The attached photo shows a card sort: 12 sticky notes with short titles of research papers on weather and climate change, sorted by our group into clusters on a flipchart. 1) Transcribe every note exactly, numbered, with the cluster it sits in; write [illegible] for anything you cannot read. 2) Give a table: note number, text, cluster. 3) Compare our clusters with these three groups: 'Global temperature records', 'UK and Europe', 'Extremes and attribution' – for each note, say whether our placement matches and where it differs. 4) Only then suggest a label for each of our clusters.",
+   "check": "Exactly 12 notes in the table; compare the transcription with the board. The pack's grouping (Practice data tab: A, B and C papers) is the reference – check two notes where Copilot says your placement differs."
+  },
+  "tech": {
+   "routes": [
+    "files"
+   ],
+   "text": "Upload the photo (JPEG or PNG) to Copilot Chat, which reads images. Export the table to Excel to count placements; for larger studies keep the photos and transcripts in your research data storage.",
+   "data": [
+    "papers"
+   ],
+   "tools": [],
+   "connect": [],
+   "repos": []
+  }
+ },
+ "design-7": {
+  "problem": "Building realistic stimuli for each condition – a mock feed, vignettes, product pages – and wiring them into a survey with randomisation takes weeks, and small unintended differences between conditions confound the results.",
+  "result": "Matched stimuli for every condition, a manipulation check and a complete study flow with variable names – faster to build, easier to keep conditions equivalent, and data that go straight into your analysis.",
+  "steps": [
+   "Define the manipulated factor, its levels and everything held constant",
+   "Generate stimuli per condition and list every difference between them",
+   "Add a manipulation check and the full survey flow with variable names",
+   "Pilot realism and the manipulation with real people",
+   "Obtain ethics approval and prepare a debrief"
+  ],
+  "method": {
+   "concepts": [
+    [
+     "Experimental manipulation and control",
+     "Conditions should differ only in the manipulated factor; every other difference is a confound. Random assignment balances participant characteristics across conditions in expectation."
+    ],
+    [
+     "Manipulation check",
+     "A measure of whether participants perceived the manipulation as intended. Useful in pilots; in the main study it can itself influence responses, so place and use it deliberately (Hauser et al., 2018)."
+    ],
+    [
+     "Vignettes and mock environments",
+     "Systematically varied descriptions or simulated settings such as a social media feed, combining control with realism. Factorial vignette designs vary several factors at once (Atzmüller & Steiner, 2010)."
+    ],
+    [
+     "Stimulus sampling",
+     "One stimulus per condition confounds the manipulation with that stimulus' quirks; several stimuli per condition support generalisation beyond the specific material (Wells & Windschitl, 1999)."
+    ],
+    [
+     "Deception and debriefing",
+     "If stimuli mislead – fictional posts, fake ads – ethics guidance requires justification, minimal deception and a debrief; AI-generated material should be labelled as such in the study record."
+    ]
+   ],
+   "refs": [
+    {
+     "cite": "Hauser, D. J., Ellsworth, P. C., & Gonzalez, R. (2018). Are manipulation checks necessary? Frontiers in Psychology, 9, 998.",
+     "doi": "10.3389/fpsyg.2018.00998"
+    },
+    {
+     "cite": "Atzmüller, C., & Steiner, P. M. (2010). Experimental vignette studies in survey research. Methodology, 6(3), 128–138.",
+     "doi": "10.1027/1614-2241/a000014"
+    },
+    {
+     "cite": "Wells, G. L., & Windschitl, P. D. (1999). Stimulus sampling and social psychological experimentation. Personality and Social Psychology Bulletin, 25(9), 1115–1125.",
+     "doi": "10.1177/01461672992512005"
+    }
+   ]
+  },
+  "practice": {
+   "data": [
+    "B2",
+    "C4"
+   ],
+   "task": "Build the two conditions of a framing experiment: a mock news feed on a heatwave with and without an attribution statement taken from the papers. You see whether Copilot keeps the conditions equivalent and the attribution claim faithful to the source.",
+   "prompt": "Attached are Christidis et al. (2020) on UK hot days and Zachariah et al. (2023) on the 2022 heatwave in India and Pakistan. I want to test whether an attribution statement changes how worried readers are about heatwaves. Create two versions of a mock social media news feed as one self-contained HTML page each: six posts from fictional accounts, one of them a post about a heatwave. Condition A: the heatwave post includes one attribution sentence taken faithfully from one of the papers, with its source. Condition B: the same post without that sentence, otherwise word for word identical. List every difference between A and B, quote the source passage for the attribution sentence, and add one manipulation-check question and a three-item worry measure with variable names.",
+   "check": "Open both HTML files side by side: only the attribution sentence may differ. Find the quoted passage in the PDF – e.g. Zachariah et al.'s 'about 30 times more likely' – and check that the post does not overstate it."
+  },
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Copilot Chat writes stimulus texts and self-contained HTML mock-ups and drafts the survey flow; you build the study in your survey tool (e.g. Qualtrics or Microsoft Forms). For realistic interactive feeds, research platforms such as Truman or the Mock Social Media Website Tool log participants' behaviour.",
+   "data": [
+    "B2",
+    "C4"
+   ],
+   "tools": [],
+   "connect": [
+    "GitHub Copilot",
+    "Figma"
+   ],
+   "repos": [
+    "truman",
+    "mock-social-media"
+   ]
+  }
+ },
+ "erhebung-8": {
+  "problem": "Language models are tempting as cheap, instant 'respondents', but their answers do not represent real people; used naively, they produce data that look plausible yet are invalid for claims about humans.",
+  "result": "A defensible design for research where model outputs are the object of study – audits of accuracy, bias or consistency – with documented prompts, versions and variability, and clear limits on what can be concluded.",
+  "steps": [
+   "Frame the question about the model, not about a human population",
+   "Fix prompts, model, version, date and parameters before collecting",
+   "Sample repeated answers and code them against a reference",
+   "Report variability and limitations; disclose the method",
+   "Use real participants for any claim about people"
+  ],
+  "method": {
+   "concepts": [
+    [
+     "Silicon sampling and algorithmic fidelity",
+     "Conditioning a model on persona descriptions to simulate survey answers. Fidelity to human response patterns varies by topic and group and must be tested against real data, not assumed (Argyle et al., 2023)."
+    ],
+    [
+     "Limits of synthetic respondents",
+     "Model answers can be unstable across prompts and versions, show too little variance and flatten or misportray identity groups; they cannot replace human samples for inference (Bisbee et al., 2024; Wang et al., 2025)."
+    ],
+    [
+     "Model audits",
+     "Systematic, repeated querying of one or more models with fixed prompts to measure accuracy, bias or consistency – here the model is the unit of analysis."
+    ],
+    [
+     "Reproducibility and disclosure",
+     "Record model name and version, date, full prompts, settings such as temperature and the number of runs; publish prompts and raw outputs so others can repeat the study."
+    ]
+   ],
+   "refs": [
+    {
+     "cite": "Argyle, L. P., Busby, E. C., Fulda, N., Gubler, J. R., Rytting, C., & Wingate, D. (2023). Out of one, many: Using language models to simulate human samples. Political Analysis, 31(3), 337–351.",
+     "doi": "10.1017/pan.2023.2"
+    },
+    {
+     "cite": "Bisbee, J., Clinton, J. D., Dorff, C., Kenkel, B., & Larson, J. M. (2024). Synthetic replacements for human survey data? The perils of large language models. Political Analysis, 32(4), 401–416.",
+     "doi": "10.1017/pan.2024.5"
+    },
+    {
+     "cite": "Wang, A., Morgenstern, J., & Dickerson, J. P. (2025). Large language models that replace human participants can harmfully misportray and flatten identity groups. Nature Machine Intelligence, 7(3), 400–411.",
+     "doi": "10.1038/s42256-025-00986-z"
+    }
+   ]
+  },
+  "practice": {
+   "data": [
+    "B2"
+   ],
+   "task": "Run a mini audit: ask Copilot the same question about UK heat attribution in five fresh chats and code the answers against Christidis et al. (2020). You see how consistent and accurate model answers are – and why they are data about the model, not about people.",
+   "prompt": "In about 120 words, and with sources: how has human-caused climate change changed the likelihood of days above 40 °C in the UK, according to research published before the July 2022 record? [Run this exact prompt in five new chats and save every answer with the time.]",
+   "check": "Compare each answer with Christidis et al. (2020): the return time of 40 °C days in the current climate (the paper's abstract gives 100–300 years) and its change under higher warming. Count correct, partly correct and wrong answers and invented sources."
+  },
+  "tech": {
+   "routes": [
+    "chat",
+    "external"
+   ],
+   "text": "Copilot Chat is enough for a first audit with repeated fresh chats, but it does not let you fix the model version or settings. Proper studies use documented model APIs (e.g. via Azure AI) with logged prompts, parameters and raw outputs.",
+   "data": [
+    "B2"
+   ],
+   "tools": [],
+   "connect": [],
+   "repos": []
+  }
  }
 }

@@ -16,7 +16,7 @@ const PHASES = [
    U('Novelty check','Semantic search for closely related work to spot duplication early and sharpen your positioning.',['recherche'],3,2,'Assist',['Semantic Scholar','OpenAlex','Consensus','Elicit']),
    U('Interdisciplinary bridges','Suggest concepts and methods from neighbouring disciplines that transfer to your research question.',['generierung','recherche'],2,2,'Co-create'),
    U('Research gap mapping','Sort the gaps a body of literature leaves into types – empirical, methodological, theoretical, practical or contradictory findings – and back each one with the studies that show it.',['synthese','analyse'],3,2,'Co-create'),
-   U('Theoretical framework & hypotheses','Compare candidate theories for your question, derive hypotheses or propositions with their reasoning, and sketch the conceptual model.',['generierung','synthese'],3,2,'Co-create')
+   U('Theoretical framework & hypotheses','Compare candidate theories for your question, derive hypotheses or propositions with their reasoning, and describe the conceptual model in words.',['generierung','synthese'],3,2,'Co-create')
   ],
   limits:['Apparent “gaps” may simply be gaps in the model’s knowledge – always verify against subject databases.','Popularity bias: models reinforce established mainstream topics.','Judging originality and relevance remains your task – and your supervisor’s.'],
   disc:['Where do you get stuck most when narrowing down a topic?','Under what conditions would you trust an AI-generated research question?']},
@@ -48,7 +48,9 @@ const PHASES = [
    U('Pre-testing with synthetic personas','Test instruments with simulated respondents for comprehension issues – as a supplement to real pre-tests, never a replacement.',['generierung','analyse'],2,3,'Assist'),
    U('Sample size & power analysis','Generate calculations as traceable code (e.g. R or Python) and make assumptions explicit.',['analyse'],2,2,'Assist'),
    U('Ethics application & data management plan','Structure drafts along your institution’s templates – the study-specific reasoning on consent, risks and anonymisation must be your own.',['generierung'],3,2,'Co-create'),
-   U('Final survey check','Let Copilot walk through the finished questionnaire along different answer paths to find broken routing, missing or overlapping answer options and inconsistent scales – and proofread it as a whole.',['analyse','generierung'],3,1,'Assist')
+   U('Final survey check','Let Copilot walk through the finished questionnaire along different answer paths to find broken routing, missing or overlapping answer options and inconsistent scales – and proofread it as a whole.',['analyse','generierung'],3,1,'Assist'),
+   U('Conceptual & measurement model diagrams','Turn your theory into a conceptual or measurement model diagram – constructs, paths and, where needed, survey items – as editable draw.io or Figma content you update with the literature instead of redrawing it.',['generierung','synthese'],3,1,'Co-create',['draw.io','Figma']),
+   U('Experimental stimuli & instruments','Generate the materials for each experimental condition – e.g. a mock social media feed with personalised vs non-personalised ads, vignettes or product pages – and build the experiment with randomisation and data capture so the data flow straight into analysis.',['generierung','agentisch'],3,2,'Co-create')
   ],
   limits:['Synthetic “respondents” do not validly represent real populations.','Methodological responsibility and disciplinary conventions rest with you and your supervisory team.','Ethics committees expect study-specific reflection – generic AI text on consent or anonymisation can be wrong.'],
   disc:['Where could AI measurably improve the quality of your instruments?','What role should synthetic data be allowed to play in your research?']},
@@ -63,7 +65,9 @@ const PHASES = [
    U('Adaptive surveying','Conversational interviews or surveys that ask follow-up questions dynamically – with clear ethical guardrails.',['generierung','agentisch'],2,3,'Delegate'),
    U('Dataset discovery','Find open secondary data and repositories for the research question and assess their suitability.',['recherche'],2,1,'Assist'),
    U('Pseudonymising transcripts','Detect and replace names, places and other identifiers before analysis – in an approved environment, always checked by hand.',['analyse'],2,3,'Assist'),
-   U('Reading historical & handwritten sources','Transcribe printed or handwritten archival material (OCR/HTR) and draft first translations for close reading.',['analyse','generierung'],2,2,'Co-create',['Transkribus'])
+   U('Reading historical & handwritten sources','Transcribe printed or handwritten archival material (OCR/HTR) and draft first translations for close reading.',['analyse','generierung'],2,2,'Co-create',['Transkribus']),
+   U('Reading photo protocols','Turn photos of whiteboards, flipcharts or card sorts from workshops and experiments into structured data – transcribed, clustered and mapped (e.g. items to constructs) – ready for analysis.',['analyse','synthese'],3,2,'Co-create'),
+   Object.assign(U('LLMs as a data source','Use the answers of language models themselves as research data – e.g. simulated interviews, “silicon samples” or audits of what models say – to study the models, not as a substitute for human participants.',['generierung','analyse'],2,3,'Assist'),{ex:true})
   ],
   limits:['Process personal and sensitive data only in approved, protected environments – and only as your ethics approval allows.','Participant information and ethics approval must cover AI processing; clarify the legal basis with your ethics committee or data protection officer.','Check transcription and annotation errors systematically through sampling.'],
   disc:['Do you know which of your data may go into which AI tool?','Where is your biggest manual data-capture effort?']},
@@ -199,6 +203,8 @@ const TOOLS = [
 // MCP servers per tool (checked 28 October 2026): [o = official / c = community, remote server?, source, note]
 const MCP = {
  'OpenAlex':['o',1,'https://help.openalex.org/access/connector/','Run by OpenAlex; sign-in, free daily allowance; can also check whether references exist.'],
+ 'draw.io':['o',1,'https://www.drawio.com/mcp/','Run by draw.io; hosted server, no install; also reads Mermaid and draw.io XML.'],
+ 'Figma':['o',1,'https://developers.figma.com/docs/figma-mcp-server/','Run by Figma; remote server with sign-in; writing to FigJam and Figma files, call limits depend on the Figma plan.'],
  'Paper Search MCP':['c',0,'https://github.com/openags/paper-search-mcp','Searches several open sources at once (e.g. OpenAlex, Crossref, Semantic Scholar).'],
  'Semantic Scholar':['o',1,'https://allenai.org/asta/resources/mcp','Ai2 Asta server on the Semantic Scholar corpus; API key optional.'],
  'Elicit':['o',1,'https://support.elicit.com/en/articles/14757404-use-elicit-via-mcp-server','Sign-in with your account; Pro plan or higher.'],
@@ -248,6 +254,8 @@ const REPOS = {
  'seminr':['SEMinR','https://github.com/sem-in-r/seminr','R package'],
  'lavaan':['lavaan','https://github.com/yrosseel/lavaan','R package'],
  'metafor':['metafor','https://github.com/wviechtb/metafor','R package'],
+ 'truman':['Truman platform','https://github.com/cornellsml/truman','Open-source mock social network for experiments'],
+ 'mock-social-media':['Mock Social Media Website Tool','https://docs.studysocial.media','Open-source research tool for mock feeds'],
  'awesome-copilot':['awesome-copilot','https://github.com/github/awesome-copilot','Collection for GitHub Copilot']
 };
 // Four levels of working with Copilot in Step 2 (round 1: level 1; round 2: levels 2–3; level 4: outlook)

@@ -129,5 +129,53 @@
     "prompt": "I am a PhD researcher in [discipline]. My research question is: [question]. Below are new publications from this week's alerts. Sort them into must-read, maybe and skip, with one line on why, based only on the title and abstract given. For the must-reads, say in one sentence whether each supports, challenges or extends my work, or offers a method I could use. Finish with a short list of search terms worth adding to my alerts. Do not add papers that are not in the list.\n\n[paste titles and abstracts]",
     "check": "For two papers you rated differently from Copilot, read the abstract again and decide who was right; nothing in the output is a paper you did not paste.",
     "limit": "Copilot rates on title and abstract only; set up the alerts themselves in the databases you use – or connect a source such as OpenAlex via MCP to search for new work directly."
+  },
+  "design-6": {
+    "bring": "Your research question with three to six constructs and the expected relationships – or, for the practice version, the Forster et al. (2025) paper and two data files.",
+    "steps": [
+      "Describe the constructs, their definitions and the expected paths.",
+      "Ask Copilot for the model as Mermaid or draw.io XML, plus a construct–indicator table.",
+      "Import the code into draw.io (Arrange › Insert › Advanced) or open it via the draw.io connection.",
+      "Check every arrow and indicator against your theory and sources."
+    ],
+    "prompt": "I am a postgraduate researcher in [discipline] working on [research question]. My constructs are: [construct – one-line definition, for each]. The expected relationships are: [e.g. A increases B; C moderates A→B]. 1) Draw the conceptual model as Mermaid flowchart code (left to right): constructs as nodes, hypothesised paths as labelled arrows (H1, H2 …), moderators as arrows pointing at a path. 2) If I want a measurement model, add for each construct whether it is reflective or formative, with a one-line reason, and list 3–4 candidate indicators or survey items per construct in a table: construct, indicator, source or 'to be developed'. Do not invent published scales; if you suggest an existing scale, say how sure you are. 3) List any path that is not backed by my description.",
+    "check": "Every node and arrow in the diagram appears in your description or is flagged, each indicator really reflects (or forms) its construct, and any named scale exists with the items Copilot claims.",
+    "limit": "Copilot Chat returns code that you import into draw.io; drawing directly on the canvas needs the draw.io or Figma connection, which your IT has to enable. The theory behind each arrow remains your argument."
+  },
+  "erhebung-7": {
+    "bring": "A clear, glare-free photo of a whiteboard, flipchart or card sort you made yourself – no faces or names – or, for the practice version, a photo of the 12 practice paper titles you sorted on sticky notes.",
+    "steps": [
+      "Photograph the board straight on, in good light, in one or two shots.",
+      "Upload the photo and ask Copilot to transcribe every card before interpreting anything.",
+      "Ask for the clusters or the card-to-category mapping as a table, with uncertain readings flagged.",
+      "Compare the transcription and mapping with the board itself."
+    ],
+    "prompt": "The attached photo shows the result of a [card sort / item-sorting task / brainstorming] from a [workshop or experiment] on [topic]. 1) Transcribe every card or note exactly as written, numbered, with its position (column or cluster). Mark any word you cannot read as [illegible] instead of guessing. 2) Give a table: card number, text, the group or category it was placed in, and any arrow or line connecting it to another card. 3) If the task assigned items to predefined categories ([list categories]), count for each item how many placements fall in the intended category. 4) Only then suggest a short label for each cluster and say which cards fit poorly. Keep observation (steps 1–3) and interpretation (step 4) separate.",
+    "check": "Count the cards on the board and in the table – the numbers must match – and compare five transcriptions word for word; every [illegible] or misread card is a reason to re-photograph or type it in yourself.",
+    "limit": "Handwriting, glare and overlapping notes cause misreadings; photos may contain personal data (faces, names, handwriting), so use only photos you are allowed to process and remove identifying details first."
+  },
+  "design-7": {
+    "bring": "Your hypothesis with the factor you manipulate and the outcome you measure – or, for the practice version, the attribution papers B2 and C4.",
+    "steps": [
+      "State the manipulated factor, its levels and what must stay identical across conditions.",
+      "Ask Copilot for the stimulus texts or a simple HTML mock-up per condition, plus a manipulation check.",
+      "Ask for the survey flow: consent, random assignment, stimulus, measures, debrief – with variable names.",
+      "Compare the conditions side by side: only the manipulated element may differ."
+    ],
+    "prompt": "I am planning a between-subjects experiment in [discipline]. Hypothesis: [e.g. personalised ads in a social media feed increase perceived intrusiveness compared with non-personalised ads]. Manipulated factor: [factor] with the levels [level A] and [level B]. Outcome measures: [measures]. 1) Create the stimulus for each condition: [e.g. a mock social media feed of six posts, two of them ads, as a single self-contained HTML page with fictional accounts and brands]. Keep everything identical except the manipulated element and list every difference between the conditions. 2) Write one manipulation-check question. 3) Draft the full study flow for a survey tool – consent, random assignment, stimulus, measures, manipulation check, demographics, debrief – as a table with variable names and coding, so the export can be analysed directly. Use no real brands, people or logos.",
+    "check": "Put the conditions side by side: apart from the manipulated element, texts, images, layout and length must be identical; the variable names in the flow must match what your analysis plan expects.",
+    "limit": "Stimuli need ethics approval, a debrief when they mislead, and labelling of AI-generated images; check copyright and platform terms, use fictional brands, and pilot the realism with real people before the main study."
+  },
+  "erhebung-8": {
+    "bring": "A question about what language models say or how they respond – not a question about real people – or, for the practice version, the UK heat attribution paper B2.",
+    "steps": [
+      "Formulate a research question about the model, not about people.",
+      "Fix the prompt, then collect several answers in fresh chats and note date and model.",
+      "Code the answers against a reference (the source paper) or a codebook.",
+      "Report variability and limits – never generalise to a human population."
+    ],
+    "prompt": "I am studying how a language model answers a question in [field] – the model's answers are my data, not a stand-in for people. Answer the following question as you normally would, in about 120 words, and cite your sources: [question]. [Repeat this exact prompt in five new chats, on the same day, and save each answer with date, time and the model name shown.]",
+    "check": "Code each saved answer against your reference: correct, partly correct, wrong, no source. Variability across the five runs is itself a finding; do not average answers into a 'typical respondent'.",
+    "limit": "Model answers change with prompt wording, model version and time; they are not valid data about real people and may misrepresent groups. In Copilot Chat you cannot fix the model version or settings – serious studies use documented model APIs and record all parameters."
   }
 }

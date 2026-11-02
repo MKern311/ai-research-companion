@@ -150,6 +150,7 @@ function renderIntro(){
 function card(u, rank){
   const r = myR(u.id), rm = room(u.id);
   const pills = [];
+  if (u.ex) pills.push('<span class="pill ex">Excursus</span>');
   if (r.x) pills.push('<span class="pill notai">Not an AI task</span>');
   else if (r.n && r.u) pills.push(`<span class="pill rated">Value ${r.n} · Feasibility ${r.u}</span>`);
   if (r.tt) pills.push(r.o ? `<span class="pill v" style="--vc:${OUTCOME[r.o][1]}">Copilot: ${OUTCOME[r.o][0]}</span>` : '<span class="pill test">Testing with Copilot</span>');
@@ -247,6 +248,7 @@ function openDrawer(id){
     const r = myR(u.id), rm = room(u.id), ro = readOnly();
     d.innerHTML = `<header><h2 id="drawerTitle">${esc(u.t)}</h2><button class="icon-btn" type="button" data-close aria-label="Close">✕</button></header>
       <div class="scroll">
+        ${u.ex ? '<p class="exnote"><b>Excursus.</b> Research on language models, not a method for every discipline: model outputs are not valid data about real people.</p>' : ''}
         ${u.d ? `<p class="desc">${esc(u.d)}</p>` : ''}
         <div class="meta">${u.custom ? `<span>${u.by === 'Survey' ? 'From the pre-event survey' : 'Added in the workshop'} · ${SHORT[u.phase]}</span>` :
           `<span><b>${u.mode}:</b> ${MODE_DEF[u.mode]}</span><span><b>${RISK[u.risk]}:</b> ${RISK_DEF[u.risk]}</span>`}</div>
