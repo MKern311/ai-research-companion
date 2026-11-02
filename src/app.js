@@ -25,7 +25,7 @@ let state = blank();
 try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v && v.t) state = {t:v.t, c:Array.isArray(v.c) ? v.c : [], a:(v.a && v.a !== 'Table 1' ? v.a : 'Group 1')}; } catch(e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} };
 let session = null;            // {code, role, table, workshop}
-const ui = {view:'agenda', lens:1, phase:0, scope:'room', resTable:null, resPhase:null, toolPhase:null, toolMcp:false, open:null};
+const ui = {gmode:'practice', view:'agenda', lens:1, phase:0, scope:'room', resTable:null, resPhase:null, toolPhase:null, toolMcp:false, open:null};
 const sync = {dirty:false, timer:0, poll:0, last:null, err:null, busy:false};
 
 const remote = () => !!session;
@@ -179,9 +179,24 @@ const GENERIC = {bring:'Material for your own example: a short text, an open-acc
   prompt:'I am a PhD researcher in [discipline]. My goal: [what you want to achieve]. Material: [attached file / pasted text]. Please [task]. Give the result as [format, length]. If you are not sure about something, say so; do not invent sources.',
   check:'The result is correct against your material and saves you real time.'};
 const COPILOT_URL = 'https://m365.cloud.microsoft/chat';   // Microsoft 365 Copilot Chat, university sign-in
+const practiceOf = id => (typeof DETAILS !== 'undefined' && DETAILS[id] && DETAILS[id].practice) || null;
+const promptOf = id => { const pr = practiceOf(id); return pr && ui.gmode === 'practice' ? pr.prompt : ((typeof GUIDES !== 'undefined' && GUIDES[id]) || GENERIC).prompt; };
+function packFiles(id){
+  const p = PACK.papers.find(x => x.id === id);
+  if (p) return `<li><b>${id}</b> <a href="${fileUrl(p.file)}" target="_blank" rel="noopener">${esc(packLabel(id))} · PDF · ${mb(p.size)}</a></li>`;
+  const d = PACK.data.find(x => x.id === id);
+  return d ? `<li><b>${id}</b> ${esc(d.title)}: ${d.files.map(f => `<a href="${fileUrl(f.f)}" download>${esc(f.f.split('/').pop())} · ${mb(f.size)}</a>`).join(', ')}</li>` : '';
+}
 function guideHtml(u, open){
-  const g = (typeof GUIDES !== 'undefined' && GUIDES[u.id]) || GENERIC;
-  return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot · about 10 minutes</summary>
+  const g = (typeof GUIDES !== 'undefined' && GUIDES[u.id]) || GENERIC, pr = practiceOf(u.id), pm = pr && ui.gmode === 'practice';
+  const seg = pr ? `<div class="seg gseg" role="group" aria-label="Material for the test"><button type="button" data-gmode="practice" aria-pressed="${pm}">With the practice data</button><button type="button" data-gmode="own" aria-pressed="${!pm}">With your own material</button></div>` : '';
+  if (pm) return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot · about 10 minutes</summary>${seg}
+    <p>${esc(pr.task)}</p>
+    <p><b>Download and attach:</b></p><ul class="pfiles">${pr.data.map(id => packFiles(id)).join('')}</ul>
+    <div class="prompt"><div class="ptools"><b>Starter prompt · practice data</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-opencopilot title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(pr.prompt)}</pre></div>
+    <p><b>Check:</b> ${esc(pr.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}
+    <p class="sub">All files and test ideas: <button type="button" class="linkbtn" data-view="data">Practice data →</button></p></details>`;
+  return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot · about 10 minutes</summary>${seg}
     <p><b>Bring:</b> ${esc(g.bring)}</p>
     <ol class="howto">${g.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
     <div class="prompt"><div class="ptools"><b>Starter prompt</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-opencopilot title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(g.prompt)}</pre></div>
@@ -379,7 +394,7 @@ function reportMarkdown(){
 }
 /* ---------- tools view ---------- */
 const packLabel = id => { if (id === 'papers') return `All ${PACK.papers.length} papers`; const p = PACK.papers.find(x => x.id === id); if (p) return `${p.cite.split(',')[0]} ${(p.cite.match(/\((\d{4})\)/) || [])[1] || ''}`.trim(); const d = PACK.data.find(x => x.id === id); return d ? d.title : id; };
-const toolUrl = n => { const t = TOOLS.find(x => x.n === n); return t ? 'https://' + t.url.replace(/^https?:\/\//, '') : null; };
+const toolUrl = n => { const t = TOOLS.find(x => x.n === n); return t && t.url ? 'https://' + t.url.replace(/^https?:\/\//, '') : null; };
 function connectHtml(names){
   return names.map(n => {
     const m = MCP[n], c = (M365[n] || []).find(x => x[0] === 'copilot');
@@ -403,6 +418,8 @@ function detailHtml(u){
   return `<div class="ux">
     <div class="ux-pr"><div><h4>The problem</h4><p>${esc(x.problem)}</p></div><div><h4>Result and value</h4><p>${esc(x.result)}</p></div></div>
     <div><h4>How you go about it</h4><ol class="ux-steps">${x.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>
+    ${x.method ? `<div class="ux-method"><h4>Methods and concepts</h4><dl>${x.method.concepts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+      ${x.method.refs.length ? `<p class="ux-refs-h">Key references</p><ul class="ux-refs">${x.method.refs.map(r => `<li>${esc(r.cite)}${r.doi ? ` <a href="https://doi.org/${esc(r.doi)}" target="_blank" rel="noopener">doi.org/${esc(r.doi)}</a>` : ''}</li>`).join('')}</ul>` : ''}</div>` : ''}
     ${tech}</div>`;
 }
 function mcpHtml(t){
@@ -561,10 +578,11 @@ document.addEventListener('click', e => {
   if (t.closest('#explore')) { $('#login').hidden = true; renderAll(); return; }
   if (t.closest('#menuBtn')) { openMenu(); return; }
   if (t.closest('[data-mclose]') || t === $('#modal')) { closeMenu(); return; }
-  if (t.closest('[data-opencopilot]') && ui.open) { const g = (typeof GUIDES !== 'undefined' && GUIDES[ui.open]) || GENERIC; copyText(g.prompt, 'Prompt', 'Prompt copied – paste it into Copilot'); return; }
+  if (t.closest('[data-opencopilot]') && ui.open) { copyText(promptOf(ui.open), 'Prompt', 'Prompt copied – paste it into Copilot'); return; }
   const slb = t.closest('[data-slides]'); if (slb) { openSlides(+slb.dataset.slides); return; }
   const slc = t.closest('[data-slcopy]'); if (slc) { const p = SLIDES.prompts[+slc.dataset.slcopy][1]; if (slc.tagName === 'A') copyText(p, 'Prompt', 'Prompt copied – paste it into Copilot'); else { e.preventDefault(); copyText(p, 'Prompt'); } return; }
-  if (t.closest('[data-copyprompt]') && ui.open) { const g = (typeof GUIDES !== 'undefined' && GUIDES[ui.open]) || GENERIC; copyText(g.prompt, 'Prompt'); return; }
+  if (t.closest('[data-copyprompt]') && ui.open) { copyText(promptOf(ui.open), 'Prompt'); return; }
+  const gm = t.closest('[data-gmode]'); if (gm && ui.open) { ui.gmode = gm.dataset.gmode; const gd = gm.closest('details.guide'); if (gd) { const tmp = document.createElement('div'); tmp.innerHTML = guideHtml(findUc(ui.open), true); gd.replaceWith(tmp.firstElementChild); } return; }
   if (t.closest('#repCopy')) { copyText(reportMarkdown(), 'Report'); return; }
   if (t.closest('#repDl')) { download(`${stamp()}_ai-research-process_report.md`, reportMarkdown(), 'text/markdown'); return; }
   if (t.closest('#mCsv')) { download(`${stamp()}_ai-research-process_results.csv`, '﻿' + csv(), 'text/csv'); return; }

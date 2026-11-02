@@ -295,6 +295,17 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 .ux-con{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;width:100%}
 .ux-con li{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .ux-row .linkbtn{font-size:13.5px}
+.ux-method dl{margin:0;display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr);gap:6px 12px}
+.ux-method dt{font-weight:700;font-size:14px;color:var(--ink)}
+.ux-method dd{margin:0;font-size:14px;color:var(--ink-2)}
+@media (max-width:560px){.ux-method dl{grid-template-columns:minmax(0,1fr)}.ux-method dd{margin-bottom:6px}}
+.ux-refs-h{font-size:13px;font-weight:700;color:var(--ink);margin-top:10px !important}
+.ux-refs{margin:4px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.ux-refs li{font-size:13px;color:var(--ink-2);overflow-wrap:anywhere}
+.gseg{margin:10px 0 12px}
+.pfiles{margin:4px 0 10px;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.pfiles li{overflow-wrap:anywhere}
+.pfiles b{color:var(--red)}
 .dl-item.flash{animation:flash 1.8s ease-out}
 @keyframes flash{0%{background:var(--red-tint-2)}100%{background:transparent}}
 @media (prefers-reduced-motion:reduce){.dl-item.flash{animation:none;outline:2px solid var(--red)}}
