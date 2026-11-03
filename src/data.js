@@ -339,6 +339,7 @@ const TEAM = [
  {n:'Tom', role:'', photo:'assets/team/tom.webp'},
  {n:'Thomas', role:'', photo:'assets/team/thomas.webp'},
  {n:'Liam', role:'', photo:'assets/team/liam.webp'},
+ {n:'Rachel', role:'', photo:'assets/team/rachel.webp'},
  {n:'Manuel', role:'', photo:''}
 ];
 
