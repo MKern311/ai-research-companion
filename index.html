@@ -1277,25 +1277,25 @@ S.push({t:'About me', note:'I am Manuel. I wear three hats today: professor at H
  '</div></div></div>'+
  link([['15:00','<b>Steps 1 and 2:</b> rate the use cases, then try the best ones with Copilot.']])});
 
-S.push({t:'How this session works', note:'Here is how the next hour and a half works – I will show it in the tool in a minute. Step 1: your group rates the use cases for your research: how valuable, what kind of gain, how feasible. Step 2: you pick one to three of your best-rated use cases and try them live with Copilot. Each one comes with a starter prompt and a check, and you can climb three levels: chat, notebook, agent. Results shows what the whole room rated and tested. On the side you have practice data – papers and raw datasets you can use instead of your own unpublished material – and Academic Extensions & Tools for specialist tools beyond Copilot. Before we start: what actually changes when you go from chat to agent?',
+S.push({t:'How this session works', note:'Here is how the next hour and a half works – I will show it in the tool in a minute. Step 1: your group rates the use cases for your research: how valuable, what kind of gain, how feasible. Step 2: you pick one to three of your best-rated use cases and try them live with Copilot. Each one comes with a starter prompt and a check, and you can climb three levels: chat, notebook or cowork, agent. Results shows what the whole room rated and tested. On the side you have practice data – papers and raw datasets you can use instead of your own unpublished material – and Academic Extensions & Tools for specialist tools beyond Copilot. Before we start: what actually changes when you go from chat to agent?',
  html: head('1 · How this session works','Rate, <em>try</em>, compare.')+
  '<div class="ps-body" style="gap:18px"><div class="pi-flow">'+
    '<div class="pi-st rv" style="--d:180;--c:var(--blue);--cs:var(--blue-soft)"><span class="ic">'+ico('rate',26)+'</span><div class="k">Step 1</div><div class="t">Research value</div><div class="p">Your group rates the use cases: value, kind of gain, feasibility.</div></div>'+
    '<div class="pi-arw rv" style="--d:300" aria-hidden="true">→</div>'+
-   '<div class="pi-st rv" style="--d:380;--c:var(--accent);--cs:var(--accent-soft)"><span class="ic">'+ico('test',26)+'</span><div class="k">Step 2</div><div class="t">Try it with Copilot</div><div class="p">One to three of your best use cases, live – with a starter prompt and a check.</div><div class="pi-lv"><span><b>1</b> Chat</span><span><b>2</b> Notebook</span><span><b>3</b> Agent</span><span class="o">4 Copilot Studio / GitHub Code</span></div></div>'+
+   '<div class="pi-st rv" style="--d:380;--c:var(--accent);--cs:var(--accent-soft)"><span class="ic">'+ico('test',26)+'</span><div class="k">Step 2</div><div class="t">Try it with Copilot</div><div class="p">One to three of your best use cases, live – with a starter prompt and a check.</div><div class="pi-lv"><span><b>1</b> Chat</span><span><b>2</b> Notebook / Cowork</span><span><b>3</b> Agent</span><span class="o">4 Copilot Studio / GitHub Code</span></div></div>'+
    '<div class="pi-arw rv" style="--d:500" aria-hidden="true">→</div>'+
    '<div class="pi-st rv" style="--d:580;--c:var(--verify);--cs:var(--verify-soft)"><span class="ic">'+ico('results',26)+'</span><div class="k">Results</div><div class="t">What the room found</div><div class="p">Rankings and tests of all groups, by discipline.</div></div>'+
  '</div><div class="pi-auxl rv" style="--d:700">Alongside</div><div class="pi-aux">'+
    '<div class="pi-ax rv" style="--d:760"><span class="ic">'+ico('data')+'</span><div><b>Practice data</b><span>Open papers and raw data to use instead of your own unpublished work.</span></div></div>'+
    '<div class="pi-ax rv" style="--d:840"><span class="ic">'+ico('tools')+'</span><div><b>Academic Extensions &amp; Tools</b><span>Specialist tools beyond Copilot – and how they connect.</span></div></div>'+
  '</div></div>'+
- link([['Step 2','<b>Three levels: chat, notebook, agent.</b> What changes along the way?']])});
+ link([['Step 2','<b>Three levels: chat, notebook / cowork, agent.</b> What changes along the way?']])});
 
-S.push({t:'Chat, notebook, agent', note:'Three ways to work with AI. In a chat you ask, it answers – you steer every single step. In the middle, cowork or a notebook: it works with you on your files and keeps them together – Copilot Cowork works through a multi-step task, a Copilot notebook keeps your sources and answers in one place – and you check each step. An agent pursues a goal on its own: it plans, acts and checks in a loop. The more autonomy, the more it needs: a clear goal, the right context – instructions, your files, memory – and tools such as search, code or a connector to a database. A chat alone has none of that. That is also the ladder in Step 2: Chat, then a notebook adds context, an agent adds standing instructions, Copilot Studio or your own code on GitHub adds tools.',
+S.push({t:'Chat, notebook / cowork, agent', note:'Three ways to work with AI. In a chat you ask, it answers – you steer every single step. In the middle, a notebook or cowork: it works with you on your files – a Copilot notebook keeps your sources and answers in one place, Copilot Cowork works through a multi-step task – and you check each step. An agent pursues a goal on its own: it plans, acts and checks in a loop. The more autonomy, the more it needs: a clear goal, the right context – instructions, your files, memory – and tools such as search, code or a connector to a database. A chat alone has none of that. That is also the ladder in Step 2: Chat, then a notebook or cowork adds context, an agent adds standing instructions, Copilot Studio or your own code on GitHub adds tools.',
  html: head('2 · Three ways to work with AI','From <em>chat</em> to <em>agent</em>.')+
  '<div class="ps-body" style="gap:16px"><div class="pi-modes">'+[
    ['chat','blue','Chat','You ask, it answers. You steer every step.','Copilot Chat'],
-   ['cowork','ochre','Cowork / Notebook','It works with you on your files and keeps them together. You check each step.','Copilot Cowork · Copilot Notebook'],
+   ['cowork','ochre','Notebook / Cowork','It works with you on your files and keeps them together. You check each step.','Copilot Notebook · Copilot Cowork'],
    ['agent','accent','Agent','It pursues a goal on its own – with context and tools. You set goal and limits.','Agent Builder · Copilot Studio']
  ].map(function(m,i){ return '<div class="pi-mode rv" style="--d:'+(180+i*160)+';--c:var(--'+m[1]+');--cs:var(--'+m[1]+'-soft)">'+SV[m[0]]+'<div class="t">'+m[2]+'</div><div class="p">'+m[3]+'</div><span class="tag">'+m[4]+'</span></div>'; }).join('')+
  '</div><div class="pi-auto rv" style="--d:650"><span>You steer every step</span><i></i><span>AI runs the loop</span></div>'+
@@ -1796,7 +1796,7 @@ const REPOS = {
 // Four levels of working with Copilot in Step 2
 const LEVELS = [
  ['Chat', 'One conversation: prompt, pasted text or uploaded files. Copilot reads PDFs, Word, Excel, CSV and images and runs Python on data – not R, Stata or SPSS: it writes that code, you run it in your own software.'],
- ['Notebook', 'A Copilot notebook keeps your files, notes and Copilot’s answers together – for work you return to. Copilot answers only from the files you add: no web, no Python, no CSV (save as .xlsx).'],
+ ['Notebook / Cowork', 'A Copilot notebook keeps your files, notes and Copilot’s answers together – for work you return to. Copilot answers only from the files you add: no web, no Python, no CSV (save as .xlsx). Copilot Cowork works through a multi-step task across your files and apps and asks before sensitive steps – it needs a Microsoft 365 Copilot licence and your IT team.'],
  ['Agent', 'Your own agent in Agent Builder: standing instructions, knowledge and skills. Reusable for every new paper, dataset or draft. Files as knowledge need a Microsoft 365 Copilot licence – without one, attach them in the chat with your agent.'],
  ['Copilot Studio / GitHub Code', 'For anything an agent cannot hold: connecting tools and databases via MCP or connectors – e.g. OpenAlex, scite, GitHub – in Copilot Studio or as your own code on GitHub. Needs your IT team.']
 ];
@@ -2207,7 +2207,7 @@ function packFiles(id){
   const d = PACK.data.find(x => x.id === id);
   return d ? `<li><b>${id}</b> ${esc(d.title)}: ${d.files.map(f => `<a href="${fileUrl(f.f)}" download>${esc(f.f.split('/').pop())} · ${mb(f.size)}</a>`).join(', ')}</li>` : '';
 }
-// every use case shows the same ladder: 1 chat, 2 notebook, 3 agent – and 4 Copilot Studio only where it makes sense
+// every use case shows the same ladder: 1 chat, 2 notebook / cowork, 3 agent – and 4 Copilot Studio only where it makes sense
 const LV_GENERIC = {chat:'Run the starter prompt in one chat and refine the result there with follow-up questions.',
   notebook:'Create a Copilot notebook, add the files you work with as references and a short document with your rules, and come back to it as your material grows. Copilot answers only from those references.',
   agent:'In Copilot Chat choose New agent: put your rules and the output format into Instructions, add stable reference files as Knowledge (needs a Microsoft 365 Copilot licence – otherwise attach them in the chat) and test it on the Try it tab. Reuse it whenever the task comes up again.', studio:''};
@@ -2215,7 +2215,7 @@ const lvOf = u => (typeof DETAILS !== 'undefined' && DETAILS[u.id] && DETAILS[u.
 function ladderHtml(u){
   const L = lvOf(u), item = (n, t, txt, extra) => `<li><span class="ln">Level ${n} · ${t}</span><p>${esc(txt)}</p>${extra || ''}</li>`;
   return `<div class="ladder"><h4>Three levels with Copilot${L.studio ? ' – and a fourth' : ''}</h4><ol>
-    ${item(1, 'Chat', L.chat)}${item(2, 'Notebook', L.notebook)}${item(3, 'Agent', L.agent, '<p class="lnote">Files as Knowledge need a Microsoft 365 Copilot licence. Without one, attach the files in the chat with your agent. Data to analyse always goes in as an attachment.</p>')}
+    ${item(1, 'Chat', L.chat)}${item(2, 'Notebook / Cowork', L.notebook, '<p class="lnote">Copilot Cowork can run the same steps as one multi-step task across your files – with a Microsoft 365 Copilot licence, once your IT team enables it.</p>')}${item(3, 'Agent', L.agent, '<p class="lnote">Files as Knowledge need a Microsoft 365 Copilot licence. Without one, attach the files in the chat with your agent. Data to analyse always goes in as an attachment.</p>')}
     ${L.studio ? item(4, 'Copilot Studio / GitHub Code', L.studio, '<button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How connecting works →</button>') : ''}</ol></div>`;
 }
 function guideHtml(u, open){
