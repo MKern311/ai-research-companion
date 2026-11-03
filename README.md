@@ -2,7 +2,7 @@
 
 Interactive companion for the workshop *Generative AI in Your Research* (4 November 2026, delivered by Hitachi Solutions). Postgraduate researchers rate AI use cases along the research process in two steps – research value first, technology second – and see the results of the whole room.
 
-**Live:** https://mkern311.github.io/ai-research-companion/
+**Live:** https://airesearchataston.pro/ (also https://mkern311.github.io/ai-research-companion/)
 
 ## How it works
 
