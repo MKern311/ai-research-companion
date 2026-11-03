@@ -141,11 +141,11 @@
     "steps": [
       "Paste your research question and planned design.",
       "Ask for a comparison of three design alternatives in a table.",
-      "Ask for the main threats to validity of your preferred design, with mitigations – and, for an experiment, a plan of conditions, variables and controls.",
+      "Ask for the main threats to validity of your preferred design, with mitigations – and, for an experiment, a plan of conditions, variables and controls that needs as few runs as possible.",
       "Compare the threats with what your methods textbook or supervisor would name."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. My planned design is: [design]. Compare it with two realistic alternatives in a table: design, what it can answer, main strengths, main weaknesses, practical demands (time, access, data). Then, for my planned design, list the main threats to validity (or, for qualitative work, to trustworthiness), each with a concrete way to reduce it. If my design is an experiment, add a short plan: conditions, independent and dependent variables, controls and randomisation. Be specific to my study rather than generic. Keep it under 450 words.",
-    "check": "The threats named include those you already know about from your methods training, and each one is specific to your study rather than a textbook list."
+    "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. My planned design is: [design]. Compare it with two realistic alternatives in a table: design, what it can answer, main strengths, main weaknesses, practical demands (time, access, data). Then, for my planned design, list the main threats to validity (or, for qualitative work, to trustworthiness), each with a concrete way to reduce it. If my design is an experiment, add a short plan: conditions, independent and dependent variables, controls and randomisation, and suggest a design of experiments (for example a fractional factorial or response-surface design) that gives the information I need with fewer runs, stating which effects it cannot separate. Be specific to my study rather than generic. Keep it under 450 words.",
+    "check": "The threats named include those you already know about from your methods training, and each one is specific to your study rather than a textbook list. For a reduced experimental design, the effects it cannot separate are named and you can live with them."
   },
   "design-1": {
     "bring": "Five to eight draft survey items or interview questions of your own, on a non-sensitive topic.",

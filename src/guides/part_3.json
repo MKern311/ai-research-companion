@@ -125,14 +125,14 @@
     "limit": "Copilot Chat does not join or record the meeting; it works only from the notes you write and paste."
   },
   "querschnitt-1": {
-    "bring": "Bullet-point notes on this year's progress, outputs and plans, and the section headings of your review form; leave out health or other personal circumstances.",
+    "bring": "Bullet-point notes or lab-notebook entries on this period's progress, outputs and plans, and the section headings of your report or review form; leave out health or other personal circumstances.",
     "steps": [
-      "Paste the section headings of your review form.",
+      "Paste the section headings of your monthly report or review form.",
       "Paste your notes and ask for a draft under those headings.",
       "Ask for a risk table with likelihood, impact and mitigation.",
       "Check every achievement and date against your notes and records."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline] preparing my [annual / transfer / confirmation] review. The report needs these sections: [paste headings]. My notes are: [paste notes]. Draft the report under these headings in a factual, concise style of about [word count] words. Include progress against last year's objectives, outputs, training, a plan for the next 12 months, and a table of risks with likelihood, impact and mitigation. Use only what is in my notes; mark missing information with [TO ADD] and do not invent achievements, dates or results.",
+    "prompt": "I am a postgraduate researcher in [discipline] preparing my [monthly progress report for my supervisor / annual / transfer / confirmation review]. The report needs these sections: [paste headings]. My notes are: [paste notes]. Draft the report under these headings in a factual, concise style of about [word count] words. Include progress against the objectives of the last period, outputs, training, a plan for the next period (month or year), and a table of risks with likelihood, impact and mitigation. Use only what is in my notes; mark missing information with [TO ADD] and do not invent achievements, dates or results.",
     "check": "Every achievement, output and date in the draft matches your notes, and each risk is one you recognise as real."
   },
   "querschnitt-2": {

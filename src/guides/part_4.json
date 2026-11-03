@@ -87,11 +87,12 @@
     "steps": [
       "Paste the output and say which analysis and software produced it.",
       "Ask for each number to be explained and the assumptions and quality criteria to be checked.",
+      "Ask which checks or analyses you may have missed, and decide which ones you need.",
       "Ask for an APA-style results paragraph using only the numbers in the output.",
       "Check every number in the paragraph against the output."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline]. Below is the output of a [analysis] I ran in [software] on [public or dummy] data, with [n] cases. 1) Explain each part of the output in plain language. 2) List the assumptions and quality criteria I should check for this analysis (for example normality, multicollinearity, reliability such as Cronbach's alpha or omega, model fit such as CFI, RMSEA and SRMR, or for PLS-SEM AVE and HTMT), say which ones the output shows and whether they meet common thresholds, and name the source of each threshold. 3) Draft a results paragraph in APA 7 style using only numbers from the output. Do not round differently, recompute or add numbers that are not in the output; mark anything you are unsure about.\n\n[paste output]",
-    "check": "Every number in the paragraph appears in the output, and the thresholds named match a methods textbook or the guidance your field uses.",
+    "prompt": "I am a postgraduate researcher in [discipline]. Below is the output of a [analysis] I ran in [software] on [public or dummy] data, with [n] cases. 1) Explain each part of the output in plain language. 2) List the assumptions and quality criteria I should check for this analysis (for example normality, multicollinearity, reliability such as Cronbach's alpha or omega, model fit such as CFI, RMSEA and SRMR, or for PLS-SEM AVE and HTMT), say which ones the output shows and whether they meet common thresholds, and name the source of each threshold. 3) List checks or analyses I may have missed for this question and design (for example robustness checks, alternative models, sensitivity or subgroup analyses) and say briefly why each matters. 4) Draft a results paragraph in APA 7 style using only numbers from the output. Do not round differently, recompute or add numbers that are not in the output; mark anything you are unsure about.\n\n[paste output]",
+    "check": "Every number in the paragraph appears in the output, and the thresholds named match a methods textbook or the guidance your field uses. Each suggested extra analysis fits your research question; you decide which ones to run.",
     "limit": "Copilot interprets what you paste; it cannot see your data or the code that produced the output, so check that the analysis itself was the right one."
   },
   "publikation-8": {

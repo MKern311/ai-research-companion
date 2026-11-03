@@ -155,10 +155,11 @@
       "Paste the starter prompt with your code, naming the language and purpose.",
       "Read the explanation and check it matches what you intended the code to do.",
       "Ask for unit tests for one function if they were not included.",
-      "Run the tests in your own environment, or in Copilot if the code is Python; if pytest is not available there, ask for plain assert statements."
+      "Run the tests in your own environment, or in Copilot if the code is Python; if pytest is not available there, ask for plain assert statements.",
+      "Run one suggested plausibility check, for example a case whose answer you know."
     ],
-    "prompt": "I am a researcher writing [language] code for [purpose, e.g. an agent-based simulation of X]. Below is part of my own code. Please 1) explain what it does in plain language, 2) list possible bugs, edge cases and numerical issues, 3) suggest a refactored version with clear names and docstrings that keeps the behaviour the same, and 4) write unit tests in [pytest or testthat] covering normal and edge cases. If you are unsure about the intended behaviour, ask rather than assume. Code: [paste code]",
-    "check": "The tests run, the refactored version gives the same output as your original on the same input, and you can reproduce each bug it reports."
+    "prompt": "I am a researcher writing [language] code for [purpose, e.g. an agent-based simulation of X]. Below is part of my own code. Please 1) explain what it does in plain language, 2) list possible bugs, edge cases and numerical issues, 3) suggest a refactored version with clear names and docstrings that keeps the behaviour the same, and 4) write unit tests in [pytest or testthat] covering normal and edge cases, and 5) suggest checks of the numerical results: a case with a known analytical solution or benchmark, consistent units, conserved quantities and plausible value ranges. If you are unsure about the intended behaviour, ask rather than assume. Code: [paste code]",
+    "check": "The tests run, the refactored version gives the same output as your original on the same input, and you can reproduce each bug it reports. For a case with a known answer, the code reproduces it."
   },
   "publikation-0": {
     "bring": "The abstract and section headings, or a one- to two-page extended outline, of your own paper or chapter, and the name of a target journal.",

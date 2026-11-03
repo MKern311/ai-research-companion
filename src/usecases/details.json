@@ -1293,11 +1293,12 @@
  },
  "design-0": {
   "problem": "Designs often follow the first idea or your field's habit; alternative designs and threats to validity or trustworthiness surface late – in a viva or a reviewer's report.",
-  "result": "A comparison of three designs and a list of threats, sorted by validity type (statistical conclusion, internal, construct, external), each with a mitigation specific to your study – a better-justified methods chapter.",
+  "result": "A comparison of three designs and a list of threats, sorted by validity type (statistical conclusion, internal, construct, external), each with a mitigation specific to your study – and, for experiments, a design that needs fewer runs. A better-justified methods chapter.",
   "steps": [
    "State your question, planned design and unit of analysis",
    "Ask for two realistic alternative designs in a comparison table",
    "Ask for threats sorted by the four validity types",
+   "For an experiment, ask for a design with fewer runs",
    "For interpretive designs, ask for trustworthiness criteria instead",
    "Check the threats against your methods textbook or supervisor"
   ],
@@ -2603,12 +2604,13 @@
  },
  "analyse-6": {
   "problem": "Research code grows without tests or documentation; months later you cannot tell whether a change altered a result, and others cannot run, reuse or cite your code.",
-  "result": "Explained, refactored code with docstrings and unit tests that pin down its behaviour, including edge cases – fewer silent errors and software you can deposit and cite.",
+  "result": "Explained, refactored code with docstrings and unit tests that pin down its behaviour, including edge cases, and checks of the numbers against known solutions and physical plausibility – fewer silent errors and software you can deposit and cite.",
   "steps": [
    "Paste a short code section and state its purpose",
    "Check the explanation matches your intent",
    "Ask for unit tests, including edge cases",
    "Run the tests before accepting any refactoring",
+   "Check results against a known solution or benchmark",
    "Add a licence, README and citation file before sharing"
   ],
   "method": {
@@ -2762,10 +2764,11 @@
  },
  "analyse-8": {
   "problem": "Statistical output is full of figures whose meaning and thresholds you half remember, and turning it into a correct, complete APA results paragraph takes repeated checking.",
-  "result": "A plain explanation of your output, assumptions and quality criteria checked against sourced conventions, and a draft paragraph reporting effect sizes and intervals – usable once every number is verified.",
+  "result": "A plain explanation of your output, assumptions and quality criteria checked against sourced conventions, a list of checks or analyses you may have missed, and a draft paragraph reporting effect sizes and intervals – usable once every number is verified.",
   "steps": [
    "Paste the output and name the analysis and software",
    "Ask for each figure and the source of each threshold",
+   "Ask which checks or analyses are still missing",
    "Request an APA paragraph using only output numbers",
    "Check every number and claim against the output"
   ],
@@ -2913,11 +2916,11 @@
   }
  },
  "querschnitt-1": {
-  "problem": "Annual and transfer reviews arrive at busy times; reconstructing a year of progress from scattered notes and fitting it to the panel's criteria takes days.",
+  "problem": "Monthly reports to your supervisor and annual or transfer reviews arrive at busy times; reconstructing progress from lab notebooks and scattered notes and fitting it to the required headings takes days.",
   "result": "A draft under your form's headings with gaps marked [TO ADD], a risk register and evidence of skills development – a starting point you complete with verified facts.",
   "steps": [
    "Paste the form's headings and assessment criteria",
-   "Add bullet notes and last year's objectives",
+   "Add bullet notes or lab-notebook entries and earlier objectives",
    "Ask for a risk register with likelihood and impact",
    "Map training to the Researcher Development Framework",
    "Check every achievement and date against your records"

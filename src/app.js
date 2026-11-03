@@ -202,9 +202,10 @@ function card(u, rank){
   if (rm.k && session) pills.push(`<span class="pill room">${rm.k} ${rm.k === 1 ? 'group' : 'groups'}</span>`);
   const low = ui.lens === 2 && !readOnly() && (r.x || !(r.n && r.u));
   if (low && !r.x) pills.push('<span class="pill">Not rated yet</span>');
-  return `<button class="card${r.tt ? ' tested' : ''}${low ? ' low' : ''}" type="button" data-open="${esc(u.id)}" aria-current="${ui.open === u.id}">
+  const wish = !u.custom && WISH[u.id];
+  return `<button class="card${r.tt ? ' tested' : ''}${low ? ' low' : ''}${wish ? ' wish' : ''}" type="button" data-open="${esc(u.id)}" aria-current="${ui.open === u.id}"${wish ? ' title="Asked for in the pre-workshop survey"' : ''}>
     ${rank ? `<span class="rankno">#${rank} in this phase · ${r.n}×${r.u}</span>` : ''}<h3>${r.f ? '<span class="star" aria-label="starred">★</span> ' : ''}${esc(u.t)}</h3>${u.d ? `<p>${esc(u.d)}</p>` : ''}
-    <span class="foot">${pills.join('')}</span></button>`;
+    <span class="foot">${pills.join('')}</span>${wish ? '<span class="sr-only">Asked for in the pre-workshop survey.</span>' : ''}</button>`;
 }
 const prio = u => { const r = myR(u.id); return r.x ? -2 : (r.n && r.u) ? r.n * r.u + (r.f ? .5 : 0) + (r.tt ? .25 : 0) : -1; };
 function renderCards(){
@@ -215,7 +216,8 @@ function renderCards(){
   // Step 2: the group's best-rated use cases across all phases, so the pick is not limited to the phase on screen
   const top = ui.lens === 2 && !readOnly() ? allUcs().filter(u => prio(u) > 0).sort((a, b) => prio(b) - prio(a)).slice(0, 5) : [];
   const topHtml = top.length ? `<div class="topstrip"><b>Your top use cases (all phases)</b><ol>${top.map(u => { const r = myR(u.id); return `<li><button type="button" class="linkbtn" data-open="${esc(u.id)}">${r.tt ? '✓ ' : ''}${esc(u.t)}</button> <small>${SHORT[u.phase]} · ${r.n}×${r.u}</small></li>`; }).join('')}</ol></div>` : '';
-  $('#cards').innerHTML = (ui.lens === 2 && !readOnly() ? `${topHtml}<p class="sortnote">Sorted by your group’s priority in this phase (value × feasibility). Pick one to three use cases in total and try them with Copilot.</p>` : '') +
+  const wishKey = list.some(u => !u.custom && WISH[u.id]) ? '<p class="wishkey"><i aria-hidden="true"></i>Red outline: asked for in the pre-workshop survey</p>' : '';
+  $('#cards').innerHTML = wishKey + (ui.lens === 2 && !readOnly() ? `${topHtml}<p class="sortnote">Sorted by your group’s priority in this phase (value × feasibility). Pick one to three use cases in total and try them with Copilot.</p>` : '') +
     list.map(u => card(u, ui.lens === 2 && prio(u) > 0 ? ++rank : 0)).join('') + (readOnly() ? '' : '<button class="card add" type="button" data-add>+ Add a use case</button>');
 }
 
@@ -339,6 +341,7 @@ function openDrawer(id){
         ${u.d ? `<p class="desc">${esc(u.d)}</p>` : ''}
         <div class="meta">${u.custom ? `<span>${u.by === 'Survey' ? 'From the pre-event survey' : 'Added in the workshop'} · ${SHORT[u.phase]}</span>` :
           `<span><b>${u.mode}:</b> ${MODE_DEF[u.mode]}</span><span><b>${RISK[u.risk]}:</b> ${RISK_DEF[u.risk]}</span>`}</div>
+        ${!u.custom && WISH[u.id] ? `<div class="wishq"><b>Asked for in the survey</b>${WISH[u.id].map(q => `<q>${esc(q)}</q>`).join('')}</div>` : ''}
         ${x ? `<div class="ux"><div class="ux-pr"><div><h4>The problem</h4><p>${esc(x.problem)}</p></div><div><h4>Result and value</h4><p>${esc(x.result)}</p></div></div></div>` : ''}
         ${ui.lens === 2 ? step2Html(u) + step1Html(u) : step1Html(u) + step2Html(u)}
         ${backgroundHtml(u)}

@@ -43,7 +43,7 @@ const PHASES = [
   goal:'Develop a robust design with a suitable method, sample and instruments, plus ethics approval and a data management plan.',
   tasks:['Choose method and design','Develop instruments (questionnaire, interview guide, protocol)','Plan the sample','Ethics approval and data management plan','Pre-registration where relevant'],
   uc:[
-   U('Methods advice','Compare design alternatives with their pros and cons, plan experiments (conditions, variables, controls) and work systematically through threats to validity.',['generierung','synthese'],2,2,'Co-create'),
+   U('Methods advice','Compare design alternatives with their pros and cons, plan experiments (conditions, variables, controls) – including designs that need fewer runs, such as factorial or response-surface designs – and work systematically through threats to validity.',['generierung','synthese'],2,2,'Co-create'),
    U('Instrument development','Draft items, interview guides and response scales; check for clarity and for double-barrelled or leading questions, and map every item to your research questions – also across survey and interview in mixed methods.',['generierung'],3,2,'Co-create'),
    U('Pre-testing with synthetic personas','Test instruments with simulated respondents for comprehension issues – as a supplement to real pre-tests, never a replacement.',['generierung','analyse'],2,2,'Assist'),
    U('Sample size & power analysis','Generate calculations as traceable code (e.g. R or Python) and make assumptions explicit.',['analyse'],2,2,'Assist'),
@@ -82,9 +82,9 @@ const PHASES = [
    U('Text as data','Classification, sentiment analysis and topic modelling of large text corpora with language models.',['analyse'],3,3,'Delegate'),
    U('Conversational exploratory analysis','Explore datasets in natural language (“How is … distributed?”) and surface initial patterns.',['analyse','agentisch'],2,2,'Assist'),
    U('Visualisation','Create chart suggestions and publication-ready figures as reproducible code.',['generierung'],2,1,'Co-create'),
-   U('Research software & simulation code','Write, refactor, test and document code for models, simulations or lab data pipelines.',['generierung','analyse'],3,2,'Co-create',['GitHub (repositories)']),
+   U('Research software & simulation code','Write, refactor, test and document code for models, simulations or lab data pipelines – and check numerical results against known solutions, benchmarks and physical plausibility (units, conserved quantities, value ranges).',['generierung','analyse'],3,2,'Co-create',['GitHub (repositories)']),
    U('Codebook with anchor examples','Turn a category system into a codebook – definition, inclusion and exclusion rules, anchor example and rule for borderline cases – and test it on a sample passage and with a second coder.',['analyse','generierung'],3,3,'Co-create'),
-   U('Interpreting & reporting results','Have your own statistical output explained, check assumptions and quality criteria (e.g. reliability, model fit, validity of scales) and draft an APA-style results paragraph.',['analyse','generierung'],3,2,'Co-create')
+   U('Interpreting & reporting results','Have your own statistical output explained, check assumptions and quality criteria (e.g. reliability, model fit, validity of scales), ask which checks or analyses you may have missed, and draft an APA-style results paragraph.',['analyse','generierung'],3,2,'Co-create')
   ],
   limits:['Plausible-looking but wrong code – verify results independently.','Easier “fishing” for significance: pre-specify analysis plans.','Reproducibility: record date, tool, prompt and the saved output; keep analyses as code.'],
   disc:['Which analysis steps would you never leave to AI without checking?','How do you keep your analysis reproducible when the tools keep changing?']},
@@ -125,7 +125,7 @@ const PHASES = [
   tasks:['PhD planning and time management','Supervision','Annual and progress reviews','Research data management','Skills development','AI declarations and integrity'],
   uc:[
    U('Supervision meetings','Prepare agendas and questions for supervision and summarise agreed actions afterwards from your own notes.',['synthese','generierung'],3,2,'Assist',['Otter.ai']),
-   U('Annual review & progress reports','Structure progress, plans and risks for annual, transfer or confirmation reviews from your notes and earlier reports.',['generierung','synthese'],2,2,'Co-create'),
+   U('Annual review & progress reports','Turn lab notebooks and notes into monthly progress reports for your supervisor, and structure progress, plans and risks for annual, transfer or confirmation reviews.',['generierung','synthese'],2,2,'Co-create'),
    U('PhD planning & time management','Break the doctorate into milestones, plan your weeks and re-plan after setbacks.',['generierung'],2,1,'Assist'),
    U('Personal knowledge base','Turn notes, highlights and annotations into atomic notes with a shared tag vocabulary and typed links, so that you can search and connect them in your notes tool.',['recherche','synthese'],3,2,'Assist',['Zotero','Notion','Obsidian']),
    U('Metadata, FAIR data & replication','Suggest metadata, codebooks and README files for data publications, assemble a replication package and check that every number in the paper can be reproduced from the code.',['generierung'],2,2,'Co-create',['GitHub (repositories)']),
@@ -303,6 +303,30 @@ const AGENDA = [
  ['15:00','16:45','Where does AI actually help me? Let\'s focus on your Research Process','Manuel + Team'],
  ['16:45','17:00','So, what changes on Monday?','Oliver']
 ];
+// Use cases the pre-workshop survey asked for (survey tab, slide 8), with the participants' own words
+const WISH = {
+ 'idee-1':['I also use AI to brainstorm ideas for my writing and critically evaluate my research ideas.','I would like AI to suggest ways forward when I encounter unfamiliar research questions'],
+ 'idee-4':['Literature bridging and evidence mapping'],
+ 'idee-5':['Literature bridging and evidence mapping'],
+ 'literatur-1':['When I start a new strand of my project, I spend weeks screening and summarising literature… I\'d like AI to help me map that literature quickly'],
+ 'literatur-3':['data extraction for systematic review. data analysis for stats. understanding stats.'],
+ 'literatur-5':['AI helps me make sense of very disorganised bodies of research.'],
+ 'literatur-6':['effectively translating foreign-language materials.','make the reading process more effective without relying on word-for-word translation'],
+ 'design-0':['help improve experimental design so I can obtain more meaningful data with fewer iterations'],
+ 'analyse-0':['data extraction for systematic review. data analysis for stats. understanding stats.'],
+ 'analyse-1':['I would like AI to help with coding during the data cleaning and processing.'],
+ 'analyse-4':['I would like AI to help me develop and check analysis code, identify which measured signals reveal degradation, and interpret the results.'],
+ 'analyse-6':['how generative AI can help with scientific coding, debugging and verifying numerical results','…while ensuring that its recommendations remain physically correct and properly verified.'],
+ 'analyse-8':['to double check what things I might have missed covering during data analysis'],
+ 'publikation-0':['Understanding complex literature on my project. To give structure to my writing.'],
+ 'publikation-1':['…taking something I have already drafted and refining it to better meet the requirements of the writing brief or specific format.'],
+ 'publikation-4':['what changes would you suggest for submission to conference/journal X'],
+ 'publikation-7':['ask AI to check my thesis writing from the examiner role (I created an agent to do this role)'],
+ 'publikation-8':['to be a second eye as I cite and to challenge my citations.'],
+ 'querschnitt-1':['A way to pass my lab notes to word, so it can make a report of what I have done in the month.'],
+ 'querschnitt-2':['To assist in the planning the schedule of my whole project.'],
+ 'querschnitt-6':['data extraction for systematic review. data analysis for stats. understanding stats.']
+};
 const AGENDA_DAY = '2026-11-04', TOOL_SLOT = 5, SURVEY_SLOT = 1;
 
 /* Slides of Tom's sessions: assets/slides/tom/sNN.webp, exported from PowerPoint (hidden slides left out) */
