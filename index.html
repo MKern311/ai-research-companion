@@ -72,7 +72,8 @@ a{color:var(--red)}
 main{padding-block:28px 64px}
 .view-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
 .view-head h1{font-size:clamp(1.5rem,2.6vw,2rem)}
-.view-head p{color:var(--ink-2);margin-top:6px;max-width:68ch}
+.view-head > div:first-child{flex:1 1 auto;min-width:0}
+.view-head p{color:var(--ink-2);margin-top:6px}
 .panel{background:#fff;border-radius:var(--radius);padding:20px 22px}
 
 /* step switch */
@@ -589,7 +590,7 @@ li[role=button]:focus-visible,tr[data-group]:focus-within,.linkbtn:focus-visible
       <button role="tab" id="tab-cases" data-view="cases" aria-selected="false">Use cases</button>
       <button role="tab" id="tab-data" data-view="data" aria-selected="false">Practice data</button>
       <button role="tab" id="tab-results" data-view="results" aria-selected="false">Results</button>
-      <button role="tab" id="tab-tools" data-view="tools" aria-selected="false">Other supportive academic tools</button>
+      <button role="tab" id="tab-tools" data-view="tools" aria-selected="false">Academic Extensions &amp; Tools</button>
     </nav>
     <div class="ident" id="ident"></div>
   </div>
@@ -622,7 +623,7 @@ li[role=button]:focus-visible,tr[data-group]:focus-within,.linkbtn:focus-visible
         </div>
         <div class="ov ov-after">
           <span class="ov-n">After today</span><h3>Keep using it</h3>
-          <p>The results report, the guides, the practice data, Tom’s slides and the overview of other supportive academic tools stay available – as a starting point for your own work.</p>
+          <p>The results report, the guides, the practice data, Tom’s slides and the overview of academic extensions and tools stay available – as a starting point for your own work.</p>
         </div>
       </div>
       <div class="row"><button type="button" class="btn btn-primary" data-view="cases">Start with Step 1 →</button></div>
@@ -1201,7 +1202,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
   <section id="view-tools" aria-labelledby="tab-tools" hidden>
     <div id="toolsBack"></div>
     <div class="view-head">
-      <div><h1>Other supportive academic tools</h1>
+      <div><h1>Academic Extensions &amp; Tools</h1>
         <p>Tools commonly used in academic work, mapped to the research phases – for orientation, not recommendations. They complement Copilot rather than replace it: subject databases, reference managers and analysis software do things a general assistant cannot. Many of them can also be connected to Copilot, most flexibly through the <b>Model Context Protocol (MCP)</b>, an open standard that lets an assistant call another tool and use its results.</p>
         <p><b>Example:</b> a Copilot Studio agent connected to scite’s MCP server can check, while you draft a literature review, whether later studies support or contrast a finding you cite – and answers with the actual citation statements and DOIs instead of guessing.</p>
         <p class="sub">Ratings: by students at a German university, 2024/25 (greyed out with fewer than three ratings); tools without a rating were added for this workshop. <span class="mcpb o">MCP</span> official server from the provider · <span class="mcpb c">MCP</span> community server, review before use · “Copilot Studio” = remote server that can be added there directly · <span class="msb">Microsoft 365</span> other ways the tool connects to Copilot, Word, Teams, Outlook or Power Automate.</p></div>
@@ -1537,7 +1538,7 @@ const LEVELS = [
  ['Copilot Studio', 'For anything an agent cannot hold: connecting tools and databases via MCP or connectors – e.g. OpenAlex, scite, GitHub. Needs your IT team.']
 ];
 const ROUTES = {chat:['Copilot Chat','A prompt and text you paste'], files:['Copilot + files','Upload your own or the practice files'],
- connected:['Copilot + connected tool','MCP server or Copilot connector – enabled by your IT'], external:['Specialist tool or open source','Other supportive academic tool, R/Python package or agent skill']};
+ connected:['Copilot + connected tool','MCP server or Copilot connector – enabled by your IT'], external:['Specialist tool or open source','Academic extension or tool, R/Python package or agent skill']};
 
 // Microsoft 365 integrations per tool (checked 2 November 2026): [type, source]
 // copilot = Copilot connector or agent (needs a Microsoft 365 Copilot licence and IT approval)
@@ -2195,7 +2196,7 @@ function backgroundHtml(u){
     ${t.text ? `<p>${esc(t.text)}</p>` : ''}
     ${row('Copilot levels', (() => { const st = !!lvOf(u).studio; return LEVELS.map(([n, d], i) => { const on = i < 3 || st; return `<span class="lvl${on ? ' on' : ''}" title="${esc(d)}">${i + 1} ${esc(n)}</span>`; }).join('') + '<small class="lvl-note">Levels 1 to 3 work for every use case; level 4 is highlighted where Copilot Studio adds something – see the guide above.</small>'; })())}
     ${row('Practice data', t.data.map(id => `<button type="button" class="pk" data-pack="${id}" title="${esc(packLabel(id))}">${id === 'papers' ? '' : `<b>${id}</b> `}${esc(packLabel(id))}</button>`).join(''))}
-    ${row('Other supportive academic tools', t.tools.map(n => toolUrl(n) ? `<a class="tk" href="${toolUrl(n)}" target="_blank" rel="noopener">${esc(n)}</a>` : `<span class="tk">${esc(n)}</span>`).join(''))}
+    ${row('Academic extensions & tools', t.tools.map(n => toolUrl(n) ? `<a class="tk" href="${toolUrl(n)}" target="_blank" rel="noopener">${esc(n)}</a>` : `<span class="tk">${esc(n)}</span>`).join(''))}
     ${row('Connect to Copilot', con.length ? `<ul class="ux-con">${connectHtml(con)}</ul><button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How to connect a tool to Copilot →</button>` : '')}
     ${row('Open source', t.repos.filter(k => REPOS[k]).map(k => `<a class="tk repo" href="${REPOS[k][1]}" target="_blank" rel="noopener" title="${esc(REPOS[k][0] + ' – ' + REPOS[k][2])}">${esc(REPOS[k][0])}</a>`).join(''))}
   </div>`;

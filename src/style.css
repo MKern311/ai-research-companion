@@ -61,7 +61,8 @@ a{color:var(--red)}
 main{padding-block:28px 64px}
 .view-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
 .view-head h1{font-size:clamp(1.5rem,2.6vw,2rem)}
-.view-head p{color:var(--ink-2);margin-top:6px;max-width:68ch}
+.view-head > div:first-child{flex:1 1 auto;min-width:0}
+.view-head p{color:var(--ink-2);margin-top:6px}
 .panel{background:#fff;border-radius:var(--radius);padding:20px 22px}
 
 /* step switch */

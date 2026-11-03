@@ -556,7 +556,7 @@ function backgroundHtml(u){
     ${t.text ? `<p>${esc(t.text)}</p>` : ''}
     ${row('Copilot levels', (() => { const st = !!lvOf(u).studio; return LEVELS.map(([n, d], i) => { const on = i < 3 || st; return `<span class="lvl${on ? ' on' : ''}" title="${esc(d)}">${i + 1} ${esc(n)}</span>`; }).join('') + '<small class="lvl-note">Levels 1 to 3 work for every use case; level 4 is highlighted where Copilot Studio adds something – see the guide above.</small>'; })())}
     ${row('Practice data', t.data.map(id => `<button type="button" class="pk" data-pack="${id}" title="${esc(packLabel(id))}">${id === 'papers' ? '' : `<b>${id}</b> `}${esc(packLabel(id))}</button>`).join(''))}
-    ${row('Other supportive academic tools', t.tools.map(n => toolUrl(n) ? `<a class="tk" href="${toolUrl(n)}" target="_blank" rel="noopener">${esc(n)}</a>` : `<span class="tk">${esc(n)}</span>`).join(''))}
+    ${row('Academic extensions & tools', t.tools.map(n => toolUrl(n) ? `<a class="tk" href="${toolUrl(n)}" target="_blank" rel="noopener">${esc(n)}</a>` : `<span class="tk">${esc(n)}</span>`).join(''))}
     ${row('Connect to Copilot', con.length ? `<ul class="ux-con">${connectHtml(con)}</ul><button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How to connect a tool to Copilot →</button>` : '')}
     ${row('Open source', t.repos.filter(k => REPOS[k]).map(k => `<a class="tk repo" href="${REPOS[k][1]}" target="_blank" rel="noopener" title="${esc(REPOS[k][0] + ' – ' + REPOS[k][2])}">${esc(REPOS[k][0])}</a>`).join(''))}
   </div>`;

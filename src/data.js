@@ -267,7 +267,7 @@ const LEVELS = [
  ['Copilot Studio', 'For anything an agent cannot hold: connecting tools and databases via MCP or connectors – e.g. OpenAlex, scite, GitHub. Needs your IT team.']
 ];
 const ROUTES = {chat:['Copilot Chat','A prompt and text you paste'], files:['Copilot + files','Upload your own or the practice files'],
- connected:['Copilot + connected tool','MCP server or Copilot connector – enabled by your IT'], external:['Specialist tool or open source','Other supportive academic tool, R/Python package or agent skill']};
+ connected:['Copilot + connected tool','MCP server or Copilot connector – enabled by your IT'], external:['Specialist tool or open source','Academic extension or tool, R/Python package or agent skill']};
 
 // Microsoft 365 integrations per tool (checked 2 November 2026): [type, source]
 // copilot = Copilot connector or agent (needs a Microsoft 365 Copilot licence and IT approval)
