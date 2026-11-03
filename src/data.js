@@ -259,12 +259,12 @@ const REPOS = {
  'mock-social-media':['Mock Social Media Website Tool','https://docs.studysocial.media','Open-source research tool for mock feeds (software, not an agent skill)'],
  'awesome-copilot':['awesome-copilot','https://github.com/github/awesome-copilot','Community collection of instructions, agents and skills for GitHub Copilot (a collection, not a single skill)']
 };
-// Four levels of working with Copilot in Step 2 (round 1: level 1; round 2: levels 2–3; level 4: outlook)
+// Four levels of working with Copilot in Step 2
 const LEVELS = [
- ['Chat', 'One conversation: prompt, pasted text or uploaded files. Copilot reads PDFs, Word, Excel and CSV and runs Python on data.', 'Round 1'],
- ['Project', 'A Copilot notebook (or a Cowork project) that keeps several files, your instructions and earlier answers together – for work you return to.', 'Round 2'],
- ['Agent', 'Your own agent in Agent Builder: standing instructions, files as knowledge, uploaded skills. Reusable for every new paper, dataset or draft.', 'Round 2'],
- ['Copilot Studio', 'For anything an agent cannot hold: connecting tools and databases via MCP or connectors – e.g. Zotero, OpenAlex, scite. Needs your IT team.', 'Outlook']
+ ['Chat', 'One conversation: prompt, pasted text or uploaded files. Copilot reads PDFs, Word, Excel and CSV and runs Python on data.'],
+ ['Project', 'A Copilot notebook (or a Cowork project) that keeps several files, your instructions and earlier answers together – for work you return to.'],
+ ['Agent', 'Your own agent in Agent Builder: standing instructions, files as knowledge, uploaded skills. Reusable for every new paper, dataset or draft.'],
+ ['Copilot Studio', 'For anything an agent cannot hold: connecting tools and databases via MCP or connectors – e.g. Zotero, OpenAlex, scite. Needs your IT team.']
 ];
 const ROUTES = {chat:['Copilot Chat','A prompt and text you paste'], files:['Copilot + files','Upload your own or the practice files'],
  connected:['Copilot + connected tool','MCP server or Copilot connector – enabled by your IT'], external:['Specialist tool or open source','Other supportive academic tool, R/Python package or agent skill']};

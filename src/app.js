@@ -170,8 +170,8 @@ function renderLens(){
     : readOnly() ? 'View only – open a use case to see how to try it with Copilot.'
     : `Pick one to three of your highest-rated use cases and try them live with Copilot · ${n} of ${MAXTEST} selected.`;
   $('#levels').hidden = ui.lens !== 2;
-  $('#levels').innerHTML = `<h2>Four levels of working with Copilot</h2><p class="sub">Start at level 1. In round 2, go further – the guide in each use case shows how to take it to the next level.</p>
-    <ol class="lv-grid">${LEVELS.map(([t, d, r], i) => `<li><span class="lv-n">Level ${i + 1} · ${r}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>`;
+  $('#levels').innerHTML = `<h2>Four levels of working with Copilot</h2><p class="sub">Start at level 1 and go further when you are ready – the guide in each use case shows how to take it to the next level.</p>
+    <ol class="lv-grid">${LEVELS.map(([t, d], i) => `<li><span class="lv-n">Level ${i + 1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>`;
 }
 function renderPhases(){
   $('#phases').innerHTML = PHASES.map((p, i) => {
