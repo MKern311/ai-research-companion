@@ -38,7 +38,7 @@ const DEMO = 'Facilitator';
 const myTable = () => session ? (session.role === 'facilitator' ? DEMO : session.table || 'Viewer') : state.a;
 const readOnly = () => !!session && session.role === 'viewer';
 const tbl = n => (state.t[n] = state.t[n] || {r:{}, fd:{f1:'', f2:'', f3:'', q:''}, disc:''});
-const tblFrom = d => ({r:(d && d.r) || {}, fd:Object.assign({f1:'', f2:'', f3:'', q:''}, (d && d.fd) || {}), disc:String((d && d.disc) || '').slice(0, 60)});
+const tblFrom = d => ({r:(d && d.r) || {}, fd:Object.assign({f1:'', f2:'', f3:'', q:''}, (d && d.fd) || {}), disc:String((d && d.disc) || '').slice(0, 60), plan:planClean(d && d.plan) || undefined});
 // discipline of a group, e.g. "Marketing"; groups with the same discipline are compared together
 const discOf = k => ((state.t[k] && state.t[k].disc) || '').trim();
 const discKey = s => s.trim().toLowerCase().replace(/\s+/g, ' ');
@@ -87,6 +87,7 @@ async function pull(force){
     (room.tables || []).forEach(x => { t[x.name] = tblFrom(x.data); });
     if (keepMine) t[mine] = keepMine;
     state.t = t; state.c = (room.additions || []).filter(c => c && c.id); state.remote = true;
+    planPrefill();
     sync.last = new Date(); sync.err = null; save(); softRender();
   } catch(e) { sync.err = e.message; renderIdent(); }
   finally { sync.busy = false; }
@@ -110,6 +111,54 @@ async function pushAddition(c, del){
   try { if (del) await rpc('delete_addition', {p_code:session.code, p_id:c.id}); else await rpc('save_addition', {p_code:session.code, p_item:c}); }
   catch(e) { toast('Could not save the use case: ' + e.message); }
 }
+
+/* ---------- group plan (intro slide 4): which group code sits with which discipline ---------- */
+// stored with the facilitator's demo table, so every group sees it; in explore mode only in this browser
+const PKEY = 'airp-plan', PLAN_MAX = 12, PLAN_DEF = 10;
+const DISC_SUGGEST = ['Social sciences, humanities & education','Engineering, technology & applied science','Health, clinical & sport sciences','Business, management & finance','Environment & earth sciences','AI, computing & mathematics','Other / interdisciplinary'];
+function planClean(p){ return Array.isArray(p) ? p.slice(0, PLAN_MAX).map(x => ({disc:String((x && x.disc) || '').slice(0, 60), note:String((x && x.note) || '').slice(0, 60)})) : null; }
+let localPlan = null; try { localPlan = planClean(JSON.parse(localStorage.getItem(PKEY) || 'null')); } catch(e) {}
+const planEdit = () => !session || session.role === 'facilitator';
+const planBlank = () => Array.from({length:PLAN_DEF}, () => ({disc:'', note:''}));
+function planGet(){ const p = session ? planClean(state.t[DEMO] && state.t[DEMO].plan) : localPlan; return p && p.length ? p : null; }
+function planSet(p){
+  if (session) { tbl(DEMO).plan = p; push(); }
+  else { localPlan = p; try { localStorage.setItem(PKEY, JSON.stringify(p)); } catch(e) {} }
+}
+// a group that signs in without a discipline takes the one the facilitator planned for it
+function planPrefill(){
+  if (!session || session.role !== 'table') return;
+  const p = planGet(), n = parseInt(String(session.table).replace(/\D/g, ''), 10), T = tbl(session.table);
+  if (p && p[n - 1] && p[n - 1].disc && !T.disc) { T.disc = p[n - 1].disc; push(); }
+}
+function renderPlan(force){
+  const box = document.querySelector('[data-plan]'); if (!box || (!force && box.contains(document.activeElement))) return;
+  const edit = planEdit() && !readOnly(), p = planGet() || (edit ? planBlank() : []);
+  const me = session && session.role === 'table' ? session.table : '';
+  if (!p.length) { box.innerHTML = '<h4>Groups by discipline</h4><p class="ps-sub">Your facilitator fills this in before Step 1.</p>'; return; }
+  const notes = edit || p.some(x => x.note);
+  const row = (x, i) => { const g = 'Group ' + (i + 1); return `<tr${g === me ? ' class="me"' : ''}><td><code>group ${i + 1}</code>${g === me ? ' you' : ''}</td>` + (edit
+    ? `<td><input data-pi="${i}" data-pf="disc" list="piDisc" value="${esc(x.disc)}" placeholder="Discipline" aria-label="Discipline of ${g}"></td><td><input data-pi="${i}" data-pf="note" value="${esc(x.note)}" placeholder="e.g. table by the window" aria-label="Note for ${g}"></td>`
+    : `<td>${x.disc ? esc(x.disc) : '<span class="em">–</span>'}</td>${notes ? `<td>${esc(x.note)}</td>` : ''}`) + '</tr>'; };
+  box.innerHTML = `<div class="hd"><h4>Groups by discipline</h4><span class="ps-sub" style="margin:0">Codes are not case-sensitive.</span></div>
+    <div class="pi-split">${[p.slice(0, Math.ceil(p.length / 2)), p.slice(Math.ceil(p.length / 2))].filter(h => h.length).map((h, k) => `<table class="pi-tbl"><thead><tr><th>Group code</th><th>Discipline</th>${notes ? '<th>Where / note</th>' : ''}</tr></thead><tbody>${h.map((x, j) => row(x, j + k * Math.ceil(p.length / 2))).join('')}</tbody></table>`).join('')}</div>
+    ${edit ? `<datalist id="piDisc">${DISC_SUGGEST.map(d => `<option value="${esc(d)}">`).join('')}</datalist>
+    <div class="pi-ctl"><button type="button" class="ps-btn" data-plan-add${p.length >= PLAN_MAX ? ' disabled' : ''}>+ Group</button><button type="button" class="ps-btn" data-plan-del${p.length <= 1 ? ' disabled' : ''}>− Last group</button>
+    <span>${session ? 'Saved for the whole room – groups see it read-only and get their discipline when they sign in.' : 'Explore mode: saved in this browser only. Sign in with the facilitator code to share it with the room.'}</span></div>` : ''}`;
+}
+document.addEventListener('input', e => {
+  const t = e.target.closest && e.target.closest('[data-plan] input[data-pi]'); if (!t || !planEdit()) return;
+  const p = planGet() || planBlank(), i = +t.dataset.pi;
+  if (!p[i]) return; p[i][t.dataset.pf] = t.value.slice(0, 60); planSet(p);
+});
+document.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('[data-plan-add],[data-plan-del]'); if (!b || !planEdit()) return;
+  const p = planGet() || planBlank();
+  if (b.hasAttribute('data-plan-add') && p.length < PLAN_MAX) p.push({disc:'', note:''});
+  if (b.hasAttribute('data-plan-del') && p.length > 1) p.pop();
+  planSet(p); renderPlan(true);
+});
+document.addEventListener('pgr-intro-ready', () => renderPlan(true));
 
 /* ---------- room aggregation ---------- */
 // disc: only groups of this discipline (key from discKey); empty = whole room
@@ -707,11 +756,11 @@ function setView(v, back){
 // marked target in the data or tools view stays highlighted until the next click
 function mark(el){ document.querySelectorAll('.marked').forEach(x => x.classList.remove('marked')); if (el) el.classList.add('marked'); }
 function softRender(){
-  renderIdent(); renderDisc(); renderPhases(); renderCards();
+  renderIdent(); renderDisc(); renderPhases(); renderCards(); renderPlan();
   if (ui.view === 'results') renderResults();
   if (ui.open && ui.open !== '__new' && !$('#drawer').hidden && !$('#drawer').contains(document.activeElement)) openDrawer(ui.open);
 }
-function renderAll(){ renderAgenda(); renderIdent(); renderDisc(); renderLens(); renderPhases(); renderIntro(); renderCards(); if (ui.view === 'results') renderResults(); if (ui.view === 'tools') renderTools(); }
+function renderAll(){ renderAgenda(); renderIdent(); renderDisc(); renderLens(); renderPhases(); renderIntro(); renderCards(); renderPlan(true); if (ui.view === 'results') renderResults(); if (ui.view === 'tools') renderTools(); }
 
 /* ---------- events ---------- */
 document.addEventListener('click', e => {

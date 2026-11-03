@@ -1,0 +1,225 @@
+<!-- ===== "Before we start" intro deck (Use cases tab) =====
+     Reuses the .pgr-story CSS of the survey story; extra components are scoped to .pgr-intro.
+     Slide 4 holds [data-plan], which app.js fills with the group/discipline table (stored with the facilitator).
+     Keys while visible: ←/→ or PageUp/PageDown, N = talk track, F = full screen. -->
+<div class="pgr-story pgr-intro" data-pgr-intro data-theme="light" lang="en" aria-label="Before we start: introduction slides"></div>
+<style>
+.pgr-intro{margin-bottom:22px}
+.pgr-intro .ps-stage{min-height:700px}
+.pgr-intro .ps-slide{overflow-y:auto}
+/* 1 · about me */
+.pgr-intro .pi-me{display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);gap:28px;align-items:center}
+.pgr-intro .pi-photo{margin:0;position:relative}
+.pgr-intro .pi-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:18px;box-shadow:var(--shadow)}
+.pgr-intro .pi-photo figcaption{margin-top:10px;font-size:13px;color:var(--muted);line-height:1.35}
+.pgr-intro .pi-photo figcaption b{display:block;color:var(--ink);font-size:15px}
+.pgr-intro .pi-hats{display:grid;gap:10px}
+.pgr-intro .pi-hat{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 16px}
+.pgr-intro .pi-hat .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--cs);color:var(--c)}
+.pgr-intro .pi-hat .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);font-weight:650}
+.pgr-intro .pi-hat .t{font-weight:650;font-size:16px;line-height:1.25}
+.pgr-intro .pi-hat .s{font-size:13px;color:var(--muted)}
+/* 2 · chat, cowork, agent */
+.pgr-intro .pi-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pgr-intro .pi-mode{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;border-block-start:5px solid var(--c)}
+.pgr-intro .pi-mode svg{width:100%;height:118px;display:block}
+.pgr-intro .pi-mode .t{font-family:var(--serif);font-size:22px;font-weight:600;line-height:1.1}
+.pgr-intro .pi-mode .p{font-size:14px;color:var(--muted);line-height:1.35}
+.pgr-intro .pi-mode .tag{align-self:flex-start;font-size:11.5px;font-weight:600;color:var(--c);background:var(--cs);border-radius:99px;padding:3px 10px;margin-top:2px}
+.pgr-intro .pi-auto{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;font-size:12.5px;color:var(--muted);margin-top:-6px}
+.pgr-intro .pi-auto i{height:4px;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--ochre),var(--accent));position:relative}
+.pgr-intro .pi-auto i::after{content:'';position:absolute;right:-2px;top:50%;width:10px;height:10px;border-top:4px solid var(--accent);border-right:4px solid var(--accent);transform:translateY(-50%) rotate(45deg)}
+.pgr-intro .pi-eq{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.pgr-intro .pi-eq .lb{align-self:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:650;width:100%;margin-bottom:2px}
+.pgr-intro .pi-eq .op{align-self:center;font-family:var(--serif);font-size:24px;color:var(--faint);padding:0 2px}
+.pgr-intro .pi-chip{flex:1 1 140px;border-radius:12px;padding:8px 12px;background:var(--cs);border-inline-start:4px solid var(--c)}
+.pgr-intro .pi-chip b{display:block;font-size:15px;color:var(--ink)}
+.pgr-intro .pi-chip span{font-size:12.5px;color:var(--muted)}
+.pgr-intro .pi-chip.res{background:var(--ink);border-color:var(--accent)}
+.pgr-intro .pi-chip.res b{color:var(--paper)}
+.pgr-intro .pi-chip.res span{color:var(--paper);opacity:.75}
+/* 3 · traps */
+.pgr-intro .pi-traps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pgr-intro .pi-trap{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.pgr-intro .pi-trap .ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.pgr-intro .pi-trap .n{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:650}
+.pgr-intro .pi-trap .t{font-weight:650;font-size:17px;line-height:1.2;margin:1px 0 4px}
+.pgr-intro .pi-trap .p{font-size:14px;color:var(--muted);line-height:1.35}
+.pgr-intro .pi-trap .g{font-size:13.5px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.pgr-intro .pi-trap .g b{color:var(--verify)}
+/* 4 · groups (table filled by app.js) */
+.pgr-intro .pi-plan{padding:14px 16px}
+.pgr-intro .pi-plan .hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}
+.pgr-intro .pi-plan h4{margin:0}
+.pgr-intro .pi-tbl{width:100%;border-collapse:collapse;font-size:14px}
+.pgr-intro .pi-tbl th{text-align:start;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:650;padding:6px 8px;border-bottom:1px solid var(--line)}
+.pgr-intro .pi-tbl td{padding:4px 8px;border-bottom:1px solid var(--soft);vertical-align:middle}
+.pgr-intro .pi-tbl td:first-child{font-weight:650;white-space:nowrap}
+.pgr-intro .pi-tbl td:nth-child(2){width:58%}
+.pgr-intro .pi-tbl code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;background:var(--soft);border-radius:6px;padding:2px 7px;white-space:nowrap}
+.pgr-intro .pi-tbl input{width:100%;font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:5px 8px}
+.pgr-intro .pi-tbl input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.pgr-intro .pi-tbl tr.me td{background:var(--accent-soft)}
+.pgr-intro .pi-tbl .em{color:var(--faint)}
+.pgr-intro .pi-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 22px;align-items:start}
+.pgr-intro .pi-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;font-size:12.5px;color:var(--muted)}
+@media (max-width:900px){.pgr-intro .pi-me,.pgr-intro .pi-modes,.pgr-intro .pi-traps{grid-template-columns:1fr}.pgr-intro .pi-me{gap:16px}.pgr-intro .pi-photo{max-width:260px}.pgr-intro .ps-stage{min-height:980px}.pgr-intro .pi-split{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+"use strict";
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function head(k,h,l){ return '<div><div class="ps-kicker rv">'+k+'</div><h3 class="ps-h rv" style="--d:60">'+h+'</h3>'+(l?'<p class="ps-lede rv" style="--d:140">'+l+'</p>':'')+'</div>'; }
+function link(items){
+  return '<div class="ps-link rv" style="--d:700"><span class="lt">Next <span class="ps-arrow">→</span></span><span class="tx">'+items.map(function(x){
+    return '<span class="tm">'+x[0]+'</span> '+x[1];
+  }).join(' &nbsp; ')+'</span></div>';
+}
+var I = {   // line icons, 24×24
+  research:'<path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11.5V16c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-4.5"/>',
+  practice:'<rect x="3" y="7" width="18" height="12" rx="2"/><path d="M9 7V5h6v2M3 12h18"/>',
+  seat:'<path d="M12 3v4M5 21v-6a4 4 0 014-4h6a4 4 0 014 4v6"/><circle cx="12" cy="9" r="2"/>',
+  focus:'<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5M11 8v6M8 11h6"/>',
+  trace:'<path d="M9 15l6-6"/><path d="M11 6l1.5-1.5a3.5 3.5 0 015 5L16 11"/><path d="M13 18l-1.5 1.5a3.5 3.5 0 01-5-5L8 13"/><path d="M4 4l3 3M20 20l-3-3" stroke-dasharray="1 2.5"/>',
+  clash:'<path d="M3 8h8l-2.5-2.5M11 8l-2.5 2.5"/><path d="M21 16h-8l2.5-2.5M13 16l2.5 2.5"/><path d="M12 4v16" stroke-dasharray="2 2"/>',
+  blank:'<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/><rect x="10.5" y="9" width="3" height="5" rx=".5" stroke-dasharray="1.5 1.5"/>',
+  assume:'<path d="M4 20h16"/><path d="M6 20V10h12v10"/><path d="M12 10l-1.5 3 2 2-1 5"/><path d="M8 10l4-5 4 5"/>'
+};
+function ico(k,s){ return '<svg width="'+(s||24)+'" height="'+(s||24)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+I[k]+'</svg>'; }
+
+/* mini diagrams for chat, cowork and agent (220×118) */
+var arrowDef = function(id,c){ return '<defs><marker id="'+id+'" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="'+c+'"/></marker></defs>'; };
+function node(x,y,label,fill,tc){ return '<g><circle cx="'+x+'" cy="'+y+'" r="19" fill="'+fill+'"/><text x="'+x+'" y="'+(y+4.5)+'" text-anchor="middle" font-size="12" font-weight="700" fill="'+tc+'">'+label+'</text></g>'; }
+function ai(x,y,c){ return '<g><rect x="'+(x-21)+'" y="'+(y-21)+'" width="42" height="42" rx="11" fill="'+c+'"/><text x="'+x+'" y="'+(y+5)+'" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">AI</text></g>'; }
+var SV = {
+  chat: '<svg viewBox="0 0 220 118" aria-hidden="true">'+arrowDef('mA','var(--blue)')+
+    node(42,59,'You','var(--soft)','var(--ink)')+ai(178,59,'var(--blue)')+
+    '<path d="M66 48 C100 30 120 30 152 46" fill="none" stroke="var(--blue)" stroke-width="2.2" marker-end="url(#mA)"/>'+
+    '<path d="M154 72 C120 88 100 88 68 72" fill="none" stroke="var(--faint)" stroke-width="2.2" marker-end="url(#mA)"/>'+
+    '<text x="110" y="25" text-anchor="middle" font-size="11" fill="var(--muted)">prompt</text><text x="110" y="104" text-anchor="middle" font-size="11" fill="var(--muted)">answer</text></svg>',
+  cowork: '<svg viewBox="0 0 220 118" aria-hidden="true">'+arrowDef('mB','var(--ochre)')+
+    node(36,32,'You','var(--soft)','var(--ink)')+ai(184,32,'var(--ochre)')+
+    '<g fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"><rect x="88" y="66" width="30" height="38" rx="4"/><rect x="96" y="60" width="30" height="38" rx="4"/><rect x="104" y="54" width="30" height="38" rx="4"/></g>'+
+    '<path d="M110 64h16M110 70h16M110 76h10" stroke="var(--faint)" stroke-width="2" stroke-linecap="round"/>'+
+    '<path d="M162 44 C150 56 146 62 140 66" fill="none" stroke="var(--ochre)" stroke-width="2.2" marker-end="url(#mB)"/>'+
+    '<path d="M58 40 C70 52 76 58 84 70" fill="none" stroke="var(--faint)" stroke-width="2.2" stroke-dasharray="4 3" marker-end="url(#mB)"/>'+
+    '<g transform="translate(46 70)"><circle r="11" fill="var(--verify-soft)"/><path d="M-5 0l3.5 3.5L5-4" fill="none" stroke="var(--verify)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>'+
+    '<text x="110" y="20" text-anchor="middle" font-size="11" fill="var(--muted)">step by step</text><text x="164" y="104" text-anchor="middle" font-size="11" fill="var(--muted)">your files</text></svg>',
+  agent: '<svg viewBox="0 0 220 118" aria-hidden="true">'+arrowDef('mC','var(--accent)')+
+    '<g transform="translate(16 30)"><path d="M0 0v34" stroke="var(--ink)" stroke-width="2"/><path d="M0 0h18l-4 6 4 6H0z" fill="var(--accent)"/></g><text x="22" y="82" text-anchor="middle" font-size="11" fill="var(--muted)">goal</text>'+
+    '<path d="M42 46h30" stroke="var(--faint)" stroke-width="2.2" marker-end="url(#mC)"/>'+
+    '<circle cx="110" cy="52" r="36" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-dasharray="6 5"/>'+ai(110,52,'var(--accent)')+
+    '<text x="110" y="10" text-anchor="middle" font-size="10.5" fill="var(--muted)">plan</text><text x="152" y="96" text-anchor="middle" font-size="10.5" fill="var(--muted)">act</text><text x="68" y="96" text-anchor="middle" font-size="10.5" fill="var(--muted)">check</text>'+
+    '<g stroke="var(--line)" stroke-width="1.5" fill="var(--surface)"><rect x="168" y="12" width="40" height="22" rx="6"/><rect x="168" y="40" width="40" height="22" rx="6"/><rect x="168" y="68" width="40" height="22" rx="6"/></g>'+
+    '<g font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle"><text x="188" y="27">search</text><text x="188" y="55">code</text><text x="188" y="83">files</text></g>'+
+    '<path d="M146 30l20-6M146 52h20M146 70l20 8" stroke="var(--faint)" stroke-width="1.5"/></svg>'
+};
+
+var S = [];
+S.push({t:'About me', note:'I am Manuel. I wear three hats today: professor at Heilbronn University of Applied Sciences, where I research and teach AI in marketing and relationship management; consultant at Hitachi Solutions, where we bring Copilot and agents into organisations; and, a few years ago, a doctoral researcher in the UK myself. So I know both sides: what the technology can do, and what it feels like to defend your work in a viva.',
+ html: head('Where does AI actually help me? · 15:00','Hi, I’m <em>Manuel</em>.','Professor, consultant – and once a doctoral researcher at a UK university myself.')+
+ '<div class="ps-body"><div class="pi-me"><figure class="pi-photo rv" style="--d:180"><img src="assets/team/manuel-lg.webp" alt="Portrait of Manuel Kern" width="480" height="600" loading="lazy"><figcaption><b>Prof. Dr. Manuel Kern</b>Heilbronn University of Applied Sciences · Hitachi Solutions</figcaption></figure>'+
+ '<div class="pi-hats">'+[
+   ['research','accent','Research & teaching','Professor of AI-driven Digital Marketing, Social Media and Relationship Management','Heilbronn University of Applied Sciences · since 2024'],
+   ['practice','blue','Practice','Director CRM & Power Platform Consulting','Hitachi Solutions · Microsoft 365, Copilot and agents in organisations'],
+   ['seat','verify','Been in your seat','Doctorate in Marketing (DBA), University of Portsmouth','and an MSc from the University of Leeds'],
+   ['focus','ochre','Research interests','AI in marketing and consumer behaviour · AI in higher education','published e.g. in Marketing Review St. Gallen and HMD']
+ ].map(function(h,i){ return '<div class="pi-hat rv" style="--d:'+(260+i*120)+';--c:var(--'+h[1]+');--cs:var(--'+h[1]+'-soft)"><span class="ic">'+ico(h[0])+'</span><div><div class="k">'+h[2]+'</div><div class="t">'+h[3]+'</div><div class="s">'+h[4]+'</div></div></div>'; }).join('')+
+ '</div></div></div>'+
+ link([['15:00','<b>Steps 1 and 2:</b> rate the use cases, then try the best ones with Copilot.']])});
+
+S.push({t:'Chat, cowork, agent', note:'Three ways to work with AI. In a chat you ask, it answers – you steer every single step. In cowork mode it works through a multi-step task with you, on your files, and you approve each step. An agent pursues a goal on its own: it plans, acts and checks in a loop. The more autonomy, the more it needs: a clear goal, the right context – instructions, your files, memory – and tools such as search, code or a connector to a database. A chat alone has none of that. That is also the ladder in Step 2: Chat, then a notebook adds context, an agent adds standing instructions, Copilot Studio adds tools.',
+ html: head('1 · Three ways to work with AI','From <em>chat</em> to <em>agent</em>.')+
+ '<div class="ps-body" style="gap:16px"><div class="pi-modes">'+[
+   ['chat','blue','Chat','You ask, it answers. You steer every step.','Copilot Chat'],
+   ['cowork','ochre','Cowork','It works through a task with you, on your files. You approve each step.','Copilot Cowork'],
+   ['agent','accent','Agent','It pursues a goal on its own – with context and tools. You set goal and limits.','Agent Builder · Copilot Studio']
+ ].map(function(m,i){ return '<div class="pi-mode rv" style="--d:'+(180+i*160)+';--c:var(--'+m[1]+');--cs:var(--'+m[1]+'-soft)">'+SV[m[0]]+'<div class="t">'+m[2]+'</div><div class="p">'+m[3]+'</div><span class="tag">'+m[4]+'</span></div>'; }).join('')+
+ '</div><div class="pi-auto rv" style="--d:650"><span>You steer every step</span><i></i><span>AI runs the loop</span></div>'+
+ '<div class="pi-eq rv" style="--d:800"><span class="lb">An agent needs more than a chat</span>'+
+   [['Model','the language model','ink','soft'],['Context','instructions · your files · memory','blue','blue-soft'],['Tools','search · code · connectors (MCP)','verify','verify-soft'],['Goal & loop','plan · act · check','ochre','ochre-soft']].map(function(c,i){
+     return (i?'<span class="op">+</span>':'')+'<div class="pi-chip" style="--c:var(--'+c[2]+');--cs:var(--'+c[3]+')"><b>'+c[0]+'</b><span>'+c[1]+'</span></div>'; }).join('')+
+   '<span class="op">=</span><div class="pi-chip res"><b>Agent</b><span>Step 2: levels 1 → 4</span></div></div></div>'});
+
+S.push({t:'Four traps', note:'Where does AI make academic work harder? Four traps. First, transparency: which step was yours, which was the AI’s, and could an examiner retrace it? Second, contradictions: fluent text hides claims that clash across sections. Third, white spots: AI writes smoothly over what it does not know – missing literature, questions nobody asked. Fourth, assumptions: hidden premises in your prompt or in its answer quietly become the foundation of your work. Every exercise in Step 2 has a check built in for exactly these traps.',
+ html: head('2 · Research with AI','Four traps in <em>academic work</em> with AI.')+
+ '<div class="ps-body"><div class="pi-traps">'+[
+   ['trace','Transparency & traceability','Which step was yours, which was the AI’s – and could someone retrace it?','Log prompts, versions and decisions as you go.'],
+   ['clash','Contradictions in the argument','Fluent text hides claims that clash across sections and chapters.','Ask for every contradiction – then check each one yourself.'],
+   ['blank','White spots','AI writes smoothly over what it does not know: missing literature, unasked questions.','Ask what is missing and compare with your own search.'],
+   ['assume','(Flawed) assumptions','Hidden premises in your prompt or its answer become the base of your work.','Make assumptions explicit and test them against the source.']
+ ].map(function(t,i){ return '<div class="pi-trap rv" style="--d:'+(200+i*140)+'"><span class="ic">'+ico(t[0],28)+'</span><div><div class="n">Trap '+(i+1)+'</div><div class="t">'+t[1]+'</div><div class="p">'+t[2]+'</div><div class="g"><b>Guard:</b> '+t[3]+'</div></div></div>'; }).join('')+
+ '</div></div>'+
+ link([['15:00','<b>Every exercise in Step 2 has a check</b> – a number, a quote or a page to verify.']])});
+
+S.push({t:'Your group', note:'Please sit together by discipline. Each group has a code – sign in with it at the top right of the tool. Your discipline is then filled in for you, and everything your group rates is saved for the whole room.',
+ html: head('3 · Your group','Find your <em>group</em> and your <em>code</em>.','Sit together by discipline. Sign in with your group code (top right) – your discipline is then filled in for you.')+
+ '<div class="ps-body"><div class="ps-card pi-plan rv" style="--d:200" data-plan></div></div>'+
+ link([['15:00','<b>Step 1:</b> rate the use cases from your discipline’s point of view.']])});
+
+/* ---------- engine (same behaviour as the survey story) ---------- */
+function init(root){
+  if(!root || root.__pgr) return; root.__pgr = true;
+  root.innerHTML =
+   '<div class="ps-top"><span class="ps-brand"><b>Before we start</b> · Where does AI actually help me?</span><span class="ps-chapter" aria-live="polite"></span></div>'+
+   '<div class="ps-progress"><i></i></div><div class="ps-stage"><div class="ps-scale">'+S.map(function(s,i){return '<section class="ps-slide" data-i="'+i+'" aria-roledescription="slide" aria-label="'+(i+1)+' of '+S.length+': '+esc(s.t)+'">'+s.html+'</section>';}).join('')+'</div></div>'+
+   '<div class="ps-notes" role="note"><div class="nh">Talk track</div><div class="nt"></div></div>'+
+   '<nav class="ps-nav" aria-label="Intro navigation"><button type="button" class="ps-btn" data-act="prev">← Back</button><div class="ps-dots">'+S.map(function(s,i){return '<button type="button" data-go="'+i+'" aria-label="Go to '+(i+1)+': '+esc(s.t)+'"></button>';}).join('')+'</div>'+
+   '<button type="button" class="ps-btn" data-act="notes" aria-pressed="false" title="Talk track (N)">Notes</button><button type="button" class="ps-btn" data-act="fs" title="Full screen (F)">⛶</button><button type="button" class="ps-btn pri" data-act="next">Next →</button></nav>';
+  var slides = root.querySelectorAll('.ps-slide'), dots = root.querySelectorAll('.ps-dots button'), cur = -1, visible = false;
+  function go(i){
+    i = Math.max(0, Math.min(S.length-1, i)); if(i===cur) return;
+    slides.forEach(function(sl,k){ sl.classList.toggle('is-on',k===i); sl.classList.toggle('is-prev',k<i); sl.setAttribute('aria-hidden', k===i?'false':'true'); if('inert' in sl) sl.inert = k!==i; });
+    if(root.classList.contains('is-fit')) fit();
+    dots.forEach(function(d,k){ if(k===i) d.setAttribute('aria-current','step'); else d.removeAttribute('aria-current'); });
+    root.querySelector('.ps-chapter').textContent = (i+1)+' / '+S.length+' · '+S[i].t;
+    root.querySelector('.ps-progress i').style.width = (100*(i+1)/S.length)+'%';
+    root.querySelector('[data-act="prev"]').disabled = i===0;
+    root.querySelector('[data-act="next"]').disabled = i===S.length-1;
+    root.querySelector('.ps-notes .nt').textContent = S[i].note || '';
+    cur = i; slides[i].scrollTop = 0;
+  }
+  root.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b || !root.contains(b) || b.closest('[data-plan]')) return;
+    var a = b.getAttribute('data-act');
+    if(a==='next') go(cur+1); else if(a==='prev') go(cur-1);
+    else if(a==='notes'){ var on = root.classList.toggle('show-notes'); b.setAttribute('aria-pressed', on); }
+    else if(a==='fs'){ if(document.fullscreenElement) document.exitFullscreen(); else if(root.requestFullscreen) root.requestFullscreen(); }
+    else if(b.hasAttribute('data-go')) go(+b.getAttribute('data-go'));
+  });
+  document.addEventListener('keydown', function(e){
+    if(!visible || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
+    var tg = e.target; if(tg && (tg.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName))) return;
+    if(tg && tg !== document.body && !root.contains(tg) && !document.fullscreenElement) return;
+    if(document.fullscreenElement && document.fullscreenElement !== root) return;
+    var k = e.key;
+    if(k==='ArrowRight'||k==='PageDown'){ go(cur+1); e.preventDefault(); }
+    else if(k==='ArrowLeft'||k==='PageUp'){ go(cur-1); e.preventDefault(); }
+    else if(k==='Home'){ go(0); e.preventDefault(); } else if(k==='End'){ go(S.length-1); e.preventDefault(); }
+    else if(k==='n'||k==='N'){ root.querySelector('[data-act="notes"]').click(); }
+    else if(k==='f'||k==='F'){ root.querySelector('[data-act="fs"]').click(); }
+  });
+  if('IntersectionObserver' in window){ new IntersectionObserver(function(en){ visible = en[0].isIntersecting; },{threshold:.4}).observe(root); }
+  function fit(){
+    var st = root.querySelector('.ps-stage'), sc = st.firstElementChild, on = document.fullscreenElement === root && window.innerWidth > 900;
+    root.classList.toggle('is-fit', on);
+    if(!on){ sc.style.width = sc.style.height = sc.style.transform = ''; root.style.removeProperty('--fz'); return; }
+    root.style.setProperty('--fz', Math.max(1, Math.min(window.innerWidth/1280, window.innerHeight/830)).toFixed(3));
+    var W = st.clientWidth, H = st.clientHeight, k = Math.min(W/1280, H/720), sl = root.querySelector('.ps-slide.is-on');
+    for(var n = 0; n < 3; n++){
+      sc.style.width = (W/k) + 'px'; sc.style.height = (H/k) + 'px'; sc.style.transform = 'scale(' + k + ')';
+      if(!sl || sl.scrollHeight <= sl.clientHeight + 1) break;
+      k = H / sl.scrollHeight;
+    }
+  }
+  window.addEventListener('resize', fit);
+  document.addEventListener('fullscreenchange', function(){ fit(); setTimeout(fit, 200); });
+  go(0);
+  document.dispatchEvent(new Event('pgr-intro-ready'));
+}
+window.PgrIntro = { init: init, slides: S };
+function boot(){ document.querySelectorAll('[data-pgr-intro]').forEach(init); }
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
+<!-- ===== end intro deck ===== -->
