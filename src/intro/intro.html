@@ -19,6 +19,24 @@
 .pgr-intro .pi-hat .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);font-weight:650}
 .pgr-intro .pi-hat .t{font-weight:650;font-size:16px;line-height:1.25}
 .pgr-intro .pi-hat .s{font-size:13px;color:var(--muted)}
+/* session flow */
+.pgr-intro .pi-flow{display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1.25fr) 34px minmax(0,1fr);align-items:stretch}
+.pgr-intro .pi-arw{display:grid;place-items:center;color:var(--faint);font-size:26px}
+.pgr-intro .pi-st{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;border-block-start:5px solid var(--c)}
+.pgr-intro .pi-st .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--cs);color:var(--c)}
+.pgr-intro .pi-st .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);font-weight:650}
+.pgr-intro .pi-st .t{font-family:var(--serif);font-size:22px;font-weight:600;line-height:1.15}
+.pgr-intro .pi-st .p{font-size:14px;color:var(--muted);line-height:1.35}
+.pgr-intro .pi-lv{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.pgr-intro .pi-lv span{font-size:12.5px;font-weight:600;border-radius:99px;padding:4px 10px;background:var(--soft);color:var(--ink)}
+.pgr-intro .pi-lv span b{color:var(--accent)}
+.pgr-intro .pi-lv span.o{background:transparent;border:1px dashed var(--line);color:var(--muted);font-weight:500}
+.pgr-intro .pi-aux{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pgr-intro .pi-ax{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;border:1px dashed var(--line);border-radius:14px;padding:10px 14px}
+.pgr-intro .pi-ax .ic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--soft);color:var(--ink)}
+.pgr-intro .pi-ax b{display:block;font-size:15px}
+.pgr-intro .pi-ax span{font-size:13px;color:var(--muted)}
+.pgr-intro .pi-auxl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:650;margin-bottom:-8px}
 /* 2 · chat, cowork, agent */
 .pgr-intro .pi-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .pgr-intro .pi-mode{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;border-block-start:5px solid var(--c)}
@@ -63,7 +81,7 @@
 .pgr-intro .pi-tbl .em{color:var(--faint)}
 .pgr-intro .pi-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 22px;align-items:start}
 .pgr-intro .pi-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;font-size:12.5px;color:var(--muted)}
-@media (max-width:900px){.pgr-intro .pi-me,.pgr-intro .pi-modes,.pgr-intro .pi-traps{grid-template-columns:1fr}.pgr-intro .pi-me{gap:16px}.pgr-intro .pi-photo{max-width:260px}.pgr-intro .ps-stage{min-height:980px}.pgr-intro .pi-split{grid-template-columns:1fr}}
+@media (max-width:900px){.pgr-intro .pi-me,.pgr-intro .pi-modes,.pgr-intro .pi-traps,.pgr-intro .pi-flow,.pgr-intro .pi-aux{grid-template-columns:1fr}.pgr-intro .pi-arw{transform:rotate(90deg);height:30px}.pgr-intro .pi-me{gap:16px}.pgr-intro .pi-photo{max-width:260px}.pgr-intro .ps-stage{min-height:980px}.pgr-intro .pi-split{grid-template-columns:1fr}}
 </style>
 <script>
 (function(){
@@ -83,6 +101,11 @@ var I = {   // line icons, 24×24
   trace:'<path d="M9 15l6-6"/><path d="M11 6l1.5-1.5a3.5 3.5 0 015 5L16 11"/><path d="M13 18l-1.5 1.5a3.5 3.5 0 01-5-5L8 13"/><path d="M4 4l3 3M20 20l-3-3" stroke-dasharray="1 2.5"/>',
   clash:'<path d="M3 8h8l-2.5-2.5M11 8l-2.5 2.5"/><path d="M21 16h-8l2.5-2.5M13 16l2.5 2.5"/><path d="M12 4v16" stroke-dasharray="2 2"/>',
   blank:'<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/><rect x="10.5" y="9" width="3" height="5" rx=".5" stroke-dasharray="1.5 1.5"/>',
+  rate:'<path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/>',
+  test:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 001.7 3h10.6a2 2 0 001.7-3l-5-9V3"/><path d="M7.5 15h9"/>',
+  results:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  data:'<ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/>',
+  tools:'<path d="M14.5 6.5a4 4 0 00-5.3 5.3L4 17l3 3 5.2-5.2a4 4 0 005.3-5.3l-2.6 2.6-2.4-.6-.6-2.4z"/>',
   assume:'<path d="M4 20h16"/><path d="M6 20V10h12v10"/><path d="M12 10l-1.5 3 2 2-1 5"/><path d="M8 10l4-5 4 5"/>'
 };
 function ico(k,s){ return '<svg width="'+(s||24)+'" height="'+(s||24)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+I[k]+'</svg>'; }
@@ -128,8 +151,22 @@ S.push({t:'About me', note:'I am Manuel. I wear three hats today: professor at H
  '</div></div></div>'+
  link([['15:00','<b>Steps 1 and 2:</b> rate the use cases, then try the best ones with Copilot.']])});
 
+S.push({t:'How this session works', note:'Here is how the next hour and a half works – I will show it in the tool in a minute. Step 1: your group rates the use cases for your research: how valuable, what kind of gain, how feasible. Step 2: you pick one to three of your best-rated use cases and try them live with Copilot. Each one comes with a starter prompt and a check, and you can climb three levels: chat, notebook, agent. Results shows what the whole room rated and tested. On the side you have practice data – papers and raw datasets you can use instead of your own unpublished material – and Academic Extensions & Tools for specialist tools beyond Copilot. Before we start: what actually changes when you go from chat to agent?',
+ html: head('1 · How this session works','Rate, <em>try</em>, compare.')+
+ '<div class="ps-body" style="gap:18px"><div class="pi-flow">'+
+   '<div class="pi-st rv" style="--d:180;--c:var(--blue);--cs:var(--blue-soft)"><span class="ic">'+ico('rate',26)+'</span><div class="k">Step 1</div><div class="t">Research value</div><div class="p">Your group rates the use cases: value, kind of gain, feasibility.</div></div>'+
+   '<div class="pi-arw rv" style="--d:300" aria-hidden="true">→</div>'+
+   '<div class="pi-st rv" style="--d:380;--c:var(--accent);--cs:var(--accent-soft)"><span class="ic">'+ico('test',26)+'</span><div class="k">Step 2</div><div class="t">Try it with Copilot</div><div class="p">One to three of your best use cases, live – with a starter prompt and a check.</div><div class="pi-lv"><span><b>1</b> Chat</span><span><b>2</b> Notebook</span><span><b>3</b> Agent</span><span class="o">4 Copilot Studio</span></div></div>'+
+   '<div class="pi-arw rv" style="--d:500" aria-hidden="true">→</div>'+
+   '<div class="pi-st rv" style="--d:580;--c:var(--verify);--cs:var(--verify-soft)"><span class="ic">'+ico('results',26)+'</span><div class="k">Results</div><div class="t">What the room found</div><div class="p">Rankings and tests of all groups, by discipline.</div></div>'+
+ '</div><div class="pi-auxl rv" style="--d:700">Alongside</div><div class="pi-aux">'+
+   '<div class="pi-ax rv" style="--d:760"><span class="ic">'+ico('data')+'</span><div><b>Practice data</b><span>Open papers and raw data to use instead of your own unpublished work.</span></div></div>'+
+   '<div class="pi-ax rv" style="--d:840"><span class="ic">'+ico('tools')+'</span><div><b>Academic Extensions &amp; Tools</b><span>Specialist tools beyond Copilot – and how they connect.</span></div></div>'+
+ '</div></div>'+
+ link([['Step 2','<b>Three levels: chat, notebook, agent.</b> What changes along the way?']])});
+
 S.push({t:'Chat, cowork, agent', note:'Three ways to work with AI. In a chat you ask, it answers – you steer every single step. In cowork mode it works through a multi-step task with you, on your files, and you approve each step. An agent pursues a goal on its own: it plans, acts and checks in a loop. The more autonomy, the more it needs: a clear goal, the right context – instructions, your files, memory – and tools such as search, code or a connector to a database. A chat alone has none of that. That is also the ladder in Step 2: Chat, then a notebook adds context, an agent adds standing instructions, Copilot Studio adds tools.',
- html: head('1 · Three ways to work with AI','From <em>chat</em> to <em>agent</em>.')+
+ html: head('2 · Three ways to work with AI','From <em>chat</em> to <em>agent</em>.')+
  '<div class="ps-body" style="gap:16px"><div class="pi-modes">'+[
    ['chat','blue','Chat','You ask, it answers. You steer every step.','Copilot Chat'],
    ['cowork','ochre','Cowork','It works through a task with you, on your files. You approve each step.','Copilot Cowork'],
@@ -142,7 +179,7 @@ S.push({t:'Chat, cowork, agent', note:'Three ways to work with AI. In a chat you
    '<span class="op">=</span><div class="pi-chip res"><b>Agent</b><span>Step 2: levels 1 → 4</span></div></div></div>'});
 
 S.push({t:'Four traps', note:'Where does AI make academic work harder? Four traps. First, transparency: which step was yours, which was the AI’s, and could an examiner retrace it? Second, contradictions: fluent text hides claims that clash across sections. Third, white spots: AI writes smoothly over what it does not know – missing literature, questions nobody asked. Fourth, assumptions: hidden premises in your prompt or in its answer quietly become the foundation of your work. Every exercise in Step 2 has a check built in for exactly these traps.',
- html: head('2 · Research with AI','Four traps in <em>academic work</em> with AI.')+
+ html: head('3 · Research with AI','Four traps in <em>academic work</em> with AI.')+
  '<div class="ps-body"><div class="pi-traps">'+[
    ['trace','Transparency & traceability','Which step was yours, which was the AI’s – and could someone retrace it?','Log prompts, versions and decisions as you go.'],
    ['clash','Contradictions in the argument','Fluent text hides claims that clash across sections and chapters.','Ask for every contradiction – then check each one yourself.'],
@@ -153,7 +190,7 @@ S.push({t:'Four traps', note:'Where does AI make academic work harder? Four trap
  link([['15:00','<b>Every exercise in Step 2 has a check</b> – a number, a quote or a page to verify.']])});
 
 S.push({t:'Your group', note:'Please sit together by discipline. Each group has a code – sign in with it at the top right of the tool. Your discipline is then filled in for you, and everything your group rates is saved for the whole room.',
- html: head('3 · Your group','Find your <em>group</em> and your <em>code</em>.','Sit together by discipline. Sign in with your group code (top right) – your discipline is then filled in for you.')+
+ html: head('4 · Your group','Find your <em>group</em> and your <em>code</em>.','Sit together by discipline. Sign in with your group code (top right) – your discipline is then filled in for you.')+
  '<div class="ps-body"><div class="ps-card pi-plan rv" style="--d:200" data-plan></div></div>'+
  link([['15:00','<b>Step 1:</b> rate the use cases from your discipline’s point of view.']])});
 
