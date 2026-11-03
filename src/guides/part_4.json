@@ -135,13 +135,13 @@
     "bring": "Your research question with three to six constructs and the expected relationships – or, for the practice version, the Forster et al. (2025) paper and two data files.",
     "steps": [
       "Describe the constructs, their definitions and the expected paths.",
-      "Ask Copilot for the model as Mermaid or draw.io XML, plus a construct–indicator table.",
-      "Import the code into draw.io (Arrange › Insert › Advanced) or open it via the draw.io connection.",
-      "Check every arrow and indicator against your theory and sources."
+      "Ask Copilot for the model as Mermaid code, a table of every arrow with what it rests on, and a construct–indicator table.",
+      "Check every arrow and indicator in the tables against your theory and sources.",
+      "Optional: paste the code into draw.io (Arrange › Insert › Advanced) to view and edit the diagram."
     ],
-    "prompt": "I am a postgraduate researcher in [discipline] working on [research question]. My constructs are: [construct – one-line definition, for each]. The expected relationships are: [e.g. A increases B; C moderates A→B]. 1) Draw the conceptual model as Mermaid flowchart code (left to right): constructs as nodes, hypothesised paths as labelled arrows (H1, H2 …), moderators as arrows pointing at a path. 2) If I want a measurement model, add for each construct whether it is reflective or formative, with a one-line reason, and list 3–4 candidate indicators or survey items per construct in a table: construct, indicator, source or 'to be developed'. Do not invent published scales; if you suggest an existing scale, say how sure you are. 3) List any path that is not backed by my description.",
-    "check": "Every node and arrow in the diagram appears in your description or is flagged, each indicator really reflects (or forms) its construct, and any named scale exists with the items Copilot claims.",
-    "limit": "Copilot Chat returns code that you import into draw.io; drawing directly on the canvas needs the draw.io or Figma connection, which your IT has to enable. The theory behind each arrow remains your argument."
+    "prompt": "I am a postgraduate researcher in [discipline] working on [research question]. My constructs are: [construct – one-line definition, for each]. The expected relationships are: [e.g. A increases B; C moderates A→B]. 1) Draw the conceptual model as Mermaid flowchart code (left to right): constructs as nodes, hypothesised paths as labelled arrows (H1, H2 …), moderators as arrows pointing at a path. 2) Give a table of every arrow in the code: label, from, to, and the part of my description it rests on – or 'not in description'. 3) If I want a measurement model, add for each construct whether it is reflective or formative, with a one-line reason, and list 3–4 candidate indicators or survey items per construct in a table: construct, indicator, source or 'to be developed'. Do not invent published scales; if you suggest an existing scale, say how sure you are. 4) List any path that is not backed by my description.",
+    "check": "Every row of the arrow table matches your description or is flagged, each indicator really reflects (or forms) its construct, and any named scale exists with the items Copilot claims.",
+    "limit": "Copilot Chat returns the model as code and as tables you check in the chat; to see the drawing you paste the code into draw.io or another Mermaid viewer, and drawing directly on the canvas needs a connection your IT has to enable. The theory behind each arrow remains your argument."
   },
   "erhebung-7": {
     "bring": "A clear, glare-free photo of a whiteboard, flipchart or card sort you made yourself – no faces or names. For the practice version: sticky notes, a flipchart and a phone to photograph the 12 practice paper titles you sorted.",

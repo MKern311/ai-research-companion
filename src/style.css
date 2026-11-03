@@ -320,10 +320,20 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 .lv-n{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--red)}
 .lvl{font-size:12px;font-weight:600;border-radius:999px;padding:3px 9px;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line-2);background:#fff}
 .lvl.on{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink-2)}
-.further{background:var(--surface);border-radius:var(--radius-s);padding:12px 14px;margin:10px 0}
-.further h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--red);margin:0 0 6px}
-.further ol{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-2)}
-.further li b{color:var(--ink);margin-right:4px}
+/* the ladder in each use case: levels 1–3 side by side in the wide window, level 4 where it fits */
+.ladder{margin:12px 0}
+.ladder h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--red);margin:0 0 8px}
+.ladder ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.ladder li{background:#fff;box-shadow:inset 0 0 0 1px var(--line-2);border-radius:var(--radius-s);padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-2)}
+.ladder .ln{font-size:12.5px;font-weight:700;color:var(--ink)}
+.ladder .linkbtn{align-self:flex-start;font-size:13px}
+.studio-ov{margin-top:14px;background:var(--surface);border-radius:var(--radius-s);padding:10px 14px}
+.studio-ov summary{font-weight:700;cursor:pointer}
+.studio-ov table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px}
+.studio-ov th,.studio-ov td{text-align:left;vertical-align:top;padding:8px 10px;border-top:1px solid var(--line-2)}
+.studio-ov th{font-size:12.5px;color:var(--muted);font-weight:700}
+.studio-ov td:first-child{width:24%}.studio-ov td:nth-child(2){width:14%;color:var(--muted)}
+@media (max-width:700px){.studio-ov thead{display:none}.studio-ov tr,.studio-ov td{display:block;width:auto !important}.studio-ov td{border-top:0;padding:2px 0}.studio-ov tr{border-top:1px solid var(--line-2);padding:8px 0}}
 .pill.ex{background:var(--amber-bg);color:var(--amber)}
 .exnote{background:var(--amber-bg);color:var(--amber);border-radius:var(--radius-s);padding:8px 12px;font-size:14px}
 .dl-item.flash{animation:flash 1.8s ease-out}

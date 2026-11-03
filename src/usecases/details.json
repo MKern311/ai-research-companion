@@ -72,6 +72,12 @@
     "Litmaps"
    ],
    "repos": []
+  },
+  "levels": {
+   "chat": "Attach the abstracts file (AB) and run the starter prompt in one chat. In the same chat, ask Copilot to recount the papers per year from the file and name any paper missing from its table.",
+   "notebook": "Add the abstracts file (AB) – it is .txt, so it works as a reference – or, for your own field, title lists exported from a database and saved as .xlsx or .txt. Ask for themes and yearly counts across all lists at once. You can add a new export each term and see whether the themes hold.",
+   "agent": "Call it 'Topic scout'. Instructions: four to six themes, a theme–paper–year table, rarely combined themes, a statement of what the sample can and cannot show, and never add papers that are not in the upload. Switch on 'Create documents, charts and code' so it counts and charts papers per year. Starter prompt: 'Cluster this title list and chart papers per year.' Reusable for every new export.",
+   "studio": "Connect the OpenAlex MCP server so the agent pulls titles, years and topics for a whole field query and counts them at scale, instead of working on a list you paste. Agent Builder cannot reach an external database. Needs your IT team."
   }
  },
  "idee-1": {
@@ -145,6 +151,12 @@
    "repos": [
     "ars-deep-research"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with your rough idea in one chat. In the same chat, pick the objection that worries you most, ask Copilot to press it harder, then ask for the strongest reply you could give.",
+   "notebook": "Add a one-page note on your idea, your supervisor's comments, two or three key papers (practice: C6 and B1) and a short rules document – 'act as a critical but fair supervisor, no invented literature'. Ask which objections the papers already answer. Each round stays as a page, so you see how the idea changes.",
+   "agent": "Call it 'Critical supervisor'. Instructions: the three parts of the starter prompt – alternative questions (narrower, broader, different angle), hidden assumptions, three strongest objections with counter-positions – under 350 words, no literature unless it is sure it exists, and never choose the direction for you. No knowledge or code needed. Starter prompts: 'Challenge this idea', 'Act as reviewer 2 on my revised question'. Reusable for every new idea or revision.",
+   "studio": ""
   }
  },
  "idee-2": {
@@ -228,6 +240,12 @@
    "repos": [
     "ars-deep-research"
    ]
+  },
+  "levels": {
+   "chat": "Attach the HadCET daily file (D1) and run the starter prompt. In the same chat, ask Copilot to count with Python how many days in the file meet each of its two 'very hot day' definitions, and to say what that count does and does not measure.",
+   "notebook": "Add your draft question, a library guide on PICO, PEO or SPIDER, the paper whose design you build on (practice: B2) and a description of your data (D1 is .txt and works directly). Ask how each framework element and construct maps to the paper and the data. When the question changes, you rerun the same check against the same sources.",
+   "agent": "Call it 'Question framer'. Instructions: choose and justify a framework, give the element table with missing parts and three search terms each, mark assumed elements, link sub-questions to elements, rate FINER with project-specific reasons, and propose measurable working definitions. Switch on 'Create documents, charts and code' if definitions should be tested on data. Starter prompt: 'Frame this question and test it against FINER.' Reusable for every new draft question.",
+   "studio": ""
   }
  },
  "idee-3": {
@@ -311,6 +329,12 @@
     "Elicit"
    ],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with web search switched on (check the Work/Web setting). In the same chat, ask Copilot to keep only studies whose links it actually opened, and to search again with the terms a neighbouring field would use.",
+   "notebook": "A notebook cannot search the web, so use it after the search: add the verified papers you found (practice: C3 and B2) and your project summary as a .docx. Ask how each study overlaps with your design, data and setting, and draft the positioning statement from these sources. Add new papers as they appear.",
+   "agent": "Call it 'Novelty check'. Instructions: up to eight closest studies, each with authors, year, title, working link and one sentence on overlap; only studies it actually found; a two-sentence positioning statement; and a reminder that this is a first scan, not proof of novelty. No code needed. Starter prompt: 'Has this study been done? Here is my summary.' Reusable whenever your plan or question shifts.",
+   "studio": "Connect the Semantic Scholar or OpenAlex MCP server, or the Consensus or scite Copilot connector, so the agent searches a scholarly database rather than the open web; a scheduled flow could rerun the check monthly. Agent Builder cannot connect these. Needs your IT team."
   }
  },
  "idee-4": {
@@ -385,6 +409,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Attach the monthly CET file (D2) and run the starter prompt. In the same chat, ask for the search terms each neighbouring field uses for its method, so you can find that literature yourself.",
+   "notebook": "Add your question, the paper you work from (practice: C6, which draws on econometric structural-break work) and two or three papers from the neighbouring field once you have found them. Ask what each method assumes and what your data would need. The notebook grows into a reading log for the other discipline.",
+   "agent": "Call it 'Discipline bridge'. Instructions: four concepts or methods from named neighbouring fields, the starter prompt's table (transfer, adaptation, risk of mismatch), the search vocabulary each field uses, and a reference only if it is sure it exists. Switch on 'Create documents, charts and code' if you want a method tried on your data. Starter prompt: 'Which methods from other fields fit this question?' Reusable for every new question.",
+   "studio": ""
   }
  },
  "idee-5": {
@@ -454,6 +484,12 @@
    "repos": [
     "kd-literature-review"
    ]
+  },
+  "levels": {
+   "chat": "Attach the abstracts file (AB) and run the starter prompt. In the same chat, ask Copilot to re-mark every gap as stated or inferred and to drop any quote it cannot find word for word in the file.",
+   "notebook": "Add the abstracts file (AB) or, for your own work, the full texts of your key studies, plus your draft question as a .docx. Ask for gaps by type across all sources, each with a quoted passage. Answers come only from the references, so every gap is tied to your papers; add new studies and check whether a gap still stands.",
+   "agent": "Call it 'Gap mapper'. Instructions: the five gap types, a table with records, verbatim passage and 'stated' or 'inferred', a judgement of how well the draft question fills one gap, and never add studies you have not given it. No code needed. Starter prompts: 'Map the gaps in these abstracts', 'Which gap does my question fill?' Reusable for every new batch of studies.",
+   "studio": ""
   }
  },
  "idee-6": {
@@ -538,6 +574,12 @@
    "repos": [
     "kd-hypothesis"
    ]
+  },
+  "levels": {
+   "chat": "Attach HadCRUT5 (D3), Mauna Loa CO₂ (D5) and Forster et al. (A3) and run the starter prompt. In the same chat, ask which hypothesis the regression actually tests and what the different baselines (1961–1990 and 1850–1900) would change.",
+   "notebook": "Add the theory texts you are choosing between, the indicators paper (A3) and your hypothesis draft; save HadCRUT5 (D3) and Mauna Loa (D5) as .xlsx first if you want the data in. The notebook does not run Python – use it to check each hypothesis's reasoning against the sources, and keep the regression in chat or the agent.",
+   "agent": "Call it 'Theory and hypotheses'. Instructions: compare candidate theories in a table, derive hypotheses each with reasoning and a supporting passage, describe the model in words, flag baseline and omitted-variable issues, and never invent studies. Knowledge: your core theory papers. Switch on 'Create documents, charts and code' to test a hypothesis on data. Starter prompt: 'Derive hypotheses from these theories and test one on this file.'",
+   "studio": ""
   }
  },
  "literatur-0": {
@@ -611,6 +653,12 @@
    "repos": [
     "kd-literature-review"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt and copy the string into Scopus if you have access. Back in the same chat, paste the hit count and any known paper it missed, and ask Copilot which block to widen.",
+   "notebook": "Add your question, your library's search syntax guide for the database, the PRESS checklist and a .docx log of each string version with its hit count. Ask what changed between versions and which block lost known papers. You build a documented search history for reporting along PRISMA-S.",
+   "agent": "Call it 'Search string builder'. Instructions: concept blocks with synonyms, OR within and AND between blocks, truncation, subject headings where the database has them, the string in a code block, the block table, a PRESS self-check, and say so when unsure about a field code. Knowledge: the syntax guides of the databases you use. Starter prompt: 'Build a Scopus string for this question.' Reusable for every new question or database.",
+   "studio": ""
   }
  },
  "literatur-1": {
@@ -694,6 +742,12 @@
    "repos": [
     "ars-deep-research"
    ]
+  },
+  "levels": {
+   "chat": "Attach Rohde and Hausfather (A2) and run the starter prompt. In the same chat, ask Copilot to separate papers taken from the reference list from papers found by search, and to confirm that each citing paper is not in A2's references.",
+   "notebook": "Add the key paper (A2), the citing paper you verified (A1) and further papers you confirmed in Google Scholar. Ask how each relates to the key paper's problem and to each other. The notebook cannot search, so it becomes your verified citation map, extended paper by paper.",
+   "agent": "Call it 'Citation explorer'. Instructions: describe the key paper's problem in plain words, find related papers with different terminology and up to three citing papers, give a working link and the connection for each, label each as reference list or search result, write a 150-word cited overview, and never invent sources. Starter prompt: 'Find related and citing work for this DOI.' Reusable for every new key paper.",
+   "studio": "Connect the OpenAlex or Semantic Scholar MCP server, or Litmaps, so the agent follows real backward and forward citations in a database instead of the open web; a scheduled flow could report new citing papers. An agent alone cannot reach these. Needs your IT team."
   }
  },
  "literatur-2": {
@@ -764,6 +818,12 @@
    "repos": [
     "ars-screener"
    ]
+  },
+  "levels": {
+   "chat": "Screen the eight records yourself first, then attach the abstracts file (AB) and run the starter prompt. In the same chat, paste your own decisions and ask Copilot to compute Cohen's kappa with Python and list each disagreement with both reasons.",
+   "notebook": "Add your protocol with the eligibility criteria, the record batch (practice: AB; save a CSV export as .xlsx first) and a page with your own decisions. Ask for include, exclude or unsure per record with the deciding criterion and a quote. Only approved, non-sensitive records go in, and you check every decision.",
+   "agent": "Call it 'Second screener'. Instructions: your criteria word for word, one row per record with decision, deciding criterion and a quote from the abstract, 'unsure' rather than guessing, and 'the human makes the final call'. Knowledge: the protocol. Switch on 'Create documents, charts and code' to compute kappa. Starter prompt: 'Screen this batch.' Only approved, non-sensitive records go in; you check every decision.",
+   "studio": "A Power Automate flow can pass each record of a large export through the agent and write decision, criterion and quote back to a shared sheet or your screening platform – batch work an agent in chat cannot do. Needs your IT team."
   }
  },
  "literatur-3": {
@@ -836,6 +896,12 @@
    "repos": [
     "kd-literature-review"
    ]
+  },
+  "levels": {
+   "chat": "Attach Christidis et al. 2020 (B2) and 2023 (C3) and run the starter prompt. In the same chat, ask Copilot to re-check every number against the page it cited and to mark any value it rounded, converted or inferred.",
+   "notebook": "Add your piloted extraction form as a .docx, the full texts you may share (practice: B2 and C3) and a page with your own independent extraction. Ask for one row per study with page references and compare it with yours. Only approved, non-sensitive material goes in, and a human checks every value.",
+   "agent": "Call it 'Evidence extractor'. Instructions: your extraction form as fixed columns, a page or section after each value, numbers copied exactly – no calculating, rounding or converting – and 'not reported' for gaps. Knowledge: the form and its coding rules. Switch on 'Create documents, charts and code' to export the table to Excel. Starter prompt: 'Extract this PDF into the evidence table.' Only approved material; a human checks every row.",
+   "studio": ""
   }
  },
  "literatur-4": {
@@ -913,6 +979,12 @@
     "Mendeley"
    ],
    "repos": []
+  },
+  "levels": {
+   "chat": "Attach A1, A2 and A3 and run the starter prompt. In the same chat, ask a follow-up that needs two papers at once – for example how their reference periods change a stated warming figure – with a quote from each.",
+   "notebook": "This is where a notebook pays off: add your reading folder from OneDrive (practice: A1–A3), up to 50 references. Ask questions across all papers with file, page and verbatim quote; Copilot answers only from them and says when they are silent. Where licences allow, add papers as you read and come back all year.",
+   "agent": "Call it 'Library Q&A'. Instructions: answer only from the knowledge files, give file, page and a verbatim quote of one to three sentences per claim, say 'not in these sources' when they are silent, and never use outside knowledge. Knowledge: your core papers, or a SharePoint folder of them if your licence allows. Starter prompts: 'What do my papers say about …?', 'Which paper defines …?'",
+   "studio": ""
   }
  },
  "literatur-5": {
@@ -997,6 +1069,12 @@
    "repos": [
     "kd-literature-review"
    ]
+  },
+  "levels": {
+   "chat": "Attach the five PDFs (B2, B3, C3, C4, C5) and run the starter prompt. In the same chat, ask Copilot to make the strongest case that Vautard et al. weaken the model-based attribution studies, with passages and pages.",
+   "notebook": "Add the studies of your review (practice: B2, B3, C3, C4, C5), your concept list and the matrix so far as .docx or .xlsx. Ask for agreements and tensions across all sources, and which cells change when you add a study. Only material you may share goes in; check every cell against the original.",
+   "agent": "Call it 'Concept matrix'. Instructions: one row per study, your concepts as fixed columns, 'fully', 'partly' or 'not at all' with finding, passage and page, then agreements and tensions with likely reasons; never smooth over contradictions or add studies. Switch on 'Create documents, charts and code' to export to Excel. Starter prompt: 'Add this study to the matrix.' Only approved material; you check every cell and write the synthesis.",
+   "studio": ""
   }
  },
  "literatur-6": {
@@ -1069,6 +1147,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Attach the Shi et al. preprint (C6) and run the starter prompt. In the same chat, ask Copilot to quote the penalty formulas exactly as Section 3 gives them and to mark where its worked example simplifies the method.",
+   "notebook": "Add the paper (C6), a methods chapter or lecture notes you may use and a glossary page of your own. Ask about symbols and steps across them; answers come only from these sources. For a non-English paper, add the original and your verified translation side by side. Run worked examples in chat – the notebook does not run Python.",
+   "agent": "Call it 'Method explainer'. Instructions: plain language, every symbol defined, the paper's own notation, a small worked example, assumptions named, and anything beyond the paper marked; for translations, UK English, original terms in brackets when unsure, a five-bullet relevance summary, 'for screening only'. Switch on 'Create documents, charts and code' for worked examples. Starter prompts: 'Explain Section 3 of this paper', 'Translate and summarise this abstract'.",
+   "studio": ""
   }
  },
  "literatur-7": {
@@ -1152,6 +1236,12 @@
     "ars-deep-research",
     "kd-literature-review"
    ]
+  },
+  "levels": {
+   "chat": "Attach the abstracts file (AB) and run the starter prompt. In the same chat, ask Copilot to tighten every criterion that left a record 'unsure' and to apply the revised criteria to the same five records.",
+   "notebook": "Add your question, PRISMA-P (or the JBI guidance for scoping reviews), your library's guide on review types and the pilot abstracts (AB). Ask which review type fits and which PRISMA-P items your draft protocol misses. You come back as the protocol matures, with each version and your supervisor's comments in one place.",
+   "agent": "Call it 'Review planner'. Instructions: compare systematic, scoping, narrative and rapid reviews for the given question and time, recommend one with conditions, draft criteria from the question only with stage and borderline case, flag criteria hard to judge from an abstract, and mark uncertainty. Knowledge: PRISMA-P and your field's guidance. Starter prompt: 'Which review type fits this question and deadline?' Reusable for every new review.",
+   "studio": ""
   }
  },
  "literatur-8": {
@@ -1221,6 +1311,12 @@
     "prisma2020",
     "slr-prisma"
    ]
+  },
+  "levels": {
+   "chat": "Paste the practice log with the starter prompt. In the same chat, ask Copilot to add up every stage and the exclusion reasons separately and show each sum – without changing any number.",
+   "notebook": "Add your running search log (.docx or .xlsx), the PRISMA 2020 and PRISMA-S checklists and your methods draft. Ask whether the counts add up and which items are still missing. The log grows over months of searching and screening; the notebook keeps numbers and text consistent each time you come back.",
+   "agent": "Call it 'PRISMA checker'. Instructions: arrange the counts for the PRISMA 2020 flow diagram, check every sum and flag inconsistencies instead of correcting them, draft the methods paragraph only from facts in the log, list missing PRISMA 2020 items, and never invent search strings. Knowledge: the PRISMA 2020 checklist. Switch on 'Create documents, charts and code' for the sums. Starter prompt: 'Check this search log.'",
+   "studio": ""
   }
  },
  "literatur-9": {
@@ -1289,6 +1385,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Rate two criteria yourself, then attach Perkins-Kirkpatrick and Lewis (C1) and run the starter prompt. In the same chat, ask Copilot to back every 'yes' with the exact passage or change it to 'can't tell'.",
+   "notebook": "Add the checklists your field uses (for example CASP, MMAT or JBI as PDF), the studies you appraise (practice: C1) and your own appraisal notes. Ask for item-by-item ratings with passages and check that judgements stay consistent across papers. Only approved, non-sensitive material goes in, and the final rating is always yours.",
+   "agent": "Call it 'Appraisal assistant'. Instructions: name and justify a checklist for the design, or say none fits and use adapted criteria; go item by item with yes, no or can't tell, the exact passage with page and a one-line comment; never infer, never give an overall score. Knowledge: the checklists you use. Starter prompt: 'Appraise this study with [checklist].' Only approved material; a human makes every rating.",
+   "studio": ""
   }
  },
  "design-0": {
@@ -1368,6 +1470,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with your question and design, or with the HadCRUT5 and Mauna Loa CO₂ files. In the same chat, ask which single change to the design would remove the most serious threat, and what it would cost in data or time.",
+   "notebook": "Add your proposal draft, two or three key methods papers from your field and your supervisor's comments – for the practice version, A3 plus D3 and D5 (save the CSVs as .xlsx first). Ask which threats the methods papers raise that your design does not address. The critique stays next to its sources, so you can come back after every revision.",
+   "agent": "Call it 'Design critic'. Instructions: compare the design with two realistic alternatives in a fixed table, sort threats by the four validity types (or trustworthiness criteria for interpretive work), give one study-specific mitigation each, never run analyses or invent sources. Knowledge: your department's methods guidance, if you may share it. Starter prompt: 'Critique this design: [question, design, unit of analysis]'. Reusable for every new study or chapter revision.",
+   "studio": ""
   }
  },
  "design-1": {
@@ -1437,6 +1545,12 @@
    "tools": [],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with your draft items. In the same chat, paste your revised items and ask for the same check and construct map again, so you see whether the fixes created new problems or gaps.",
+   "notebook": "Collect your research questions, construct definitions, questionnaire and interview guide drafts, and papers that report validated scales for your constructs. Ask which construct or research question no item covers, across survey and interview. The notebook keeps every version, so the item-to-construct matrix stays consistent as the instrument grows.",
+   "agent": "Call it 'Item reviewer'. Instructions: the problem types (double-barrelled, leading, ambiguous, jargon, scale mismatch), the table format, 'keep meaning and construct unchanged' and 'never invent validated scales or sources'. Knowledge: your construct definitions and research questions. Starter prompts: 'Review these items: [paste]' and 'Map these items to my constructs'. Reusable for every new draft and shareable with co-authors.",
+   "studio": ""
   }
  },
  "design-2": {
@@ -1493,6 +1607,12 @@
    "tools": [],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with your items and target population. In the same chat, ask which three items most need a probe in your real cognitive interviews, and draft that probe for each.",
+   "notebook": "Add your questionnaire draft, the population description, your cognitive interview protocol and, later, your notes from the real pre-tests. Ask where the simulated misreadings matched or missed what real respondents did. Kept side by side, this shows over time how far persona tests help for your population.",
+   "agent": "Call it 'Pre-test planner'. Instructions: simulate four varied personas, sort misreadings by response stage (comprehension, retrieval, judgement, response), give a table with suggested probes, and label every output 'simulated – not data, not a pre-test'. Knowledge: a short description of your population. Starter prompt: 'Pre-test these items for [population]: [paste]'. Reusable for every revised version before each real pre-test round.",
+   "studio": ""
   }
  },
  "design-3": {
@@ -1564,6 +1684,12 @@
    "repos": [
     "kd-power"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Central England monthly file, or with your own test and effect size. In the same chat, ask for the calculation again across the range of effect sizes you find plausible, and for all the code in one block you can rerun.",
+   "notebook": "Add the pilot data or earlier studies your effect size comes from (D2 works as .txt), your analysis plan and the code and results from the chat. Ask which effect sizes the sources support and which assumptions your plan violates. The notebook does not run code; it keeps assumptions, sources and results together for when the estimates change.",
+   "agent": "Call it 'Power analyst' and switch on 'Create documents, charts and code'. Instructions: always write and run Python with statsmodels, show the code, plot sample size across effect sizes, list every assumption and which ones your data may violate, and run a known benchmark (d = 0.5 gives about 64 per group). Starter prompt: 'Power analysis for [test], effect size [value] from [source]'. Reusable for every study or grant.",
+   "studio": ""
   }
  },
  "design-4": {
@@ -1634,6 +1760,12 @@
    "tools": [],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with your template headings, or with the three practice data files. In the same chat, ask for a list of every statement in the skeleton that you still need to confirm with your ethics office, library or data provider.",
+   "notebook": "Add your institution's ethics form and data management plan template with their guidance notes, your protocol and the licence or documentation pages of reused data – for the practice version D7, plus D3 and D5 saved as .xlsx first. Ask which template questions your drafts do not yet answer. You come back as the application goes through revisions and reviewer comments.",
+   "agent": "Call it 'Ethics and DMP drafter'. Instructions: follow the template headings, give reviewer expectations, open questions and a skeleton with [placeholders], take licences only from source documents, and never write consent, risk or anonymisation reasoning or state rules it cannot source. Knowledge: your institution's public templates and guidance pages. Starter prompt: 'Draft the skeleton for [ethics application or DMP]: [study summary]'. Reusable for every new project.",
+   "studio": ""
   }
  },
  "design-5": {
@@ -1687,6 +1819,12 @@
    "tools": [],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Attach the exported questionnaire and run the starter prompt. In the same chat, ask for a fourth path – the respondent your filters are most likely to fail, such as someone who answers 'other' or 'don't know' at every filter.",
+   "notebook": "Add the exported questionnaire, your item list or codebook, the routing specification and your style guide for terms and form of address. Ask whether routing, answer options and terms match across all of them. After each fix you add the new export and ask again, so findings and fixes stay in one place.",
+   "agent": "Call it 'Survey checker'. Instructions: walk at least three respondent paths, use the fixed problem types and table, add a language check and a completion-time estimate, and never change the meaning of a question. Knowledge: your style guide or your institution's survey guidance. Starter prompt: 'Check this exported questionnaire for [target group]'. Reusable for every questionnaire and every version before launch.",
+   "studio": ""
   }
  },
  "erhebung-0": {
@@ -1751,6 +1889,12 @@
     "Whisper (OpenAI)"
    ],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with an invented excerpt. In the same chat, ask for a list of every place where the labelled text or the translation departs from the original wording, and check each one yourself.",
+   "notebook": "Only approved, pseudonymised draft transcripts from your approved transcription tool go in – never audio or raw personal data – with your interview guide and a glossary of terms. Ask where the same term is translated differently across interviews. You come back as each transcript is checked, and you check every result against the audio.",
+   "agent": "Call it 'Transcript formatter'. Instructions: add speaker labels, mark [unclear], translate keeping hesitations, show original and translation side by side, never summarise, shorten or correct speech, and remind you to remove names first. Knowledge: your glossary of terms. Only approved, pseudonymised text goes in, and you check every line against the audio. Starter prompt: 'Label and translate this excerpt into [language]'.",
+   "studio": "Connect the Otter.ai MCP server, or a Power Automate flow on an approved OneDrive folder, so the agent fetches transcripts from your approved tool instead of you pasting them – only if your ethics approval and data protection officer allow it. Needs your IT team."
   }
  },
  "erhebung-1": {
@@ -1817,6 +1961,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Oxford, Durham and rainfall files, or with your own PDF. In the same chat, name five cells at random and ask it to quote the evidence line again, then compare with the file yourself.",
+   "notebook": "Add the documents you extract from – reports, archival records or data documentation (D7 and D8 work as .txt) – and your extraction form as a Word file. Ask for the same fields across all documents, each with line or page and quote. New documents join one consistent table; only approved material goes in, and you verify a sample of every batch.",
+   "agent": "Call it 'Extraction assistant' and switch on 'Create documents, charts and code' for the CSV export. Instructions: your extraction form with field definitions, one row per document, line or page and a verbatim quote for every value, 'not stated' where absent, no outside knowledge. Starter prompt: 'Extract the form fields from the attached documents'. Only approved material goes in; reusable for every batch, and you check a random sample each time.",
+   "studio": "A Power Automate flow can pass every new document in a SharePoint folder to the agent and append the extracted rows to an Excel table, with a log for your verification sample. An agent alone cannot run that multi-step automation. Needs your IT team."
   }
  },
  "erhebung-2": {
@@ -1888,6 +2038,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the abstracts file and paste your own codes for kappa. In the same chat, rewrite the definition of the code with most disagreements and ask it to recode only the disputed texts.",
+   "notebook": "Add your codebook with definitions and examples, the texts (AB works as .txt; save a CSV as .xlsx first) and your notes on each disagreement. Ask which definitions the disagreements point to and draft a revised codebook. The notebook cannot compute kappa, but it keeps every codebook version with its reasons – material for your methods section.",
+   "agent": "Call it 'Pre-annotator' and switch on 'Create documents, charts and code' for kappa and the confusion matrix. Instructions: the coding scheme, one code per text, 'unclear' instead of new codes, confidence and a verbatim quote as reason, kappa against human codes when given. Knowledge: your codebook. Only approved, non-sensitive texts go in, and a human checks a sample of every batch. Starter prompt: 'Code these texts: [paste]'.",
+   "studio": ""
   }
  },
  "erhebung-3": {
@@ -1944,6 +2100,12 @@
    "tools": [],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt and answer as an invented respondent. In the same chat, ask it to rewrite every follow-up you judged leading or off-topic and to name the rule it broke.",
+   "notebook": "Add your interview guide, the conditions of your ethics approval, your follow-up rules as a short Word document and the log of each pilot run. Ask where follow-ups broke a rule across pilots. Only invented pilot answers go in, never real participants' data, and you judge every follow-up yourself.",
+   "agent": "Call it 'Interview pilot'. Instructions: your core questions in order, at most one neutral follow-up per answer, no leading or sensitive questions, accept 'I'd rather not say', and a log of every follow-up with its reason at the end. Use it only to pilot with invented respondents, never with participants, and review every log yourself. Starter prompt: 'Start the pilot interview'.",
+   "studio": ""
   }
  },
  "erhebung-4": {
@@ -2020,6 +2182,12 @@
     "OpenAlex"
    ],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with web search switched on, with the ERA5 file or your own data needs. In the same chat, ask it to rank the datasets whose links you confirmed by fit, and to list what each one lacks for your variables.",
+   "notebook": "Save the documentation pages or codebooks of the candidate datasets as PDFs and add them with your variable list – for the practice version D9, saved as .xlsx first. Ask which dataset covers which variable, period and unit, under which licence. The notebook answers only from these documents, so every claim comes from documentation, not the web.",
+   "agent": "Call it 'Data scout'. Instructions: the fixed table (name, provider, link, coverage, unit of analysis, access, licence, fit, gaps), 'say when you are not sure' and 'never invent datasets'. Knowledge: the public websites of repositories you trust, such as the UK Data Service or your discipline's archive. Starter prompt: 'Find open data for: [question, region, period, variables]'. Reusable for every new question; you still open every link.",
+   "studio": "Add the OpenAlex MCP server, so the agent searches a scholarly catalogue for datasets and the papers that used them instead of relying on general web search. Agent Builder cannot reach it. Needs your IT team."
   }
  },
  "erhebung-5": {
@@ -2072,6 +2240,12 @@
    "tools": [],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with your invented excerpt. In the same chat, paste your list of planted identifiers and ask which ones it missed or failed to flag, and why.",
+   "notebook": "Use invented excerpts only, with your pseudonymisation rules and a replacement log as Word documents. Ask whether replacements are consistent across excerpts and which identifier types slip through. Real transcripts belong in an approved environment; the notebook keeps your rules and test results while you refine the protocol you then apply and check by hand.",
+   "agent": "Call it 'Pseudonymisation tester'. Instructions: your replacement codes ([P1], [CITY], [ORG1], [DATE]), everything else word for word, indirect identifiers flagged but unchanged, always the text plus a replacement log. Use it only on invented or approved, de-identified test material, and a human checks every output. Starter prompt: 'Pseudonymise this excerpt and log the replacements'.",
+   "studio": ""
   }
  },
  "erhebung-6": {
@@ -2129,6 +2303,12 @@
     "Transkribus"
    ],
    "repos": []
+  },
+  "levels": {
+   "chat": "Attach one page image and run the starter prompt. In the same chat, paste your corrections for the five lines you checked and ask for a revised transcription and a translation of the confirmed lines only.",
+   "notebook": "Add your checked transcriptions of earlier pages, a list of abbreviations and spellings, and the archive's catalogue description, as Word or text files. Ask how a word or abbreviation was read on earlier pages before you accept a new reading. Readings stay consistent across a whole collection; the page images themselves still go into the chat.",
+   "agent": "Call it 'Archive transcriber'. Instructions: line by line, original spelling and abbreviations kept, [?] for uncertain and [illegible] for unreadable text, a literal translation in a two-column table, notes on words whose meaning has changed. Knowledge: your abbreviation list and checked sample transcriptions. Starter prompt: 'Transcribe this page – [language], around [date]'. Reusable for every page; you still spot-check each one against the image.",
+   "studio": ""
   }
  },
  "analyse-0": {
@@ -2215,6 +2395,12 @@
     "kd-stats",
     "lavaan"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Durham file attached. Then, in the same chat, ask Copilot to rerun the model with a different Newey–West lag and explain why only the standard error changes.",
+   "notebook": "Add the Durham station file (D7, .txt), your analysis plan as a Word file and the code and output of each chat run saved as .txt. Ask where the code departs from the plan or what changed between runs. The notebook does not run code, but it keeps plan, script versions and results together, so you can see weeks later why you made each choice.",
+   "agent": "In Instructions, name your discipline and software and set the rules: commented code, complete cases only, list every dropped observation, state and check assumptions, give R or Stata equivalents without running them, and never report a number without the code behind it. Switch on \"Create documents, charts and code\". Starter prompt: \"Here is my dataset and model – write, run and explain the code.\" Reusable for every new dataset.",
+   "studio": ""
   }
  },
  "analyse-1": {
@@ -2284,6 +2470,12 @@
    "repos": [
     "kd-eda"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Oxford file attached. Then, in the same chat, accept the fixes you agree with and ask for the cleaned file with flag columns, the script and a log of every change.",
+   "notebook": "Add the raw Oxford file (D7, .txt), a short Word data dictionary with the codes from its header and your cleaning log. Ask which codes each column uses and whether the log covers all of them. For your own data, keep codebook, documentation and cleaning decisions together, so the same rules apply when you return or add a new wave.",
+   "agent": "In Instructions, fix the order: read the header and codebook first, profile without changing anything, report an issue table, wait for your approval, then clean with flag columns, keep the raw file untouched and return the script and a change log. Never delete rows silently. Switch on \"Create documents, charts and code\". Starter prompt: \"Profile this file and list every problem before cleaning.\" Reusable for each new data file or survey wave.",
+   "studio": ""
   }
  },
  "analyse-2": {
@@ -2377,6 +2569,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the four PDFs attached. Then, in the same chat, give Copilot your revised definition of one code and ask it to recode one paper and list every quote that changed.",
+   "notebook": "Add the four attribution papers (B2, C3, C4, C5) and a Word file with your research question and current coding frame. Ask for every passage that fits one code, with page numbers. For your own study, add only approved, anonymised transcripts as your ethics approval allows. The frame and material stay together as you return – you still check every quote and decision.",
+   "agent": "Add your coding frame as Knowledge. In Instructions, state your approach (e.g. codebook thematic analysis) and the rules: quote word for word with page or line, stay within the text, flag ambiguous passages, never invent quotes or themes. Starter prompt: \"Code this excerpt with my frame and flag every borderline passage.\" Reusable for each new document – only approved, anonymised material goes in, and you check every coded segment.",
+   "studio": ""
   }
  },
  "analyse-3": {
@@ -2446,6 +2644,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Forster PDF attached. Then, in the same chat, ask Copilot to add the extra stop words it suggested, rerun with two seeds and show a table of the topics that persist.",
+   "notebook": "Add the Forster report (A3), the code and topic lists from your chat runs saved as .txt and a note of your settings. Ask which passages of the report each saved topic matches, and how two runs differ. For your own corpus, add only approved, non-sensitive texts. Settings, outputs and your interpretation stay together; you judge every topic label yourself.",
+   "agent": "In Instructions, fix the method: preprocessing rules, a fixed random seed, the number of topics, a stability rerun, top-word tables, and \"call a vague topic vague\". For labelling, add category definitions and ask for a one-line reason per text. Switch on \"Create documents, charts and code\". Starter prompt: \"Run the standard topic model on this corpus and report stability.\" Only approved, non-sensitive texts go in, and you check a sample of labels by hand.",
+   "studio": "For a large corpus, a Power Automate flow can pass each new text from a SharePoint folder to the agent and write its label and reason into an Excel table – an agent alone works one chat at a time. You still check a random sample. Needs your IT team."
   }
  },
  "analyse-4": {
@@ -2525,6 +2729,12 @@
    "repos": [
     "kd-eda"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the three CSV files and two PDFs attached. Then, in the same chat, ask which year shows the largest gap between the series and what the papers say could explain it, with the code.",
+   "notebook": "Save the HadCRUT5, GISTEMP and ERA5 files (D3, D4, D9) as .xlsx first, then add them with the Morice and Rohde & Hausfather papers (A1, A2). Ask how each paper explains the differences you found in the chat. For your own data, add the codebook and documentation: data descriptions and source papers stay together, and answers stay consistent when you return.",
+   "agent": "In Instructions, set the exploration routine: describe structure, types and missing values first, check baselines and units, show the code behind every number, add one sentence of caution per finding and label everything exploratory. Switch on \"Create documents, charts and code\". Starter prompts: \"Describe this file before we look at patterns.\" and \"How is X distributed across Y?\" Reusable for every new dataset.",
+   "studio": ""
   }
  },
  "analyse-5": {
@@ -2600,6 +2810,12 @@
    "repos": [
     "kd-viz"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the HadCRUT5 CSV attached. Then, in the same chat, ask for a greyscale version and a second panel from 1950 in the same size and style.",
+   "notebook": "Save the HadCRUT5 file (D3) as .xlsx and add it with your journal's figure guidelines (PDF or Word) and the code of figures you have already accepted (.txt). Ask which guideline points your current figure still misses. Guidelines and figure code stay together, so every figure in the thesis follows the same rules.",
+   "agent": "In Instructions, write your house style: font and size, colour-blind-safe palette, width and resolution, axis labels with units, complete periods only, uncertainty shown where the data allow, and \"always return the full code and a draft caption\". Add the journal's figure guidelines as Knowledge and switch on \"Create documents, charts and code\". Starter prompt: \"Draw this data as a journal figure in my house style.\" Reusable for every chapter.",
+   "studio": ""
   }
  },
  "analyse-6": {
@@ -2676,6 +2892,12 @@
    "repos": [
     "awesome-copilot"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the sea-ice CSV attached. Then, in the same chat, ask Copilot to add a test that would fail if the December 1987 flag were missing, and run it.",
+   "notebook": "Save the sea-ice file (D6) as .xlsx and add it with your function and tests saved as .txt and a short design note on the intended behaviour. Ask whether the tests cover every rule in the design note. The notebook does not run code, but over time it keeps the record of why the code behaves as it does.",
+   "agent": "In Instructions, set your language and rules: docstrings, unit tests for normal and edge cases, a check against a known result or benchmark, units and value ranges stated, \"ask when behaviour is unclear\", and never include keys or passwords. Switch on \"Create documents, charts and code\" so it can run Python tests. Starter prompt: \"Review this function and write tests for its edge cases.\" Reusable for each new module.",
+   "studio": "Connect GitHub (repositories) through its MCP server, so the agent can read your repository, issues and pull requests and comment on changes – an agent in Agent Builder only sees what you paste or upload. Needs your IT team."
   }
  },
  "analyse-7": {
@@ -2760,6 +2982,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the three PDFs attached. Then, in the same chat, paste your neighbour's coding of the Zachariah abstract and ask for Cohen's kappa, percentage agreement and a list of every disagreement.",
+   "notebook": "Add the Christidis papers (B2, C3), the Zachariah paper (C4) and your codebook as a Word file you update after each round. Ask for passages that test a borderline rule. For your own study, use only approved, anonymised material. Codebook versions, anchors and disagreement notes build up in one place; you decide every rule.",
+   "agent": "Add the final codebook as Knowledge. In Instructions: code sentence by sentence, give category, exact quote and \"clear, unclear or problematic\", use \"none of these\" when nothing fits, and never invent an anchor or quote. Starter prompt: \"Code this passage with the codebook and flag every borderline decision.\" Reusable for each new batch – only approved, anonymised material goes in, and a human checks every coding.",
+   "studio": ""
   }
  },
  "analyse-8": {
@@ -2859,6 +3087,12 @@
    "repos": [
     "kd-stats"
    ]
+  },
+  "levels": {
+   "chat": "Run the two-chat starter prompt. Then, in the second chat, ask which analysis would test agreement between the two records and what you would report from it.",
+   "notebook": "Add the saved model summary (.txt), your analysis plan and a methods text you trust for thresholds (PDF). Ask the notebook to check the interpretation against that methods text only. As you add more output, results, thresholds and drafted paragraphs stay consistent across chapters.",
+   "agent": "In Instructions, set the rules: explain each part of the output, list the assumptions and say which the output lets you check, name the source of every threshold, use only numbers from the output without recomputing or rounding, and say what the analysis cannot show. Add your field's reporting guide as Knowledge; no code needed. Starter prompt: \"Interpret this output and draft an APA 7 results paragraph.\" Reusable for every analysis you run.",
+   "studio": ""
   }
  },
  "querschnitt-0": {
@@ -2913,6 +3147,12 @@
     "Otter.ai"
    ],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with your notes pasted before the meeting. Afterwards, in the same chat, paste your meeting notes, ask for the action table, and ask which agenda items still have no agreed action.",
+   "notebook": "Create one notebook for supervision and add your project plan, earlier action lists and your own meeting notes (no personal details about others) as Word or OneNote references. Before each meeting ask which actions are still open and what belongs on the agenda – you gain a running record across meetings that a single chat forgets.",
+   "agent": "Instructions: agenda with time slots, the three decisions you need, questions per item, actions as a table with owner and deadline in SMART form, use only the pasted notes, never add agreements that are not there, list open questions. No Knowledge needed. Starter prompts: \"Agenda for my 45-minute meeting\" and \"Action list from these notes\". Reusable for every supervision meeting.",
+   "studio": ""
   }
  },
  "querschnitt-1": {
@@ -2966,6 +3206,12 @@
    "tools": [],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with your headings and notes pasted. In the same chat, ask Copilot to list every statement in the draft next to the note it came from, so you see what rests on your records and what is [TO ADD].",
+   "notebook": "Keep one notebook for the year: add your lab-notebook entries or monthly notes, last period's objectives, the review form and your university's skills framework (e.g. the Researcher Development Framework) as references, adding notes each month. At review time ask for a draft under the form's headings and a risk register drawn from the whole year, not from memory.",
+   "agent": "Instructions: your report types and their headings, factual style and word count, progress against previous objectives, a risk table with likelihood, impact and mitigation, [TO ADD] for gaps, never invent achievements, dates or results. Knowledge: the review form and its assessment criteria. Starter prompts: \"Monthly report from these notes\" and \"Draft my annual review\". Reusable every month and at every review.",
+   "studio": ""
   }
  },
  "querschnitt-2": {
@@ -3024,6 +3270,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with your dates and commitments. In the same chat, describe a real setback and ask Copilot to re-plan, showing which milestones move and whether the buffer still holds.",
+   "notebook": "Add your plan (as .xlsx or Word), your institution's milestone regulations and a short log of how long past tasks actually took. Come back each month, update the log and ask whether the timeline still holds and what to re-plan – estimates based on your real durations rather than guesses.",
+   "agent": "Instructions: plan backwards from the submission date, mark the critical path, base estimates on past durations and add explicit buffers, weekly plans in half-day blocks with one goal per day, flag any plan that exceeds the stated hours. Knowledge: your milestone regulations. Switch on \"Create documents, charts and code\" for an Excel timeline. Starter prompts: \"Plan my next week\" and \"Re-plan after this setback\". Reusable every week.",
+   "studio": ""
   }
  },
  "querschnitt-3": {
@@ -3103,6 +3355,12 @@
     "Obsidian"
    ],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the AB abstracts file attached. In the same chat, ask Copilot to recheck each link and drop any whose quoted sentence does not name the data, method or claim its link type requires.",
+   "notebook": "Add the AB abstracts, your own reading notes and a tag vocabulary document as references, and keep adding notes as you read. Ask for atomic notes and typed links across everything in the notebook – it searches only your material, so you find what you read months ago, and the tag document keeps tags consistent.",
+   "agent": "Instructions: the atomic note format (ID, one idea, source, page), your controlled tag vocabulary with definitions, the five link types, a quoted sentence for every link, no links resting only on a shared topic. Knowledge: your tag vocabulary. Starter prompts: \"Atomic notes from these highlights\" and \"Typed links between these notes\". Reusable for every batch of reading, so new notes match the old ones.",
+   "studio": "Connect Notion through its remote MCP server so the agent writes approved notes, tags and links straight into your Notion database – Agent Builder cannot write into another tool. The Zotero and Obsidian servers run only locally. Needs your IT team."
   }
  },
  "querschnitt-4": {
@@ -3171,6 +3429,12 @@
     "GitHub (repositories)"
    ],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the D7 Oxford file attached. In the same chat, ask Copilot to show the Python lines that computed the tmax range and the missing sunshine count, and to list every column meaning it took from the header versus guessed.",
+   "notebook": "Add the D7 text file, the Met Office header notes, your methods notes and the repository's deposit guidelines as references; for your own data, add your protocol and file list. Ask for README and metadata drafts that cite these sources and keep them as pages until deposit. The notebook does not run Python, so compute the codebook in Chat and add it.",
+   "agent": "Instructions: codebook columns, ranges and missing counts computed with Python, [CHECK] on every guessed meaning, README sections, DataCite mandatory fields, a replication checklist. Knowledge: your repository's deposit guidelines and licence options. Switch on \"Create documents, charts and code\". Starter prompts: \"Codebook and README for this file\" and \"Replication checklist for my paper\". Reusable for every dataset you deposit.",
+   "studio": "Connect GitHub through its MCP server or Copilot connector so the agent reads your repository's code, README and issues and checks the replication package against them – Agent Builder only sees files you upload. Needs your IT team."
   }
  },
  "querschnitt-5": {
@@ -3235,6 +3499,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt and save the table as a Copilot Page. In the same chat, ask Copilot to mark which log cell each sentence of the declaration rests on and to list any cell that is still empty.",
+   "notebook": "Add your running AI-use log (as .xlsx or a Copilot Page) and your university's AI policy as references, and update the log as you work. At submission ask for a declaration drawn only from the log and checked against the policy – months of use become traceable instead of reconstructed from memory.",
+   "agent": "Instructions: the log columns, fill only from what you describe, leave unknown cells empty, declarations in a neutral tone naming only logged uses, never add tools or benefits. Knowledge: your university's AI policy. Starter prompts: \"Add today's AI use to the log\" and \"Draft my declaration from these rows\". Reusable after every AI task, so the log grows as you work.",
+   "studio": ""
   }
  },
  "querschnitt-6": {
@@ -3308,6 +3578,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the D2 monthly file attached and work through the steps in the same chat. At the end, ask for a five-question quiz and answer it before you see the solutions; repeat it a few days later.",
+   "notebook": "Add C6, the official documentation of the package you use (saved as PDF) and your own notes as references. Ask questions across them when you get stuck and keep worked examples and quiz answers as pages – explanations stay tied to the paper and the documentation. Run code in Chat, as the notebook does not run Python.",
+   "agent": "Instructions: tutor role, test the level first, one idea, worked example and exercise at a time, wait for my answer, feedback before the solution, a quiz at the end, point to the official documentation, say when unsure. Knowledge: the package documentation. Switch on \"Create documents, charts and code\" to run examples. Starter prompts: \"Teach me changepoint detection\" and \"Quiz me on last week's topic\". Reusable for any new method.",
+   "studio": ""
   }
  },
  "querschnitt-7": {
@@ -3315,9 +3591,10 @@
   "result": "A reusable assistant that applies your citation style and terms, and a staged workflow that proceeds only after you have checked each stage – time saved while you stay accountable.",
   "steps": [
    "Write standing rules and one narrow question",
-   "Create an agent with rules and trusted sources",
+   "Paste the rules as the first message of a chat",
    "Test it with one routine question first",
    "Approve each stage only after checking every source",
+   "Turn the rules into an agent once they work",
    "Log the workflow and declare the AI use"
   ],
   "method": {
@@ -3362,9 +3639,9 @@
     "C5"
    ],
    "ref": [],
-   "task": "Create an agent with four attribution PDFs as knowledge and run an extraction stage with a checkpoint. You learn how often extracted numbers, return periods and likelihood changes are wrong or unsupported, and why each stage needs your approval.",
-   "prompt": "You are the research assistant of a postgraduate researcher. Standing rules: cite in APA 7; treat 'return time' and 'return period' as the same concept – the average time between events of a given size – and write 'return period'; 'probability ratio' means how many times more likely an event is with human influence; never invent sources, quotes or numbers, and say when you are unsure; use only the four attached PDFs (Christidis et al., 2020; Christidis et al., 2023; Zachariah et al., 2023; Schumacher et al., 2024). Work in two stages and stop after each for my approval. Stage 1, extraction: a table with one row per paper – event and region, variable, method, change in likelihood, change in intensity, future projection – each cell with a verbatim quote and page number. Stage 2, after my approval: a 200-word comparison citing only approved cells, ending with a list of claims I should still verify.",
-   "check": "Check every cell against the PDFs, e.g. Zachariah et al.: 30 times more likely and about 1 °C hotter (Ctrl+F '30 times more likely'); Christidis et al. (2020): '100-300 years' for 40 °C summers, which the table should call a return period. Only then approve stage 2 and log the AI use."
+   "task": "Start a new chat, paste your standing rules as the first message, attach four attribution PDFs and run an extraction stage with a checkpoint. You learn how often extracted numbers, return periods and likelihood changes are wrong or unsupported, and why each stage needs your approval.",
+   "prompt": "For this whole conversation, you are the research assistant of a postgraduate researcher. Standing rules: cite in APA 7; treat 'return time' and 'return period' as the same concept – the average time between events of a given size – and write 'return period'; 'probability ratio' means how many times more likely an event is with human influence; never invent sources, quotes or numbers, and say when you are unsure; use only the four attached PDFs (Christidis et al., 2020; Christidis et al., 2023; Zachariah et al., 2023; Schumacher et al., 2024). Work in two stages and stop after each for my approval. Stage 1, extraction: a table with one row per paper – event and region, variable, method, change in likelihood, change in intensity, future projection – each cell with a verbatim quote and page number. Stage 2, after my approval: a 200-word comparison citing only approved cells, ending with a list of claims I should still verify.",
+   "check": "Check every cell against the PDFs, e.g. Zachariah et al.: 30 times more likely and about 1 °C hotter (Ctrl+F '30 times more likely'); Christidis et al. (2020): '100-300 years' for 40 °C summers, which the table should call a return period. Only then approve stage 2 in the same chat, see whether the rules still hold, and log the AI use."
   },
   "tech": {
    "routes": [
@@ -3391,6 +3668,12 @@
     "ars-deep-research",
     "awesome-copilot"
    ]
+  },
+  "levels": {
+   "chat": "Paste the standing rules and the staged task as your first message, attach B2, C3, C4 and C5, and run stage 1. In the same chat, approve only the cells you have checked and run stage 2 – the rules last only for this conversation.",
+   "notebook": "Add the four PDFs and a one-page rules document (citation style, terms, never invent, stop after each stage) as references – only approved, non-sensitive material. Start each question with \"Follow the rules document\". The notebook answers only from these sources, so no unchecked web sources slip in, and you can add papers later. You still check every cell.",
+   "agent": "Instructions: APA 7, your terms with definitions, never invent sources, quotes or numbers, a verbatim quote and page per cell, stop after each stage for approval. Knowledge: the four PDFs or your own approved, non-sensitive papers. Starter prompts: \"Stage 1 extraction for these papers\" and \"Compare the approved cells\". A human checks every result; reusable for each new scoping or comparison task.",
+   "studio": "Connect the OpenAlex MCP server so the agent can search for sources and check that every reference exists, and chain the stages in a flow that still stops for your approval – Agent Builder cannot reach scholarly databases. Needs your IT team."
   }
  },
  "querschnitt-8": {
@@ -3463,6 +3746,12 @@
     "Litmaps"
    ],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the AB abstracts file attached. In the same chat, ask Copilot to list the skipped papers with the criterion each fails, so you can spot-check whether a relevant paper was missed.",
+   "notebook": "Add a criteria document (research question and the three relevance criteria), each week's alert as a Word or .txt file and your earlier must-read lists. Ask for the week's triage against the criteria and compare it with earlier weeks. You gain consistent ratings over time and a record of what you chose to read and why.",
+   "agent": "Instructions: your research question, the three relevance criteria, rate only from title and abstract, a one-line reason naming the criterion, supports, challenges or extends for must-reads, five alert terms, never add papers not in the input. Knowledge: optionally two or three key papers that define your topic. Starter prompt: \"Triage this week's alert\". Reusable every week.",
+   "studio": "Connect OpenAlex or Semantic Scholar through their remote MCP servers and add a weekly scheduled trigger, so the agent fetches new papers for your alert terms and e-mails you the triage – Agent Builder cannot search databases or run on a schedule. Needs your IT team."
   }
  },
  "publikation-0": {
@@ -3529,6 +3818,12 @@
     "ars-paper",
     "kd-writing"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Vautard PDF attached. Then, in the same chat, ask which step of the argument is weakest and for one concrete fix, without rewriting the text.",
+   "notebook": "Add the Vautard paper (B3) or, for your own work, your draft, outline, the target journal's author guidelines and two exemplary papers from that journal. Ask how your structure differs from the exemplars and guidelines. After each revision you add the new version and compare the argument maps.",
+   "agent": "In Instructions, set the routine: three-sentence summary, Toulmin map with a quote for each element, steps assumed rather than shown, CARS moves in the introduction, refer to section headings and never rewrite the text. Add your target journal's author guidelines as Knowledge. Starter prompt: \"Map the argument of this draft and mark the weakest step.\" Reusable for every paper and chapter.",
+   "studio": ""
   }
  },
  "publikation-1": {
@@ -3601,6 +3896,12 @@
    "repos": [
     "kd-writing"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Vautard PDF attached. Then, in the same chat, ask for two alternatives for each sentence that no longer sounds like the author, keeping every number and hedge.",
+   "notebook": "Add your drafts, a short style sheet (UK spelling, preferred terms, words to avoid) and a paragraph you are happy with as a sample of your voice; for the practice, the Vautard paper (B3). Ask for edits that follow the style sheet. Terminology and tone stay consistent across chapters you edit over weeks.",
+   "agent": "Put your style sheet in Instructions: UK English, the given–new principle, keep terms, numbers, hedges and citations unchanged, add no content, return a change table, mark unclear sentences and flag AI-typical phrasing. Add a glossary of your field's terms as Knowledge. Starter prompt: \"Edit this paragraph and give me the change table.\" Reusable for every chapter – check your university's rules on proofreading for the thesis.",
+   "studio": ""
   }
  },
  "publikation-2": {
@@ -3668,6 +3969,12 @@
    "repos": [
     "kd-citation"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Forster PDF attached. Then, in the same chat, ask Copilot to recheck, section by section, any table it says it could not read fully.",
+   "notebook": "Add the Forster report (A3) or, for your own work, the current draft, its tables as separate .xlsx files and your reference list. Ask for numbers and terms that differ between abstract, text and tables. Separate tables are easy to check one by one, and you rerun the same check after each revision.",
+   "agent": "In Instructions, define the check: numbers across abstract, text and tables; terms and abbreviations; in-text citations against the reference list; a table of issue type, location, what each place says and suggested fix; report only what is in the document and say which parts were not read. Starter prompt: \"Run the consistency check on this draft.\" Reusable before every submission – plant one mismatch to test it.",
+   "studio": ""
   }
  },
  "publikation-3": {
@@ -3747,6 +4054,12 @@
    "repos": [
     "kd-citation"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Myhre PDF attached. Then, in the same chat, paste the author guidelines of your preferred journal and ask for a formatting checklist.",
+   "notebook": "Add the author guidelines of your shortlisted journals (PDF or Word), your manuscript and your .bib file saved as .txt; for the practice, the Myhre paper (C2). Ask for a side-by-side comparison of word limits, reference styles and open-access options. The notebook answers only from the saved guidelines, which leaves less room for invented requirements.",
+   "agent": "In Instructions, set the output: a journal table with publisher, fit, article type, word limit, reference style, open-access options and guideline link; use only the journals' own pages; BibTeX with correct entry types and missing fields flagged; never invent journals, DOIs or page numbers. Starter prompts: \"Suggest five journals for this abstract.\" and \"Convert these references to BibTeX.\" Reusable for every manuscript.",
+   "studio": "Connect the OpenAlex MCP server, so the agent can look up which venues publish work like yours and check reference metadata in a scholarly database rather than the open web. Agent Builder cannot reach external services. Needs your IT team."
   }
  },
  "publikation-4": {
@@ -3820,6 +4133,12 @@
     "ars-reviewer",
     "peer-review-panel"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Shi preprint attached. Then, in the same chat, ask Copilot to turn the two highest-priority comments into a concrete revision plan for the methods section.",
+   "notebook": "Add the Shi preprint (C6) or your own draft, the target journal's reviewer guidance and the checklist of the reporting guideline that fits your design (from the EQUATOR Network website). Ask which checklist items are missing. After each revision you add the new version and see which comments are resolved.",
+   "agent": "In Instructions, define the panel: a methods expert, a field expert and a devil's advocate, each with a short assessment and up to four major comments that quote their passage and propose a fix; then a reporting-guideline check (\"say if none fits\") and a prioritised roadmap with effort. Add your checklists as Knowledge. Starter prompt: \"Review this draft for [journal].\" Reusable for every manuscript – only your own drafts or with co-authors' consent.",
+   "studio": ""
   }
  },
  "publikation-5": {
@@ -3885,6 +4204,12 @@
    "repos": [
     "ars-paper"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Schumacher PDF attached. Then, in the same chat, paste your notes on two comments and ask for the matching replies, with [ADD RESPONSE] wherever your notes say nothing.",
+   "notebook": "Add the reviewer comments (pasted into Word), your revised manuscript and a change log; for the practice, the Schumacher paper (C5) and RC1 saved from the discussion page. Ask which comments the change log does not yet answer. Over several revision rounds, comments, changes and replies stay in one place.",
+   "agent": "In Instructions, set the rules: number every comment in a table, quote it before each reply, keep replies polite and concise, write [ADD RESPONSE] where your notes give no answer, never claim a change you have not listed, and end with a short summary of changes. Starter prompt: \"Here are the comments and my notes – draft the response letter.\" Reusable for every revision round. Never upload manuscripts you review for others.",
+   "studio": ""
   }
  },
  "publikation-6": {
@@ -3952,6 +4277,12 @@
    "repos": [
     "ars-paper"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the two Christidis PDFs attached. Then, in the same chat, ask how RQ3 could be narrowed or where in the chapters it could still be answered.",
+   "notebook": "Add your research questions, chapter summaries and, as they are finished, the chapters themselves; for the practice, the two Christidis papers (B2, C3) and a Word file with RQ1–RQ3. Ask for the question-to-chapter table again after each new chapter. The notebook holds the thesis over months, so the golden-thread check grows with it.",
+   "agent": "Paste your research questions and the mapping rules into Instructions: one row per question showing where it is introduced, addressed with methods, answered and discussed; flag gaps, overlaps and repetition, quoting the sentence behind each point; say when information is missing. Add the thesis outline as Knowledge. Starter prompt: \"Check this chapter summary against my research questions.\" Reusable each time a chapter changes.",
+   "studio": ""
   }
  },
  "publikation-7": {
@@ -4016,6 +4347,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the Christidis 2020 PDF attached and answer three questions. Then, in the same chat, ask which of your answers an examiner would probe hardest, and why.",
+   "notebook": "Add your thesis abstract, chapter summaries, key papers and notes from supervision meetings; for the practice, the Christidis paper (B2). Ask for examiner questions on one chapter at a time and keep the best questions and your answers as notes. Over weeks you build a viva file you can return to.",
+   "agent": "In Instructions, describe the examiner: UK viva, questions grouped by contribution, methodology, findings and limitations, and future work, each tied to a quoted claim; one question at a time, wait for the answer, then brief feedback and a follow-up. Add your abstract and chapter summaries as Knowledge. Starter prompt: \"Examine me on chapter 3.\" Reusable for regular practice – a complement to mock vivas with your supervisors.",
+   "studio": ""
   }
  },
  "publikation-8": {
@@ -4095,6 +4432,12 @@
    "repos": [
     "kd-citation"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with both PDFs attached. Then, in the same chat, ask Copilot to show the link it used for every reference it marked as matching.",
+   "notebook": "Add the papers you cite as PDFs (for the practice, C3 and B2) and your draft paragraph. Ask, sentence by sentence, whether the cited source supports the claim, with a quote. The notebook answers only from its references, so a missing source shows up as a gap instead of a vague web summary.",
+   "agent": "In Instructions, set the two-step check: first existence and metadata (working DOI or link, \"not found\" if absent, flag any difference in authors, year, title, journal, volume or pages), then support (supports, partly, does not) with a quoted passage; never guess. Starter prompt: \"Check these references and the claims they are cited for.\" Reusable for every chapter before submission.",
+   "studio": "Connect OpenAlex to check that references exist and match their metadata, and scite to see how a source is cited elsewhere – both as MCP servers. Agent Builder cannot reach external databases, and web search misses paywalled records. Needs your IT team."
   }
  },
  "publikation-9": {
@@ -4164,6 +4507,12 @@
     "ars-paper",
     "kd-writing"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the five notes. Then, in the same chat, ask Copilot to list every sentence of the draft next to the note it comes from.",
+   "notebook": "Add the abstracts file (AB) or, for your own work, your source PDFs and notes document, and keep the evidence map as a note. Ask for one section at a time drafted from the notes only, with [GAP] marks. Every claim traces back to a source you added; you rework the text and declare the AI use.",
+   "agent": "In Instructions, fix the sequence: evidence map first, then a draft of the requested length using only your notes and sources, cited in your style, with [GAP] wherever a sentence lacks a source; never add claims, sources or numbers. Starter prompt: \"Build the evidence map from these notes, then draft 200 words.\" Reusable for each section – check your university's rules first, rework the text yourself and declare the AI use.",
+   "studio": ""
   }
  },
  "transfer-0": {
@@ -4229,6 +4578,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the paper attached. In the same chat, ask Copilot to check its three drafts against the paper and list every sentence that sounds stronger, more general or more certain than the original.",
+   "notebook": "Add B2 as a reference, plus a short rules document with your audiences and the no-spin rules (keep numbers, conditions and uncertainty words). Ask for each format and keep the approved versions as pages. For your own work, add each new paper and your earlier approved summaries, so new formats stay consistent with what you have already published.",
+   "agent": "Instructions: the three formats with word limits, numbers and conditions kept exact, uncertainty words kept, a list of every simplification, never a claim the paper does not make. No Knowledge needed – attach each paper in the chat. Starter prompts: \"Lay summary, brief outline and post for council officers\" and \"Check this draft for spin against the paper\". Reusable for every new paper.",
+   "studio": ""
   }
  },
  "transfer-1": {
@@ -4307,6 +4662,12 @@
    "repos": [
     "kd-viz"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the D8 rainfall file attached. In the same chat, ask Copilot to print the four 30-year means and the 2014 and 2026 rows from its parsed table, so you can check them against the file.",
+   "notebook": "Add the D8 text file, your talk notes and a Word file with the chart code and numbers you checked in Chat. Ask for slide titles and speaker notes that use only those checked numbers. The notebook does not run Python, so compute in Chat; you gain one place for data, code and talk drafts that you return to before each presentation.",
+   "agent": "Instructions: read wide files with Python and report how blanks and incomplete rows were handled; always show the code; colour-vision-safe palette, labelled axes with units; slide titles as full-sentence claims the data support, never causes the data cannot show. Switch on \"Create documents, charts and code\". Starter prompts: \"Chart this series with a 10-year rolling mean\" and \"Six-slide outline from this chart\". Reusable for every new results file.",
+   "studio": ""
   }
  },
  "transfer-2": {
@@ -4378,6 +4739,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with both files attached. In the same chat, ask Copilot to map each question and the exercise to the learning outcome and a Bloom level, and to show the 2022 rows its code counted.",
+   "notebook": "Add B2, the D1 text file and your module descriptor with its learning outcomes. Ask for cases and questions across them and keep approved ones as pages – a teaching bank for the module that grows with each new paper. The notebook does not run Python, so compute worked answers in Chat and add them as a document.",
+   "agent": "Instructions: case length and format, questions at the apply level of Bloom's revised taxonomy or above, outcome, activity and assessment aligned, facts only from the attached paper, a list of simplifications, worked answers with code. Knowledge: your module descriptor and learning outcomes. Switch on \"Create documents, charts and code\" for data exercises. Starter prompt: \"Seminar case and three questions from this paper\". Reusable for every new paper and module.",
+   "studio": ""
   }
  },
  "transfer-3": {
@@ -4443,6 +4810,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with web search switched on. In the same chat, paste back only the items you confirmed by opening the links and ask for a stage per item (awareness, use, change) and a short narrative that claims contribution, not sole attribution.",
+   "notebook": "A notebook answers only from its references, so it cannot search – add what you have verified instead: B2, the confirmed mentions table as .xlsx or Word, and notes or saved copies of key pages. Add new items over the months and ask for an updated impact narrative and timeline – a growing evidence file for reports and impact case studies.",
+   "agent": "Instructions: search scope and table columns from the starter prompt, include an item only when its page names the paper, DOI or authors, classify as awareness, use or change, claim contribution not attribution, never invent sources. Knowledge, if your licence allows: trusted public policy websites. Starter prompts: \"Find new mentions of [DOI] since [date]\" and \"Classify these confirmed items\". Reusable for every paper or project.",
+   "studio": "Add a scheduled trigger that runs the search once a month and appends new candidate mentions to an Excel table or SharePoint list for you to verify – Agent Builder cannot run on a schedule or write into a list. Needs your IT team."
   }
  },
  "transfer-4": {
@@ -4509,6 +4882,12 @@
    ],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the starter prompt with the paper attached and, in the same chat, ask Copilot to check its translation against its own glossary and list every term used inconsistently or number not in local format. Do the back-translation in a new chat, which must not see the original.",
+   "notebook": "Add B2, your approved earlier translations and a glossary document with key terms per language, agreed with a fluent colleague. Ask that each new translation follows the glossary and flags new terms. You gain consistent terminology across all your translations and a glossary that grows with each project; back-translate in a plain chat, outside the notebook.",
+   "agent": "Instructions: target language, country and audience, natural style, numbers and units exact in local format, glossary terms kept, every adaptation listed, unsure terms marked. Knowledge: your term glossary. A second agent that only back-translates, with no access to the original, makes the check repeatable. Starter prompt: \"Translate this abstract for the public in [country]\". Reusable for every summary you share abroad.",
+   "studio": ""
   }
  },
  "design-6": {
@@ -4569,9 +4948,9 @@
     "D3",
     "D5"
    ],
-   "task": "Build the causal chain behind the annual climate indicators from Forster et al. (2025) as a diagram and map the two practice data files to the constructs they measure. You see whether Copilot keeps to the paper's chain or adds arrows of its own.",
-   "prompt": "Attached is Forster et al. (2025), 'Indicators of Global Climate Change 2024', plus the HadCRUT5 monthly CSV and the NOAA Mauna Loa CO₂ CSV. 1) From the paper only, draw the chain of indicators it reports – from emissions through concentrations and effective radiative forcing to observed and human-induced warming – as Mermaid flowchart code (left to right), each arrow labelled with the section of the paper it comes from. 2) Add a measurement layer: which column of each attached data file measures which construct, and with what unit and baseline. 3) List any arrow or construct you added that is not in the paper.",
-   "check": "Compare the chain with Figure 1 of the paper (the flow chart from emissions to human-induced warming) and its sections; aerosol and other non-CO₂ forcings must appear if Copilot claims completeness. Neither file states its baseline, and the CO₂ file does not state its unit: HadCRUT5 'Anomaly (deg C)' is relative to 1961–1990 (not in the file), and the CO₂ column 'average' is in ppm (not in the file), so Copilot should say where it took them from. Paste the Mermaid code into draw.io to see it.",
+   "task": "Build the causal chain behind the annual climate indicators from Forster et al. (2025) as diagram code, with a table of every arrow and the section it comes from, and map the two practice data files to the constructs they measure. You see in the chat whether Copilot keeps to the paper's chain or adds arrows of its own.",
+   "prompt": "Attached is Forster et al. (2025), 'Indicators of Global Climate Change 2024', plus the HadCRUT5 monthly CSV and the NOAA Mauna Loa CO₂ CSV. 1) From the paper only, draw the chain of indicators it reports – from emissions through concentrations and effective radiative forcing to observed and human-induced warming – as Mermaid flowchart code (left to right), each arrow labelled with the section of the paper it comes from. 2) Give a table of every arrow in the code: number, from, to, section of the paper (number and title) and a short quote from that section that supports the arrow. 3) Add a measurement layer: which column of each attached data file measures which construct, and with what unit and baseline. 4) List any arrow or construct you added that is not in the paper.",
+   "check": "Check the arrow table in the chat: open each cited section in the PDF, find the quote and compare the chain with Figure 1 of the paper (the flow chart from emissions to human-induced warming); aerosol and other non-CO₂ forcings must appear if Copilot claims completeness. Neither file states its baseline, and the CO₂ file does not state its unit: HadCRUT5 'Anomaly (deg C)' is relative to 1961–1990 (not in the file), and the CO₂ column 'average' is in ppm (not in the file), so Copilot should say where it took them from. Optional: paste the Mermaid code into draw.io (Arrange › Insert › Advanced) to view the diagram.",
    "ref": []
   },
   "tech": {
@@ -4596,6 +4975,12 @@
     "seminr",
     "lavaan"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt to get the Mermaid code and the table of every arrow with its source. In the same chat, add or remove one path and ask for the updated code and arrow table, so you see that the model changes without being redrawn.",
+   "notebook": "Add the key papers behind your constructs, your construct definitions and the current model code saved as a .txt file – for the practice version A3, plus D3 and D5 saved as .xlsx first. Ask which arrows the papers support and what a newly added paper changes. When the literature moves on, you update the model from the same sources.",
+   "agent": "Call it 'Model diagram builder'. Instructions: Mermaid flowchart left to right, paths labelled H1, H2 …, always a table of every arrow with its source and a construct–indicator table, reflective or formative with a reason, never invent published scales, flag every path not in the input. Knowledge: your construct definitions and theory notes. Starter prompt: 'Update my model: [change]'. Reusable across thesis, slides and survey.",
+   "studio": "Add the draw.io or Figma MCP server, so the agent draws and updates the diagram on the canvas instead of returning code you paste in. Agent Builder cannot reach these services. Needs your IT team."
   }
  },
  "erhebung-7": {
@@ -4663,6 +5048,12 @@
    "tools": [],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Upload the photo and run the starter prompt. In the same chat, type in corrections for any misread notes and ask for the corrected table, with counts per cluster, as a CSV file.",
+   "notebook": "Add the checked tables from each session as .xlsx or Word files (not the photos), plus your predefined categories or constructs. Ask how placements differ between groups or sessions and which items fall outside their intended category. Only photos without faces or names feed these tables, and you check every table against the board.",
+   "agent": "Call it 'Board digitiser' and switch on 'Create documents, charts and code' for counts and the table export. Instructions: transcribe every card before interpreting, [illegible] instead of guessing, a table of card, text, cluster and connections, counts per predefined category, interpretation last. Knowledge: your category list. Only photos without faces or names go in, and you check every table against the board. Starter prompt: 'Digitise this card sort'.",
+   "studio": ""
   }
  },
  "design-7": {
@@ -4743,6 +5134,12 @@
     "truman",
     "mock-social-media"
    ]
+  },
+  "levels": {
+   "chat": "Run the starter prompt with B2 and C4, or with your own hypothesis. In the same chat, ask for a sentence-by-sentence comparison table of the two conditions, so you can confirm that only the manipulated element differs.",
+   "notebook": "Add the source papers behind your stimuli, your analysis plan or preregistration, and the stimulus texts and study flow from the chat – for the practice version B2 and C4. Ask whether the variable names match the analysis plan and whether every factual claim in a stimulus has a source. Conditions, sources and plan stay together across pilot rounds.",
+   "agent": "Call it 'Stimulus builder' and switch on 'Create documents, charts and code' so it returns HTML files. Instructions: keep conditions identical except the manipulated element, list every difference, quote the source of any factual claim, add a manipulation check and a study flow with variable names, use no real organisations, brands, people or logos. Starter prompt: 'Build conditions [A] and [B] for: [hypothesis]'. Reusable for every follow-up experiment.",
+   "studio": ""
   }
  },
  "erhebung-8": {
@@ -4810,6 +5207,12 @@
    "tools": [],
    "connect": [],
    "repos": []
+  },
+  "levels": {
+   "chat": "Run the fixed prompt in five new chats and save every answer with the time. In one of them, follow up with 'Are you sure? Please check your sources.' and record whether the answer changes – a second measure of stability.",
+   "notebook": "Add the saved answers as Word or text files with date, time and model, your codebook and the reference paper (B2 for the practice version). Ask for a table that codes each answer against the reference and lists every cited source. The notebook answers only from these files, so new model output does not mix in; you check every code.",
+   "agent": "Do not let an agent produce the answers – its instructions would change what you study. Build a coding agent, 'Audit coder', instead. Instructions: your codebook (correct, partly correct, wrong, no or invented source) and a fixed table. Knowledge: the reference paper. Starter prompt: 'Code these saved answers against the reference'. Only model answers, never personal data, go in, and you check every code.",
+   "studio": "A scheduled trigger in Copilot Studio can send the fixed prompt to the model you audit at set times and write each answer with date, time and model to an Excel table in SharePoint – a time series an agent cannot collect on its own. Needs your IT team."
   }
  }
 }

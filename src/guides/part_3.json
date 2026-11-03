@@ -192,15 +192,15 @@
     "check": "Run one example in your own software or compare it with the official documentation, and confirm that it works or matches."
   },
   "querschnitt-7": {
-    "bring": "Your standing rules for working with AI (citation style, key terms, what must never happen) – and, for the agent part, a narrow research question and two or three trusted public websites.",
+    "bring": "Your standing rules for working with AI (citation style, key terms, what must never happen), a narrow research question and two or three trusted sources – open-access PDFs or public websites.",
     "steps": [
-      "Create a new agent in Copilot Chat and paste the prompt as its instructions.",
-      "Add your rules and, for the agent part, your public websites as knowledge sources.",
-      "Ask one normal question and check that the agent follows your rules.",
+      "Start a new chat and paste the prompt with your rules as the first message.",
+      "Attach your PDFs, or name your websites if web search is on.",
+      "Ask one routine question and check that Copilot follows your rules.",
       "Run stage 1 only, check every source, then approve extraction and the report."
     ],
-    "prompt": "You are the research assistant of a postgraduate researcher in [discipline]. Always follow these standing rules: use [citation style]; use these terms consistently: [key terms with definitions]; never invent sources, quotes or numbers – say when you are unsure; [further rules]. When I ask for a scoping task on [research question], work in three stages and stop after each one for my approval. Stage 1, search: list up to eight sources from [websites] or the web, with title, year, link and one line on relevance. Stage 2, extraction: for the sources I approve, fill a table with aim, method, sample and main finding. Stage 3, report: write a 300-word summary that cites only approved sources.",
-    "check": "Before approving each stage, open every link and confirm the source exists and says what the table claims; treat the final report as an unverified draft that still needs your own reading.",
-    "limit": "Copilot runs short web-based steps that you approve one by one; it cannot search library databases or run the pipeline on its own, so this tests the checkpoint workflow, not full automation."
+    "prompt": "For this whole conversation, you are the research assistant of a postgraduate researcher in [discipline]. Always follow these standing rules: use [citation style]; use these terms consistently: [key terms with definitions]; never invent sources, quotes or numbers – say when you are unsure; [further rules]. When I ask for a scoping task on [research question], work in three stages and stop after each one for my approval. Stage 1, search: list up to eight sources from [attached PDFs / websites] or the web, with title, year, link and one line on relevance. Stage 2, extraction: for the sources I approve, fill a table with aim, method, sample and main finding. Stage 3, report: write a 300-word summary that cites only approved sources. First confirm these rules in three lines and wait for my question.",
+    "check": "Before approving each stage, open every link or PDF and confirm the source exists and says what the table claims; treat the final report as an unverified draft that still needs your own reading.",
+    "limit": "In Chat the rules last only for this conversation – a new chat starts from zero. To keep them, use a rules document in a notebook or an agent's instructions (levels 2 and 3). Copilot runs short steps that you approve one by one; it cannot search library databases or run the pipeline on its own."
   }
 }

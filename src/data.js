@@ -262,9 +262,9 @@ const REPOS = {
 // Four levels of working with Copilot in Step 2
 const LEVELS = [
  ['Chat', 'One conversation: prompt, pasted text or uploaded files. Copilot reads PDFs, Word, Excel and CSV and runs Python on data.'],
- ['Project', 'A Copilot notebook (or a Cowork project) that keeps several files, your instructions and earlier answers together – for work you return to.'],
+ ['Notebook', 'A Copilot notebook keeps your files, notes and Copilot’s answers together – for work you return to. Copilot answers only from the files you add.'],
  ['Agent', 'Your own agent in Agent Builder: standing instructions, files as knowledge, uploaded skills. Reusable for every new paper, dataset or draft.'],
- ['Copilot Studio', 'For anything an agent cannot hold: connecting tools and databases via MCP or connectors – e.g. Zotero, OpenAlex, scite. Needs your IT team.']
+ ['Copilot Studio', 'For anything an agent cannot hold: connecting tools and databases via MCP or connectors – e.g. OpenAlex, scite, GitHub. Needs your IT team.']
 ];
 const ROUTES = {chat:['Copilot Chat','A prompt and text you paste'], files:['Copilot + files','Upload your own or the practice files'],
  connected:['Copilot + connected tool','MCP server or Copilot connector – enabled by your IT'], external:['Specialist tool or open source','Other supportive academic tool, R/Python package or agent skill']};

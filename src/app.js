@@ -170,8 +170,16 @@ function renderLens(){
     : readOnly() ? 'View only – open a use case to see how to try it with Copilot.'
     : `Pick one to three of your highest-rated use cases and try them live with Copilot · ${n} of ${MAXTEST} selected.`;
   $('#levels').hidden = ui.lens !== 2;
-  $('#levels').innerHTML = `<h2>Four levels of working with Copilot</h2><p class="sub">Start at level 1 and go further when you are ready – the guide in each use case shows how to take it to the next level.</p>
-    <ol class="lv-grid">${LEVELS.map(([t, d], i) => `<li><span class="lv-n">Level ${i + 1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>`;
+  $('#levels').innerHTML = `<h2>Four levels of working with Copilot</h2><p class="sub">Every use case shows levels 1 to 3 in its guide – start with the chat and go further when you are ready. Level 4 is suggested only where Copilot Studio adds something.</p>
+    <ol class="lv-grid">${LEVELS.map(([t, d], i) => `<li><span class="lv-n">Level ${i + 1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>${studioHtml()}`;
+}
+// level 4 overview: the use cases where Copilot Studio adds something, with the proposal for each
+function studioHtml(){
+  const list = PHASES.flatMap(p => p.uc.filter(u => lvOf(u).studio));
+  if (!list.length) return '';
+  return `<details class="studio-ov"><summary>Level 4 · where Copilot Studio fits – ${list.length} use cases</summary>
+    <p class="sub">A proposal per use case. Each needs your IT team: licence, approval and a data-protection check.</p>
+    <table><thead><tr><th>Use case</th><th>Phase</th><th>What Copilot Studio would add</th></tr></thead><tbody>${list.map(u => `<tr><td><button type="button" class="linkbtn" data-open="${esc(u.id)}">${esc(u.t)}</button></td><td>${esc(SHORT[u.phase])}</td><td>${esc(lvOf(u).studio)}</td></tr>`).join('')}</tbody></table></details>`;
 }
 function renderPhases(){
   $('#phases').innerHTML = PHASES.map((p, i) => {
@@ -247,20 +255,16 @@ function packFiles(id){
   const d = PACK.data.find(x => x.id === id);
   return d ? `<li><b>${id}</b> ${esc(d.title)}: ${d.files.map(f => `<a href="${fileUrl(f.f)}" download>${esc(f.f.split('/').pop())} · ${mb(f.size)}</a>`).join(', ')}</li>` : '';
 }
-function levelsOf(u){
-  const x = (typeof DETAILS !== 'undefined' && DETAILS[u.id]) || {tech:{routes:[], data:[], connect:[], repos:[]}}, t = x.tech;
-  const con = (u.ix || []).concat((t.connect || []).filter(n => !(u.ix || []).includes(n)));
-  // level 3 names only real agent skills; level 4 only tools Copilot Studio can reach (remote MCP server or Copilot connector)
-  const reach = n => (MCP[n] && MCP[n][1]) || (M365[n] || []).some(x => x[0] === 'copilot');
-  return {two: t.routes.includes('files') || t.data.length > 1, con, studio: con.filter(reach), repos: (t.repos || []).filter(k => REPOS[k] && REPOS[k][2] === 'Agent skill')};
-}
-function furtherHtml(u){
-  const L = levelsOf(u), pr = practiceOf(u.id), files = pr && pr.data.length ? pr.data.map(id => id === 'papers' ? 'the practice papers' : id).join(', ') : 'your files';
-  const items = [];
-  if (L.two) items.push(`<li><b>Level 2 · Project</b> Create a Copilot notebook (or a Cowork project), add ${esc(files)} as references and paste the starter prompt as the notebook's instructions. Ask follow-up questions across all files – the notebook keeps the context.</li>`);
-  items.push(`<li><b>Level 3 · Agent</b> In Copilot Chat choose New agent (Agent Builder): turn the starter prompt into standing instructions${L.two ? ', add the files as knowledge' : ''}${L.repos.length ? `, and add a matching skill (${L.repos.map(k => esc(REPOS[k][0])).join(', ')})` : ''}. Test it, then reuse it for every new ${u.phase === 'analyse' || u.phase === 'erhebung' ? 'dataset' : u.phase === 'publikation' ? 'draft' : 'paper or question'}.</li>`);
-  if (L.studio.length) items.push(`<li><b>Level 4 · Copilot Studio</b> Connect ${L.studio.map(esc).join(', ')} so the agent can search or use them directly – via MCP or a connector, which an agent alone cannot hold. Needs your IT team; <button type="button" class="linkbtn" data-view="tools" data-mcpinfo>how it works →</button></li>`);
-  return `<div class="further"><h4>Take it further</h4><ol>${items.join('')}</ol></div>`;
+// every use case shows the same ladder: 1 chat, 2 notebook, 3 agent – and 4 Copilot Studio only where it makes sense
+const LV_GENERIC = {chat:'Run the starter prompt in one chat and refine the result there with follow-up questions.',
+  notebook:'Create a Copilot notebook, add the files you work with as references and a short document with your rules, and come back to it as your material grows. Copilot answers only from those references.',
+  agent:'In Copilot Chat choose New agent: put your rules and the output format into Instructions, add stable reference files as Knowledge and test it on the Try it tab. Reuse it whenever the task comes up again.', studio:''};
+const lvOf = u => (typeof DETAILS !== 'undefined' && DETAILS[u.id] && DETAILS[u.id].levels) || LV_GENERIC;
+function ladderHtml(u){
+  const L = lvOf(u), item = (n, t, txt, extra) => `<li><span class="ln">Level ${n} · ${t}</span><p>${esc(txt)}</p>${extra || ''}</li>`;
+  return `<div class="ladder"><h4>Three levels with Copilot${L.studio ? ' – and a fourth' : ''}</h4><ol>
+    ${item(1, 'Chat', L.chat)}${item(2, 'Notebook', L.notebook)}${item(3, 'Agent', L.agent)}
+    ${L.studio ? item(4, 'Copilot Studio', L.studio, '<button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How connecting works →</button>') : ''}</ol></div>`;
 }
 function guideHtml(u, open){
   const g = (typeof GUIDES !== 'undefined' && GUIDES[u.id]) || GENERIC, pr = practiceOf(u.id), pm = pr && ui.gmode === 'practice';
@@ -271,14 +275,14 @@ function guideHtml(u, open){
     ${(pr.ref || []).length ? `<p><b>Keep open for checking – do not attach:</b></p><ul class="pfiles ref">${pr.ref.map(id => packFiles(id)).join('')}</ul>` : ''}
     <div class="prompt"><div class="ptools"><b>Starter prompt · practice data</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-opencopilot title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(pr.prompt)}</pre></div>
     <p><b>Check:</b> ${esc(pr.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}
-    ${furtherHtml(u)}
+    ${ladderHtml(u)}
     <p class="sub">All files and test ideas: <button type="button" class="linkbtn" data-view="data">Practice data →</button></p></details>`;
   return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot · about 10 minutes</summary>${seg}
     <p><b>Bring:</b> ${esc(g.bring)}</p>
     <ol class="howto">${g.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
     <div class="prompt"><div class="ptools"><b>Starter prompt</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-opencopilot title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(withDisc(g.prompt))}</pre></div>
     <p><b>Check:</b> ${esc(g.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}
-    ${furtherHtml(u)}
+    ${ladderHtml(u)}
     <p class="sub">No suitable material at hand? <button type="button" class="linkbtn" data-view="data">Use the practice data →</button></p></details>`;
 }
 function testHtml(u){
@@ -550,7 +554,7 @@ function backgroundHtml(u){
   const tech = `<div class="ux-tech"><h4>How it works technically</h4>
     ${t.routes.length ? `<div class="ux-routes">${t.routes.map((r, i) => `<span class="route${i ? '' : ' main'}" title="${esc(ROUTES[r][1])}">${esc(ROUTES[r][0])}</span>`).join('')}</div>` : ''}
     ${t.text ? `<p>${esc(t.text)}</p>` : ''}
-    ${row('Copilot levels', (() => { const L = levelsOf(u); return LEVELS.map(([n, d], i) => { const on = i === 0 || i === 2 || (i === 1 && L.two) || (i === 3 && L.studio.length); return `<span class="lvl${on ? ' on' : ''}" title="${esc(d)}">${i + 1} ${esc(n)}</span>`; }).join('') + '<small class="lvl-note">Highlighted: the levels of working with Copilot that fit this use case – explained in Step 2.</small>'; })())}
+    ${row('Copilot levels', (() => { const st = !!lvOf(u).studio; return LEVELS.map(([n, d], i) => { const on = i < 3 || st; return `<span class="lvl${on ? ' on' : ''}" title="${esc(d)}">${i + 1} ${esc(n)}</span>`; }).join('') + '<small class="lvl-note">Levels 1 to 3 work for every use case; level 4 is highlighted where Copilot Studio adds something – see the guide above.</small>'; })())}
     ${row('Practice data', t.data.map(id => `<button type="button" class="pk" data-pack="${id}" title="${esc(packLabel(id))}">${id === 'papers' ? '' : `<b>${id}</b> `}${esc(packLabel(id))}</button>`).join(''))}
     ${row('Other supportive academic tools', t.tools.map(n => toolUrl(n) ? `<a class="tk" href="${toolUrl(n)}" target="_blank" rel="noopener">${esc(n)}</a>` : `<span class="tk">${esc(n)}</span>`).join(''))}
     ${row('Connect to Copilot', con.length ? `<ul class="ux-con">${connectHtml(con)}</ul><button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How to connect a tool to Copilot →</button>` : '')}
