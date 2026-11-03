@@ -77,7 +77,7 @@
    "chat": "Attach the abstracts file (AB) and run the starter prompt in one chat. In the same chat, ask Copilot to recount the papers per year from the file and name any paper missing from its table.",
    "notebook": "Add the abstracts file (AB) – it is .txt, so it works as a reference – or, for your own field, title lists exported from a database and saved as .xlsx or .txt. Ask for themes and yearly counts across all lists at once – the notebook does not run code, so recount the numbers yourself. You can add a new export each term and see whether the themes hold.",
    "agent": "Call it 'Topic scout'. Instructions: four to six themes, a theme–paper–year table, rarely combined themes, a statement of what the sample can and cannot show, and never add papers that are not in the upload. Switch on 'Create documents, charts and code' so it counts and charts papers per year. Starter prompt: 'Cluster this title list and chart papers per year.' Reusable for every new export.",
-   "studio": "Connect the OpenAlex MCP server so the agent pulls titles, years and topics for a whole field query and counts them at scale, instead of working on a list you paste. Agent Builder cannot reach an external database. Needs your IT team."
+   "studio": "Connect the OpenAlex MCP server so the agent pulls titles, years and topics for a whole field query and counts them at scale, instead of working on a list you paste. Agent Builder cannot reach an external database. On GitHub: a Python script queries the OpenAlex API for the whole field and counts topics per year – versioned code makes the counts reproducible. Copilot Studio needs your IT team."
   }
  },
  "idee-1": {
@@ -334,7 +334,7 @@
    "chat": "Run the starter prompt with web search switched on (check the Work/Web setting). In the same chat, ask Copilot to keep only studies whose links it actually opened, and to search again with the terms a neighbouring field would use.",
    "notebook": "A notebook cannot search the web, so use it after the search: add the verified papers you found (practice: C3 and B2) and your project summary as a .docx. Ask how each study overlaps with your design, data and setting, and draft the positioning statement from these sources. Add new papers as they appear.",
    "agent": "Call it 'Novelty check'. Instructions: up to eight closest studies, each with authors, year, title, working link and one sentence on overlap; only studies it actually found; a two-sentence positioning statement; and a reminder that this is a first scan, not proof of novelty. No code needed. Starter prompt: 'Has this study been done? Here is my summary.' Reusable whenever your plan or question shifts.",
-   "studio": "Connect the Semantic Scholar or OpenAlex MCP server, or the Consensus or scite Copilot connector, so the agent searches a scholarly database rather than the open web; a scheduled flow could rerun the check monthly. Agent Builder cannot connect these. Needs your IT team."
+   "studio": "Connect the Semantic Scholar or OpenAlex MCP server, or the Consensus or scite Copilot connector, so the agent searches a scholarly database rather than the open web; a scheduled flow could rerun the check monthly. Agent Builder cannot connect these. On GitHub: a script queries the OpenAlex or Semantic Scholar API, and a scheduled GitHub Actions workflow reruns it monthly and saves new hits. Copilot Studio needs your IT team."
   }
  },
  "idee-4": {
@@ -747,7 +747,7 @@
    "chat": "Attach Rohde and Hausfather (A2) and run the starter prompt with web search switched on (check the Work/Web setting). In the same chat, ask Copilot to separate papers taken from the reference list from papers found by search, and to confirm that each citing paper is not in A2's references.",
    "notebook": "Add the key paper (A2), the citing paper you verified (A1) and further papers you confirmed in Google Scholar. Ask how each relates to the key paper's problem and to each other. The notebook cannot search, so it becomes your verified citation map, extended paper by paper.",
    "agent": "Call it 'Citation explorer'. Instructions: describe the key paper's problem in plain words, find related papers with different terminology and up to three citing papers, give a working link and the connection for each, label each as reference list or search result, write a 150-word cited overview, and never invent sources. Starter prompt: 'Find related and citing work for this DOI.' Reusable for every new key paper.",
-   "studio": "Connect the OpenAlex or Semantic Scholar MCP server, or Litmaps, so the agent follows real backward and forward citations in a database instead of the open web; a scheduled flow could report new citing papers. An agent alone cannot reach these. Needs your IT team."
+   "studio": "Connect the OpenAlex or Semantic Scholar MCP server, or Litmaps, so the agent follows real backward and forward citations in a database instead of the open web; a scheduled flow could report new citing papers. An agent alone cannot reach these. On GitHub: a script follows references and citing works through the OpenAlex API, and a scheduled GitHub Actions workflow lists new citing papers. Copilot Studio needs your IT team."
   }
  },
  "literatur-2": {
@@ -823,7 +823,7 @@
    "chat": "Screen the eight records yourself first, then attach the abstracts file (AB) and run the starter prompt. In the same chat, paste your own decisions and ask Copilot to compute Cohen's kappa with Python and list each disagreement with both reasons.",
    "notebook": "Add your protocol with the eligibility criteria, the record batch (practice: AB; save a CSV export as .xlsx first) and a page with your own decisions. Ask for include, exclude or unsure per record with the deciding criterion and a quote. Only approved, non-sensitive records go in, and you check every decision.",
    "agent": "Call it 'Second screener'. Instructions: your criteria word for word, one row per record with decision, deciding criterion and a quote from the abstract, 'unsure' rather than guessing, and 'the human makes the final call'. Knowledge: the protocol. Switch on 'Create documents, charts and code' to compute kappa. Starter prompt: 'Screen this batch.' Only approved, non-sensitive records go in; you check every decision.",
-   "studio": "A Power Automate flow can pass each record of a large export through the agent and write decision, criterion and quote back to a shared sheet or your screening platform – batch work an agent in chat cannot do. Needs your IT team."
+   "studio": "A Power Automate flow can pass each record of a large export through the agent and write decision, criterion and quote back to a shared sheet or your screening platform – batch work an agent in chat cannot do. On GitHub: a script sends each record to your institution's approved AI API and logs decision, criterion and quote in a CSV – only with approved, non-sensitive records. Copilot Studio needs your IT team."
   }
  },
  "literatur-3": {
@@ -1894,7 +1894,7 @@
    "chat": "Run the starter prompt with an invented excerpt. In the same chat, ask for a list of every place where the labelled text or the translation departs from the original wording, and check each one yourself.",
    "notebook": "Only approved, pseudonymised draft transcripts from your approved transcription tool go in – never audio or raw personal data – with your interview guide and a glossary of terms. Ask where the same term is translated differently across interviews. You come back as each transcript is checked, and you check every result against the audio.",
    "agent": "Call it 'Transcript formatter'. Instructions: add speaker labels, mark [unclear], translate keeping hesitations, show original and translation side by side, never summarise, shorten or correct speech, and remind you to remove names first. Knowledge: your glossary of terms. Only approved, pseudonymised text goes in, and you check every line against the audio. Starter prompt: 'Label and translate this excerpt into [language]'.",
-   "studio": "Connect the Otter.ai MCP server, or a Power Automate flow on an approved OneDrive folder, so the agent fetches transcripts from your approved tool instead of you pasting them – only if your ethics approval and data protection officer allow it. Needs your IT team."
+   "studio": "Connect the Otter.ai MCP server, or a Power Automate flow on an approved OneDrive folder, so the agent fetches transcripts from your approved tool instead of you pasting them – only if your ethics approval and data protection officer allow it. Own code on GitHub is not the route here: transcripts must stay in the storage your ethics approval names. Copilot Studio needs your IT team."
   }
  },
  "erhebung-1": {
@@ -1966,7 +1966,7 @@
    "chat": "Run the starter prompt with the Oxford, Durham and rainfall files, or with your own PDF. In the same chat, name five cells at random and ask it to quote the evidence line again, then compare with the file yourself.",
    "notebook": "Add the documents you extract from – reports, archival records or data documentation (D7 and D8 work as .txt) – and your extraction form as a Word file. Ask for the same fields across all documents, each with line or page and quote. New documents join one consistent table; only approved material goes in, and you verify a sample of every batch.",
    "agent": "Call it 'Extraction assistant' and switch on 'Create documents, charts and code' for the CSV export. Instructions: your extraction form with field definitions, one row per document, line or page and a verbatim quote for every value, 'not stated' where absent, no outside knowledge. Starter prompt: 'Extract the form fields from the attached documents'. Only approved material goes in; reusable for every batch, and you check a random sample each time.",
-   "studio": "A Power Automate flow can pass every new document in a SharePoint folder to the agent and append the extracted rows to an Excel table, with a log for your verification sample. An agent alone cannot run that multi-step automation. Needs your IT team."
+   "studio": "A Power Automate flow can pass every new document in a SharePoint folder to the agent and append the extracted rows to an Excel table, with a log for your verification sample. An agent alone cannot run that multi-step automation. On GitHub: a Python script calls your institution's approved AI API for each document and writes the rows to one table, versioned next to your verification log. Copilot Studio needs your IT team."
   }
  },
  "erhebung-2": {
@@ -2187,7 +2187,7 @@
    "chat": "Run the starter prompt with web search switched on, with the ERA5 file or your own data needs. In the same chat, ask it to rank the datasets whose links you confirmed by fit, and to list what each one lacks for your variables.",
    "notebook": "Save the documentation pages or codebooks of the candidate datasets as PDFs and add them with your variable list – for the practice version D9, saved as .xlsx first. Ask which dataset covers which variable, period and unit, under which licence. The notebook answers only from these documents, so every claim comes from documentation, not the web.",
    "agent": "Call it 'Data scout'. Instructions: the fixed table (name, provider, link, coverage, unit of analysis, access, licence, fit, gaps), 'say when you are not sure' and 'never invent datasets'. Knowledge: the public websites of repositories you trust, such as the UK Data Service or your discipline's archive. Starter prompt: 'Find open data for: [question, region, period, variables]'. Reusable for every new question; you still open every link.",
-   "studio": "Add the OpenAlex MCP server, so the agent searches a scholarly catalogue for datasets and the papers that used them instead of relying on general web search. Agent Builder cannot reach it. Needs your IT team."
+   "studio": "Add the OpenAlex MCP server, so the agent searches a scholarly catalogue for datasets and the papers that used them instead of relying on general web search. Agent Builder cannot reach it. On GitHub: a script searches the OpenAlex API for papers that use a dataset, and the DataCite or Zenodo API for the dataset records themselves. Copilot Studio needs your IT team."
   }
  },
  "erhebung-5": {
@@ -2649,7 +2649,7 @@
    "chat": "Run the starter prompt with the Forster PDF attached. Then, in the same chat, ask Copilot to add the extra stop words it suggested, rerun with two seeds and show a table of the topics that persist.",
    "notebook": "Add the Forster report (A3), the code and topic lists from your chat runs saved as .txt and a note of your settings. Ask which passages of the report each saved topic matches, and how two runs differ. For your own corpus, add only approved, non-sensitive texts. Settings, outputs and your interpretation stay together; you judge every topic label yourself.",
    "agent": "In Instructions, fix the method: preprocessing rules, a fixed random seed, the number of topics, a stability rerun, top-word tables, and \"call a vague topic vague\". For labelling, add category definitions and ask for a one-line reason per text. Switch on \"Create documents, charts and code\". Starter prompt: \"Run the standard topic model on this corpus and report stability.\" Only approved, non-sensitive texts go in, and you check a sample of labels by hand.",
-   "studio": "For a large corpus, a Power Automate flow can pass each new text from a SharePoint folder to the agent and write its label and reason into an Excel table – an agent alone works one chat at a time. You still check a random sample. Needs your IT team."
+   "studio": "For a large corpus, a Power Automate flow can pass each new text from a SharePoint folder to the agent and write its label and reason into an Excel table – an agent alone works one chat at a time. You still check a random sample. On GitHub: a Python script runs the topic model and the labelling over the whole corpus via your institution's approved AI API – only with approved, non-sensitive texts. Copilot Studio needs your IT team."
   }
  },
  "analyse-4": {
@@ -2897,7 +2897,7 @@
    "chat": "Run the starter prompt with the sea-ice CSV attached. Then, in the same chat, ask Copilot to add a test that would fail if the December 1987 flag were missing, and run it.",
    "notebook": "Save the sea-ice file (D6) as .xlsx and add it with your function and tests saved as .txt and a short design note on the intended behaviour. Ask whether the tests cover every rule in the design note. The notebook does not run code, but over time it keeps the record of why the code behaves as it does.",
    "agent": "In Instructions, set your language and rules: docstrings, unit tests for normal and edge cases (plain asserts if pytest is missing), a check against a known result or benchmark, units and value ranges stated, \"ask when behaviour is unclear\", and never include keys or passwords. Switch on \"Create documents, charts and code\" so it can run Python tests. Starter prompt: \"Review this function and write tests for its edge cases.\" Reusable for each new module.",
-   "studio": "Connect GitHub (repositories) through its MCP server, so the agent can read your repository, issues and pull requests and comment on changes – an agent in Agent Builder only sees what you paste or upload. Needs your IT team."
+   "studio": "Connect GitHub (repositories) through its MCP server, so the agent can read your repository, issues and pull requests and comment on changes – an agent in Agent Builder only sees what you paste or upload. On GitHub itself: a GitHub Actions workflow runs your tests on every change, and GitHub Copilot can review your pull requests. Copilot Studio needs your IT team."
   }
  },
  "analyse-7": {
@@ -3360,7 +3360,7 @@
    "chat": "Run the starter prompt with the AB abstracts file attached. In the same chat, ask Copilot to recheck each link and drop any whose quoted sentence does not name the data, method or claim its link type requires.",
    "notebook": "Add the AB abstracts, your own reading notes and a tag vocabulary document as references, and keep adding notes as you read. Ask for atomic notes and typed links across everything in the notebook – it searches only your material, so you find what you read months ago, and the tag document keeps tags consistent.",
    "agent": "Instructions: the atomic note format (ID, one idea, source, page), your controlled tag vocabulary with definitions, the five link types, a quoted sentence for every link, no links resting only on a shared topic. Knowledge: your tag vocabulary. Starter prompts: \"Atomic notes from these highlights\" and \"Typed links between these notes\". Reusable for every batch of reading, so new notes match the old ones.",
-   "studio": "Connect Notion through its remote MCP server so the agent writes approved notes, tags and links straight into your Notion database – Agent Builder cannot write into another tool. The Zotero and Obsidian servers run only locally. Needs your IT team."
+   "studio": "Connect Notion through its remote MCP server so the agent writes approved notes, tags and links straight into your Notion database – Agent Builder cannot write into another tool. The Zotero and Obsidian servers run only locally. On GitHub: keep your notes as Markdown files in a private repository, and a script writes them into Notion through its API. Copilot Studio needs your IT team."
   }
  },
  "querschnitt-4": {
@@ -3434,7 +3434,7 @@
    "chat": "Run the starter prompt with the D7 Oxford file attached. In the same chat, ask Copilot to show the Python lines that computed the tmax range and the missing sunshine count, and to list every column meaning it took from the header versus guessed.",
    "notebook": "Add the D7 text file, the Met Office header notes, your methods notes and the repository's deposit guidelines as references; for your own data, add your protocol and file list. Ask for README and metadata drafts that cite these sources and keep them as pages until deposit. The notebook does not run Python, so compute the codebook in Chat and add it.",
    "agent": "Instructions: codebook columns, ranges and missing counts computed with Python, [CHECK] on every guessed meaning, README sections, DataCite mandatory fields, a replication checklist. Knowledge: your repository's deposit guidelines and licence options. Switch on \"Create documents, charts and code\". Starter prompts: \"Codebook and README for this file\" and \"Replication checklist for my paper\". Reusable for every dataset you deposit.",
-   "studio": "Connect GitHub through its MCP server or Copilot connector so the agent reads your repository's code, README and issues and checks the replication package against them – Agent Builder only sees files you upload. Needs your IT team."
+   "studio": "Connect GitHub through its MCP server or Copilot connector so the agent reads your repository's code, README and issues and checks the replication package against them – Agent Builder only sees files you upload. On GitHub itself: a GitHub Actions workflow reruns the replication code on every change, and the Zenodo integration archives each release with a DOI. Copilot Studio needs your IT team."
   }
  },
  "querschnitt-5": {
@@ -3673,7 +3673,7 @@
    "chat": "Paste the standing rules and the staged task as your first message, attach B2, C3, C4 and C5, and run stage 1. In the same chat, approve only the cells you have checked and run stage 2 – the rules last only for this conversation.",
    "notebook": "Add the four PDFs and a one-page rules document (citation style, terms, never invent, stop after each stage) as references – only approved, non-sensitive material. Start each question with \"Follow the rules document\". The notebook answers only from these sources, so no unchecked web sources slip in, and you can add papers later. You still check every cell.",
    "agent": "Instructions: APA 7, your terms with definitions, never invent sources, quotes or numbers, a verbatim quote and page per cell, stop after each stage for approval. Knowledge: the four PDFs or your own approved, non-sensitive papers. Starter prompts: \"Stage 1 extraction for these papers\" and \"Compare the approved cells\". A human checks every result; reusable for each new scoping or comparison task.",
-   "studio": "Connect the OpenAlex MCP server so the agent can search for sources and check that every reference exists, and chain the stages in a flow that still stops for your approval – Agent Builder cannot reach scholarly databases. Needs your IT team."
+   "studio": "Connect the OpenAlex MCP server so the agent can search for sources and check that every reference exists, and chain the stages in a flow that still stops for your approval – Agent Builder cannot reach scholarly databases. On GitHub: a Python script chains the stages, checks every reference against the OpenAlex or Crossref API and stops for your approval between stages. Copilot Studio needs your IT team."
   }
  },
  "querschnitt-8": {
@@ -3751,7 +3751,7 @@
    "chat": "Run the starter prompt with the AB abstracts file attached. In the same chat, ask Copilot to list the skipped papers with the criterion each fails, so you can spot-check whether a relevant paper was missed.",
    "notebook": "Add a criteria document (research question and the three relevance criteria), each week's alert as a Word or .txt file and your earlier must-read lists. Ask for the week's triage against the criteria and compare it with earlier weeks. You gain consistent ratings over time and a record of what you chose to read and why.",
    "agent": "Instructions: your research question, the three relevance criteria, rate only from title and abstract, a one-line reason naming the criterion, supports, challenges or extends for must-reads, five alert terms, never add papers not in the input. Knowledge: optionally two or three key papers that define your topic. Starter prompt: \"Triage this week's alert\". Reusable every week.",
-   "studio": "Connect OpenAlex or Semantic Scholar through their remote MCP servers and add a weekly scheduled trigger, so the agent fetches new papers for your alert terms and e-mails you the triage – Agent Builder cannot search databases or run on a schedule. Needs your IT team."
+   "studio": "Connect OpenAlex or Semantic Scholar through their remote MCP servers and add a weekly scheduled trigger, so the agent fetches new papers for your alert terms and e-mails you the triage – Agent Builder cannot search databases or run on a schedule. On GitHub: a scheduled GitHub Actions workflow queries the OpenAlex API every week and opens an issue with the new papers, so GitHub notifies you. Copilot Studio needs your IT team."
   }
  },
  "publikation-0": {
@@ -4059,7 +4059,7 @@
    "chat": "Run the starter prompt with web search switched on (check the Work/Web setting) and the Myhre PDF attached. Then, in the same chat, paste the author guidelines of your preferred journal and ask for a formatting checklist.",
    "notebook": "Add the author guidelines of your shortlisted journals (PDF or Word), your manuscript and your .bib file saved as .txt; for the practice, the Myhre paper (C2). Ask for a side-by-side comparison of word limits, reference styles and open-access options. The notebook answers only from the saved guidelines, which leaves less room for invented requirements.",
    "agent": "In Instructions, set the output: a journal table with publisher, fit, article type, word limit, reference style, open-access options and guideline link; use only the journals' own pages (keep web search on); BibTeX with correct entry types and missing fields flagged; never invent journals, DOIs or page numbers. Starter prompts: \"Suggest five journals for this abstract.\" and \"Convert these references to BibTeX.\" Reusable for every manuscript.",
-   "studio": "Connect the OpenAlex MCP server, so the agent can look up which venues publish work like yours and check reference metadata in a scholarly database rather than the open web. Agent Builder cannot reach external services. Needs your IT team."
+   "studio": "Connect the OpenAlex MCP server, so the agent can look up which venues publish work like yours and check reference metadata in a scholarly database rather than the open web. Agent Builder cannot reach external services. On GitHub: a script queries the OpenAlex API for the venues where similar papers appear and checks your references against Crossref. Copilot Studio needs your IT team."
   }
  },
  "publikation-4": {
@@ -4437,7 +4437,7 @@
    "chat": "Run the starter prompt with web search switched on (check the Work/Web setting) and both PDFs attached. Then, in the same chat, ask Copilot to show the link it used for every reference it marked as matching.",
    "notebook": "Add the papers you cite as PDFs (for the practice, C3 and B2) and your draft paragraph. Ask, sentence by sentence, whether the cited source supports the claim, with a quote. The notebook answers only from its references, so a missing source shows up as a gap instead of a vague web summary.",
    "agent": "In Instructions, set the two-step check: first existence and metadata (working DOI or link, \"not found\" if absent, flag any difference in authors, year, title, journal, volume or pages), then support (supports, partly, does not) with a quoted passage; never guess. Keep web search on. Starter prompt: \"Check these references and the claims they are cited for.\" Reusable for every chapter before submission.",
-   "studio": "Connect OpenAlex to check that references exist and match their metadata, and scite to see how a source is cited elsewhere – both as MCP servers. Agent Builder cannot reach external databases, and web search misses paywalled records. Needs your IT team."
+   "studio": "Connect OpenAlex to check that references exist and match their metadata, and scite to see how a source is cited elsewhere – both as MCP servers. Agent Builder cannot reach external databases, and web search misses paywalled records. On GitHub: a script checks every DOI in your reference list against the Crossref or OpenAlex API and flags metadata that does not match. Copilot Studio needs your IT team."
   }
  },
  "publikation-9": {
@@ -4815,7 +4815,7 @@
    "chat": "Run the starter prompt with web search switched on. In the same chat, paste back only the items you confirmed by opening the links and ask for a stage per item (awareness, use, change) and a short narrative that claims contribution, not sole attribution.",
    "notebook": "A notebook answers only from its references, so it cannot search – add what you have verified instead: B2, the confirmed mentions table as .xlsx or Word, and notes or saved copies of key pages. Add new items over the months and ask for an updated impact narrative and timeline – a growing evidence file for reports and impact case studies.",
    "agent": "Instructions: search scope and table columns from the starter prompt, include an item only when its page names the paper, DOI or authors, classify as awareness, use or change, claim contribution not attribution, never invent sources. Knowledge: web search, or up to four trusted public policy websites. Starter prompts: \"Find new mentions of [DOI] since [date]\" and \"Classify these confirmed items\". Reusable for every paper or project.",
-   "studio": "Add a scheduled trigger that runs the search once a month and appends new candidate mentions to an Excel table or SharePoint list for you to verify – Agent Builder cannot run on a schedule or write into a list. Needs your IT team."
+   "studio": "Add a scheduled trigger that runs the search once a month and appends new candidate mentions to an Excel table or SharePoint list for you to verify – Agent Builder cannot run on a schedule or write into a list. On GitHub: a scheduled GitHub Actions workflow asks the OpenAlex API each month for new works citing your papers and appends them to a CSV for you to verify. Copilot Studio needs your IT team."
   }
  },
  "transfer-4": {
@@ -4980,7 +4980,7 @@
    "chat": "Run the starter prompt to get the Mermaid code and the table of every arrow with its source. In the same chat, add or remove one path and ask for the updated code and arrow table, so you see that the model changes without being redrawn.",
    "notebook": "Add the key papers behind your constructs, your construct definitions and the current model code saved as a .txt file – for the practice version A3, plus D3 and D5 saved as .xlsx first. Ask which arrows the papers support and what a newly added paper changes. When the literature moves on, you update the model from the same sources.",
    "agent": "Call it 'Model diagram builder'. Instructions: Mermaid flowchart left to right, paths labelled H1, H2 …, always a table of every arrow with its source and a construct–indicator table, reflective or formative with a reason, never invent published scales, flag every path not in the input. Knowledge: your construct definitions and theory notes. Starter prompt: 'Update my model: [change]'. Reusable across thesis, slides and survey.",
-   "studio": "Add the draw.io or Figma MCP server, so the agent draws and updates the diagram on the canvas instead of returning code you paste in. Agent Builder cannot reach these services. Needs your IT team."
+   "studio": "Add the draw.io or Figma MCP server, so the agent draws and updates the diagram on the canvas instead of returning code you paste in. Agent Builder cannot reach these services. On GitHub: keep the diagram as Mermaid code in a repository – GitHub renders it, and every change stays visible in the history. Copilot Studio needs your IT team."
   }
  },
  "erhebung-7": {
@@ -5212,7 +5212,7 @@
    "chat": "Run the fixed prompt in five new chats and save every answer with the time. In one of them, follow up with 'Are you sure? Please check your sources.' and record whether the answer changes – a second measure of stability.",
    "notebook": "Add the saved answers as Word or text files with date, time and model, your codebook and the reference paper (B2 for the practice version). Ask for a table that codes each answer against the reference and lists every cited source. The notebook answers only from these files, so new model output does not mix in; you check every code.",
    "agent": "Do not let an agent produce the answers – its instructions would change what you study. Build a coding agent, 'Audit coder', instead. Instructions: your codebook (correct, partly correct, wrong, no or invented source) and a fixed table. Knowledge: the reference paper (needs a Microsoft 365 Copilot licence; otherwise attach it in the chat with the agent). Starter prompt: 'Code these saved answers against the reference'. Only model answers, never personal data, go in, and you check every code.",
-   "studio": "A scheduled trigger in Copilot Studio can send the fixed prompt to the model you audit at set times and write each answer with date, time and model to an Excel table in SharePoint – a time series an agent cannot collect on its own. Needs your IT team."
+   "studio": "A scheduled trigger in Copilot Studio can send the fixed prompt to the model you audit at set times and write each answer with date, time and model to an Excel table in SharePoint – a time series an agent cannot collect on its own. On GitHub: a scheduled GitHub Actions workflow sends the fixed prompt to the API of the model you audit and appends each answer with date, time and model version to a CSV. Copilot Studio needs your IT team."
   }
  }
 }
