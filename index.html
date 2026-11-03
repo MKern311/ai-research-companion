@@ -1291,11 +1291,11 @@ S.push({t:'How this session works', note:'Here is how the next hour and a half w
  '</div></div>'+
  link([['Step 2','<b>Three levels: chat, notebook, agent.</b> What changes along the way?']])});
 
-S.push({t:'Chat, cowork, agent', note:'Three ways to work with AI. In a chat you ask, it answers – you steer every single step. In cowork mode it works through a multi-step task with you, on your files, and you approve each step. An agent pursues a goal on its own: it plans, acts and checks in a loop. The more autonomy, the more it needs: a clear goal, the right context – instructions, your files, memory – and tools such as search, code or a connector to a database. A chat alone has none of that. That is also the ladder in Step 2: Chat, then a notebook adds context, an agent adds standing instructions, Copilot Studio adds tools.',
+S.push({t:'Chat, notebook, agent', note:'Three ways to work with AI. In a chat you ask, it answers – you steer every single step. In the middle, cowork or a notebook: it works with you on your files and keeps them together – Copilot Cowork works through a multi-step task, a Copilot notebook keeps your sources and answers in one place – and you check each step. An agent pursues a goal on its own: it plans, acts and checks in a loop. The more autonomy, the more it needs: a clear goal, the right context – instructions, your files, memory – and tools such as search, code or a connector to a database. A chat alone has none of that. That is also the ladder in Step 2: Chat, then a notebook adds context, an agent adds standing instructions, Copilot Studio adds tools.',
  html: head('2 · Three ways to work with AI','From <em>chat</em> to <em>agent</em>.')+
  '<div class="ps-body" style="gap:16px"><div class="pi-modes">'+[
    ['chat','blue','Chat','You ask, it answers. You steer every step.','Copilot Chat'],
-   ['cowork','ochre','Cowork','It works through a task with you, on your files. You approve each step.','Copilot Cowork'],
+   ['cowork','ochre','Cowork / Notebook','It works with you on your files and keeps them together. You check each step.','Copilot Cowork · Copilot Notebook'],
    ['agent','accent','Agent','It pursues a goal on its own – with context and tools. You set goal and limits.','Agent Builder · Copilot Studio']
  ].map(function(m,i){ return '<div class="pi-mode rv" style="--d:'+(180+i*160)+';--c:var(--'+m[1]+');--cs:var(--'+m[1]+'-soft)">'+SV[m[0]]+'<div class="t">'+m[2]+'</div><div class="p">'+m[3]+'</div><span class="tag">'+m[4]+'</span></div>'; }).join('')+
  '</div><div class="pi-auto rv" style="--d:650"><span>You steer every step</span><i></i><span>AI runs the loop</span></div>'+
