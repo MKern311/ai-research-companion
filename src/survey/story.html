@@ -13,6 +13,10 @@
 .pgr-story button{font:inherit;color:inherit;cursor:pointer}
 .pgr-story:fullscreen{border-radius:0;border:0;display:flex;flex-direction:column;height:100vh}
 .pgr-story:fullscreen .ps-stage{flex:1;min-height:0}
+/* full screen: slides are laid out at a fixed design size (at least 1280×720) and scaled as a whole, so text and charts grow with the screen */
+.pgr-story .ps-scale{position:absolute;inset:0}
+.pgr-story.is-fit .ps-scale{inset:auto;left:0;top:0;transform-origin:0 0}
+.pgr-story.is-fit .ps-top,.pgr-story.is-fit .ps-nav,.pgr-story.is-fit .ps-notes{zoom:var(--fz,1)}
 .pgr-story .ps-top{display:flex;align-items:center;gap:14px;padding:12px 22px;border-block-end:1px solid var(--line);background:var(--surface);font-size:12.5px;color:var(--muted)}
 .pgr-story .ps-brand{font-weight:600;color:var(--ink);letter-spacing:.02em}
 .pgr-story .ps-brand b{color:var(--accent)}
@@ -355,7 +359,7 @@ function init(root){
   if(!root || root.__pgr) return; root.__pgr = true;
   root.innerHTML =
    '<div class="ps-top"><span class="ps-brand"><b>You told us</b> \u00b7 GenAI in Your Research \u00b7 pre-workshop survey (n='+N+')</span><span class="ps-chapter" aria-live="polite"></span></div>'+
-   '<div class="ps-progress"><i></i></div><div class="ps-stage">'+S.map(function(s,i){return '<section class="ps-slide" data-i="'+i+'" aria-roledescription="slide" aria-label="'+(i+1)+' of '+S.length+': '+esc(s.t)+'">'+s.html+'</section>';}).join('')+'</div>'+
+   '<div class="ps-progress"><i></i></div><div class="ps-stage"><div class="ps-scale">'+S.map(function(s,i){return '<section class="ps-slide" data-i="'+i+'" aria-roledescription="slide" aria-label="'+(i+1)+' of '+S.length+': '+esc(s.t)+'">'+s.html+'</section>';}).join('')+'</div></div>'+
    '<div class="ps-notes" role="note"><div class="nh">Talk track</div><div class="nt"></div></div>'+
    '<nav class="ps-nav" aria-label="Story navigation"><button type="button" class="ps-btn" data-act="prev">\u2190 Back</button><div class="ps-dots">'+S.map(function(s,i){return '<button type="button" data-go="'+i+'" aria-label="Go to '+esc(s.t)+'"></button>';}).join('')+'</div>'+
    '<button type="button" class="ps-btn" data-act="notes" aria-pressed="false" title="Talk track (N)">Notes</button><button type="button" class="ps-btn" data-act="fs" title="Full screen (F)">\u26F6</button><button type="button" class="ps-btn pri" data-act="next">Next \u2192</button></nav>';
@@ -373,6 +377,7 @@ function init(root){
   function go(i){
     i = Math.max(0, Math.min(S.length-1, i)); if(i===cur) return;
     slides.forEach(function(sl,k){ sl.classList.toggle('is-on',k===i); sl.classList.toggle('is-prev',k<i); sl.setAttribute('aria-hidden', k===i?'false':'true'); if('inert' in sl) sl.inert = k!==i; });
+    if(root.classList.contains('is-fit')) fit();
     dots.forEach(function(d,k){ if(k===i) d.setAttribute('aria-current','step'); else d.removeAttribute('aria-current'); });
     root.querySelector('.ps-chapter').textContent = (i+1)+' / '+S.length+' \u00b7 '+S[i].t;
     root.querySelector('.ps-progress i').style.width = (100*(i+1)/S.length)+'%';
@@ -428,12 +433,12 @@ function init(root){
   var mapSl = root.querySelector('.ps-slide[data-i="'+S.findIndex(function(s){return s.interactive==='map';})+'"]'), sel = -1;
   function drawMap(sl, animate){
     var m = sl.querySelector('.ps-map'), svg = m.querySelector('svg.ln'), r0 = m.getBoundingClientRect(); if(!r0.width) return;
-    var out = '', d = 0;
+    var out = '', d = 0, q = m.offsetWidth / r0.width;   // 1 unless the slides are scaled in full screen
     OG.forEach(function(g,gi){
       var a = m.querySelector('.ps-ob[data-i="'+gi+'"]').getBoundingClientRect();
       g.to.forEach(function(id){
         var b = m.querySelector('.ps-an[data-id="'+id+'"]').getBoundingClientRect();
-        var x1 = a.right - r0.left, y1 = a.top + a.height/2 - r0.top, x2 = b.left - r0.left - 4, y2 = b.top + b.height/2 - r0.top, cx = (x2-x1)*.5;
+        var x1 = (a.right - r0.left)*q, y1 = (a.top + a.height/2 - r0.top)*q, x2 = (b.left - r0.left)*q - 4, y2 = (b.top + b.height/2 - r0.top)*q, cx = (x2-x1)*.5;
         var on = sel===gi;
         out += '<path data-g="'+gi+'" class="'+(on?'on ':'')+(animate?'draw':'')+'" style="--c:var(--'+g.c+');--len:'+Math.ceil(Math.hypot(x2-x1,y2-y1)*1.3)+';--d:'+(d++*90)+'" d="M'+x1.toFixed(1)+' '+y1.toFixed(1)+' C'+(x1+cx).toFixed(1)+' '+y1.toFixed(1)+' '+(x2-cx).toFixed(1)+' '+y2.toFixed(1)+' '+x2.toFixed(1)+' '+y2.toFixed(1)+'"/>';
       });
@@ -449,7 +454,21 @@ function init(root){
     setTimeout(function(){ drawMap(mapSl, false); }, 260);
   });
   var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ if(mapSl.classList.contains('is-on')) drawMap(mapSl,false); }, 120); });
-  document.addEventListener('fullscreenchange', function(){ setTimeout(function(){ if(mapSl.classList.contains('is-on')) drawMap(mapSl,false); }, 200); });
+  // full screen on a large display: scale the controls a little and the slides to fill the stage
+  function fit(){
+    var st = root.querySelector('.ps-stage'), sc = st.firstElementChild, on = document.fullscreenElement === root && window.innerWidth > 900;
+    root.classList.toggle('is-fit', on);
+    if(!on){ sc.style.width = sc.style.height = sc.style.transform = ''; root.style.removeProperty('--fz'); return; }
+    root.style.setProperty('--fz', Math.max(1, Math.min(window.innerWidth/1280, window.innerHeight/830)).toFixed(3));
+    var W = st.clientWidth, H = st.clientHeight, k = Math.min(W/1280, H/720), sl = root.querySelector('.ps-slide.is-on');
+    for(var n = 0; n < 3; n++){   // a slide taller than the design height is scaled down a little instead of scrolling
+      sc.style.width = (W/k) + 'px'; sc.style.height = (H/k) + 'px'; sc.style.transform = 'scale(' + k + ')';
+      if(!sl || sl.scrollHeight <= sl.clientHeight + 1) break;
+      k = H / sl.scrollHeight;
+    }
+  }
+  window.addEventListener('resize', fit);
+  document.addEventListener('fullscreenchange', function(){ fit(); setTimeout(function(){ fit(); if(mapSl.classList.contains('is-on')) drawMap(mapSl,false); }, 200); });
 
   go(0);
 }
