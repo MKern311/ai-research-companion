@@ -1656,7 +1656,9 @@ try { const v = JSON.parse(sessionStorage.getItem(UKEY) || 'null'); if (v) { ui.
 const saveUi = () => { try { sessionStorage.setItem(UKEY, JSON.stringify({lens:ui.lens, explore:ui.explore})); } catch(e) {} };
 
 const remote = () => !!session;
-const myTable = () => session ? (session.table || 'Viewer') : state.a;
+// the facilitator rates as "Facilitator" to demonstrate the tool; those ratings never count in room values, rankings or results
+const DEMO = 'Facilitator';
+const myTable = () => session ? (session.role === 'facilitator' ? DEMO : session.table || 'Viewer') : state.a;
 const readOnly = () => !!session && session.role === 'viewer';
 const tbl = n => (state.t[n] = state.t[n] || {r:{}, fd:{f1:'', f2:'', f3:'', q:''}, disc:''});
 const tblFrom = d => ({r:(d && d.r) || {}, fd:Object.assign({f1:'', f2:'', f3:'', q:''}, (d && d.fd) || {}), disc:String((d && d.disc) || '').slice(0, 60)});
@@ -1734,7 +1736,7 @@ async function pushAddition(c, del){
 
 /* ---------- room aggregation ---------- */
 // disc: only groups of this discipline (key from discKey); empty = whole room
-const inDisc = (k, disc) => !disc || discKey(discOf(k)) === disc;
+const inDisc = (k, disc) => k !== DEMO && (!disc || discKey(discOf(k)) === disc);
 function room(id, disc){
   const rs = Object.entries(state.t).filter(([k]) => inDisc(k, disc)).map(([k, T]) => [k, T.r[id]]).filter(([, r]) => r);
   const both = rs.filter(([, r]) => r.n && r.u && !r.x);
@@ -1767,10 +1769,10 @@ function renderIdent(){
 }
 
 /* ---------- use cases view ---------- */
-const canRate = () => !readOnly() && !(session && session.role === 'facilitator');
+const canRate = () => !readOnly();
 function renderDisc(){
   const el = $('#discBar');
-  el.hidden = !canRate();
+  el.hidden = !canRate() || myTable() === DEMO;
   if (el.hidden) return;
   const own = discOf(myTable()), inp = $('#discIn');
   const others = [...new Set(Object.keys(state.t).filter(k => k !== myTable()).map(discOf).filter(Boolean))].sort();
@@ -1918,7 +1920,8 @@ let drawerHtml = '';
 function step1Html(u){
   const r = myR(u.id), rm = room(u.id);
   return `<div class="block">
-          <h3>Step 1 · Research value${session && canRate() ? ' · ' + esc(groupLabel(myTable())) : ''}</h3>
+          <h3>Step 1 · Research value${session && canRate() ? ' · ' + (myTable() === DEMO ? 'Facilitator demo' : esc(groupLabel(myTable()))) : ''}</h3>
+          ${myTable() === DEMO ? '<p class="q-hint">Your ratings as facilitator are for demonstration only and never count in the room results.</p>' : ''}
           ${!canRate() ? '<p class="later">View only – this code cannot rate.</p>' : `
           ${scale('n', r.n, 'Value', '1 nice to have · 3 saves real time · 5 removes a real bottleneck')}
           <div><div class="q-label">Kind of gain</div><div class="q-hint">Choose all that apply.</div>
@@ -1999,7 +2002,7 @@ const rOf = (k, id) => (state.t[k] && state.t[k].r[id]) || {};
 // disciplines entered by the groups: spelling variants ("marketing", "Marketing ") count as one
 function disciplines(){
   const m = new Map();
-  Object.keys(state.t).filter(k => discOf(k) && Object.keys(state.t[k].r).length).sort(groupOrder).forEach(k => { const key = discKey(discOf(k)); if (!m.has(key)) m.set(key, {key, label:discOf(k), groups:[]}); m.get(key).groups.push(k); });
+  Object.keys(state.t).filter(k => k !== DEMO && discOf(k) && Object.keys(state.t[k].r).length).sort(groupOrder).forEach(k => { const key = discKey(discOf(k)); if (!m.has(key)) m.set(key, {key, label:discOf(k), groups:[]}); m.get(key).groups.push(k); });
   return [...m.values()].sort((a, b) => a.label.localeCompare(b.label));
 }
 const discLabel = key => (disciplines().find(d => d.key === key) || {label:key}).label;
@@ -2119,7 +2122,7 @@ function reportData(){
   const ucs = allUcs().map(u => ({u, rm:room(u.id)}));
   const ranked = ucs.filter(e => e.rm.k).sort((a, b) => byRoom(a.rm, b.rm));
   const byDisc = disciplines().map(d => ({d, top:allUcs().map(u => ({u, rm:room(u.id, d.key)})).filter(e => e.rm.k).sort((a, b) => byRoom(a.rm, b.rm)).slice(0, 3)})).filter(x => x.top.length);
-  return {ranked, byDisc, tabs:Object.keys(state.t).filter(k => Object.keys(state.t[k].r).length || Object.values(state.t[k].fd || {}).some(Boolean)),
+  return {ranked, byDisc, tabs:Object.keys(state.t).filter(k => k !== DEMO).filter(k => Object.keys(state.t[k].r).length || Object.values(state.t[k].fd || {}).some(Boolean)),
     notai:ucs.filter(e => e.rm.x.length), chk:ranked.filter(e => e.rm.chk.length),
     tests:ucs.flatMap(e => e.rm.tests.map(x => ({u:e.u, ...x}))),
     gains:GAINS.map(([g, l]) => ({l, n:ucs.reduce((s, e) => s + e.rm.gain[g], 0), top:ranked.filter(e => e.rm.gain[g]).sort((a, b) => b.rm.gain[g] - a.rm.gain[g] || byRoom(a.rm, b.rm)).slice(0, 3)})),
