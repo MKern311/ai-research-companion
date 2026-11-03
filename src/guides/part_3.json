@@ -2,7 +2,7 @@
   "publikation-3": {
     "bring": "The abstract of a paper you are writing (or an open-access abstract from your field) and the name of one journal you are considering.",
     "steps": [
-      "Paste your abstract and ask for five candidate journals with links to their author guidelines.",
+      "With web search switched on, paste your abstract and ask for five candidate journals with links to their author guidelines.",
       "Open two of the linked guideline pages and compare scope and word limits.",
       "Paste one journal's author guidelines and ask for a formatting checklist.",
       "Tick the checklist against your manuscript, including citation style and, if you write in LaTeX, the BibTeX entries."
@@ -189,7 +189,8 @@
       "Finish with a five-question quiz and note what to look up."
     ],
     "prompt": "I am a postgraduate researcher in [discipline] and want to learn [method / package / language] for [purpose in my project]. Act as a patient tutor. First ask me three short questions to judge my level. Then teach step by step in short chunks: explain one idea, show a small example, and give me one exercise. Wait for my answer and give feedback before showing the solution. Use [dataset or a simple made-up example]. Point me to the official documentation for each step, and if you are not sure about a function or option, say so.",
-    "check": "Run one example in your own software or compare it with the official documentation, and confirm that it works or matches."
+    "check": "Run one example in your own software or compare it with the official documentation, and confirm that it works or matches.",
+    "limit": "Copilot Chat runs only Python. For R, Stata, SPSS or other software it writes and explains the code, and you run it in your own software."
   },
   "querschnitt-7": {
     "bring": "Your standing rules for working with AI (citation style, key terms, what must never happen), a narrow research question and two or three trusted sources – open-access PDFs or public websites.",

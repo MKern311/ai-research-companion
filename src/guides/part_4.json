@@ -99,7 +99,7 @@
     "bring": "A paragraph of your own writing with five to eight citations and the matching reference list entries.",
     "steps": [
       "Paste the paragraph and its references.",
-      "Ask Copilot to check that each reference exists, with a link or DOI.",
+      "With web search switched on, ask Copilot to check that each reference exists, with a link or DOI.",
       "Ask whether each source supports the sentence it is cited for.",
       "Open each flagged source and decide yourself."
     ],
@@ -129,7 +129,7 @@
     ],
     "prompt": "I am a postgraduate researcher in [discipline]. My research question is: [question]. Below are new publications from this week's alerts. Sort them into must-read, maybe and skip, with one line on why, based only on the title and abstract given. For the must-reads, say in one sentence whether each supports, challenges or extends my work, or offers a method I could use. Finish with a short list of search terms worth adding to my alerts. Do not add papers that are not in the list.\n\n[paste titles and abstracts]",
     "check": "For two papers you rated differently from Copilot, read the abstract again and decide who was right; nothing in the output is a paper you did not paste.",
-    "limit": "Copilot rates on title and abstract only; set up the alerts themselves in the databases you use – or connect a source such as OpenAlex via MCP to search for new work directly."
+    "limit": "Copilot rates on title and abstract only; set up the alerts themselves in the databases you use. Connecting a source such as OpenAlex via MCP, so that new work is searched directly, needs Copilot Studio and your IT team."
   },
   "design-6": {
     "bring": "Your research question with three to six constructs and the expected relationships – or, for the practice version, the Forster et al. (2025) paper and two data files.",
@@ -147,7 +147,7 @@
     "bring": "A clear, glare-free photo of a whiteboard, flipchart or card sort you made yourself – no faces or names. For the practice version: sticky notes, a flipchart and a phone to photograph the 12 practice paper titles you sorted.",
     "steps": [
       "Photograph the board straight on, in good light, in one or two shots.",
-      "Upload the photo – from the Copilot mobile app or via OneDrive – and ask Copilot to transcribe every card before interpreting anything.",
+      "Upload the photo (JPEG or PNG; convert iPhone HEIC photos first) – from the Copilot mobile app or via OneDrive – and ask Copilot to transcribe every card before interpreting anything.",
       "Ask for the clusters or the card-to-category mapping as a table, with uncertain readings flagged.",
       "Compare the transcription and mapping with the board itself."
     ],

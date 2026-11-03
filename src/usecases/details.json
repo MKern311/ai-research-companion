@@ -6,7 +6,7 @@
    "Export 15–20 recent titles with years from one database",
    "Ask Copilot to group them into themes and count per year",
    "List theme pairs that rarely co-occur in one paper",
-   "Test one promising intersection with a larger OpenAlex query"
+   "Test one promising intersection yourself with a larger OpenAlex search"
   ],
   "method": {
    "concepts": [
@@ -75,7 +75,7 @@
   },
   "levels": {
    "chat": "Attach the abstracts file (AB) and run the starter prompt in one chat. In the same chat, ask Copilot to recount the papers per year from the file and name any paper missing from its table.",
-   "notebook": "Add the abstracts file (AB) – it is .txt, so it works as a reference – or, for your own field, title lists exported from a database and saved as .xlsx or .txt. Ask for themes and yearly counts across all lists at once. You can add a new export each term and see whether the themes hold.",
+   "notebook": "Add the abstracts file (AB) – it is .txt, so it works as a reference – or, for your own field, title lists exported from a database and saved as .xlsx or .txt. Ask for themes and yearly counts across all lists at once – the notebook does not run code, so recount the numbers yourself. You can add a new export each term and see whether the themes hold.",
    "agent": "Call it 'Topic scout'. Instructions: four to six themes, a theme–paper–year table, rarely combined themes, a statement of what the sample can and cannot show, and never add papers that are not in the upload. Switch on 'Create documents, charts and code' so it counts and charts papers per year. Starter prompt: 'Cluster this title list and chart papers per year.' Reusable for every new export.",
    "studio": "Connect the OpenAlex MCP server so the agent pulls titles, years and topics for a whole field query and counts them at scale, instead of working on a list you paste. Agent Builder cannot reach an external database. Needs your IT team."
   }
@@ -551,7 +551,7 @@
     "D5"
    ],
    "task": "Derive hypotheses on the CO₂–temperature link, let Copilot test one with Python on the HadCRUT5 and Mauna Loa files, then critique the result against the indicators paper. You learn whether its models omit forcings and baselines the paper treats explicitly.",
-   "prompt": "I am a postgraduate researcher. My question: how much of the rise in global surface temperature since 1959 can be explained by rising atmospheric CO₂? Attached are the HadCRUT5 monthly CSV, the Mauna Loa CO₂ monthly CSV and the Forster et al. (2025) PDF. First, compare two explanatory models in a table – CO₂ alone versus total human and natural forcing – with core idea, key constructs, predictions and limitations. Second, derive three hypotheses, each with its reasoning and a supporting passage from the PDF. Third, using Python, compute annual means for complete years in both files, regress the temperature anomaly on the natural log of CO₂, and report slope, R² and the pattern of residuals. Fourth, say which forcings and which baseline differences the regression ignores. Do not invent studies.",
+   "prompt": "I am a postgraduate researcher. My question: how much of the rise in global surface temperature since 1959 can be explained by rising atmospheric CO₂? Attached are the HadCRUT5 monthly CSV, the Mauna Loa CO₂ monthly CSV and the Forster et al. (2025) PDF. First, compare two explanatory models in a table – CO₂ alone versus total human and natural forcing – with core idea, key constructs, predictions and limitations. Second, derive three hypotheses, each with its reasoning and a supporting passage from the PDF. Third, using Python, compute annual means for complete years in both files, regress the temperature anomaly on the natural log of CO₂, and report the slope, the coefficient of determination (R²) and the pattern of the residuals. Fourth, say which forcings and which baseline differences the regression ignores. Do not invent studies.",
    "check": "HadCRUT5 anomalies are relative to 1961–1990, Forster et al. report warming relative to 1850–1900 – Copilot must not compare them directly. The abstract names reduced aerosol cooling as a driver; a CO₂-only model omits it. Regression should start in 1959."
   },
   "tech": {
@@ -578,7 +578,7 @@
   "levels": {
    "chat": "Attach HadCRUT5 (D3), Mauna Loa CO₂ (D5) and Forster et al. (A3) and run the starter prompt. In the same chat, ask which hypothesis the regression actually tests and what the different baselines (1961–1990 and 1850–1900) would change.",
    "notebook": "Add the theory texts you are choosing between, the indicators paper (A3) and your hypothesis draft; save HadCRUT5 (D3) and Mauna Loa (D5) as .xlsx first if you want the data in. The notebook does not run Python – use it to check each hypothesis's reasoning against the sources, and keep the regression in chat or the agent.",
-   "agent": "Call it 'Theory and hypotheses'. Instructions: compare candidate theories in a table, derive hypotheses each with reasoning and a supporting passage, describe the model in words, flag baseline and omitted-variable issues, and never invent studies. Knowledge: your core theory papers. Switch on 'Create documents, charts and code' to test a hypothesis on data. Starter prompt: 'Derive hypotheses from these theories and test one on this file.'",
+   "agent": "Call it 'Theory and hypotheses'. Instructions: compare candidate theories in a table, derive hypotheses each with reasoning and a supporting passage, describe the model in words, flag baseline and omitted-variable issues, and never invent studies. Knowledge: your core theory papers. Switch on 'Create documents, charts and code' to test a hypothesis on data – attach the data file in the chat, not as knowledge. Starter prompt: 'Derive hypotheses from these theories and test one on this file.'",
    "studio": ""
   }
  },
@@ -590,7 +590,7 @@
    "Split the question into two or three concept blocks",
    "Ask for synonyms, truncation and subject headings per block",
    "Have Copilot review its string against PRESS",
-   "Run it and check that known key papers appear"
+   "Run it yourself in the database and check that known key papers appear"
   ],
   "method": {
    "concepts": [
@@ -744,7 +744,7 @@
    ]
   },
   "levels": {
-   "chat": "Attach Rohde and Hausfather (A2) and run the starter prompt. In the same chat, ask Copilot to separate papers taken from the reference list from papers found by search, and to confirm that each citing paper is not in A2's references.",
+   "chat": "Attach Rohde and Hausfather (A2) and run the starter prompt with web search switched on (check the Work/Web setting). In the same chat, ask Copilot to separate papers taken from the reference list from papers found by search, and to confirm that each citing paper is not in A2's references.",
    "notebook": "Add the key paper (A2), the citing paper you verified (A1) and further papers you confirmed in Google Scholar. Ask how each relates to the key paper's problem and to each other. The notebook cannot search, so it becomes your verified citation map, extended paper by paper.",
    "agent": "Call it 'Citation explorer'. Instructions: describe the key paper's problem in plain words, find related papers with different terminology and up to three citing papers, give a working link and the connection for each, label each as reference list or search result, write a 150-word cited overview, and never invent sources. Starter prompt: 'Find related and citing work for this DOI.' Reusable for every new key paper.",
    "studio": "Connect the OpenAlex or Semantic Scholar MCP server, or Litmaps, so the agent follows real backward and forward citations in a database instead of the open web; a scheduled flow could report new citing papers. An agent alone cannot reach these. Needs your IT team."
@@ -982,8 +982,8 @@
   },
   "levels": {
    "chat": "Attach A1, A2 and A3 and run the starter prompt. In the same chat, ask a follow-up that needs two papers at once – for example how their reference periods change a stated warming figure – with a quote from each.",
-   "notebook": "This is where a notebook pays off: add your reading folder from OneDrive (practice: A1–A3), up to 50 references. Ask questions across all papers with file, page and verbatim quote; Copilot answers only from them and says when they are silent. Where licences allow, add papers as you read and come back all year.",
-   "agent": "Call it 'Library Q&A'. Instructions: answer only from the knowledge files, give file, page and a verbatim quote of one to three sentences per claim, say 'not in these sources' when they are silent, and never use outside knowledge. Knowledge: your core papers, or a SharePoint folder of them if your licence allows. Starter prompts: 'What do my papers say about …?', 'Which paper defines …?'",
+   "notebook": "This is where a notebook pays off: add the papers from your OneDrive reading folder (practice: A1–A3), up to 50 references. Ask questions across all papers with file, page and verbatim quote; Copilot answers only from them and says when they are silent. Where licences allow, add papers as you read and come back all year.",
+   "agent": "Call it 'Library Q&A'. Instructions: answer only from the knowledge files, give file, page and a verbatim quote of one to three sentences per claim, say 'not in these sources' when they are silent, and never use outside knowledge. Knowledge: your core papers, or a SharePoint folder of them (Knowledge files need a Microsoft 365 Copilot licence; otherwise attach them in the chat with the agent). Starter prompts: 'What do my papers say about …?', 'Which paper defines …?'",
    "studio": ""
   }
  },
@@ -1763,7 +1763,7 @@
   },
   "levels": {
    "chat": "Run the starter prompt with your template headings, or with the three practice data files. In the same chat, ask for a list of every statement in the skeleton that you still need to confirm with your ethics office, library or data provider.",
-   "notebook": "Add your institution's ethics form and data management plan template with their guidance notes, your protocol and the licence or documentation pages of reused data – for the practice version D7, plus D3 and D5 saved as .xlsx first. Ask which template questions your drafts do not yet answer. You come back as the application goes through revisions and reviewer comments.",
+   "notebook": "Add your institution's ethics form and data management plan template with their guidance notes, your protocol and the licence or documentation pages of reused data, saved as PDFs – for the practice version D7, plus D3 and D5 saved as .xlsx first. Ask which template questions your drafts do not yet answer. You come back as the application goes through revisions and reviewer comments.",
    "agent": "Call it 'Ethics and DMP drafter'. Instructions: follow the template headings, give reviewer expectations, open questions and a skeleton with [placeholders], take licences only from source documents, and never write consent, risk or anonymisation reasoning or state rules it cannot source. Knowledge: your institution's public templates and guidance pages. Starter prompt: 'Draft the skeleton for [ethics application or DMP]: [study summary]'. Reusable for every new project.",
    "studio": ""
   }
@@ -2317,7 +2317,7 @@
   "steps": [
    "Name the model, software, outcome and predictors",
    "Ask for commented code with assumption checks built in",
-   "Run it and paste error messages back verbatim",
+   "Run it (Copilot runs Python only) and paste error messages back verbatim",
    "Reproduce one key estimate in a second tool"
   ],
   "method": {
@@ -2368,8 +2368,8 @@
    ],
    "ref": [],
    "task": "Compute annual means from a station file with codes for missing, estimated and provisional values, then fit a linear trend with ordinary and Newey–West standard errors. You learn whether Copilot applies the codes correctly, reports which years it left out (1883, 2026) and raises time-series assumptions such as autocorrelation without being told.",
-   "prompt": "I am a postgraduate researcher learning Python for statistics. Attached is the Met Office Durham station file (from D7): a few header lines, then one row per month with yyyy, mm, tmax and tmin (°C), af, rain and sun. '---' marks a missing value, * an estimated value and 'Provisional' a row that is not yet final. Write and run commented Python code that: 1) reads the file, keeps estimated values but drops provisional rows, 2) computes the annual mean of tmax for complete calendar years only (all 12 months present), 3) prints the number of years, the first and last year and every year left out, 4) regresses annual mean tmax on year with OLS, then again with Newey–West standard errors (state the lag you choose and why), and reports the trend per decade, 5) plots the residuals against time. Explain each block in plain language, list the assumptions of this regression and say which ones the residual plot puts in doubt. Then give equivalent R code without running it.",
-   "check": "The model should use 145 complete years (1880–2025): 1883 drops out because December is missing, 2026 because it is incomplete and provisional. The OLS trend is about 0.11 °C per decade (R² about 0.32); the coefficient is identical in both runs, only the standard error changes. Recompute the 2025 mean in Excel: 14.45 °C. The residuals run below zero in 1960–1989 and above it after 2010, so Copilot should question a straight line."
+   "prompt": "I am a postgraduate researcher learning Python for statistics. Attached is the Met Office Durham station file (from D7): a few header lines, then one row per month with yyyy, mm, tmax and tmin (°C), af, rain and sun. '---' marks a missing value, * an estimated value and 'Provisional' a row that is not yet final. Write and run commented Python code that: 1) reads the file, keeps estimated values but drops provisional rows, 2) computes the annual mean of tmax for complete calendar years only (all 12 months present), 3) prints the number of years, the first and last year and every year left out, 4) regresses annual mean tmax on year with OLS, then again with Newey–West standard errors (state the lag you choose and why), and reports the trend per decade, 5) plots the residuals against time. Explain each block in plain language, list the assumptions of this regression and say which ones the residual plot puts in doubt. Then give equivalent R code without running it (I will run it in R myself).",
+   "check": "The model should use 145 complete years (1880–2025): 1883 drops out because December is missing, 2026 because it is incomplete and provisional. The OLS trend is about 0.11 °C per decade (coefficient of determination R² about 0.32); the coefficient is identical in both runs, only the standard error changes. Recompute the 2025 mean in Excel: 14.45 °C. The residuals run below zero in 1960–1989 and above it after 2010, so Copilot should question a straight line."
   },
   "tech": {
    "routes": [
@@ -2573,7 +2573,7 @@
   "levels": {
    "chat": "Run the starter prompt with the four PDFs attached. Then, in the same chat, give Copilot your revised definition of one code and ask it to recode one paper and list every quote that changed.",
    "notebook": "Add the four attribution papers (B2, C3, C4, C5) and a Word file with your research question and current coding frame. Ask for every passage that fits one code, with page numbers. For your own study, add only approved, anonymised transcripts as your ethics approval allows. The frame and material stay together as you return – you still check every quote and decision.",
-   "agent": "Add your coding frame as Knowledge. In Instructions, state your approach (e.g. codebook thematic analysis) and the rules: quote word for word with page or line, stay within the text, flag ambiguous passages, never invent quotes or themes. Starter prompt: \"Code this excerpt with my frame and flag every borderline passage.\" Reusable for each new document – only approved, anonymised material goes in, and you check every coded segment.",
+   "agent": "Add your coding frame as Knowledge (Knowledge files need a Microsoft 365 Copilot licence; otherwise attach them in the chat). In Instructions, state your approach (e.g. codebook thematic analysis) and the rules: quote word for word with page or line, stay within the text, flag ambiguous passages, never invent quotes or themes. Starter prompt: \"Code this excerpt with my frame and flag every borderline passage.\" Reusable for each new document – only approved, anonymised material goes in, and you check every coded segment.",
    "studio": ""
   }
  },
@@ -2896,7 +2896,7 @@
   "levels": {
    "chat": "Run the starter prompt with the sea-ice CSV attached. Then, in the same chat, ask Copilot to add a test that would fail if the December 1987 flag were missing, and run it.",
    "notebook": "Save the sea-ice file (D6) as .xlsx and add it with your function and tests saved as .txt and a short design note on the intended behaviour. Ask whether the tests cover every rule in the design note. The notebook does not run code, but over time it keeps the record of why the code behaves as it does.",
-   "agent": "In Instructions, set your language and rules: docstrings, unit tests for normal and edge cases, a check against a known result or benchmark, units and value ranges stated, \"ask when behaviour is unclear\", and never include keys or passwords. Switch on \"Create documents, charts and code\" so it can run Python tests. Starter prompt: \"Review this function and write tests for its edge cases.\" Reusable for each new module.",
+   "agent": "In Instructions, set your language and rules: docstrings, unit tests for normal and edge cases (plain asserts if pytest is missing), a check against a known result or benchmark, units and value ranges stated, \"ask when behaviour is unclear\", and never include keys or passwords. Switch on \"Create documents, charts and code\" so it can run Python tests. Starter prompt: \"Review this function and write tests for its edge cases.\" Reusable for each new module.",
    "studio": "Connect GitHub (repositories) through its MCP server, so the agent can read your repository, issues and pull requests and comment on changes – an agent in Agent Builder only sees what you paste or upload. Needs your IT team."
   }
  },
@@ -2986,7 +2986,7 @@
   "levels": {
    "chat": "Run the starter prompt with the three PDFs attached. Then, in the same chat, paste your neighbour's coding of the Zachariah abstract and ask for Cohen's kappa, percentage agreement and a list of every disagreement.",
    "notebook": "Add the Christidis papers (B2, C3), the Zachariah paper (C4) and your codebook as a Word file you update after each round. Ask for passages that test a borderline rule. For your own study, use only approved, anonymised material. Codebook versions, anchors and disagreement notes build up in one place; you decide every rule.",
-   "agent": "Add the final codebook as Knowledge. In Instructions: code sentence by sentence, give category, exact quote and \"clear, unclear or problematic\", use \"none of these\" when nothing fits, and never invent an anchor or quote. Starter prompt: \"Code this passage with the codebook and flag every borderline decision.\" Reusable for each new batch – only approved, anonymised material goes in, and a human checks every coding.",
+   "agent": "Add the final codebook as Knowledge (Knowledge files need a Microsoft 365 Copilot licence; otherwise attach them in the chat). In Instructions: code sentence by sentence, give category, exact quote and \"clear, unclear or problematic\", use \"none of these\" when nothing fits, and never invent an anchor or quote. Starter prompt: \"Code this passage with the codebook and flag every borderline decision.\" Reusable for each new batch – only approved, anonymised material goes in, and a human checks every coding.",
    "studio": ""
   }
  },
@@ -3064,9 +3064,9 @@
     "D4"
    ],
    "ref": [],
-   "task": "Regress one global temperature record on another, then paste only the output into a new chat for interpretation. You learn whether Copilot uses only numbers from the output, spots autocorrelation and the baseline offset, and avoids reading a high R² as agreement.",
-   "prompt": "Chat 1 – attach the HadCRUT5 monthly CSV and the GISTEMP CSV (the first line is a title, *** marks missing values, J-D is the annual mean) and ask: 'Using Python statsmodels, compute HadCRUT5 annual means for complete years only, take the GISTEMP J-D annual means, keep the years present in both, regress the HadCRUT5 annual anomaly on the GISTEMP annual anomaly with OLS and print only the full model summary.' Chat 2 – paste the summary into a new chat and ask: 'This is OLS output: annual global temperature anomaly from HadCRUT5 (°C relative to 1961–1990) regressed on the same quantity from NASA GISTEMP (°C relative to 1951–1980), one row per year. 1) Explain each part in plain language. 2) List the assumptions, say which the output lets me check, including the Durbin–Watson statistic, and name the source of each threshold. 3) Draft an APA 7 results paragraph using only numbers in the output, without recomputing or rounding differently. 4) Does the high R² show that the two records agree? Say what this regression cannot show and which analysis would.'",
-   "check": "Every number in the paragraph appears in the summary (n = 146 years, R² = 0.987, Durbin–Watson about 0.39). Copilot should say that the low Durbin–Watson signals autocorrelated residuals, so standard errors are too small; that the intercept of about −0.09 °C mainly reflects the different baselines; and that the shared warming trend inflates R². Agreement is judged from the yearly differences (Bland–Altman), not from R²."
+   "task": "Regress one global temperature record on another, then paste only the output into a new chat for interpretation. You learn whether Copilot uses only numbers from the output, spots autocorrelation and the baseline offset, and avoids reading a high coefficient of determination (R²) as agreement.",
+   "prompt": "Chat 1 – attach the HadCRUT5 monthly CSV and the GISTEMP CSV (the first line is a title, *** marks missing values, J-D is the annual mean) and ask: 'Using Python statsmodels, compute HadCRUT5 annual means for complete years only, take the GISTEMP J-D annual means, keep the years present in both, regress the HadCRUT5 annual anomaly on the GISTEMP annual anomaly with OLS and print only the full model summary.' Chat 2 – paste the summary into a new chat and ask: 'This is OLS output: annual global temperature anomaly from HadCRUT5 (°C relative to 1961–1990) regressed on the same quantity from NASA GISTEMP (°C relative to 1951–1980), one row per year. 1) Explain each part in plain language. 2) List the assumptions, say which the output lets me check, including the Durbin–Watson statistic, and name the source of each threshold. 3) Draft an APA 7 results paragraph using only numbers in the output, without recomputing or rounding differently. 4) Does the high coefficient of determination (R²) show that the two records agree? Say what this regression cannot show and which analysis would.'",
+   "check": "Every number in the paragraph appears in the summary (n = 146 years, coefficient of determination R² = 0.987, Durbin–Watson about 0.39). Copilot should say that the low Durbin–Watson signals autocorrelated residuals, so standard errors are too small; that the intercept of about −0.09 °C mainly reflects the different baselines; and that the shared warming trend inflates R². Agreement is judged from the yearly differences (Bland–Altman), not from R²."
   },
   "tech": {
    "routes": [
@@ -3503,7 +3503,7 @@
   "levels": {
    "chat": "Run the starter prompt and save the table as a Copilot Page. In the same chat, ask Copilot to mark which log cell each sentence of the declaration rests on and to list any cell that is still empty.",
    "notebook": "Add your running AI-use log (as .xlsx or a Copilot Page) and your university's AI policy as references, and update the log as you work. At submission ask for a declaration drawn only from the log and checked against the policy – months of use become traceable instead of reconstructed from memory.",
-   "agent": "Instructions: the log columns, fill only from what you describe, leave unknown cells empty, declarations in a neutral tone naming only logged uses, never add tools or benefits. Knowledge: your university's AI policy. Starter prompts: \"Add today's AI use to the log\" and \"Draft my declaration from these rows\". Reusable after every AI task, so the log grows as you work.",
+   "agent": "Instructions: the log columns, fill only from what you describe, leave unknown cells empty, declarations in a neutral tone naming only logged uses, never add tools or benefits. Knowledge: your university's AI policy. Starter prompts: \"Turn today's AI use into a log row\" and \"Draft my declaration from these rows\". Reusable after every AI task – the agent does not keep the log, so paste each new row into your Excel log or Copilot Page.",
    "studio": ""
   }
  },
@@ -3559,7 +3559,7 @@
     "C6"
    ],
    "task": "Learn changepoint detection step by step on the Central England monthly series. You learn whether Copilot teaches the method correctly and whether the changepoints it finds match those in the Shi et al. preprint, which you keep open for checking.",
-   "prompt": "I am a postgraduate researcher and want to learn changepoint detection in Python. Act as a patient tutor. First ask me three short questions to judge my level. Then teach step by step in short chunks: explain one idea, show a small worked example, and give me one exercise; wait for my answer and give feedback before showing the solution. Use the attached HadCET monthly text file: help me read it, keep only complete years and use the Annual column (-99.9 marks missing values). Cover mean-shift versus trend-shift models and penalties such as BIC and MDL. In the last step, fit a trend-shift model with a BIC penalty to the annual series and list the changepoint years. Point me to the documentation of any package you use, and say when you are unsure.",
+   "prompt": "I am a postgraduate researcher and want to learn changepoint detection in Python. Act as a patient tutor. First ask me three short questions to judge my level. Then teach step by step in short chunks: explain one idea, show a small worked example, and give me one exercise; wait for my answer and give feedback before showing the solution. Use the attached HadCET monthly text file: help me read it, keep only complete years and use the Annual column (-99.9 marks missing values). Cover mean-shift versus trend-shift models and penalties such as BIC and MDL. In the last step, fit a trend-shift model with a BIC penalty to the annual series and list the changepoint years. Use only Python packages already available in your environment; if no changepoint package is installed, implement the method with numpy and statsmodels and say so. Point me to the documentation of any package you use, and say when you are unsure.",
    "check": "Compare with Shi et al. (Table 2, Figure 2): BIC and MDL trend-shift models flag changepoints in 1700, 1739 and 1988, and the fixed-slope mean-shift model flags 1988. The paper used an earlier CET version, so small differences are possible; large ones need an explanation."
   },
   "tech": {
@@ -3582,7 +3582,7 @@
   "levels": {
    "chat": "Run the starter prompt with the D2 monthly file attached and work through the steps in the same chat. At the end, ask for a five-question quiz and answer it before you see the solutions; repeat it a few days later.",
    "notebook": "Add C6, the official documentation of the package you use (saved as PDF) and your own notes as references. Ask questions across them when you get stuck and keep worked examples and quiz answers as pages – explanations stay tied to the paper and the documentation. Run code in Chat, as the notebook does not run Python.",
-   "agent": "Instructions: tutor role, test the level first, one idea, worked example and exercise at a time, wait for my answer, feedback before the solution, a quiz at the end, point to the official documentation, say when unsure. Knowledge: the package documentation. Switch on \"Create documents, charts and code\" to run examples. Starter prompts: \"Teach me changepoint detection\" and \"Quiz me on last week's topic\". Reusable for any new method.",
+   "agent": "Instructions: tutor role, test the level first, one idea, worked example and exercise at a time, wait for my answer, feedback before the solution, a quiz at the end, point to the official documentation, say when unsure. Knowledge: the package documentation. Switch on \"Create documents, charts and code\" to run Python examples; for R, Stata or SPSS you run its code in your own software. Starter prompts: \"Teach me changepoint detection\" and \"Quiz me on last week's topic\". Reusable for any new method.",
    "studio": ""
   }
  },
@@ -3650,7 +3650,7 @@
     "connected",
     "external"
    ],
-   "text": "Create an agent in Copilot Chat with your rules as instructions and public websites or practice PDFs as knowledge. Adding search tools such as OpenAlex through Copilot Studio needs your IT team to enable it.",
+   "text": "Create an agent in Copilot Chat with your rules as instructions and public websites or practice PDFs as knowledge (PDFs as knowledge need a Microsoft 365 Copilot licence; otherwise attach them in the chat). Adding search tools such as OpenAlex through Copilot Studio needs your IT team to enable it.",
    "data": [
     "B2",
     "C3",
@@ -4056,9 +4056,9 @@
    ]
   },
   "levels": {
-   "chat": "Run the starter prompt with the Myhre PDF attached. Then, in the same chat, paste the author guidelines of your preferred journal and ask for a formatting checklist.",
+   "chat": "Run the starter prompt with web search switched on (check the Work/Web setting) and the Myhre PDF attached. Then, in the same chat, paste the author guidelines of your preferred journal and ask for a formatting checklist.",
    "notebook": "Add the author guidelines of your shortlisted journals (PDF or Word), your manuscript and your .bib file saved as .txt; for the practice, the Myhre paper (C2). Ask for a side-by-side comparison of word limits, reference styles and open-access options. The notebook answers only from the saved guidelines, which leaves less room for invented requirements.",
-   "agent": "In Instructions, set the output: a journal table with publisher, fit, article type, word limit, reference style, open-access options and guideline link; use only the journals' own pages; BibTeX with correct entry types and missing fields flagged; never invent journals, DOIs or page numbers. Starter prompts: \"Suggest five journals for this abstract.\" and \"Convert these references to BibTeX.\" Reusable for every manuscript.",
+   "agent": "In Instructions, set the output: a journal table with publisher, fit, article type, word limit, reference style, open-access options and guideline link; use only the journals' own pages (keep web search on); BibTeX with correct entry types and missing fields flagged; never invent journals, DOIs or page numbers. Starter prompts: \"Suggest five journals for this abstract.\" and \"Convert these references to BibTeX.\" Reusable for every manuscript.",
    "studio": "Connect the OpenAlex MCP server, so the agent can look up which venues publish work like yours and check reference metadata in a scholarly database rather than the open web. Agent Builder cannot reach external services. Needs your IT team."
   }
  },
@@ -4350,8 +4350,8 @@
   },
   "levels": {
    "chat": "Run the starter prompt with the Christidis 2020 PDF attached and answer three questions. Then, in the same chat, ask which of your answers an examiner would probe hardest, and why.",
-   "notebook": "Add your thesis abstract, chapter summaries, key papers and notes from supervision meetings; for the practice, the Christidis paper (B2). Ask for examiner questions on one chapter at a time and keep the best questions and your answers as notes. Over weeks you build a viva file you can return to.",
-   "agent": "In Instructions, describe the examiner: UK viva, questions grouped by contribution, methodology, findings and limitations, and future work, each tied to a quoted claim; one question at a time, wait for the answer, then brief feedback and a follow-up. Add your abstract and chapter summaries as Knowledge. Starter prompt: \"Examine me on chapter 3.\" Reusable for regular practice – a complement to mock vivas with your supervisors.",
+   "notebook": "Add your thesis abstract, chapter summaries, key papers and notes from supervision meetings; for the practice, the Christidis paper (B2). Ask for examiner questions on one chapter at a time and save the best questions and your answers as a Copilot Page in the notebook. Over weeks you build a viva file you can return to.",
+   "agent": "In Instructions, describe the examiner: UK viva, questions grouped by contribution, methodology, findings and limitations, and future work, each tied to a quoted claim; one question at a time, wait for the answer, then brief feedback and a follow-up. Add your abstract and chapter summaries as Knowledge (Knowledge files need a Microsoft 365 Copilot licence; otherwise attach them in the chat). Starter prompt: \"Examine me on chapter 3.\" Reusable for regular practice – a complement to mock vivas with your supervisors.",
    "studio": ""
   }
  },
@@ -4434,9 +4434,9 @@
    ]
   },
   "levels": {
-   "chat": "Run the starter prompt with both PDFs attached. Then, in the same chat, ask Copilot to show the link it used for every reference it marked as matching.",
+   "chat": "Run the starter prompt with web search switched on (check the Work/Web setting) and both PDFs attached. Then, in the same chat, ask Copilot to show the link it used for every reference it marked as matching.",
    "notebook": "Add the papers you cite as PDFs (for the practice, C3 and B2) and your draft paragraph. Ask, sentence by sentence, whether the cited source supports the claim, with a quote. The notebook answers only from its references, so a missing source shows up as a gap instead of a vague web summary.",
-   "agent": "In Instructions, set the two-step check: first existence and metadata (working DOI or link, \"not found\" if absent, flag any difference in authors, year, title, journal, volume or pages), then support (supports, partly, does not) with a quoted passage; never guess. Starter prompt: \"Check these references and the claims they are cited for.\" Reusable for every chapter before submission.",
+   "agent": "In Instructions, set the two-step check: first existence and metadata (working DOI or link, \"not found\" if absent, flag any difference in authors, year, title, journal, volume or pages), then support (supports, partly, does not) with a quoted passage; never guess. Keep web search on. Starter prompt: \"Check these references and the claims they are cited for.\" Reusable for every chapter before submission.",
    "studio": "Connect OpenAlex to check that references exist and match their metadata, and scite to see how a source is cited elsewhere – both as MCP servers. Agent Builder cannot reach external databases, and web search misses paywalled records. Needs your IT team."
   }
  },
@@ -4510,7 +4510,7 @@
   },
   "levels": {
    "chat": "Run the starter prompt with the five notes. Then, in the same chat, ask Copilot to list every sentence of the draft next to the note it comes from.",
-   "notebook": "Add the abstracts file (AB) or, for your own work, your source PDFs and notes document, and keep the evidence map as a note. Ask for one section at a time drafted from the notes only, with [GAP] marks. Every claim traces back to a source you added; you rework the text and declare the AI use.",
+   "notebook": "Add the abstracts file (AB) or, for your own work, your source PDFs and notes document, and save the evidence map as a Copilot Page in the notebook. Ask for one section at a time drafted from the notes only, with [GAP] marks. Every claim traces back to a source you added; you rework the text and declare the AI use.",
    "agent": "In Instructions, fix the sequence: evidence map first, then a draft of the requested length using only your notes and sources, cited in your style, with [GAP] wherever a sentence lacks a source; never add claims, sources or numbers. Starter prompt: \"Build the evidence map from these notes, then draft 200 words.\" Reusable for each section – check your university's rules first, rework the text yourself and declare the AI use.",
    "studio": ""
   }
@@ -4814,7 +4814,7 @@
   "levels": {
    "chat": "Run the starter prompt with web search switched on. In the same chat, paste back only the items you confirmed by opening the links and ask for a stage per item (awareness, use, change) and a short narrative that claims contribution, not sole attribution.",
    "notebook": "A notebook answers only from its references, so it cannot search – add what you have verified instead: B2, the confirmed mentions table as .xlsx or Word, and notes or saved copies of key pages. Add new items over the months and ask for an updated impact narrative and timeline – a growing evidence file for reports and impact case studies.",
-   "agent": "Instructions: search scope and table columns from the starter prompt, include an item only when its page names the paper, DOI or authors, classify as awareness, use or change, claim contribution not attribution, never invent sources. Knowledge, if your licence allows: trusted public policy websites. Starter prompts: \"Find new mentions of [DOI] since [date]\" and \"Classify these confirmed items\". Reusable for every paper or project.",
+   "agent": "Instructions: search scope and table columns from the starter prompt, include an item only when its page names the paper, DOI or authors, classify as awareness, use or change, claim contribution not attribution, never invent sources. Knowledge: web search, or up to four trusted public policy websites. Starter prompts: \"Find new mentions of [DOI] since [date]\" and \"Classify these confirmed items\". Reusable for every paper or project.",
    "studio": "Add a scheduled trigger that runs the search once a month and appends new candidate mentions to an Excel table or SharePoint list for you to verify – Agent Builder cannot run on a schedule or write into a list. Needs your IT team."
   }
  },
@@ -5029,7 +5029,7 @@
   },
   "practice": {
    "data": [],
-   "attach_note": "Your photo of the flipchart – taken in the Copilot app, or saved to OneDrive and attached on the laptop.",
+   "attach_note": "Your photo of the flipchart (JPEG or PNG) – taken in the Copilot app, or saved to OneDrive and attached on the laptop. iPhone photos saved as HEIC must be converted to JPEG first.",
    "task": "Your group needs sticky notes, a flipchart or large sheet and a phone. Split the 12 paper titles from the abstracts file among you (keep it open, do not attach it), write one short title per note, sort the notes into clusters on the flipchart and photograph it straight on. Take the photo in the Microsoft 365 Copilot app and run the prompt there, or save it to OneDrive and attach it on the laptop. You see how reliably Copilot reads handwriting and keeps observation apart from interpretation.",
    "prompt": "The attached photo shows a card sort: 12 sticky notes with short titles of research papers on weather and climate change, sorted by our group into clusters on a flipchart. 1) Transcribe every note exactly, numbered, with the cluster it sits in; write [illegible] for anything you cannot read. 2) Give a table: note number, text, cluster. 3) Compare our clusters with these three groups: 'Global temperature records', 'UK and Europe', 'Extremes and attribution' – for each note, say whether our placement matches and where it differs. 4) Only then suggest a label for each of our clusters.",
    "check": "Exactly 12 notes in the table; compare the transcription with the board. The reference grouping is the paper ID in the abstracts file (A = global temperature records, B = UK and Europe, C = extremes and attribution) – check two notes where Copilot says your placement differs.",
@@ -5111,7 +5111,7 @@
    ],
    "task": "Build the two conditions of a framing experiment: a mock news feed on a heatwave with and without an attribution statement taken from the papers. You see whether Copilot keeps the conditions equivalent and the attribution claim faithful to the source.",
    "prompt": "Attached are Christidis et al. (2020) on UK hot days and Zachariah et al. (2023) on the 2022 heatwave in India and Pakistan. I want to test whether an attribution statement changes how worried readers are about heatwaves. Create two versions of a mock social media news feed as one self-contained HTML page each: six posts from fictional accounts, one of them a post about a heatwave. Condition A: the heatwave post includes one attribution sentence taken faithfully from one of the papers, with its source. Condition B: the same post without that sentence, otherwise word for word identical. List every difference between A and B, quote the source passage for the attribution sentence, and add one manipulation-check question and a three-item worry measure with variable names.",
-   "check": "Open both HTML files side by side: only the attribution sentence may differ. Then find the quoted passage in the PDF – for Zachariah et al. search for '30 times more likely', for Christidis et al. for 'return time of 100-300 years' – and check that the post does not overstate it.",
+   "check": "Open both HTML files side by side (if Copilot shows only code, ask it for both as downloadable .html files): only the attribution sentence may differ. Then find the quoted passage in the PDF – for Zachariah et al. search for '30 times more likely', for Christidis et al. for 'return time of 100-300 years' – and check that the post does not overstate it.",
    "ref": []
   },
   "tech": {
@@ -5147,7 +5147,7 @@
   "result": "A defensible design for research where model outputs are the object of study – audits of accuracy, bias or consistency – with documented prompts, versions and variability, and clear limits on what can be concluded.",
   "steps": [
    "Frame the question about the model, not about a human population",
-   "Fix prompts, model, version, date and parameters before collecting",
+   "Fix the prompt; record model, date and time of every run",
    "Sample repeated answers and code them against a reference",
    "Report variability and limitations; disclose the method",
    "Use real participants for any claim about people"
@@ -5211,7 +5211,7 @@
   "levels": {
    "chat": "Run the fixed prompt in five new chats and save every answer with the time. In one of them, follow up with 'Are you sure? Please check your sources.' and record whether the answer changes – a second measure of stability.",
    "notebook": "Add the saved answers as Word or text files with date, time and model, your codebook and the reference paper (B2 for the practice version). Ask for a table that codes each answer against the reference and lists every cited source. The notebook answers only from these files, so new model output does not mix in; you check every code.",
-   "agent": "Do not let an agent produce the answers – its instructions would change what you study. Build a coding agent, 'Audit coder', instead. Instructions: your codebook (correct, partly correct, wrong, no or invented source) and a fixed table. Knowledge: the reference paper. Starter prompt: 'Code these saved answers against the reference'. Only model answers, never personal data, go in, and you check every code.",
+   "agent": "Do not let an agent produce the answers – its instructions would change what you study. Build a coding agent, 'Audit coder', instead. Instructions: your codebook (correct, partly correct, wrong, no or invented source) and a fixed table. Knowledge: the reference paper (needs a Microsoft 365 Copilot licence; otherwise attach it in the chat with the agent). Starter prompt: 'Code these saved answers against the reference'. Only model answers, never personal data, go in, and you check every code.",
    "studio": "A scheduled trigger in Copilot Studio can send the fixed prompt to the model you audit at set times and write each answer with date, time and model to an Excel table in SharePoint – a time series an agent cannot collect on its own. Needs your IT team."
   }
  }

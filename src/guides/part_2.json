@@ -49,7 +49,7 @@
   "erhebung-4": {
     "bring": "Your research question and a note of the data you need: country, time period, unit of analysis and key variables.",
     "steps": [
-      "Paste the starter prompt with your research question and data requirements.",
+      "Switch web search on (if your tenant allows it), then paste the starter prompt with your research question and data requirements.",
       "Open each suggested link and check coverage, access conditions and latest update.",
       "Remove any dataset you cannot find or that lacks your key variables.",
       "Ask Copilot to rank the confirmed datasets by fit to your question."
