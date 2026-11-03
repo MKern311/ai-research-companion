@@ -219,16 +219,16 @@ function renderLens(){
     : readOnly() ? 'View only – open a use case to see how to try it with Copilot.'
     : `Pick one to three of your highest-rated use cases and try them live with Copilot · ${n} of ${MAXTEST} selected.`;
   $('#levels').hidden = ui.lens !== 2;
-  $('#levels').innerHTML = `<h2>Four levels of working with Copilot</h2><p class="sub">Every use case shows levels 1 to 3 in its guide – start with the chat and go further when you are ready. Level 4 is suggested only where Copilot Studio adds something.</p>
+  $('#levels').innerHTML = `<h2>Four levels of working with Copilot</h2><p class="sub">Every use case shows levels 1 to 3 in its guide – start with the chat and go further when you are ready. Level 4 (Copilot Studio / GitHub Code) is suggested only where it adds something.</p>
     <ol class="lv-grid">${LEVELS.map(([t, d], i) => `<li><span class="lv-n">Level ${i + 1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>${studioHtml()}`;
 }
 // level 4 overview: the use cases where Copilot Studio adds something, with the proposal for each
 function studioHtml(){
   const list = PHASES.flatMap(p => p.uc.filter(u => lvOf(u).studio));
   if (!list.length) return '';
-  return `<details class="studio-ov"><summary>Level 4 · where Copilot Studio fits – ${list.length} use cases</summary>
+  return `<details class="studio-ov"><summary>Level 4 · Copilot Studio / GitHub Code – where it fits: ${list.length} use cases</summary>
     <p class="sub">A proposal per use case. Each needs your IT team: licence, approval and a data-protection check.</p>
-    <table><thead><tr><th>Use case</th><th>Phase</th><th>What Copilot Studio would add</th></tr></thead><tbody>${list.map(u => `<tr><td><button type="button" class="linkbtn" data-open="${esc(u.id)}">${esc(u.t)}</button></td><td>${esc(SHORT[u.phase])}</td><td>${esc(lvOf(u).studio)}</td></tr>`).join('')}</tbody></table></details>`;
+    <table><thead><tr><th>Use case</th><th>Phase</th><th>What level 4 would add</th></tr></thead><tbody>${list.map(u => `<tr><td><button type="button" class="linkbtn" data-open="${esc(u.id)}">${esc(u.t)}</button></td><td>${esc(SHORT[u.phase])}</td><td>${esc(lvOf(u).studio)}</td></tr>`).join('')}</tbody></table></details>`;
 }
 function renderPhases(){
   $('#phases').innerHTML = PHASES.map((p, i) => {
@@ -313,7 +313,7 @@ function ladderHtml(u){
   const L = lvOf(u), item = (n, t, txt, extra) => `<li><span class="ln">Level ${n} · ${t}</span><p>${esc(txt)}</p>${extra || ''}</li>`;
   return `<div class="ladder"><h4>Three levels with Copilot${L.studio ? ' – and a fourth' : ''}</h4><ol>
     ${item(1, 'Chat', L.chat)}${item(2, 'Notebook', L.notebook)}${item(3, 'Agent', L.agent, '<p class="lnote">Files as Knowledge need a Microsoft 365 Copilot licence. Without one, attach the files in the chat with your agent. Data to analyse always goes in as an attachment.</p>')}
-    ${L.studio ? item(4, 'Copilot Studio', L.studio, '<button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How connecting works →</button>') : ''}</ol></div>`;
+    ${L.studio ? item(4, 'Copilot Studio / GitHub Code', L.studio, '<button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How connecting works →</button>') : ''}</ol></div>`;
 }
 function guideHtml(u, open){
   const g = (typeof GUIDES !== 'undefined' && GUIDES[u.id]) || GENERIC, pr = practiceOf(u.id), pm = pr && ui.gmode === 'practice';

@@ -264,7 +264,7 @@ const LEVELS = [
  ['Chat', 'One conversation: prompt, pasted text or uploaded files. Copilot reads PDFs, Word, Excel, CSV and images and runs Python on data – not R, Stata or SPSS: it writes that code, you run it in your own software.'],
  ['Notebook', 'A Copilot notebook keeps your files, notes and Copilot’s answers together – for work you return to. Copilot answers only from the files you add: no web, no Python, no CSV (save as .xlsx).'],
  ['Agent', 'Your own agent in Agent Builder: standing instructions, knowledge and skills. Reusable for every new paper, dataset or draft. Files as knowledge need a Microsoft 365 Copilot licence – without one, attach them in the chat with your agent.'],
- ['Copilot Studio', 'For anything an agent cannot hold: connecting tools and databases via MCP or connectors – e.g. OpenAlex, scite, GitHub. Needs your IT team.']
+ ['Copilot Studio / GitHub Code', 'For anything an agent cannot hold: connecting tools and databases via MCP or connectors – e.g. OpenAlex, scite, GitHub – in Copilot Studio or as your own code on GitHub. Needs your IT team.']
 ];
 const ROUTES = {chat:['Copilot Chat','A prompt and text you paste'], files:['Copilot + files','Upload your own or the practice files'],
  connected:['Copilot + connected tool','MCP server or Copilot connector – enabled by your IT'], external:['Specialist tool or open source','Academic extension or tool, R/Python package or agent skill']};
