@@ -269,7 +269,7 @@ function ladderHtml(u){
 function guideHtml(u, open){
   const g = (typeof GUIDES !== 'undefined' && GUIDES[u.id]) || GENERIC, pr = practiceOf(u.id), pm = pr && ui.gmode === 'practice';
   const seg = pr ? `<div class="seg gseg" role="group" aria-label="Material for the test"><button type="button" data-gmode="practice" aria-pressed="${pm}">With the practice data</button><button type="button" data-gmode="own" aria-pressed="${!pm}">With your own material</button></div>` : '';
-  if (pm) return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot · about 10 minutes</summary>${seg}
+  if (pm) return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot</summary>${seg}
     <p>${esc(pr.task)}</p>
     ${pr.data.length || pr.attach_note ? `<p><b>Attach to Copilot:</b></p><ul class="pfiles">${pr.data.map(id => packFiles(id)).join('')}${pr.attach_note ? `<li>${esc(pr.attach_note)}</li>` : ''}</ul>` : '<p><b>Nothing to attach</b> – the prompt contains all Copilot needs.</p>'}
     ${(pr.ref || []).length ? `<p><b>Keep open for checking – do not attach:</b></p><ul class="pfiles ref">${pr.ref.map(id => packFiles(id)).join('')}</ul>` : ''}
@@ -277,7 +277,7 @@ function guideHtml(u, open){
     <p><b>Check:</b> ${esc(pr.check)}</p>${g.limit ? `<p class="limit"><b>Limit:</b> ${esc(g.limit)}</p>` : ''}
     ${ladderHtml(u)}
     <p class="sub">All files and test ideas: <button type="button" class="linkbtn" data-view="data">Practice data →</button></p></details>`;
-  return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot · about 10 minutes</summary>${seg}
+  return `<details class="guide"${open ? ' open' : ''}><summary>How to try it with Copilot</summary>${seg}
     <p><b>Bring:</b> ${esc(g.bring)}</p>
     <ol class="howto">${g.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
     <div class="prompt"><div class="ptools"><b>Starter prompt</b><span class="row"><button type="button" class="btn btn-quiet btn-sm" data-copyprompt>Copy prompt</button><a class="btn btn-primary btn-sm" href="${COPILOT_URL}" target="_blank" rel="noopener" data-opencopilot title="Copies the prompt and opens Copilot in a new tab">Open Copilot ↗</a></span></div><pre>${esc(withDisc(g.prompt))}</pre></div>
