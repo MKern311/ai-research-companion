@@ -258,12 +258,12 @@ function packFiles(id){
 // every use case shows the same ladder: 1 chat, 2 notebook, 3 agent – and 4 Copilot Studio only where it makes sense
 const LV_GENERIC = {chat:'Run the starter prompt in one chat and refine the result there with follow-up questions.',
   notebook:'Create a Copilot notebook, add the files you work with as references and a short document with your rules, and come back to it as your material grows. Copilot answers only from those references.',
-  agent:'In Copilot Chat choose New agent: put your rules and the output format into Instructions, add stable reference files as Knowledge and test it on the Try it tab. Reuse it whenever the task comes up again.', studio:''};
+  agent:'In Copilot Chat choose New agent: put your rules and the output format into Instructions, add stable reference files as Knowledge (needs a Microsoft 365 Copilot licence – otherwise attach them in the chat) and test it on the Try it tab. Reuse it whenever the task comes up again.', studio:''};
 const lvOf = u => (typeof DETAILS !== 'undefined' && DETAILS[u.id] && DETAILS[u.id].levels) || LV_GENERIC;
 function ladderHtml(u){
   const L = lvOf(u), item = (n, t, txt, extra) => `<li><span class="ln">Level ${n} · ${t}</span><p>${esc(txt)}</p>${extra || ''}</li>`;
   return `<div class="ladder"><h4>Three levels with Copilot${L.studio ? ' – and a fourth' : ''}</h4><ol>
-    ${item(1, 'Chat', L.chat)}${item(2, 'Notebook', L.notebook)}${item(3, 'Agent', L.agent)}
+    ${item(1, 'Chat', L.chat)}${item(2, 'Notebook', L.notebook)}${item(3, 'Agent', L.agent, '<p class="lnote">Files as Knowledge need a Microsoft 365 Copilot licence. Without one, attach the files in the chat with your agent. Data to analyse always goes in as an attachment.</p>')}
     ${L.studio ? item(4, 'Copilot Studio', L.studio, '<button type="button" class="linkbtn" data-view="tools" data-mcpinfo>How connecting works →</button>') : ''}</ol></div>`;
 }
 function guideHtml(u, open){
