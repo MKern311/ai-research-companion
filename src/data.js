@@ -336,7 +336,7 @@ const SLIDES = {title:'Wait, where does my data go? · Why did it say that? A co
 // Team: photo = path under assets/team/ once available
 const TEAM = [
  {n:'Oliver', role:'', photo:''},
- {n:'Tom', role:'', photo:''},
+ {n:'Tom', role:'', photo:'assets/team/tom.webp'},
  {n:'Thomas', role:'', photo:''},
  {n:'Manuel', role:'', photo:''}
 ];
