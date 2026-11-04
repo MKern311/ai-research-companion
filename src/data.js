@@ -340,7 +340,7 @@ const TEAM = [
  {n:'Thomas', role:'Client Director', photo:'assets/team/thomas.webp'},
  {n:'Liam', role:'Client Director', photo:'assets/team/liam.webp'},
  {n:'Rachel', role:'Senior Marketing Manager', photo:'assets/team/rachel.webp'},
- {n:'Manuel', role:'Professor (Heilbronn University of Applied Sciences)', photo:'assets/team/manuel.webp'}
+ {n:'Manuel', role:'Professor (Heilbronn University of Applied Sciences)', photo:'assets/team/manuel.webp', link:'https://www.linkedin.com/in/manuelkern/', linkText:'LinkedIn – questions after the workshop'}
 ];
 
 const GAINS = [['time','Saves time'],['quality','Better quality'],['new','New possibility'],['learn','I learn']];
