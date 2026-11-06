@@ -503,7 +503,7 @@ a.msb:hover{background:#0B4A8F;color:#fff}
 .member .avatar{display:grid;place-items:center;background:var(--surface);color:var(--ink);font-weight:700;font-size:18px;box-shadow:inset 0 0 0 1px var(--line)}
 .member b{display:block}
 .member small{display:block;color:var(--muted);font-size:14px;line-height:1.35;margin-top:2px}
-.member .mlink{display:inline-block;margin-top:4px;font-size:14px;font-weight:600;color:var(--red);text-underline-offset:2px}
+.member .mlink{display:block;width:fit-content;margin-top:4px;overflow-wrap:anywhere;font-size:14px;font-weight:600;color:var(--red);text-underline-offset:2px}
 .member .mlink:hover{text-decoration-thickness:2px}
 .steps-ov .sub{max-width:80ch}
 .ov-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:14px 0 16px}
@@ -1871,12 +1871,12 @@ const SLIDES = {title:'Wait, where does my data go? · Why did it say that? A co
  prompts:[["The GCSE formula", "Act as a [Context].\nHelp me [Goal].\nUse [Source].\nGive me the result as [Expectations]."], ["Let Copilot remind you", "Remember that whenever my prompt is vague, remind me to use the GCSE framework: Goal, Context, Source, Expectations."], ["Two open-access papers · 1 Summarise one paper", "Summarise this paper’s methods and findings in 5 bullets."], ["Two open-access papers · 2 Compare both papers", "Compare the methods in these two papers. Cite the relevant sections."], ["Two open-access papers · 3 Limitations", "List the limitations the authors report. Flag any missing information."], ["Full example: from a broad interest to research directions", "I am at the early stage of developing a postgraduate research project. Help me turn my broad interest in how generative AI is changing the way university students learn into a small number of credible research directions that I could investigate.\n\nI am interested in the relationship between generative AI, student learning behaviours and independent learning in higher education. I haven't yet decided on a precise research question, methodology or theoretical framework. I want to explore the topic before narrowing it down, rather than jumping immediately to a finished research question. Treat me as the researcher. Your role is to help me explore and challenge my thinking, not to make the research decisions for me.\n\nFor this initial exploration, use the information I have provided above and your general knowledge to help me map the topic. Clearly distinguish between:\n1. ideas or hypotheses that need testing,\n2. established concepts or bodies of research that may be relevant, and\n3. claims for which I should seek supporting academic evidence.\nDo not invent citations or references. Where literature would be useful, suggest search concepts and keywords I could investigate through my university's academic databases rather than presenting unverified references as evidence.\n\nStructure your response in five parts:\n1. Identify 5 possible research directions within this broad topic.\n2. For each, explain why it could be interesting to investigate and what remains uncertain.\n3. Suggest 2 possible research questions for each direction.\n4. Identify useful keywords and search terms that could help me begin exploring the academic literature.\n5. Finish by asking me 5 challenging questions, one at a time, to help me decide which direction best fits my interests, research context and intended contribution.\nDo not select the “best” topic for me. Help me make that judgement myself."]]};
 // Team: photo = path under assets/team/ once available
 const TEAM = [
- {n:'Oliver', role:'Director of AI Europe', photo:'assets/team/oliver.webp'},
- {n:'Tom', role:'Advisory Director', photo:'assets/team/tom.webp'},
- {n:'Thomas', role:'Client Director', photo:'assets/team/thomas.webp'},
- {n:'Liam', role:'Client Director', photo:'assets/team/liam.webp'},
- {n:'Rachel', role:'Senior Marketing Manager', photo:'assets/team/rachel.webp'},
- {n:'Manuel', role:'Professor (Heilbronn University of Applied Sciences)', photo:'assets/team/manuel.webp', link:'https://www.linkedin.com/in/manuelkern/', linkText:'LinkedIn – questions after the workshop'}
+ {n:'Oliver', mail:'ohoellriegl@hitachisolutions.com', role:'Director of AI Europe', photo:'assets/team/oliver.webp'},
+ {n:'Tom', mail:'tlyne@hitachisolutions.com', role:'Advisory Director', photo:'assets/team/tom.webp'},
+ {n:'Thomas', mail:'tday@hitachisolutions.com', role:'Client Director', photo:'assets/team/thomas.webp'},
+ {n:'Liam', mail:'liammurphy@hitachisolutions.com', role:'Client Director', photo:'assets/team/liam.webp'},
+ {n:'Rachel', mail:'rlamacraft@hitachisolutions.com', role:'Senior Marketing Manager', photo:'assets/team/rachel.webp'},
+ {n:'Manuel', mail:'mkern@hitachisolutions.com', role:'Professor (Heilbronn University of Applied Sciences)', photo:'assets/team/manuel.webp', link:'https://www.linkedin.com/in/manuelkern/', linkText:'LinkedIn – questions after the workshop'}
 ];
 
 const GAINS = [['time','Saves time'],['quality','Better quality'],['new','New possibility'],['learn','I learn']];
@@ -2616,7 +2616,7 @@ function renderAgenda(){
     const live = now.day === AGENDA_DAY && now.min >= mins(a) && now.min < mins(b);
     return `<li class="${who ? '' : 'brk'}${live ? ' live' : ''}"><span class="t">${a}–${b}</span><span><b>${esc(title)}</b>${who ? `<small>${esc(who)}</small>` : ''}${i === TOOL_SLOT ? '<small class="here">This tool · Steps 1 and 2 below</small>' : ''}${i === SURVEY_SLOT ? '<small><button type="button" class="linkbtn" data-view="survey">Survey results: you told us</button></small>' : ''}${SLIDES.start[i] ? `<small><button type="button" class="linkbtn" data-slides="${SLIDES.start[i]}">View slides</button></small>` : ''}</span>${live ? '<span class="now">Now</span>' : ''}</li>`;
   }).join('');
-  $('#team').innerHTML = TEAM.map(m => `<div class="member">${m.photo ? `<img src="${esc(m.photo)}" alt="" width="64" height="64">` : `<span class="avatar" aria-hidden="true">${esc(m.n[0])}</span>`}<span><b>${esc(m.n)}</b>${m.role ? `<small>${esc(m.role)}</small>` : ''}${m.link ? `<a class="mlink" href="${esc(m.link)}" target="_blank" rel="noopener">${esc(m.linkText || m.link)}</a>` : ''}</span></div>`).join('');
+  $('#team').innerHTML = TEAM.map(m => `<div class="member">${m.photo ? `<img src="${esc(m.photo)}" alt="" width="64" height="64">` : `<span class="avatar" aria-hidden="true">${esc(m.n[0])}</span>`}<span><b>${esc(m.n)}</b>${m.role ? `<small>${esc(m.role)}</small>` : ''}${m.mail ? `<a class="mlink" href="mailto:${esc(m.mail)}">${esc(m.mail)}</a>` : ''}${m.link ? `<a class="mlink" href="${esc(m.link)}" target="_blank" rel="noopener">${esc(m.linkText || m.link)}</a>` : ''}</span></div>`).join('');
   $('#slidesPanel').innerHTML = `<div class="sl-head"><button type="button" class="sl-thumb" data-slides="1" aria-label="Open the slides"><img src="${slideSrc(1)}" alt="" width="320" height="180" loading="lazy"></button>
     <div><h2>Slides · ${esc(SLIDES.title)}</h2><p class="sub">${SLIDES.n} slides from ${esc(SLIDES.who)}’s sessions. Move through them with the arrow keys or by swiping.</p>
     <div class="row"><button type="button" class="btn btn-primary btn-sm" data-slides="1">View slides</button><a class="btn btn-quiet btn-sm" href="${SLIDES.pdf}" download>PDF · ${mb(SLIDES.pdfSize)}</a></div></div></div>
